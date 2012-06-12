@@ -85,6 +85,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -125,6 +126,7 @@ function os2web_sovs_user_default_permissions() {
     'name' => 'delete any rotating_image content',
     'roles' => array(
       0 => 'Kommunikation',
+      1 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -182,6 +184,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -234,6 +237,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -285,6 +289,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );

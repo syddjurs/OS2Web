@@ -199,7 +199,7 @@ function os2web_spotbokse_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'image',
     ),
     'field_instance' => array(
@@ -247,8 +247,15 @@ function os2web_spotbokse_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'imagefield_crop',
+        'module' => 'media',
         'settings' => array(
+          'allowed_schemes' => array(
+            0 => 'public',
+            1 => 'private',
+          ),
+          'allowed_types' => array(
+            0 => 'image',
+          ),
           'collapsible' => '2',
           'croparea' => '450x450',
           'enforce_minimum' => 1,
@@ -257,7 +264,7 @@ function os2web_spotbokse_field_default_fields() {
           'progress_indicator' => 'throbber',
           'resolution' => '230x115',
         ),
-        'type' => 'imagefield_crop_widget',
+        'type' => 'media_generic',
         'weight' => '3',
       ),
     ),
@@ -655,8 +662,15 @@ function os2web_spotbokse_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'imagefield_crop',
+        'module' => 'media',
         'settings' => array(
+          'allowed_schemes' => array(
+            0 => 'public',
+            1 => 'private',
+          ),
+          'allowed_types' => array(
+            0 => 'image',
+          ),
           'collapsible' => '3',
           'croparea' => '500x500',
           'enforce_minimum' => 1,
@@ -665,7 +679,7 @@ function os2web_spotbokse_field_default_fields() {
           'progress_indicator' => 'throbber',
           'resolution' => '230x312',
         ),
-        'type' => 'imagefield_crop_widget',
+        'type' => 'media_generic',
         'weight' => '4',
       ),
     ),
@@ -1030,7 +1044,7 @@ function os2web_spotbokse_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(

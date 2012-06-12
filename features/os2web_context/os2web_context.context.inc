@@ -26,13 +26,16 @@ function os2web_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-sitestuktur-block_1' => array(
+        'views-sitestuktur-block_2' => array(
           'module' => 'views',
-          'delta' => 'sitestuktur-block_1',
+          'delta' => 'sitestuktur-block_2',
           'region' => 'sidebar_first',
           'weight' => '-10',
         ),
       ),
+    ),
+    'delta' => array(
+      'delta_template' => 'standard',
     ),
   );
   $context->condition_mode = 0;
@@ -151,8 +154,6 @@ function os2web_context_context_default_contexts() {
     'node' => array(
       'values' => array(
         'contentpage' => 'contentpage',
-        'esdh_dokument' => 'esdh_dokument',
-        'esdh_sag' => 'esdh_sag',
         'galleri' => 'galleri',
         'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
         'news' => 'news',
@@ -215,6 +216,9 @@ function os2web_context_context_default_contexts() {
         ),
       ),
     ),
+    'delta' => array(
+      'delta_template' => 'standard',
+    ),
   );
   $context->condition_mode = 0;
 
@@ -242,6 +246,7 @@ function os2web_context_context_default_contexts() {
       'values' => array(
         'node/add/*' => 'node/add/*',
         'node/*/edit' => 'node/*/edit',
+        'brugers-indhold' => 'brugers-indhold',
       ),
     ),
   );
@@ -288,77 +293,6 @@ function os2web_context_context_default_contexts() {
   );
   $context->condition_mode = 1;
   $export['hide_second_sidebar_indholdssider'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'indholdsredigering';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/add/*' => 'node/add/*',
-        'node/*/edit' => 'node/*/edit',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'delta' => array(
-      'delta_template' => 'indholdsredigering',
-    ),
-  );
-  $context->condition_mode = 0;
-  $export['indholdsredigering'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'indholdsside_hoejreblokke';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'contentpage' => 'contentpage',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'block-1' => array(
-          'module' => 'block',
-          'delta' => 1,
-          'region' => 'sidebar_second',
-          'weight' => '-10',
-        ),
-        'views-spot_view-block_1' => array(
-          'module' => 'views',
-          'delta' => 'spot_view-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-9',
-        ),
-        'views-kle_lonks_boks-kle_links_boks' => array(
-          'module' => 'views',
-          'delta' => 'kle_lonks_boks-kle_links_boks',
-          'region' => 'sidebar_second',
-          'weight' => '-8',
-        ),
-        'views-kontaktblok-block' => array(
-          'module' => 'views',
-          'delta' => 'kontaktblok-block',
-          'region' => 'sidebar_second',
-          'weight' => '-7',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-  $export['indholdsside_hoejreblokke'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -451,11 +385,21 @@ function os2web_context_context_default_contexts() {
         'site_struktur' => 'site_struktur',
       ),
       'options' => array(
-        'term_form' => '1',
+        'term_form' => '0',
       ),
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'menu_block-14' => array(
+          'module' => 'menu_block',
+          'delta' => 14,
+          'region' => 'sidebar_first',
+          'weight' => '-10',
+        ),
+      ),
+    ),
     'delta' => array(
       'delta_template' => 'hide_second_sidebar',
     ),
@@ -485,6 +429,14 @@ function os2web_context_context_default_contexts() {
         'node_form' => '1',
       ),
     ),
+    'taxonomy_term' => array(
+      'values' => array(
+        'site_struktur' => 'site_struktur',
+      ),
+      'options' => array(
+        'term_form' => '1',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -496,6 +448,9 @@ function os2web_context_context_default_contexts() {
           'weight' => '-10',
         ),
       ),
+    ),
+    'delta' => array(
+      'delta_template' => 'standard',
     ),
   );
   $context->condition_mode = 0;

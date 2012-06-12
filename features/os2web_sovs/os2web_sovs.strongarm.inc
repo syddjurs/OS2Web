@@ -783,6 +783,7 @@ function os2web_sovs_strongarm() {
     9 => 11,
     10 => 12,
     11 => 13,
+    12 => 14,
   );
   $export['menu_block_ids'] = $strongarm;
 
