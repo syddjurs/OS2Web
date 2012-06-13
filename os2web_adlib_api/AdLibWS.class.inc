@@ -14,8 +14,9 @@
 class AdLibWS {
 
   private $client;
-  private static $base_path = 'c:\\Inetpub\\wwwroot\\';
-  private static $base_url = 'http://10.1.1.127/';
+  //private static $base_path = 'd:\\wwwroot\\';
+  private static $base_path = 'C:\\InetPub\\wwwroot\\';
+  private static $base_url = 'http://10.1.1.180/';
 
   public function __construct() {
     if (!isset($this->client)) {
@@ -71,7 +72,6 @@ class AdLibWS {
             </JOB:DOCOUTPUTS>
             <JOB:SETTINGS>
               <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
-              <JOB:WATERMARK ENABLED="Yes" FONTCOLOR="6447714" FONTNAME="Helvetica" FONTSIZE="48" LAYER="Foreground" TEXT="TESTING!"/>
             </JOB:SETTINGS>
           </JOB>
         </JOBS>';
@@ -97,12 +97,15 @@ class AdLibWS {
       $return->status = 'Not found';
     }
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: ".$id." Status: ".$return->status);
+    error_log("Var: \$result = " . print_r($result, 1));
     return $return;
   }
 
   public function addJobFolder() {
     if ($this->client) {
-      $folder_info = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
+      $reply = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
+      error_log("Var: \$reply = " . print_r($reply, 1));
+      $folder_info = $reply;
       $result = 'ExponentJobs\\' . ((string) $folder_info['FolderID']);
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added folder: ".$result);
       return $result;
@@ -124,6 +127,10 @@ class AdLibWS {
     if (!isset($folder)) {
       $folder = $this->addJobFolder();
     }
+    if (!$folder) {
+      error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() - Adding folder failed.');
+      return false;
+      }
     $payload = '
       <JobFiles>
         <JobFile FileName="' . $filename . '" Data="' . base64_encode($data) . '" Length="' . strlen($data) . '" />
