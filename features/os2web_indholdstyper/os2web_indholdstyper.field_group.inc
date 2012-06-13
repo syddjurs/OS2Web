@@ -19,18 +19,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Billeder og filer',
-    'weight' => '1',
-    'children' => array(
-      0 => 'field_lead_image',
-      1 => 'field_mediafile',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'label' => 'Billeder og filer',
-    ),
-  );
+  $field_group->data = '';
   $export['group_billeder|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -90,23 +79,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'default';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Hentet fra kommunens sagssystem',
-    'weight' => '3',
-    'children' => array(
-      0 => 'field_case',
-      1 => 'field_doc',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'label' => 'Hentet fra kommunens sagssystem',
-      'instance_settings' => array(
-        'classes' => 'attached-documents',
-        'description' => '',
-      ),
-      'formatter' => 'open',
-    ),
-  );
+  $field_group->data = '';
   $export['group_document|node|contentpage|default'] = $field_group;
 
   $field_group = new stdClass();
@@ -118,19 +91,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Acadre sager og dokumenter',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_case',
-      1 => 'field_doc',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
-    ),
-  );
+  $field_group->data = '';
   $export['group_esdh|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -142,20 +103,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Emneord',
-    'weight' => '3',
-    'children' => array(
-      0 => 'field_editortags',
-      1 => 'field_termref_sted',
-      2 => 'field_organization',
-      3 => 'field_politics',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'label' => 'Emneord',
-    ),
-  );
+  $field_group->data = '';
   $export['group_extras|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -167,21 +115,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Generelt',
-    'weight' => '0',
-    'children' => array(
-      0 => 'body',
-      1 => 'field_resume_long',
-      2 => 'field_termref_kle',
-      3 => 'title',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
-    ),
-  );
+  $field_group->data = '';
   $export['group_general|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -193,28 +127,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Indstillinger',
-    'weight' => '4',
-    'children' => array(
-      0 => 'field_rotate_publish',
-      1 => 'field_node_reference_kontaktblok',
-      2 => 'field_site_structure',
-      3 => 'field_indholdsside_spotboxe',
-      4 => 'field_noderef_selvbtjn',
-      5 => 'path',
-      6 => 'additional_settings',
-      7 => 'revision_information',
-      8 => 'author',
-      9 => 'options',
-      10 => 'group_hidden',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
-    ),
-  );
+  $field_group->data = '';
   $export['group_gruppe3|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -226,23 +139,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_gruppe3';
-  $field_group->data = array(
-    'label' => 'Skjult',
-    'weight' => '39',
-    'children' => array(
-      0 => 'field_source_id',
-      1 => 'workbench_access',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_hidden|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -254,24 +151,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'galleri';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Skjult',
-    'weight' => '6',
-    'children' => array(
-      0 => 'field_inherit_right_column',
-      1 => 'field_lead_image',
-      2 => 'field_parent_node',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_hidden|node|galleri|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -283,25 +163,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_indstillinger';
-  $field_group->data = array(
-    'label' => 'Skjult',
-    'weight' => '46',
-    'children' => array(
-      0 => 'field_additional_info',
-      1 => 'field_related',
-      2 => 'field_related_tema',
-      3 => 'field_source_id',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_hidden|node|news|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -313,19 +175,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Indstillinger',
-    'weight' => '3',
-    'children' => array(
-      0 => 'field_promoteto',
-      1 => 'path',
-      2 => 'group_hidden',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-    ),
-  );
+  $field_group->data = '';
   $export['group_indstillinger|node|news|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -337,24 +187,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Menu',
-    'weight' => '8',
-    'children' => array(),
-    'format_type' => 'div',
-    'format_settings' => array(
-      'formatter' => 'open',
-      'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_menu|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -402,26 +235,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'galleri';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Taksonomi',
-    'weight' => '4',
-    'children' => array(
-      0 => 'field_termref_kle',
-      1 => 'field_termref_sted',
-      2 => 'field_organization',
-      3 => 'field_editortags',
-      4 => 'field_politics',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_taksonomi|node|galleri|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -433,26 +247,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'iframe_selvbetjeningsl_sning_mm';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Taksonomi',
-    'weight' => '8',
-    'children' => array(
-      0 => 'field_termref_kle',
-      1 => 'field_editortags',
-      2 => 'field_organization',
-      3 => 'field_termref_sted',
-      4 => 'field_politics',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_taksonomi|node|iframe_selvbetjeningsl_sning_mm|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -464,21 +259,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Emneord',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_termref_kle',
-      1 => 'field_organization',
-      2 => 'field_editortags',
-      3 => 'field_termref_sted',
-      4 => 'field_politics',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'label' => 'Emneord',
-    ),
-  );
+  $field_group->data = '';
   $export['group_taksonomi|node|news|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -490,21 +271,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Tekst',
-    'weight' => '0',
-    'children' => array(
-      0 => 'body',
-      1 => 'field_lead_image',
-      2 => 'field_resume_long',
-      3 => 'field_site_structure',
-      4 => 'title',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'label' => 'Tekst',
-    ),
-  );
+  $field_group->data = '';
   $export['group_tekst|node|news|form'] = $field_group;
 
   return $export;

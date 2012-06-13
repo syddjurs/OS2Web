@@ -73,6 +73,79 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Felt: Indhold: Afdeling */
+  $handler->display->display_options['fields']['field_afdeling']['id'] = 'field_afdeling';
+  $handler->display->display_options['fields']['field_afdeling']['table'] = 'field_data_field_afdeling';
+  $handler->display->display_options['fields']['field_afdeling']['field'] = 'field_afdeling';
+  $handler->display->display_options['fields']['field_afdeling']['label'] = '';
+  $handler->display->display_options['fields']['field_afdeling']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['field_afdeling']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_afdeling']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_afdeling']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_afdeling']['field_api_classes'] = 0;
+  /* Felt: Indhold: Sted Adresse */
+  $handler->display->display_options['fields']['field_stedadresse']['id'] = 'field_stedadresse';
+  $handler->display->display_options['fields']['field_stedadresse']['table'] = 'field_data_field_stedadresse';
+  $handler->display->display_options['fields']['field_stedadresse']['field'] = 'field_stedadresse';
+  $handler->display->display_options['fields']['field_stedadresse']['label'] = '';
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_stedadresse']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_stedadresse']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_stedadresse']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_stedadresse']['field_api_classes'] = 0;
+  /* Felt: Indhold: Sted Postnr */
+  $handler->display->display_options['fields']['field_stedpostnr']['id'] = 'field_stedpostnr';
+  $handler->display->display_options['fields']['field_stedpostnr']['table'] = 'field_data_field_stedpostnr';
+  $handler->display->display_options['fields']['field_stedpostnr']['field'] = 'field_stedpostnr';
+  $handler->display->display_options['fields']['field_stedpostnr']['label'] = '';
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_stedpostnr']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_stedpostnr']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_stedpostnr']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_stedpostnr']['field_api_classes'] = 0;
   /* Felt: Indhold: Eget indhold */
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['id'] = 'field_kontaktblok_egetindhold';
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['table'] = 'field_data_field_kontaktblok_egetindhold';
@@ -97,14 +170,37 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['field_api_classes'] = 0;
+  /* Felt: Indhold: Email */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['label'] = '';
+  $handler->display->display_options['fields']['field_email']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_email']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_email']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_email']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_email']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_email']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_email']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_email']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_email']['field_api_classes'] = 0;
   /* Felt: Indhold: Telefonnummer */
   $handler->display->display_options['fields']['field_phone1']['id'] = 'field_phone1';
   $handler->display->display_options['fields']['field_phone1']['table'] = 'field_data_field_phone1';
   $handler->display->display_options['fields']['field_phone1']['field'] = 'field_phone1';
   $handler->display->display_options['fields']['field_phone1']['label'] = '';
-  $handler->display->display_options['fields']['field_phone1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_phone1']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<';
+  $handler->display->display_options['fields']['field_phone1']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<a href="tel:[field_phone1]">[field_phone1]</a>';
   $handler->display->display_options['fields']['field_phone1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['external'] = 0;
@@ -129,6 +225,57 @@ function os2web_kontaktblok_views_default_views() {
     'prefix_suffix' => 0,
   );
   $handler->display->display_options['fields']['field_phone1']['field_api_classes'] = 0;
+  /* Felt: Indhold: Man-Ons, lukker */
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['id'] = 'field_kontaktblok_aa_manolk';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['table'] = 'field_data_field_kontaktblok_aa_manolk';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['field'] = 'field_kontaktblok_aa_manolk';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['label'] = '';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['text'] = ' - [field_kontaktblok_aa_manolk]';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manolk']['field_api_classes'] = 0;
+  /* Felt: Indhold: Man-Ons, åbner */
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['id'] = 'field_kontaktblok_aa_manons';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['table'] = 'field_data_field_kontaktblok_aa_manons';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['field'] = 'field_kontaktblok_aa_manons';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['label'] = '';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['text'] = '<div class="dag">Mandag - onsdag:</div><div class="aaben"> [field_kontaktblok_aa_manons][field_kontaktblok_aa_manolk]</div>';
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_aa_manons']['field_api_classes'] = 0;
   /* Felt: Indhold: Mandag, lukker */
   $handler->display->display_options['fields']['field_kontaktblok_aa_manlk']['id'] = 'field_kontaktblok_aa_manlk';
   $handler->display->display_options['fields']['field_kontaktblok_aa_manlk']['table'] = 'field_data_field_kontaktblok_aa_manlk';
@@ -493,8 +640,7 @@ function os2web_kontaktblok_views_default_views() {
 
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>
-';
+<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['external'] = 0;
@@ -511,35 +657,10 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_label_class'] = 'kontaktblok-indhold';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_kontaktblok_callcenter']['empty'] = '<div class="telefonnummer"><a href="tel:[field_phone1]">[field_phone1]</a></div>';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['empty_zero'] = 1;
-  $handler->display->display_options['fields']['field_kontaktblok_callcenter']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_callcenter']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['field_api_classes'] = 0;
-  /* Felt: Indhold: Email */
-  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
-  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
-  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
-  $handler->display->display_options['fields']['field_email']['label'] = '';
-  $handler->display->display_options['fields']['field_email']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_email']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_email']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_email']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_email']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_email']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_email']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_email']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_email']['field_api_classes'] = 0;
   /* Felt: Indhold: Vis åbningstider */
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen']['id'] = 'field_kontaktblok_vis_aabnen';
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen']['table'] = 'field_data_field_kontaktblok_vis_aabnen';
@@ -564,54 +685,61 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen']['field_api_classes'] = 0;
-  /* Felt: Indhold: Adresse */
-  $handler->display->display_options['fields']['field_stedadresse']['id'] = 'field_stedadresse';
-  $handler->display->display_options['fields']['field_stedadresse']['table'] = 'field_data_field_stedadresse';
-  $handler->display->display_options['fields']['field_stedadresse']['field'] = 'field_stedadresse';
-  $handler->display->display_options['fields']['field_stedadresse']['label'] = '';
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_stedadresse']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_stedadresse']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_stedadresse']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_stedadresse']['field_api_classes'] = 0;
-  /* Felt: Indhold: Postnummer */
-  $handler->display->display_options['fields']['field_stedpostnr']['id'] = 'field_stedpostnr';
-  $handler->display->display_options['fields']['field_stedpostnr']['table'] = 'field_data_field_stedpostnr';
-  $handler->display->display_options['fields']['field_stedpostnr']['field'] = 'field_stedpostnr';
-  $handler->display->display_options['fields']['field_stedpostnr']['label'] = '';
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_stedpostnr']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_stedpostnr']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_stedpostnr']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_stedpostnr']['field_api_classes'] = 0;
+  /* Felt: Indhold: Redigér-link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['edit_node']['hide_alter_empty'] = 1;
+  /* Felt: Global: Kontekstuelle links */
+  $handler->display->display_options['fields']['contextual_links']['id'] = 'contextual_links';
+  $handler->display->display_options['fields']['contextual_links']['table'] = 'views';
+  $handler->display->display_options['fields']['contextual_links']['field'] = 'contextual_links';
+  $handler->display->display_options['fields']['contextual_links']['label'] = '';
+  $handler->display->display_options['fields']['contextual_links']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['contextual_links']['fields'] = array(
+    'field_kontaktblok_callcenter' => 'field_kontaktblok_callcenter',
+    'field_kontaktblok_vis_aabnen' => 'field_kontaktblok_vis_aabnen',
+    'edit_node' => 'edit_node',
+    'title' => 0,
+    'field_kontaktblok_egetindhold' => 0,
+    'field_phone1' => 0,
+    'field_kontaktblok_aa_manlk' => 0,
+    'field_kontaktblok_aa_manaa' => 0,
+    'field_kontaktblok_aa_tirlk' => 0,
+    'field_kontaktblok_aa_tiraa' => 0,
+    'field_kontaktblok_aa_onslk' => 0,
+    'field_kontaktblok_aa_onsaa' => 0,
+    'field_kontaktblok_aa_torlk' => 0,
+    'field_kontaktblok_aa_toraa' => 0,
+    'field_kontaktblok_aa_frelk' => 0,
+    'field_kontaktblok_aa_freaa' => 0,
+    'field_kontaktblok_aa_loelk' => 0,
+    'field_kontaktblok_aa_loeaa' => 0,
+    'field_kontaktblok_aa_soelk' => 0,
+    'field_kontaktblok_aa_soeaa' => 0,
+    'field_email' => 0,
+    'field_stedadresse' => 0,
+    'field_stedpostnr' => 0,
+  );
+  $handler->display->display_options['fields']['contextual_links']['destination'] = '1';
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -682,7 +810,9 @@ return os2web_kontaktblok_get_block();
     t('Faldende'),
     t('<a href="/kontakt">Gå til kontaktoversigt</a>'),
     t('Kontakt [title]'),
-    t('<'),
+    t('<a href="tel:[field_phone1]">[field_phone1]</a>'),
+    t(' - [field_kontaktblok_aa_manolk]'),
+    t('<div class="dag">Mandag - onsdag:</div><div class="aaben"> [field_kontaktblok_aa_manons][field_kontaktblok_aa_manolk]</div>'),
     t('Mandag, lukker'),
     t(' - [field_kontaktblok_aa_manlk]'),
     t('<div class="dag">Mandag:</div><div class="aaben"> [field_kontaktblok_aa_manaa][field_kontaktblok_aa_manlk]</div>'),
@@ -712,9 +842,7 @@ return os2web_kontaktblok_get_block();
 
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>
-'),
-    t('<div class="telefonnummer"><a href="tel:[field_phone1]">[field_phone1]</a></div>'),
+<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>'),
     t('Vis åbningstider'),
     t('Alle'),
     t('Block'),
