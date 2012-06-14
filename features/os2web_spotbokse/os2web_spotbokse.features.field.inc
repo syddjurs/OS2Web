@@ -173,6 +173,96 @@ function os2web_spotbokse_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-spotbox-field_fokus_sektionsforside'
+  $fields['node-spotbox-field_fokus_sektionsforside'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_fokus_sektionsforside',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'spotbox',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
+          'weight' => 17,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_fokus_sektionsforside',
+      'label' => 'Fokus sektionsforside',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 0,
+        'default_image' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '230x158',
+        'title_field' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'imagefield_crop',
+        'settings' => array(
+          'collapsible' => '2',
+          'croparea' => '500x500',
+          'enforce_minimum' => 1,
+          'enforce_ratio' => 1,
+          'preview_image_style' => 'sektion-160',
+          'progress_indicator' => 'throbber',
+          'resolution' => '230x160',
+        ),
+        'type' => 'imagefield_crop_widget',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'node-spotbox-field_lead_image'
   $fields['node-spotbox-field_lead_image'] = array(
     'field_config' => array(
@@ -1187,6 +1277,7 @@ function os2web_spotbokse_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Billede');
   t('Egenavne / Stednavne');
+  t('Fokus sektionsforside');
   t('Forfrem til');
   t('Højt billede');
   t('KL Emneord');
