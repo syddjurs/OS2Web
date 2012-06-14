@@ -27,8 +27,9 @@ function os2web_spotbokse_field_group_info() {
       1 => 'field_termref_kle',
       2 => 'field_site_structure',
       3 => 'field_spotbox_image_tall',
-      4 => 'title',
-      5 => 'field_stort_billede_spot5',
+      4 => 'field_stort_billede_spot5',
+      5 => 'title',
+      6 => 'field_fokus_sektionsforside',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
