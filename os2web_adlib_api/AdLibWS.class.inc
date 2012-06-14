@@ -19,7 +19,6 @@ class AdLibWS {
 
   public function __construct() {
     if (!isset($this->client)) {
-      $this->client = true;
       $options = array(
           'soapversion' => SOAP_1_2,
           'trace' => TRUE,
@@ -33,7 +32,7 @@ class AdLibWS {
       preg_match('%http://.+?/%', $url, $matches);
       self::$base_url = array_shift($matches);
       try {
-        $this->client = new SoapClient($url, $options);
+        //$this->client = new SoapClient($url, $options);
         error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
         error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc = ' . print_r($exc, 1));
