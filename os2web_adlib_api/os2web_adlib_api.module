@@ -14,7 +14,7 @@ function os2web_adlib_api_menu() {
   $items['os2web/adlib/test'] = array(
       'title' => t('AdLib test page'),
 //    'description' => t('Your description goes here.'),
-      'access callback' => FALSE,
+      'access callback' => TRUE,
       'page callback' => 'os2web_adlib_api_page',
       'type' => MENU_CALLBACK,
   );
@@ -22,7 +22,7 @@ function os2web_adlib_api_menu() {
 }
 
 function os2web_adlib_api_page() {
-//  os2web_adlib_api_convert_to_pdf(285);
+  os2web_adlib_api_convert_to_pdf(111);
   _os2web_adlib_api_process_pdf();
   $call = 'Hello, World.';
   return '<textarea rows=50>' . print_r($call, 1) . '</textarea>';
@@ -39,7 +39,7 @@ function os2web_adlib_api_cron() {
  * Implementation of hook_init()
  */
 function os2web_adlib_api_init() {
-  _os2web_adlib_api_process_pdf(1);
+//  _os2web_adlib_api_process_pdf(1);
 }
 
 /**
@@ -142,6 +142,7 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
           error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File recieved successfully, Saving.");
           $uri = file_unmanaged_save_data($data, dirname($upd_file->uri) . '/' . $jobfileinfo['out_filename'], FILE_EXISTS_REPLACE);
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $uri = ' . print_r($uri, 1));
+          error_log("Var: \$var = " . print_r(drupal_realpath($uri), 1));
           if (filesize(drupal_realpath($uri)) > 0) {
             file_unmanaged_delete($upd_file->uri);
             db_delete('file_managed')->condition('uri', $uri);
@@ -152,7 +153,6 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
             $upd_file->timestamp = time();
             drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid'));
             drupal_write_record('file_managed', $upd_file, array('fid'));
-//            file_save($upd_file);
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated.");
           } else {
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Filesize was 0. Aborting update.");
@@ -176,14 +176,16 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
     foreach ($pdfs as $file) {
       if ($file['is_pdf'] === FALSE && is_file(drupal_realpath($file['file']->uri))) {
         $upload = $adlib->uploadData($file['file']->filename, file_get_contents(drupal_realpath($file['file']->uri)));
-        $job = $adlib->addJob($upload);
-        if ($job !== FALSE) {
-          $jobinfo = array(
-              'fid' => $file['file']->fid,
-              'job_id' => (string) $job->JobSettings['JobID'],
-              'job_info' => $upload,
-          );
-          drupal_write_record('os2web_adlib_api_doc_files', $jobinfo, array('fid'));
+        if ($upload) {
+          $job = $adlib->addJob($upload);
+          if ($job !== FALSE) {
+            $jobinfo = array(
+                'fid' => $file['file']->fid,
+                'job_id' => (string) $job->JobSettings['JobID'],
+                'job_info' => $upload,
+                );
+            drupal_write_record('os2web_adlib_api_doc_files', $jobinfo, array('fid'));
+          }
         }
       }
     }
