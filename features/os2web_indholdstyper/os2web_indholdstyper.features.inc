@@ -24,6 +24,28 @@ function os2web_indholdstyper_ctools_plugin_api() {
 function os2web_indholdstyper_image_default_styles() {
   $styles = array();
 
+  // Exported image style: indholdsside
+  $styles['indholdsside'] = array(
+    'name' => 'indholdsside',
+    'effects' => array(
+      1 => array(
+        'label' => 'Skalér og beskær',
+        'help' => 'Skalering og beskæring bevarer billedets højde-bredde-forhold og beskærer derefter den største dimension. Det er nyttigt til at generere kvadratiske thumbnails uden at forvrænge billedet.',
+        'effect callback' => 'image_scale_and_crop_effect',
+        'dimensions callback' => 'image_resize_dimensions',
+        'form callback' => 'image_resize_form',
+        'summary theme' => 'image_resize_summary',
+        'module' => 'image',
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => '470',
+          'height' => '230',
+        ),
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Exported image style: medium-content
   $styles['medium-content'] = array(
     'name' => 'medium-content',
