@@ -257,7 +257,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'inline',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '12',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -355,7 +355,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '8',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -389,7 +389,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-contentpage-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -449,7 +449,7 @@ function os2web_indholdstyper_field_default_fields() {
             'slideshow_timeout' => '4000',
           ),
           'type' => 'slideshow',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -490,15 +490,14 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
+            'youtube' => 0,
           ),
           'allowed_types' => array(
-            'image' => 'image',
-            'video' => 'video',
-            0 => 0,
             'audio' => 0,
             'default' => 0,
+            'image' => 'image',
+            'video' => 'video',
           ),
-          'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
@@ -547,7 +546,7 @@ function os2web_indholdstyper_field_default_fields() {
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_table',
-          'weight' => '6',
+          'weight' => '4',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -665,7 +664,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '9',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -764,7 +763,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '7',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -840,7 +839,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '14',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -916,7 +915,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '6',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -983,7 +982,7 @@ function os2web_indholdstyper_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1058,7 +1057,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '5',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1140,7 +1139,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '10',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1191,7 +1190,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '17',
+          'weight' => '15',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1273,7 +1272,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'inline',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '11',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1349,7 +1348,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '13',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1743,7 +1742,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-galleri-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -3204,7 +3203,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-media-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -3956,7 +3955,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-news-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
