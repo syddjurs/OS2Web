@@ -28,6 +28,7 @@ function os2web_spotbokse_field_group_info() {
       2 => 'field_site_structure',
       3 => 'field_spotbox_image_tall',
       4 => 'title',
+      5 => 'field_stort_billede_spot5',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
