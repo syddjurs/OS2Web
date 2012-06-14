@@ -86,3 +86,20 @@ function os2web_design_fontyourface_features_default_font() {
     ),
   );
 }
+
+/**
+ * Implements hook_node_info().
+ */
+function os2web_design_node_info() {
+  $items = array(
+    'baggrund' => array(
+      'name' => t('Baggrund'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
+  );
+  return $items;
+}

@@ -306,10 +306,8 @@ projects[nice_menus][version] = "2.1"
 projects[special_menu_items][subdir] = "contrib"
 projects[special_menu_items][version] = "1.0"
 
-projects[cookiecontrol][subdir] = "contrib"
-projects[cookiecontrol][version] = "1.5"
-
-
+projects[scheduler][subdir] = "contrib"
+projects[scheduler][version] = "1.0"
 
 ; Solr and search
 projects[apachesolr][subdir] = "contrib"

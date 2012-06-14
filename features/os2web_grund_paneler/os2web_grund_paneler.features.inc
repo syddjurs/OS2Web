@@ -21,3 +21,10 @@ function os2web_grund_paneler_ctools_plugin_api() {
     return array("version" => "1");
   }
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function os2web_grund_paneler_views_api() {
+  return array("version" => "3.0");
+}
