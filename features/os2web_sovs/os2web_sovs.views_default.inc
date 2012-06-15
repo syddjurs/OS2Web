@@ -2022,7 +2022,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_rotate_image']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_rotate_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_rotate_image']['settings'] = array(
-    'image_style' => 'rotating_image_tall',
+    'image_style' => 'rotating_image',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_rotate_image']['field_api_classes'] = 0;
