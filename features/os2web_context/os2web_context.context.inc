@@ -166,6 +166,12 @@ function os2web_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-redaktoer_info-block' => array(
+          'module' => 'views',
+          'delta' => 'redaktoer_info-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'menu-menu-top-menu' => array(
           'module' => 'menu',
           'delta' => 'menu-top-menu',
