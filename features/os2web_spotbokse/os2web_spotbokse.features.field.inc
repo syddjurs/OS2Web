@@ -339,13 +339,6 @@ function os2web_spotbokse_field_default_fields() {
         'active' => 1,
         'module' => 'imagefield_crop',
         'settings' => array(
-          'allowed_schemes' => array(
-            0 => 'public',
-            1 => 'private',
-          ),
-          'allowed_types' => array(
-            0 => 'image',
-          ),
           'collapsible' => '2',
           'croparea' => '450x450',
           'enforce_minimum' => 1,
