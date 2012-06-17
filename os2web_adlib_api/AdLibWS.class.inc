@@ -36,7 +36,6 @@ class AdLibWS {
         //$this->client = new SoapClient($url, $options);
         error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
-        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc = ' . print_r($exc, 1));
       }
     }
   }

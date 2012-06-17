@@ -733,12 +733,16 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['contextual_links']['label'] = '';
   $handler->display->display_options['fields']['contextual_links']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['contextual_links']['fields'] = array(
-    'field_kontaktblok_callcenter' => 'field_kontaktblok_callcenter',
-    'field_kontaktblok_vis_aabnen' => 'field_kontaktblok_vis_aabnen',
     'edit_node' => 'edit_node',
     'title' => 0,
+    'field_afdeling' => 0,
+    'field_stedadresse' => 0,
+    'field_stedpostnr' => 0,
     'field_kontaktblok_egetindhold' => 0,
+    'field_email' => 0,
     'field_phone1' => 0,
+    'field_kontaktblok_aa_manolk' => 0,
+    'field_kontaktblok_aa_manons' => 0,
     'field_kontaktblok_aa_manlk' => 0,
     'field_kontaktblok_aa_manaa' => 0,
     'field_kontaktblok_aa_tirlk' => 0,
@@ -753,9 +757,8 @@ function os2web_kontaktblok_views_default_views() {
     'field_kontaktblok_aa_loeaa' => 0,
     'field_kontaktblok_aa_soelk' => 0,
     'field_kontaktblok_aa_soeaa' => 0,
-    'field_email' => 0,
-    'field_stedadresse' => 0,
-    'field_stedpostnr' => 0,
+    'field_kontaktblok_vis_aabnen' => 0,
+    'field_kontaktblok_callcenter' => 0,
   );
   $handler->display->display_options['fields']['contextual_links']['destination'] = '1';
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
