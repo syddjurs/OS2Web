@@ -5131,7 +5131,7 @@ function os2web_indholdstyper_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'media',
+        'module' => 'imagefield_crop',
         'settings' => array(
           'allowed_schemes' => array(
             0 => 'public',
@@ -5148,7 +5148,7 @@ function os2web_indholdstyper_field_default_fields() {
           'progress_indicator' => 'throbber',
           'resolution' => '460x260',
         ),
-        'type' => 'media_generic',
+        'type' => 'imagefield_crop_widget',
         'weight' => '4',
       ),
     ),
