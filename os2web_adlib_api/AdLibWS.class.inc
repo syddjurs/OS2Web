@@ -1,5 +1,7 @@
 <?php
 
+define('ADLIB_JOBTYPE_PDF', 0);
+define('ADLIB_JOBTYPE_HTML', 1);
 /*
  *
  * @author Jesper Mathiassen <jm@bellcom.dk>
@@ -46,7 +48,7 @@ class AdLibWS {
    * @param array $fileInfo - fileinfo structure
    * @return type
    */
-  public function addJob($fileInfo) {
+  public function addJob($fileInfo, $type = ADLIB_JOBTYPE_PDF) {
     if (!isset($this->client)) {
       return false;
     }
@@ -66,14 +68,14 @@ class AdLibWS {
               <JOB:DOCINPUT FILENAME="' . $fileInfo['filename'] . '" FOLDER="' . self::$base_path . $fileInfo['in_folder'] . '" />
             </JOB:DOCINPUTS>
             <JOB:DOCOUTPUTS>
-              <JOB:DOCOUTPUT FILENAME="' . $fileInfo['out_filename'] . '" FOLDER="' . self::$base_path . $fileInfo['out_folder'] . '" DOCTYPE="PDF" />
+              <JOB:DOCOUTPUT FILENAME="' . $fileInfo['out_filename'] . '" FOLDER="' . self::$base_path . $fileInfo['out_folder'] . '" DOCTYPE="' . ($type==ADLIB_JOBTYPE_HTML?'HTML':'PDF') . '" />
             </JOB:DOCOUTPUTS>
             <JOB:SETTINGS>
               <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
             </JOB:SETTINGS>
           </JOB>
         </JOBS>';
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added job for file: ".$fileInfo['filename']);
+    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added job for file: " . $fileInfo['filename']);
     return simplexml_load_string($this->client->addJob(array('jobInfo' => $jobInfo, 'jobTicket' => $jobTicket))->AddJobResult);
   }
 
@@ -94,7 +96,7 @@ class AdLibWS {
     } else {
       $return->status = 'Not found';
     }
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: ".$id." Status: ".$return->status);
+    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
     error_log("Var: \$result = " . print_r($result, 1));
     return $return;
   }
@@ -105,7 +107,7 @@ class AdLibWS {
       error_log("Var: \$reply = " . print_r($reply, 1));
       $folder_info = $reply;
       $result = 'ExponentJobs\\' . ((string) $folder_info['FolderID']);
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added folder: ".$result);
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added folder: " . $result);
       return $result;
     }
   }
@@ -118,9 +120,19 @@ class AdLibWS {
    * @param string $folder - Optional
    * @return mixed - False if call failed, otherwise a fileinfo structure
    */
-  public function uploadData($filename, $data, $folder = NULL) {
+  public function uploadData($filename, $data, $type = ADLIB_JOBTYPE_PDF, $folder = NULL) {
     if (!isset($this->client)) {
       return false;
+    }
+    switch ($type) {
+      case ADLIB_JOBTYPE_HTML:
+        $jobtype = 'HTML';
+        $jobext = 'htm';
+        break;
+      default:
+        $jobtype = 'PDF';
+        $jobext = 'pdf';
+        break;
     }
     if (!isset($folder)) {
       $folder = $this->addJobFolder();
@@ -128,7 +140,7 @@ class AdLibWS {
     if (!$folder) {
       error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() - Adding folder failed.');
       return false;
-      }
+    }
     $payload = '
       <JobFiles>
         <JobFile FileName="' . $filename . '" Data="' . base64_encode($data) . '" Length="' . strlen($data) . '" />
@@ -139,17 +151,18 @@ class AdLibWS {
         ))->AddJobFilesAsStreamResult;
     $status = (string) simplexml_load_string($status)->System['Status'];
     if (strcmp($status, 'Success') == 0) {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Uploaded file: ".$filename);
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Uploaded file: " . $filename);
       return array(
           'basefolder' => $folder,
           'in_folder' => $folder . '\\Input',
           'out_folder' => $folder . '\\Output',
           'out_url' => self::$base_url . str_replace('\\', '/', $folder . '/Output/'),
           'filename' => $filename,
-          'out_filename' => pathinfo($filename, PATHINFO_FILENAME) . '.pdf',
+          'job_type' => $jobtype,
+          'out_filename' => pathinfo($filename, PATHINFO_FILENAME) . '.' . $jobext,
       );
     } else {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to upload: ".$filename);
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to upload: " . $filename);
       return false;
     }
   }

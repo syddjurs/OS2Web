@@ -15,9 +15,15 @@ function os2web_adlib_api_schema() {
               'type' => 'int',
               'unsigned' => TRUE,
               'not null' => TRUE,
+              'defualt' => 0,
           ),
           'did' => array(
               'description' => 'The document identifier from PWS.',
+              'type' => 'int',
+              'unsigned' => TRUE,
+          ),
+          'jobtype' => array(
+              'description' => 'Jobtype identifier. 0 = PDF , 1 = HTML',
               'type' => 'int',
               'unsigned' => TRUE,
           ),
@@ -43,6 +49,17 @@ function os2web_adlib_api_install() {
 
 function os2web_adlib_api_uninstall() {
 
+}
+
+function os2web_adlib_api_update_7001(&$sandbox) {
+  $ret = array();
+  $schema = os2web_adlib_api_schema();
+  db_add_field('os2web_adlib_api_doc_files', 'jobtype', array(
+              'description' => 'Jobtype identifier. 0 = PDF , 1 = HTML',
+              'type' => 'int',
+              'unsigned' => TRUE,
+          ));
+  return $ret;
 }
 
 ?>
