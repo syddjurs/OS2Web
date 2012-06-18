@@ -1,9 +1,5 @@
 <?php
 
-define('ADLIB_JOBTYPE_PDF', 0);
-define('ADLIB_JOBTYPE_HTML', 1);
-
-
 /*
  *
  * @author Jesper Mathiassen <jm@bellcom.dk>
@@ -27,57 +23,24 @@ function os2web_adlib_api_menu() {
 
 function os2web_adlib_api_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-  $file = file_save_data('Hello, world!', 'public://test/' . uniqid() . '.txt');
-  os2web_adlib_api_convert_to_pdf($file->fid, null, ADLIB_JOBTYPE_HTML);
-  _os2web_adlib_api_process_pdf(); // start job
-  sleep(3);
-  _os2web_adlib_api_process_pdf(); // complete job
-//  if (_os2web_adlib_api_is_file_pdf($file->fid)) {
-//    drupal_goto('media/' . $file->fid);
-//  } else {
-//
-//  }
-
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $filename = ' . print_r($filename, 1));
-//  os2web_adlib_api_convert_to_pdf(391);
+  os2web_adlib_api_convert_to_pdf(391);
+  _os2web_adlib_api_process_pdf();
   $call = 'Hello, World.';
-  return l('Filen er her', 'media/' . $file->fid) . '<textarea rows=50>' . print_r($call, 1) . '</textarea>';
+  return '<textarea rows=50>' . print_r($call, 1) . '</textarea>';
 }
 
 /**
  * Implementation of hook_cron()
  */
 function os2web_adlib_api_cron() {
-//  _os2web_adlib_api_process_pdf();
+  _os2web_adlib_api_process_pdf();
 }
 
 /**
  * Implementation of hook_init()
  */
 function os2web_adlib_api_init() {
-//  _os2web_adlib_api_process_pdf();
-}
-
-/**
- * Main call to queue file for converting to HTML.
- *
- * @param int $fid - fid of a managed file
- * @param int $docref - arbitrary identifier for later reference (ie. Doc id)
- * @return boolean
- */
-function os2web_adlib_api_convert_to_html($fid, $docref = NULL) {
-  return os2web_adlib_api_convert($fid, $docref, ADLIB_JOBTYPE_HTML);
-}
-
-/**
- * Main call to queue file for converting to PDF.
- *
- * @param int $fid - fid of a managed file
- * @param int $docref - arbitrary identifier for later reference (ie. Doc id)
- * @return boolean
- */
-function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
-  return os2web_adlib_api_convert($fid, $docref, ADLIB_JOBTYPE_PDF);
+ // _os2web_adlib_api_process_pdf(1);
 }
 
 /**
@@ -85,17 +48,14 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
  *
  * @param int $fid - fid of a managed file
  * @param int $docref - arbitrary identifier for later reference (ie. Doc id)
- * @param int $type - Job type. See ADLIBE_JOBTYPE_*
  * @return boolean
  */
-function os2web_adlib_api_convert($fid, $docref = NULL, $type = ADLIB_JOBTYPE_PDF) {
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $type = ' . print_r($type, 1));
+function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
     if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid', array(':fid' => $fid))->rowCount()) {
       $record = array(
           'fid' => $fid,
           'did' => $docref,
-          'jobtype' => $type,
       );
       drupal_write_record('os2web_adlib_api_doc_files', $record);
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File queued for processing.");
@@ -117,7 +77,7 @@ function os2web_adlib_api_convert($fid, $docref = NULL, $type = ADLIB_JOBTYPE_PD
  * @return int
  */
 function os2web_adlib_api_get_fid($ref) {
-  return (int) db_query('SELECT fid FROM {os2web_adlib_api_doc_files} WHERE did=:did', array(':did' => $ref))->fetchField();
+    return (int)db_query('SELECT fid FROM {os2web_adlib_api_doc_files} WHERE did=:did',array(':did' => $ref))->fetchField();
 }
 
 /**
@@ -174,9 +134,9 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
         }
         curl_setopt($download, CURLOPT_RETURNTRANSFER, TRUE);
         $data = curl_exec($download);
-        $info = curl_getinfo($download);
+
         //FIXME: Replace with proper returncode check
-        if ($info['http_code'] == 200 && $info['size_download'] > 4) {
+        if (!in_array(substr($data, 0, 20), array('<h1>Bad Request</h1>', '<!DOCTYPE HTML PUBLI'))) {
 
           $upd_file = file_load($file->fid);
           error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File recieved successfully, Saving.");
@@ -184,7 +144,7 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $uri = ' . print_r($uri, 1));
           error_log("Var: \$var = " . print_r(drupal_realpath($uri), 1));
           if (filesize(drupal_realpath($uri)) > 0) {
-            file_unmanaged_delete($upd_file->uri);
+//            file_unmanaged_delete($upd_file->uri);
             db_delete('file_managed')->condition('uri', $uri);
             $upd_file->uri = $uri;
             $upd_file->filename = basename($uri);
@@ -197,6 +157,7 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
           } else {
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Filesize was 0. Aborting update.");
           }
+
         }
       }
     }
@@ -213,28 +174,19 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
     $pdfs = _os2web_adlib_api_is_file_pdf($files);
 
     foreach ($pdfs as $file) {
-      if (is_file(drupal_realpath($file['file']->uri))) {
-
-        if ($file[$file['type'] == ADLIB_JOBTYPE_HTML ? 'is_html' : 'is_pdf'] === FALSE) {
-          $upload = $adlib->uploadData($file['file']->filename, file_get_contents(drupal_realpath($file['file']->uri)), $file['type']);
-
-          if ($upload) {
-            $job = $adlib->addJob($upload, $file['type']);
-            if ($job !== FALSE) {
-              $jobinfo = array(
-                  'fid' => $file['file']->fid,
-                  'job_id' => (string) $job->JobSettings['JobID'],
-                  'job_info' => $upload,
-              );
-              drupal_write_record('os2web_adlib_api_doc_files', $jobinfo, array('fid'));
-            }
-          } else {
-            error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File upload failed.");
+      if ($file['is_pdf'] === FALSE && is_file(drupal_realpath($file['file']->uri))) {
+        $upload = $adlib->uploadData($file['file']->filename, file_get_contents(drupal_realpath($file['file']->uri)));
+        if ($upload) {
+          $job = $adlib->addJob($upload);
+          if ($job !== FALSE) {
+            $jobinfo = array(
+                'fid' => $file['file']->fid,
+                'job_id' => (string) $job->JobSettings['JobID'],
+                'job_info' => $upload,
+                );
+            drupal_write_record('os2web_adlib_api_doc_files', $jobinfo, array('fid'));
           }
         }
-      } else {
-        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $file = ' . print_r($file, 1));
-        error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Not an actual file.");
       }
     }
   }
@@ -258,12 +210,8 @@ function _os2web_adlib_api_is_file_pdf($fid) {
     $result = array();
     $files = file_load_multiple($fid);
     foreach ($files as $file) {
-      $q = db_query('SELECT jobtype FROM {os2web_adlib_api_doc_files} WHERE fid=:fid', array(':fid' => $file->fid));
-      $type = $q->fetchField();
       $result[$file->fid]['is_pdf'] = strcasecmp(pathinfo($file->filename, PATHINFO_EXTENSION), 'pdf') === 0;
-      $result[$file->fid]['is_html'] = strcasecmp(pathinfo($file->filename, PATHINFO_EXTENSION), 'htm') === 0;
       $result[$file->fid]['file'] = $file;
-      $result[$file->fid]['type'] = (int) $type;
     }
     return $result;
   } else {
