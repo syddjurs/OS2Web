@@ -101,7 +101,7 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client_search) {
-      $query = str_replace('-','/',$query);
+      $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
@@ -128,7 +128,7 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client_search) {
-      $query = str_replace('-','/',$query);
+      $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
@@ -170,14 +170,18 @@ class AcadrePWS extends CaseService {
 <?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">[CaseID]</CaseFileIdentifier>
+    <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">!CaseID</CaseFileIdentifier>
   </soap:Body>
 </soap:Envelope>';
       try {
-        $result = $this->client->__doRequest(t($request, array('[CaseID]' => $id)), $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
-        $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
+        $result = $this->client->__doRequest(format_string($request, array('!CaseID' => $id)), $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
       } catch (SoapFault $sf) {
-
+        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
+      }
+      if (is_object($result)) {
+        $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
+      } else {
+        return false;
       }
     }
     return $result;
@@ -209,6 +213,7 @@ class AcadrePWS extends CaseService {
           }
         }
       } catch (SoapFault $sf) {
+
       }
     }
     return $result;
@@ -279,7 +284,7 @@ XML;
       $ref = $info['ref'];
       $ver = $info['ver'];
     }
-    drupal_load('module','os2web_adlib_api');
+    drupal_load('module', 'os2web_adlib_api');
     $fid = os2web_adlib_api_get_fid($ref);
     if ($fid > 0) {
 //      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
@@ -306,8 +311,8 @@ XML;
           if (file_prepare_directory($dest, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
             $result = file_save_data(base64_decode($result), $dest . (string) $ref . '-' . (string) $ver . '-' . $this->getDocFileName($ref, $ver), FILE_EXISTS_REPLACE);
             if (FALSE != $result) {
-              drupal_load('module','os2web_adlib_api');
-              os2web_adlib_api_convert_to_pdf($result->fid,$ref);
+              drupal_load('module', 'os2web_adlib_api');
+              os2web_adlib_api_convert_to_pdf($result->fid, $ref);
               $result = file_create_url($result->uri);
             }
           } else {
