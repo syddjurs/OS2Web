@@ -166,19 +166,19 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client) {
-      $request = '
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">!CaseID</CaseFileIdentifier>
   </soap:Body>
-</soap:Envelope>';
+</soap:Envelope> ';
       try {
-        $result = $this->client->__doRequest(format_string($request, array('!CaseID' => $id)), $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
+        $request = format_string($request, array('!CaseID' => $id));
+        $result = $this->client->__doRequest($request, $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
       } catch (SoapFault $sf) {
         error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
       }
-      if (is_object($result)) {
+      if (is_string($result)) {
         $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
       } else {
         return false;
@@ -193,8 +193,7 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client) {
-      $request = '
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <GetLockStatusDocumentId xmlns="http://www.traen.com/2007/09/06/schema">[DocID]</GetLockStatusDocumentId>
