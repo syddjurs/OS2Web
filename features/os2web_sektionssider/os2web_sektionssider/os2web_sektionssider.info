@@ -1,13 +1,12 @@
 name = OS2Web Sektionssider
 core = 7.x
 package = Features
-version = 7.x-1.0
+php = 5.2.4
+version = 7.x-1.1
 project = os2web_sektionssider
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = features
-dependencies[] = field_sql_storage
-dependencies[] = node
 dependencies[] = options
 dependencies[] = page_manager
 dependencies[] = strongarm
