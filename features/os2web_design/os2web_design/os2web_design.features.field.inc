@@ -84,8 +84,15 @@ function os2web_design_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'image',
+        'module' => 'media',
         'settings' => array(
+          'allowed_schemes' => array(
+            0 => 'public',
+            1 => 'private',
+          ),
+          'allowed_types' => array(
+            0 => 'image',
+          ),
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
@@ -105,7 +112,7 @@ function os2web_design_field_default_fields() {
           'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
-        'type' => 'image_image',
+        'type' => 'media_generic',
         'weight' => '31',
       ),
     ),

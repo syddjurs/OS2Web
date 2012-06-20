@@ -41,6 +41,13 @@ function os2web_design_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'bg_image_selector';
+  $strongarm->value = 'herskalderstånoget';
+  $export['bg_image_selector'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'job_scheduler_rebuild_all';
   $strongarm->value = FALSE;
   $export['job_scheduler_rebuild_all'] = $strongarm;
