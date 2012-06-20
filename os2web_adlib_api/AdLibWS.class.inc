@@ -35,7 +35,7 @@ class AdLibWS {
       preg_match('%http://.+?/%', $url, $matches);
       self::$base_url = array_shift($matches);
       try {
-        //$this->client = new SoapClient($url, $options);
+        $this->client = new SoapClient($url, $options);
         error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
       }
@@ -97,14 +97,12 @@ class AdLibWS {
       $return->status = 'Not found';
     }
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
-    error_log("Var: \$result = " . print_r($result, 1));
     return $return;
   }
 
   public function addJobFolder() {
     if ($this->client) {
       $reply = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
-      error_log("Var: \$reply = " . print_r($reply, 1));
       $folder_info = $reply;
       $result = 'ExponentJobs\\' . ((string) $folder_info['FolderID']);
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added folder: " . $result);
