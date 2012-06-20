@@ -3064,7 +3064,7 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['fields']['body_1']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['body_1']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['body_1']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['body_1']['alter']['max_length'] = '240';
+  $handler->display->display_options['fields']['body_1']['alter']['max_length'] = '180';
   $handler->display->display_options['fields']['body_1']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['body_1']['alter']['ellipsis'] = 1;
   $handler->display->display_options['fields']['body_1']['alter']['more_link'] = 0;
