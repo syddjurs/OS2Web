@@ -1561,8 +1561,8 @@ function os2web_kontaktblok_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => '',
-          1 => '',
+          0 => '0',
+          1 => 'vis',
         ),
         'allowed_values_function' => '',
       ),
