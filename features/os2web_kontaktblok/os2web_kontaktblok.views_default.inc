@@ -904,6 +904,31 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_stedpostnr']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_stedpostnr']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_stedpostnr']['field_api_classes'] = 0;
+  /* Felt: Indhold: Email */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['label'] = '';
+  $handler->display->display_options['fields']['field_email']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_email']['alter']['text'] = '<a href="mailto:[field_email-value]">[field_email]</a>';
+  $handler->display->display_options['fields']['field_email']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_email']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_email']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_email']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_email']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_email']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_email']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_email']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_email']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_email']['field_api_classes'] = 0;
   /* Felt: Indhold: Eget indhold */
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['id'] = 'field_kontaktblok_egetindhold';
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['table'] = 'field_data_field_kontaktblok_egetindhold';
@@ -928,30 +953,6 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_kontaktblok_egetindhold']['field_api_classes'] = 0;
-  /* Felt: Indhold: Email */
-  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
-  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
-  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
-  $handler->display->display_options['fields']['field_email']['label'] = '';
-  $handler->display->display_options['fields']['field_email']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_email']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_email']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_email']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_email']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_email']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_email']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_email']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_email']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_email']['field_api_classes'] = 0;
   /* Felt: Indhold: Telefonnummer */
   $handler->display->display_options['fields']['field_phone1']['id'] = 'field_phone1';
   $handler->display->display_options['fields']['field_phone1']['table'] = 'field_data_field_phone1';
@@ -1398,7 +1399,8 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['field'] = 'field_kontaktblok_vis_aabnen';
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['label'] = '';
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['text'] = '[field_kontaktblok_aa_manons]
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['text'] = '<h3>Åbningstider</h3>
+[field_kontaktblok_aa_manons]
 [field_kontaktblok_aa_manaa]
 [field_kontaktblok_aa_tiraa]
 [field_kontaktblok_aa_onsaa]
@@ -1594,6 +1596,16 @@ return os2web_kontaktblok_get_block();
     t('Vis åbningstider'),
     t('Alle'),
     t('Block'),
+    t('<a href="mailto:[field_email-value]">[field_email]</a>'),
+    t('<h3>Åbningstider</h3>
+[field_kontaktblok_aa_manons]
+[field_kontaktblok_aa_manaa]
+[field_kontaktblok_aa_tiraa]
+[field_kontaktblok_aa_onsaa]
+[field_kontaktblok_aa_toraa]
+[field_kontaktblok_aa_freaa]
+[field_kontaktblok_aa_loeaa]
+[field_kontaktblok_aa_soeaa] '),
     t('Kontaktblok'),
     t('View panes'),
   );
