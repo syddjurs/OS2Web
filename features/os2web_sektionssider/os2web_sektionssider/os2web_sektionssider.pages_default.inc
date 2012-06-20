@@ -27,15 +27,7 @@ function os2web_sektionssider_default_page_manager_handlers() {
     'css_id' => '',
     'css' => '',
     'contexts' => array(),
-    'relationships' => array(
-      0 => array(
-        'identifier' => 'Portalkategori',
-        'keyword' => 'taxonomy_vocabulary_2',
-        'name' => 'entity_from_schema:vid-taxonomy_term-taxonomy_vocabulary',
-        'context' => 'argument_term_1',
-        'id' => 1,
-      ),
-    ),
+    'relationships' => array(),
     'access' => array(
       'plugins' => array(
         0 => array(

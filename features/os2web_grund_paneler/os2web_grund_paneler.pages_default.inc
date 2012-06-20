@@ -1201,7 +1201,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->access = array();
     $pane->configuration = array(
       'arguments' => array(
-        'nid' => '2656',
+        'nid' => '3397',
       ),
       'override_title' => 0,
       'override_title_text' => '',

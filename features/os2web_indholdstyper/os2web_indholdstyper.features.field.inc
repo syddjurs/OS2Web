@@ -389,7 +389,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-contentpage-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -411,7 +411,7 @@ function os2web_indholdstyper_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'image',
     ),
     'field_instance' => array(
@@ -581,8 +581,8 @@ function os2web_indholdstyper_field_default_fields() {
           ),
           'allowed_types' => array(
             'audio' => 0,
-            0 => 0,
             'default' => 'default',
+            0 => 0,
             'image' => 0,
             'video' => 0,
           ),
@@ -1742,7 +1742,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-galleri-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -1764,7 +1764,7 @@ function os2web_indholdstyper_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'image',
     ),
     'field_instance' => array(
@@ -3203,7 +3203,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-media-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -3225,7 +3225,7 @@ function os2web_indholdstyper_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'image',
     ),
     'field_instance' => array(
@@ -3955,7 +3955,7 @@ function os2web_indholdstyper_field_default_fields() {
   $fields['node-news-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -3977,7 +3977,7 @@ function os2web_indholdstyper_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'image',
     ),
     'field_instance' => array(

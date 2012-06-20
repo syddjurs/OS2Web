@@ -2312,7 +2312,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_rotate_image']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_rotate_image']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_rotate_image']['settings'] = array(
-    'image_style' => 'rotating_image_tall',
+    'image_style' => 'rotating_image',
     'image_link' => '',
   );
   $handler->display->display_options['fields']['field_rotate_image']['field_api_classes'] = 0;
@@ -4433,6 +4433,40 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['tid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['tid']['not'] = 0;
+
+  /* Display: Logo - Erhverv */
+  $handler = $view->new_display('block', 'Logo - Erhverv', 'block_3');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Kontekstuelt filter: Ord i ordforråd: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '5';
+  $handler->display->display_options['arguments']['tid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['tid']['not'] = 0;
+
+  /* Display: Logo - Politik og planer */
+  $handler = $view->new_display('block', 'Logo - Politik og planer', 'block_4');
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Kontekstuelt filter: Ord i ordforråd: Term ID */
+  $handler->display->display_options['arguments']['tid']['id'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['arguments']['tid']['field'] = 'tid';
+  $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '6';
+  $handler->display->display_options['arguments']['tid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['tid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['tid']['not'] = 0;
   $translatables['sitestuktur'] = array(
     t('Master'),
     t('mere'),
@@ -4451,6 +4485,8 @@ function os2web_sovs_views_default_views() {
     t('Alle'),
     t('Logo'),
     t('Logo - Borger'),
+    t('Logo - Erhverv'),
+    t('Logo - Politik og planer'),
   );
   $export['sitestuktur'] = $view;
 

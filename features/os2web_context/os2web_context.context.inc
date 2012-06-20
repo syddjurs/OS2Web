@@ -32,10 +32,13 @@ function os2web_context_context_default_contexts() {
           'region' => 'sidebar_first',
           'weight' => '-10',
         ),
+        'menu_block-5' => array(
+          'module' => 'menu_block',
+          'delta' => 5,
+          'region' => 'sidebar_first',
+          'weight' => '28',
+        ),
       ),
-    ),
-    'delta' => array(
-      'delta_template' => 'standard',
     ),
   );
   $context->condition_mode = 0;
@@ -57,23 +60,21 @@ function os2web_context_context_default_contexts() {
         'taxonomy/term/5' => 'taxonomy/term/5',
       ),
     ),
-    'node_taxonomy' => array(
-      'values' => array(
-        5 => 5,
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-sitestuktur-block_3' => array(
+          'module' => 'views',
+          'delta' => 'sitestuktur-block_3',
+          'region' => 'sidebar_first',
+          'weight' => '-10',
+        ),
         'menu_block-6' => array(
           'module' => 'menu_block',
           'delta' => 6,
           'region' => 'sidebar_first',
-          'weight' => '-10',
+          'weight' => '10',
         ),
       ),
     ),
@@ -157,6 +158,7 @@ function os2web_context_context_default_contexts() {
         'galleri' => 'galleri',
         'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
         'news' => 'news',
+        'sektionsside' => 'sektionsside',
       ),
       'options' => array(
         'node_form' => '1',
@@ -188,7 +190,7 @@ function os2web_context_context_default_contexts() {
           'module' => 'menu_block',
           'delta' => 12,
           'region' => 'sidebar_first',
-          'weight' => '-10',
+          'weight' => '-7',
         ),
         'views-selvbetjening-block_6' => array(
           'module' => 'views',
@@ -222,9 +224,6 @@ function os2web_context_context_default_contexts() {
         ),
       ),
     ),
-    'delta' => array(
-      'delta_template' => 'standard',
-    ),
   );
   $context->condition_mode = 0;
 
@@ -243,6 +242,7 @@ function os2web_context_context_default_contexts() {
     'node' => array(
       'values' => array(
         'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'sektionsside' => 'sektionsside',
       ),
       'options' => array(
         'node_form' => '1',
@@ -324,11 +324,17 @@ function os2web_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-sitestuktur-block_4' => array(
+          'module' => 'views',
+          'delta' => 'sitestuktur-block_4',
+          'region' => 'sidebar_first',
+          'weight' => '-10',
+        ),
         'menu_block-7' => array(
           'module' => 'menu_block',
           'delta' => 7,
           'region' => 'sidebar_first',
-          'weight' => '-10',
+          'weight' => '10',
         ),
       ),
     ),
@@ -386,28 +392,28 @@ function os2web_context_context_default_contexts() {
   $context->description = '';
   $context->tag = '';
   $context->conditions = array(
-    'taxonomy_term' => array(
+    'node' => array(
       'values' => array(
-        'site_struktur' => 'site_struktur',
+        'sektionsside' => 'sektionsside',
       ),
       'options' => array(
-        'term_form' => '0',
+        'node_form' => '1',
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'menu_block-14' => array(
+        'menu_block-12' => array(
           'module' => 'menu_block',
-          'delta' => 14,
+          'delta' => 12,
           'region' => 'sidebar_first',
-          'weight' => '-10',
+          'weight' => '2',
         ),
       ),
     ),
     'delta' => array(
-      'delta_template' => 'hide_second_sidebar',
+      'delta_template' => 'portalforside',
     ),
   );
   $context->condition_mode = 0;

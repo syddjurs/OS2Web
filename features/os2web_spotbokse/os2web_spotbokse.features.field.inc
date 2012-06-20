@@ -267,7 +267,7 @@ function os2web_spotbokse_field_default_fields() {
   $fields['node-spotbox-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -289,7 +289,7 @@ function os2web_spotbokse_field_default_fields() {
         'default_image' => 0,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'image',
     ),
     'field_instance' => array(
@@ -1217,7 +1217,7 @@ function os2web_spotbokse_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '0',
+      'translatable' => '1',
       'type' => 'text',
     ),
     'field_instance' => array(
