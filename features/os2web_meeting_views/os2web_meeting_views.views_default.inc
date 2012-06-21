@@ -875,7 +875,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler = $view->new_display('attachment', 'Tillæg', 'attachment_3');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Forbindelse: Handler mangler eller er i stykker */
+  /* Forbindelse: Indhold: Tillæg til (field_addenum_to) - reverse */
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['id'] = 'reverse_field_addenum_to_node';
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['field'] = 'reverse_field_addenum_to_node';
@@ -985,7 +985,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('<div id="[field_ref_attachment-target_id]" class="indicator-has-no-notes"></div>'),
     t('<div class="indicator-has-speaker-paper"></div>Talepapir'),
     t('Tillæg'),
-    t('reverse_field_addenum_to_node'),
+    t('field_addenum_to'),
     t('meeting/[nid]'),
   );
   $export['meeting_details'] = $view;
@@ -1288,7 +1288,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_date_value2']['default_date'] = 'now + 30 day';
   $handler->display->display_options['filters']['field_date_value2']['year_range'] = '-5:+5';
-  /* Filterkriterie: Handler mangler eller er i stykker */
+  /* Filterkriterie: Indhold: Tillæg til (field_addenum_to) */
   $handler->display->display_options['filters']['field_addenum_to_nid']['id'] = 'field_addenum_to_nid';
   $handler->display->display_options['filters']['field_addenum_to_nid']['table'] = 'field_data_field_addenum_to';
   $handler->display->display_options['filters']['field_addenum_to_nid']['field'] = 'field_addenum_to_nid';
@@ -1503,7 +1503,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['type']['value'] = array(
     'meeting' => 'meeting',
   );
-  /* Filterkriterie: Handler mangler eller er i stykker */
+  /* Filterkriterie: Indhold: Regular (field_meeting_is_regular) */
   $handler->display->display_options['filters']['field_meeting_is_regular_value']['id'] = 'field_meeting_is_regular_value';
   $handler->display->display_options['filters']['field_meeting_is_regular_value']['table'] = 'field_data_field_meeting_is_regular';
   $handler->display->display_options['filters']['field_meeting_is_regular_value']['field'] = 'field_meeting_is_regular_value';
