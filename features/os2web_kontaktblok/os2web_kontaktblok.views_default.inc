@@ -200,7 +200,7 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_phone1']['field'] = 'field_phone1';
   $handler->display->display_options['fields']['field_phone1']['label'] = '';
   $handler->display->display_options['fields']['field_phone1']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<a href="tel:[field_phone1]">[field_phone1]</a>';
+  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<a id="tlf" href="tel:[field_phone1]">[field_phone1]</a>';
   $handler->display->display_options['fields']['field_phone1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['external'] = 0;
@@ -220,6 +220,7 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_phone1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_phone1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_phone1']['type'] = 'number_unformatted';
   $handler->display->display_options['fields']['field_phone1']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 0,
@@ -959,7 +960,7 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_phone1']['field'] = 'field_phone1';
   $handler->display->display_options['fields']['field_phone1']['label'] = '';
   $handler->display->display_options['fields']['field_phone1']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<a href="tel:[field_phone1]">[field_phone1]</a>';
+  $handler->display->display_options['fields']['field_phone1']['alter']['text'] = '<a id="tlf" href="tel:[field_phone1]">[field_phone1]</a>';
   $handler->display->display_options['fields']['field_phone1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_phone1']['alter']['external'] = 0;
@@ -979,6 +980,7 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_phone1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_phone1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_phone1']['type'] = 'number_unformatted';
   $handler->display->display_options['fields']['field_phone1']['settings'] = array(
     'thousand_separator' => '',
     'prefix_suffix' => 0,
@@ -1552,7 +1554,7 @@ return os2web_kontaktblok_get_block();
     t('Faldende'),
     t('<a href="/kontakt">Gå til kontaktoversigt</a>'),
     t('Kontakt [title]'),
-    t('<a href="tel:[field_phone1]">[field_phone1]</a>'),
+    t('<a id="tlf" href="tel:[field_phone1]">[field_phone1]</a>'),
     t(' - [field_kontaktblok_aa_manolk]'),
     t('<div class="dag">Mandag - onsdag:</div><div class="aaben"> [field_kontaktblok_aa_manons][field_kontaktblok_aa_manolk]</div>'),
     t('Mandag, lukker'),
