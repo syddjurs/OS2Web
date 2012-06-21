@@ -431,7 +431,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Felt: Handler mangler eller er i stykker */
+  /* Felt: Indhold: Qbrick ref */
   $handler->display->display_options['fields']['field_qbrick_ref']['id'] = 'field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['table'] = 'field_data_field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['field'] = 'field_qbrick_ref';
@@ -492,11 +492,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['type']['value'] = array(
     'meeting' => 'meeting',
   );
-  /* Filterkriterie: Handler mangler eller er i stykker */
-  $handler->display->display_options['filters']['field_qbrick_ref_id']['id'] = 'field_qbrick_ref_id';
-  $handler->display->display_options['filters']['field_qbrick_ref_id']['table'] = 'field_data_field_qbrick_ref';
-  $handler->display->display_options['filters']['field_qbrick_ref_id']['field'] = 'field_qbrick_ref_id';
-  $handler->display->display_options['filters']['field_qbrick_ref_id']['operator'] = 'not empty';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -518,21 +513,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Felt: indicator - has notes */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['ui_name'] = 'indicator - has notes';
-  $handler->display->display_options['fields']['php']['label'] = '';
-  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$annotations = annotator_get_notes_by_meeting_id($row->nid);
-if (!empty($annotations))
-print("<div class=\\"indicator-has-notes\\"></div>");
-?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Felt: Indhold: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
@@ -591,11 +571,11 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Felt: Handler mangler eller er i stykker */
+  /* Felt: Indhold: Qbrick ref */
   $handler->display->display_options['fields']['field_qbrick_ref']['id'] = 'field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['table'] = 'field_data_field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['field'] = 'field_qbrick_ref';
-  $handler->display->display_options['fields']['field_qbrick_ref']['label'] = 'Video fra mødet:';
+  $handler->display->display_options['fields']['field_qbrick_ref']['label'] = '';
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['absolute'] = 0;
@@ -609,11 +589,13 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_qbrick_ref']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_qbrick_ref']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_qbrick_ref']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_qbrick_ref']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_qbrick_ref']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_qbrick_ref']['click_sort_column'] = 'seek';
+  $handler->display->display_options['fields']['field_qbrick_ref']['field_api_classes'] = 0;
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -734,14 +716,76 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Felt: hide show container */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['ui_name'] = 'hide show container';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['element_class'] = 'hide_show_button_container';
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+  /* Felt: Indhold: Enclosures */
+  $handler->display->display_options['fields']['field_enclosures']['id'] = 'field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['table'] = 'field_data_field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['field'] = 'field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['relationship'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['fields']['field_enclosures']['label'] = 'Bilag';
+  $handler->display->display_options['fields']['field_enclosures']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['text'] = 'Bilag: [field_enclosures]';
+  $handler->display->display_options['fields']['field_enclosures']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_enclosures']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_enclosures']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_enclosures']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['delta_first_last'] = 0;
+  $handler->display->display_options['fields']['field_enclosures']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['field_enclosures']['field_api_classes'] = 0;
+  /* Felt: Indhold: Ref Attachment */
+  $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
+  $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
+  $handler->display->display_options['fields']['field_ref_attachment']['field'] = 'field_ref_attachment';
+  $handler->display->display_options['fields']['field_ref_attachment']['relationship'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['fields']['field_ref_attachment']['label'] = '';
+  $handler->display->display_options['fields']['field_ref_attachment']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['text'] = '[field_ref_attachment-target_id]';
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['path'] = 'meeting/[nid_1]/bullet-point/[nid]/bullet-point-attachment/[field_ref_attachment-target_id]';
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_ref_attachment']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_ref_attachment']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_ref_attachment']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_ref_attachment']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['delta_first_last'] = 0;
+  $handler->display->display_options['fields']['field_ref_attachment']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['field_ref_attachment']['separator'] = '<br/>';
+  $handler->display->display_options['fields']['field_ref_attachment']['field_api_classes'] = 0;
   /* Felt: Bullet point title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -756,6 +800,8 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['alter']['external'] = 0;
   $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['link_class'] = 'agenda-bullet-list';
+  $handler->display->display_options['fields']['title']['alter']['suffix'] = '<div class="agenda-item">[field_ref_attachment] Bilag: [field_enclosures]</div>';
   $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 1;
@@ -769,64 +815,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['title']['link_to_node'] = 0;
-  /* Felt: indicator - bullet point has notes */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['ui_name'] = 'indicator - bullet point has notes';
-  $handler->display->display_options['fields']['php']['label'] = '';
-  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$annotations = annotator_get_notes_by_bullet_point_id($row->nid);
-if (!empty($annotations))
-print("<div class=\\"indicator-has-notes\\"></div>");
-?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Felt: Indhold: Ref Attachment */
-  $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['field'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['relationship'] = 'field_ref_bullet_points_target_id';
-  $handler->display->display_options['fields']['field_ref_attachment']['label'] = '';
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['text'] = '[field_ref_attachment-target_id]';
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['path'] = 'meeting/[nid_1]/bullet-point/[nid]/bullet-point-attachment/[field_ref_attachment-target_id]';
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['suffix'] = '<div id="[field_ref_attachment-target_id]" class="indicator-has-no-notes"></div>';
-  $handler->display->display_options['fields']['field_ref_attachment']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_ref_attachment']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_ref_attachment']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_ref_attachment']['multi_type'] = 'ul';
-  $handler->display->display_options['fields']['field_ref_attachment']['separator'] = '<br/>';
-  /* Felt: speaker paper link */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'speaker paper link';
-  $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = '<div class="indicator-has-speaker-paper"></div>Talepapir';
-  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'bullet-point/[nid]';
-  $handler->display->display_options['fields']['nothing_1']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
-  /* Felt: Handler mangler eller er i stykker */
+  /* Felt: Indhold: Qbrick ref */
   $handler->display->display_options['fields']['field_qbrick_ref']['id'] = 'field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['table'] = 'field_data_field_qbrick_ref';
   $handler->display->display_options['fields']['field_qbrick_ref']['field'] = 'field_qbrick_ref';
@@ -850,6 +839,9 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_qbrick_ref']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_qbrick_ref']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_qbrick_ref']['click_sort_column'] = 'seek';
+  $handler->display->display_options['fields']['field_qbrick_ref']['type'] = 'qbrick_movie_seek';
+  $handler->display->display_options['fields']['field_qbrick_ref']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -979,11 +971,12 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('<h3>Dagsorden:</h3>'),
     t('Indhold entity refereret fra field_ref_bullet_points'),
     t('bullet point speaking paper'),
-    t('bullet-point/[nid]'),
+    t('Bilag'),
+    t('Bilag: [field_enclosures]'),
     t('[field_ref_attachment-target_id]'),
     t('meeting/[nid_1]/bullet-point/[nid]/bullet-point-attachment/[field_ref_attachment-target_id]'),
-    t('<div id="[field_ref_attachment-target_id]" class="indicator-has-no-notes"></div>'),
-    t('<div class="indicator-has-speaker-paper"></div>Talepapir'),
+    t('bullet-point/[nid]'),
+    t('<div class="agenda-item">[field_ref_attachment] Bilag: [field_enclosures]</div>'),
     t('Tillæg'),
     t('field_addenum_to'),
     t('meeting/[nid]'),
@@ -1148,19 +1141,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'meeting/[nid]';
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Felt: indicator - has notes */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['ui_name'] = 'indicator - has notes';
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$annotations = annotator_get_notes_by_meeting_id($row->nid);
-if (!empty($annotations))
-print("<div class=\\"indicator-has-notes\\"></div>");
-?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Felt: Indhold: Date */
   $handler->display->display_options['fields']['field_date']['id'] = 'field_date';
   $handler->display->display_options['fields']['field_date']['table'] = 'field_data_field_date';
@@ -1311,7 +1291,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Status'),
     t('Titel'),
     t('meeting/[nid]'),
-    t('PHP'),
     t('Dato'),
     t('Lokation'),
     t('Udvalg'),
@@ -1535,303 +1514,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Block'),
   );
   $export['seneste_8_m_der_i_de_st_ende_politiske_udvalg_'] = $view;
-
-  $view = new view;
-  $view->name = 'speaking_paper';
-  $view->description = '';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Speaking paper (bullet point details)';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Dagsorden detailer';
-  $handler->display->display_options['use_more_text'] = 'mere';
-  $handler->display->display_options['access']['type'] = 'none';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
-  $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
-  $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
-  $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
-    'edit_node' => 'edit_node',
-    'delete_node' => 'delete_node',
-  );
-  /* Overskrift: Global: Tekstområde */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
-  /* Opførsel ved ingen resultater: Global: Tekstområde */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = '<a href="?q=node/add/speaker-paper&edit[field_ref_bullet_point][und]=!1">Opret et ny tale papir</a>';
-  $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  $handler->display->display_options['empty']['area']['tokenize'] = TRUE;
-  /* Forbindelse: Entity Reference: Refererende entity */
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['id'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['field'] = 'reverse_field_ref_bullet_point_node';
-  /* Forbindelse: Indhold: Forfatter */
-  $handler->display->display_options['relationships']['uid_1']['id'] = 'uid_1';
-  $handler->display->display_options['relationships']['uid_1']['table'] = 'node';
-  $handler->display->display_options['relationships']['uid_1']['field'] = 'uid';
-  $handler->display->display_options['relationships']['uid_1']['relationship'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['relationships']['uid_1']['label'] = 'speaker paper creator';
-  /* Felt: Indhold: Titel */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Felt: Indhold: Ref Attachment */
-  $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['field'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['label'] = '';
-  $handler->display->display_options['fields']['field_ref_attachment']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_ref_attachment']['settings'] = array(
-    'link' => 1,
-  );
-  $handler->display->display_options['fields']['field_ref_attachment']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_ref_attachment']['multi_type'] = 'ul';
-  /* Felt: Indhold: Titel */
-  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['fields']['title_1']['table'] = 'node';
-  $handler->display->display_options['fields']['title_1']['field'] = 'title';
-  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_ref_speaker_paper_target_id';
-  $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Indhold */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['relationship'] = 'field_ref_speaker_paper_target_id';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Sorteringskriterie: Indhold: Oprettelsesdato */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Kontekstuelt filter: Indhold: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'raw';
-  $handler->display->display_options['arguments']['nid']['default_argument_options']['index'] = '1';
-  $handler->display->display_options['arguments']['nid']['default_argument_skip_url'] = 0;
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['arguments']['nid']['validate']['type'] = 'node';
-  $handler->display->display_options['arguments']['nid']['validate_options']['types'] = array(
-    'bullet_point' => 'bullet_point',
-  );
-  $handler->display->display_options['arguments']['nid']['validate_options']['access'] = 0;
-  $handler->display->display_options['arguments']['nid']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['nid']['not'] = 0;
-  /* Filterkriterie: Indhold: Udgivet */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'bullet_point' => 'bullet_point',
-  );
-  /* Filterkriterie: Bruger: Aktuelle */
-  $handler->display->display_options['filters']['uid_current']['id'] = 'uid_current';
-  $handler->display->display_options['filters']['uid_current']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_current']['field'] = 'uid_current';
-  $handler->display->display_options['filters']['uid_current']['relationship'] = 'uid_1';
-  $handler->display->display_options['filters']['uid_current']['value'] = '1';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Forbindelse: bullet points meeting */
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_points_node']['id'] = 'reverse_field_ref_bullet_points_node';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_points_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_points_node']['field'] = 'reverse_field_ref_bullet_points_node';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_points_node']['ui_name'] = 'bullet points meeting';
-  $handler->display->display_options['relationships']['reverse_field_ref_bullet_points_node']['label'] = 'bullet points meeting';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Felt: bullet point id */
-  $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
-  $handler->display->display_options['fields']['nid_1']['table'] = 'node';
-  $handler->display->display_options['fields']['nid_1']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid_1']['ui_name'] = 'bullet point id';
-  $handler->display->display_options['fields']['nid_1']['label'] = '';
-  $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Nid */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'reverse_field_ref_bullet_points_node';
-  $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Titel */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'view-header';
-  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-  /* Felt: indicator - bullet point has notes */
-  $handler->display->display_options['fields']['php']['id'] = 'php';
-  $handler->display->display_options['fields']['php']['table'] = 'views';
-  $handler->display->display_options['fields']['php']['field'] = 'php';
-  $handler->display->display_options['fields']['php']['ui_name'] = 'indicator - bullet point has notes';
-  $handler->display->display_options['fields']['php']['label'] = '';
-  $handler->display->display_options['fields']['php']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$annotations = annotator_get_notes_by_bullet_point_id($row->nid_1);
-if (!empty($annotations))
-print("<div class=\\"indicator-has-notes\\"></div>");
-?>';
-  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
-  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
-  /* Felt: Indhold: Indhold */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Ref Attachment */
-  $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['field'] = 'field_ref_attachment';
-  $handler->display->display_options['fields']['field_ref_attachment']['label'] = '';
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['path'] = 'meeting/[nid]/bullet-point/!1/bullet-point-attachment/[field_ref_attachment-target_id]';
-  $handler->display->display_options['fields']['field_ref_attachment']['alter']['suffix'] = '<div id="[field_ref_attachment-target_id]" class="indicator-has-no-notes"></div>';
-  $handler->display->display_options['fields']['field_ref_attachment']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_ref_attachment']['settings'] = array(
-    'link' => 0,
-  );
-  $handler->display->display_options['fields']['field_ref_attachment']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_ref_attachment']['multi_type'] = 'ul';
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filterkriterie: Indhold: Udgivet */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filterkriterie: Indhold: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'bullet_point' => 'bullet_point',
-  );
-  $handler->display->display_options['path'] = 'bullet-point/%';
-
-  /* Display: Attachment */
-  $handler = $view->new_display('attachment', 'Attachment', 'attachment_1');
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['defaults']['header'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Felt: Indhold: Titel */
-  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
-  $handler->display->display_options['fields']['title_1']['table'] = 'node';
-  $handler->display->display_options['fields']['title_1']['field'] = 'title';
-  $handler->display->display_options['fields']['title_1']['relationship'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['fields']['title_1']['label'] = '';
-  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title_1']['alter']['text'] = 'talepapir - [title_1]';
-  $handler->display->display_options['fields']['title_1']['alter']['path'] = '#';
-  $handler->display->display_options['fields']['title_1']['alter']['prefix'] = 'Talepapir -';
-  $handler->display->display_options['fields']['title_1']['element_type'] = 'h3';
-  $handler->display->display_options['fields']['title_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title_1']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['title_1']['element_wrapper_class'] = 'view-header';
-  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Felt: Indhold: Redigér-link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['relationship'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = '';
-  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Slet-link */
-  $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['delete_node']['field'] = 'delete_node';
-  $handler->display->display_options['fields']['delete_node']['relationship'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['fields']['delete_node']['label'] = '';
-  $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Indhold */
-  $handler->display->display_options['fields']['body']['id'] = 'body';
-  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body']['field'] = 'body';
-  $handler->display->display_options['fields']['body']['relationship'] = 'reverse_field_ref_bullet_point_node';
-  $handler->display->display_options['fields']['body']['label'] = '';
-  $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
-  $handler->display->display_options['displays'] = array(
-    'page' => 'page',
-    'default' => 0,
-  );
-  $handler->display->display_options['attachment_position'] = 'after';
-  $translatables['speaking_paper'] = array(
-    t('Master'),
-    t('Dagsorden detailer'),
-    t('mere'),
-    t('Udfør'),
-    t('Gendan'),
-    t('Sortér efter'),
-    t('Stigende'),
-    t('Faldende'),
-    t('<a href="?q=node/add/speaker-paper&edit[field_ref_bullet_point][und]=!1">Opret et ny tale papir</a>'),
-    t('Indhold refererer til Indhold fra field_ref_bullet_point'),
-    t('speaker paper creator'),
-    t('Alle'),
-    t('Page'),
-    t('bullet points meeting'),
-    t('meeting/[nid]/bullet-point/!1/bullet-point-attachment/[field_ref_attachment-target_id]'),
-    t('<div id="[field_ref_attachment-target_id]" class="indicator-has-no-notes"></div>'),
-    t('Attachment'),
-    t('talepapir - [title_1]'),
-    t('#'),
-    t('Talepapir -'),
-  );
-  $export['speaking_paper'] = $view;
 
   return $export;
 }

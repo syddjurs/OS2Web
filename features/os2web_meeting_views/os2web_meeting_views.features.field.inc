@@ -686,7 +686,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -763,7 +763,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '7',
+        'weight' => '9',
       ),
     ),
   );
@@ -851,7 +851,7 @@ function os2web_meeting_views_field_default_fields() {
           'year_range' => '-0:+1',
         ),
         'type' => 'date_popup',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -1002,7 +1002,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '8',
+        'weight' => '10',
       ),
     ),
   );
@@ -1082,7 +1082,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -1149,7 +1149,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -1222,7 +1222,7 @@ function os2web_meeting_views_field_default_fields() {
           'display_label' => 0,
         ),
         'type' => 'options_buttons',
-        'weight' => '6',
+        'weight' => '8',
       ),
     ),
   );
@@ -1318,7 +1318,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'computed_field',
         'settings' => array(),
         'type' => 'computed',
-        'weight' => '10',
+        'weight' => '12',
       ),
     ),
   );
@@ -1401,7 +1401,64 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '1',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_qbrick_ref'
+  $fields['node-meeting-field_qbrick_ref'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_qbrick_ref',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_qbrick',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'qbrick_movie',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => 15,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_qbrick_ref',
+      'label' => 'Qbrick ref',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'os2web_qbrick',
+        'settings' => array(),
+        'type' => 'qbrick_movie_simple',
+        'weight' => '7',
       ),
     ),
   );
@@ -1498,7 +1555,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '11',
       ),
     ),
   );
@@ -1965,6 +2022,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
   t('ID');
   t('Lokation');
   t('Meeting ID');
+  t('Qbrick ref');
   t('Ref Attachment');
   t('Ref Bullet point');
   t('Ref Bullet points');
