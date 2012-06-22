@@ -259,6 +259,69 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-bullet_point-field_qbrick_ref'
+  $fields['node-bullet_point-field_qbrick_ref'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_qbrick_ref',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_qbrick',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'qbrick_movie',
+    ),
+    'field_instance' => array(
+      'bundle' => 'bullet_point',
+      'default_value' => array(
+        0 => array(
+          'id' => '',
+          'seek' => '0',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => 3,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_qbrick_ref',
+      'label' => 'Qbrick ref',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_qbrick',
+        'settings' => array(),
+        'type' => 'qbrick_movie_simple',
+        'weight' => '4',
+      ),
+    ),
+  );
+
   // Exported field: 'node-bullet_point-field_ref_attachment'
   $fields['node-bullet_point-field_ref_attachment'] = array(
     'field_config' => array(

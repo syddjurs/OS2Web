@@ -22,6 +22,17 @@ function os2web_context_context_default_contexts() {
         'taxonomy/term/4' => 'taxonomy/term/4',
       ),
     ),
+    'node' => array(
+      'values' => array(
+        'contentpage' => 'contentpage',
+        'galleri' => 'galleri',
+        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'sektionsside' => 'sektionsside',
+      ),
+      'options' => array(
+        'node_form' => '1',
+      ),
+    ),
   );
   $context->reactions = array(
     'block' => array(
@@ -41,7 +52,7 @@ function os2web_context_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -58,6 +69,20 @@ function os2web_context_context_default_contexts() {
     'menu' => array(
       'values' => array(
         'taxonomy/term/5' => 'taxonomy/term/5',
+      ),
+    ),
+    'node' => array(
+      'values' => array(
+        'contentpage' => 'contentpage',
+        'galleri' => 'galleri',
+        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'local_plan' => 'local_plan',
+        'referat' => 'referat',
+        'sektionsside' => 'sektionsside',
+        'webform' => 'webform',
+      ),
+      'options' => array(
+        'node_form' => '1',
       ),
     ),
   );
@@ -79,7 +104,7 @@ function os2web_context_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
@@ -242,6 +267,7 @@ function os2web_context_context_default_contexts() {
     'node' => array(
       'values' => array(
         'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'meeting' => 'meeting',
         'sektionsside' => 'sektionsside',
       ),
       'options' => array(
@@ -253,6 +279,7 @@ function os2web_context_context_default_contexts() {
         'node/add/*' => 'node/add/*',
         'node/*/edit' => 'node/*/edit',
         'brugers-indhold' => 'brugers-indhold',
+        'meeting/*' => 'meeting/*',
       ),
     ),
   );
@@ -312,9 +339,13 @@ function os2web_context_context_default_contexts() {
         'taxonomy/term/6' => 'taxonomy/term/6',
       ),
     ),
-    'node_taxonomy' => array(
+    'node' => array(
       'values' => array(
-        6 => 6,
+        'contentpage' => 'contentpage',
+        'galleri' => 'galleri',
+        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'local_plan' => 'local_plan',
+        'sektionsside' => 'sektionsside',
       ),
       'options' => array(
         'node_form' => '1',
@@ -339,7 +370,7 @@ function os2web_context_context_default_contexts() {
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
