@@ -134,11 +134,17 @@ function _os2web_meetings_process_agenda($agendainfo_xml) {
  */
 function _os2web_meetings_unpublish_meeting($info) {
 //  error_log(basename(__FILE__) . ':' . __LINE__ . ' Unpublish: $agendainfo = ' . print_r($info, 1));
-  //TODO: Look up nid of the meeting
-  $aid = $info['sysid'];
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Unpublish requested: $aid = ' . print_r($aid, 1));
-  //TODO: Remove attached nodes, buttom-up
-  //TODO: Remove node.
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('type', 'meeting')
+    ->fieldCondition('field_system_id', 'value', $info['sysid'], '=')
+    ->execute();
+  if (isset($result['node'])) {
+    $nid = array_shift($result['node'])->nid;
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Unpublishing nid: '.$nid);
+    node_delete($nid);
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Unpublished nid: '.$nid);
+  }
 }
 
 /**
@@ -314,8 +320,8 @@ function _os2web_meetings_add_item($info, $xml, $id) {
     $file = file_save($file);
 
     // Schedule for PDF conversion
-//    drupal_load('module','os2web_adlib_api');
-//    os2web_adlib_api_convert_to_pdf($file->fid);
+    drupal_load('module','os2web_adlib_api');
+    os2web_adlib_api_convert_to_pdf($file->fid);
 
     $node->field_enclosures[$node->language][] = (array) $file;
   }
