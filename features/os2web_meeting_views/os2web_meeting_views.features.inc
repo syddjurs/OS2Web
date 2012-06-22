@@ -50,14 +50,6 @@ function os2web_meeting_views_node_info() {
       'title_label' => t('Titel'),
       'help' => '',
     ),
-    'speaker_paper' => array(
-      'name' => t('Speaker paper'),
-      'base' => 'node_content',
-      'description' => '',
-      'has_title' => '1',
-      'title_label' => t('Titel'),
-      'help' => '',
-    ),
   );
   return $items;
 }

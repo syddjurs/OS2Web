@@ -63,7 +63,7 @@ function os2web_meetings_order_addenums() {
   $meetings = array();
   // meetings as: $meetings[<meeting_id>][<system_id>][<node_id>]
   foreach ($nodes as $node) {
-    $meetings[$node->field_meeting_id[$node->language][0]['value']][$node->field_system_id[$node->language][0]['value']] = $node->nid;
+    $meetings[$node->field_meeting_id[$node->language][0]['value']][] = $node->nid;
   }
   foreach ($meetings as $meeting) {
     ksort($meeting); // Lowest system id first
@@ -180,15 +180,16 @@ function _os2web_meetings_publish_meeting($info, $xml) {
   }
 
 
-  //FIXME: Refactor dupe-check to seperate function.
-  $nid = db_select('os2web_meetings_imported', 'mi')
-      ->fields('mi')
-      ->condition('aid', $options['id'])
-      ->execute()
-      ->fetchObject();
-  if (isset($nid->nid) && $nid->nid > 0) {
-//    return; // No reimports
-//    node_delete($nid->nid);
+
+  $query = new EntityFieldQuery();
+
+  $result = $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('type', 'meeting')
+    ->fieldCondition('field_system_id', 'value', $options['id'], '=')
+    ->execute();
+  if (isset($result['node'])) {
+    $nid = array_shift($result['node'])->nid;
+    node_delete($nid);
   }
 
   $node = new stdClass(); // We create a new node object
@@ -313,8 +314,8 @@ function _os2web_meetings_add_item($info, $xml, $id) {
     $file = file_save($file);
 
     // Schedule for PDF conversion
-    drupal_load('module','os2web_adlib_api');
-    os2web_adlib_api_convert_to_pdf($file->fid);
+//    drupal_load('module','os2web_adlib_api');
+//    os2web_adlib_api_convert_to_pdf($file->fid);
 
     $node->field_enclosures[$node->language][] = (array) $file;
   }
@@ -464,11 +465,6 @@ function os2web_meetings_node_delete($node) {
     if (isset($node->field_ref_attachment[$node->language])) {
       foreach ($node->field_ref_attachment[$node->language] as $nids) {
         node_delete($nids['target_id']);
-      }
-    }
-    if (isset($node->field_enclosures[$node->language])) {
-      foreach ($node->field_enclosures[$node->language] as $file) {
-      file_delete((object) $file, true);
       }
     }
   }

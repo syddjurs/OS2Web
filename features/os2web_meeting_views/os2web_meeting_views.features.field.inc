@@ -686,7 +686,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '13',
+        'weight' => '14',
       ),
     ),
   );
@@ -763,7 +763,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -851,7 +851,7 @@ function os2web_meeting_views_field_default_fields() {
           'year_range' => '-0:+1',
         ),
         'type' => 'date_popup',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -925,7 +925,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -1002,7 +1002,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1082,7 +1082,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -1222,7 +1222,7 @@ function os2web_meeting_views_field_default_fields() {
           'display_label' => 0,
         ),
         'type' => 'options_buttons',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -1318,7 +1318,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'computed_field',
         'settings' => array(),
         'type' => 'computed',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -1401,7 +1401,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -1458,7 +1458,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'os2web_qbrick',
         'settings' => array(),
         'type' => 'qbrick_movie_simple',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -1555,152 +1555,43 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
 
-  // Exported field: 'node-speaker_paper-body'
-  $fields['node-speaker_paper-body'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'node',
-      ),
-      'field_name' => 'body',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_with_summary',
-    ),
-    'field_instance' => array(
-      'bundle' => 'speaker_paper',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 0,
-        ),
-        'related_block' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => 600,
-          ),
-          'type' => 'text_summary_or_trimmed',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'body',
-      'label' => 'Body',
-      'required' => FALSE,
-      'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'rows' => 20,
-          'summary_rows' => 5,
-        ),
-        'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-speaker_paper-field_ref_bullet_point'
-  $fields['node-speaker_paper-field_ref_bullet_point'] = array(
+  // Exported field: 'node-meeting-field_system_id'
+  $fields['node-meeting-field_system_id'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_ref_bullet_point',
-      'field_permissions' => array(
-        'type' => '0',
-      ),
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
-        ),
-      ),
-      'module' => 'entityreference',
-      'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'direction' => 'ASC',
-            'field' => 'body:value',
-            'property' => 'nid',
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'bullet_point' => 'bullet_point',
-          ),
-        ),
-        'handler_submit' => 'Change handler',
-        'target_type' => 'node',
-      ),
+      'field_name' => 'field_system_id',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'number_integer',
     ),
     'field_instance' => array(
-      'bundle' => 'speaker_paper',
+      'bundle' => 'meeting',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'entityreference',
+          'module' => 'number',
           'settings' => array(
-            'link' => FALSE,
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
           ),
-          'type' => 'entityreference_label',
-          'weight' => 1,
+          'type' => 'number_integer',
+          'weight' => 16,
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1715,19 +1606,24 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'weight' => 0,
         ),
       ),
+      'ds_extras_field_template' => '',
       'entity_type' => 'node',
-      'field_name' => 'field_ref_bullet_point',
-      'label' => 'Ref Bullet point',
-      'required' => 1,
+      'field_name' => 'field_system_id',
+      'label' => 'System id',
+      'required' => 0,
       'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
-        'module' => 'options',
+        'active' => 0,
+        'module' => 'number',
         'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '-3',
+        'type' => 'number',
+        'weight' => '2',
       ),
     ),
   );
@@ -2024,11 +1920,11 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
   t('Meeting ID');
   t('Qbrick ref');
   t('Ref Attachment');
-  t('Ref Bullet point');
   t('Ref Bullet points');
   t('Regular');
   t('Search meta data');
   t('Status');
+  t('System id');
   t('Tillæg til');
 
   return $fields;

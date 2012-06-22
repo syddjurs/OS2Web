@@ -379,10 +379,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['title'] = 'Møde detailer';
   $handler->display->display_options['css_class'] = 'bullet-point-attachments';
   $handler->display->display_options['use_more_text'] = 'mere';
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    2 => '2',
-  );
+  $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -410,6 +407,13 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
+  /* Opførsel ved ingen resultater: Global: Tekstområde */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Forbindelse: Entity Reference: Refereret entity */
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['id'] = 'field_ref_bullet_points_target_id';
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['table'] = 'field_data_field_ref_bullet_points';
@@ -1129,11 +1133,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Status */
-  $handler->display->display_options['fields']['field_meeting_status']['id'] = 'field_meeting_status';
-  $handler->display->display_options['fields']['field_meeting_status']['table'] = 'field_data_field_meeting_status';
-  $handler->display->display_options['fields']['field_meeting_status']['field'] = 'field_meeting_status';
-  $handler->display->display_options['fields']['field_meeting_status']['type'] = 'taxonomy_term_reference_plain';
   /* Felt: Indhold: Titel */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1268,10 +1267,11 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_popup';
   $handler->display->display_options['filters']['field_date_value2']['default_date'] = 'now + 30 day';
   $handler->display->display_options['filters']['field_date_value2']['year_range'] = '-5:+5';
-  /* Filterkriterie: Indhold: Tillæg til (field_addenum_to) */
+  /* Filterkriterie: Addenum */
   $handler->display->display_options['filters']['field_addenum_to_nid']['id'] = 'field_addenum_to_nid';
   $handler->display->display_options['filters']['field_addenum_to_nid']['table'] = 'field_data_field_addenum_to';
   $handler->display->display_options['filters']['field_addenum_to_nid']['field'] = 'field_addenum_to_nid';
+  $handler->display->display_options['filters']['field_addenum_to_nid']['ui_name'] = 'Addenum';
   $handler->display->display_options['filters']['field_addenum_to_nid']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'meetings-search';
   $translatables['meetings_search'] = array(
@@ -1288,7 +1288,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Forskydning'),
     t('<div class="help-button" title="Help text goes here"></div>'),
     t('Ingen møder er fundet'),
-    t('Status'),
     t('Titel'),
     t('meeting/[nid]'),
     t('Dato'),
