@@ -300,6 +300,7 @@ function _os2web_meetings_add_item($info, $xml, $id) {
   $enclosures = $xml->xpath("table[@name='enclosure']");
   foreach ($enclosures as $enclosure) {
     $filename = (string) array_shift($enclosure->xpath("fields/field[@name='filename']"));
+    $title = (string) array_shift($enclosure->xpath("fields/field[@name='name']"));
     $uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $info['filesfolder'], $filename));
 
     $fid = db_select('file_managed', 'fm')
@@ -313,6 +314,7 @@ function _os2web_meetings_add_item($info, $xml, $id) {
     }
     $file->uri = $uri;
     $file->display = 1;
+    $file->field_titel[LANGUAGE_NONE][]['value'] = $title;
     $file->filename = drupal_basename($file->uri);
     $file->filemime = file_get_mimetype($file->uri);
     $file->uid = 1;
@@ -433,7 +435,7 @@ function _os2web_meetings_import_location(SimpleXMLElement $xml) {
   }
   taxonomy_term_save($term);
 
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $term = ' . print_r($term, 1));
+  //error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $term = ' . print_r($term, 1));
   return $term;
 }
 
