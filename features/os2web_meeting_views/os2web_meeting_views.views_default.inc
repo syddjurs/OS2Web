@@ -1247,7 +1247,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['field_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_date_value']['expose']['operator_id'] = 'field_date_value_op';
-  $handler->display->display_options['filters']['field_date_value']['expose']['label'] = 'Fra dato:';
   $handler->display->display_options['filters']['field_date_value']['expose']['operator'] = 'field_date_value_op';
   $handler->display->display_options['filters']['field_date_value']['expose']['identifier'] = 'from_date';
   $handler->display->display_options['filters']['field_date_value']['form_type'] = 'date_popup';
@@ -1261,7 +1260,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['filters']['field_date_value2']['group'] = 1;
   $handler->display->display_options['filters']['field_date_value2']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_date_value2']['expose']['operator_id'] = 'field_date_value2_op';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['label'] = 'Til dato:';
+  $handler->display->display_options['filters']['field_date_value2']['expose']['label'] = 'Til';
   $handler->display->display_options['filters']['field_date_value2']['expose']['operator'] = 'field_date_value2_op';
   $handler->display->display_options['filters']['field_date_value2']['expose']['identifier'] = 'to_date';
   $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_popup';
@@ -1296,8 +1295,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Date -  start date (field_date)'),
     t('Page'),
     t('Fritekst'),
-    t('Fra dato:'),
-    t('Til dato:'),
+    t('Til'),
   );
   $export['meetings_search'] = $view;
 
