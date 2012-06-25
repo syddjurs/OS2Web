@@ -23,9 +23,16 @@ function os2web_adlib_api_menu() {
 
 function os2web_adlib_api_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-//  os2web_adlib_api_convert_to_pdf(391);
+  $fid = 3280;
+   db_delete('os2web_adlib_api_doc_files')->condition('fid',$fid)->execute();
+  os2web_adlib_api_convert_to_pdf($fid);
   _os2web_adlib_api_process_pdf();
-  $call = 'Hello, World';
+//  sleep(5);
+//  _os2web_adlib_api_process_pdf();
+  $file = db_select('os2web_adlib_api_doc_files','df')->fields('df')->condition('fid',$fid)->execute()->fetchObject();
+  $adlib = _os2web_adlib_api_get_instance();
+  $call = $adlib->getJobStatus($file->job_id);
+//  $call.= file_load(3279);
 
   return '<textarea rows=50>' . print_r($call, 1) . '</textarea>';
 }

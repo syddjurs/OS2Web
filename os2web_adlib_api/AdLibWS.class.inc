@@ -97,6 +97,9 @@ class AdLibWS {
       $return->status = 'Not found';
     }
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
+    if ($return->status === 'Pending') {
+      error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus'] );
+    }
     return $return;
   }
 

@@ -323,6 +323,8 @@ function _os2web_meetings_add_item($info, $xml, $id) {
     $title = (string) array_shift($enclosure->xpath("fields/field[@name='name']"));
     $uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $info['filesfolder'], $filename));
 
+    error_log("Var: \$uri = " . print_r($uri, 1));
+
     $fid = db_select('file_managed', 'fm')
             ->fields('fm', array('fid'))
             ->condition('uri', $uri)
@@ -331,6 +333,7 @@ function _os2web_meetings_add_item($info, $xml, $id) {
     $file = new stdClass();
     if ($fid) {
       $file->fid = $fid;
+      error_log("Var: \$file->fid = " . print_r($file->fid, 1));
     }
     $file->uri = $uri;
     $file->display = 1;
