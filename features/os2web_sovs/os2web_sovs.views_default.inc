@@ -1683,11 +1683,12 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_rotate_image']['table'] = 'field_data_field_rotate_image';
   $handler->display->display_options['fields']['field_rotate_image']['field'] = 'field_rotate_image';
   $handler->display->display_options['fields']['field_rotate_image']['label'] = '';
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['text'] = '<a href="[field_rotating_link]">[field_rotate_image]</a>';
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['path'] = '[field_rotating_link]';
   $handler->display->display_options['fields']['field_rotate_image']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['external'] = 1;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['nl2br'] = 0;
@@ -2445,6 +2446,7 @@ function os2web_sovs_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('<a href="[field_rotating_link]">[field_rotate_image]</a>'),
     t('[field_rotating_link]'),
     t('<a href="[field_rotating_link]"><span>[title]</span> [body]</a>'),
     t('<a href="[field_rotating_link]"><span>[title]</span></a>'),
