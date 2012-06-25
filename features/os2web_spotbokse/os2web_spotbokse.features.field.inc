@@ -267,7 +267,7 @@ function os2web_spotbokse_field_default_fields() {
   $fields['node-spotbox-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',

@@ -14,9 +14,10 @@ function os2web_kontaktblok_user_default_permissions() {
   $permissions['create kontaktblok content'] = array(
     'name' => 'create kontaktblok content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -32,9 +33,10 @@ function os2web_kontaktblok_user_default_permissions() {
   $permissions['delete own kontaktblok content'] = array(
     'name' => 'delete own kontaktblok content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -43,8 +45,10 @@ function os2web_kontaktblok_user_default_permissions() {
   $permissions['edit any kontaktblok content'] = array(
     'name' => 'edit any kontaktblok content',
     'roles' => array(
-      0 => 'Kommunikation',
-      1 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -53,9 +57,10 @@ function os2web_kontaktblok_user_default_permissions() {
   $permissions['edit own kontaktblok content'] = array(
     'name' => 'edit own kontaktblok content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );

@@ -25,6 +25,7 @@ function os2web_indholdstyper_field_group_info() {
     'children' => array(
       0 => 'field_lead_image',
       1 => 'field_mediafile',
+      2 => 'field_billede',
     ),
     'format_type' => 'multistep',
     'format_settings' => array(
@@ -92,7 +93,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Hentet fra kommunens sagssystem',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_case',
       1 => 'field_doc',
@@ -199,8 +200,8 @@ function os2web_indholdstyper_field_group_info() {
     'children' => array(
       0 => 'field_rotate_publish',
       1 => 'field_node_reference_kontaktblok',
-      2 => 'field_site_structure',
-      3 => 'field_indholdsside_spotboxe',
+      2 => 'field_indholdsside_spotboxe',
+      3 => 'field_site_structure',
       4 => 'field_noderef_selvbtjn',
       5 => 'path',
       6 => 'additional_settings',
@@ -231,7 +232,6 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '39',
     'children' => array(
       0 => 'field_source_id',
-      1 => 'workbench_access',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

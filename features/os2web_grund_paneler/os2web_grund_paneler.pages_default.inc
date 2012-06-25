@@ -1351,7 +1351,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
       'panel_args' => 0,
       'link_to_view' => 1,
       'args' => '',
-      'url' => 'indhold/syddjurslive',
+      'url' => 'http://www.djurslive.dk',
       'display' => 'blok_kulturnaut_forside',
       'override_title' => 1,
       'override_title_text' => 'Det sker',
