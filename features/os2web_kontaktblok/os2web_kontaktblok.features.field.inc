@@ -1498,7 +1498,7 @@ function os2web_kontaktblok_field_default_fields() {
       'default_value' => array(
         0 => array(
           'value' => '',
-          'format' => 'blokindhold',
+          'format' => 'full_html',
         ),
       ),
       'deleted' => '0',
@@ -1529,6 +1529,10 @@ function os2web_kontaktblok_field_default_fields() {
       'label' => 'Eget indhold',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
