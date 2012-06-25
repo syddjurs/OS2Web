@@ -51,6 +51,13 @@ function os2web_meeting_views_field_default_fields() {
           'type' => 'text_default',
           'weight' => '0',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '0',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -131,7 +138,13 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 2,
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -205,7 +218,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_default',
-          'weight' => 2,
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => '4',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -290,7 +310,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'os2web_qbrick',
           'settings' => array(),
           'type' => 'qbrick_movie_simple',
-          'weight' => 3,
+          'weight' => '3',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '3',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -383,6 +410,15 @@ function os2web_meeting_views_field_default_fields() {
           'type' => 'entityreference_entity_view',
           'weight' => '1',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'entityreference',
+          'settings' => array(
+            'view_mode' => 'full',
+          ),
+          'type' => 'entityreference_entity_view',
+          'weight' => '1',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -450,6 +486,13 @@ function os2web_meeting_views_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '0',
+        ),
+        'meeting_detail_view' => array(
           'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
@@ -529,7 +572,13 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_default',
-          'weight' => 3,
+          'weight' => '3',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '1',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -609,7 +658,13 @@ function os2web_meeting_views_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => 2,
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -718,7 +773,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => 9,
+          'weight' => '9',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => '5',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -799,7 +861,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 11,
+          'weight' => '11',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '0',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -877,6 +946,19 @@ function os2web_meeting_views_field_default_fields() {
           ),
           'type' => 'date_default',
           'weight' => '1',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+          ),
+          'type' => 'date_default',
+          'weight' => '2',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -958,7 +1040,13 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 13,
+          'weight' => '13',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '10',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1038,7 +1126,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 14,
+          'weight' => '14',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '1',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1109,13 +1204,19 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 7,
+          'weight' => '7',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '4',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '7',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1181,7 +1282,13 @@ function os2web_meeting_views_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => 12,
+          'weight' => '12',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '6',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1257,6 +1364,12 @@ function os2web_meeting_views_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '5',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '12',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1348,13 +1461,19 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'module' => 'computed_field',
           'settings' => array(),
           'type' => 'computed_field_plain',
-          'weight' => 8,
+          'weight' => '8',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '5',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1439,6 +1558,12 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'type' => 'hidden',
           'weight' => '2',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '8',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1495,7 +1620,14 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'module' => 'os2web_qbrick',
           'settings' => array(),
           'type' => 'qbrick_movie_simple',
-          'weight' => 15,
+          'weight' => '15',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '3',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1585,13 +1717,22 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
             'link' => FALSE,
           ),
           'type' => 'entityreference_label',
-          'weight' => 9,
+          'weight' => '9',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '6',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'entityreference',
+          'settings' => array(
+            'view_mode' => '',
+          ),
+          'type' => 'entityreference_entity_view',
+          'weight' => '4',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1654,7 +1795,13 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => 16,
+          'weight' => '16',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
         ),
         'related_block' => array(
           'label' => 'above',
