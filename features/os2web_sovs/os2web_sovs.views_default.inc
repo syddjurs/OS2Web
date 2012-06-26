@@ -3001,7 +3001,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = FALSE;
-  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="/soeg-nemindsigt">Søg nemindsig</a></div>';
+  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['footer']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -3319,10 +3319,10 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['id'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'empty';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['term_page'] = 1;
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = 1;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['term_page'] = 0;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = 0;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = 1;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
     'site_struktur' => 'site_struktur',
@@ -3331,6 +3331,13 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['specify_validation'] = 1;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate']['type'] = 'taxonomy_term';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['vocabularies'] = array(
+    'site_struktur' => 'site_struktur',
+  );
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['transform'] = 0;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate']['fail'] = 'empty';
   $handler->display->display_options['arguments']['field_site_structure_tid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['field_site_structure_tid']['not'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -3354,6 +3361,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['filters']['field_selvbetjeningslink_type_value']['field'] = 'field_selvbetjeningslink_type_value';
   $handler->display->display_options['filters']['field_selvbetjeningslink_type_value']['value'] = array(
     'handling' => 'handling',
+    'emne' => 'emne',
   );
   /* Filterkriterie: Indhold: Forfremmet til forside */
   $handler->display->display_options['filters']['promote']['id'] = 'promote';
@@ -4348,7 +4356,7 @@ function os2web_sovs_views_default_views() {
     t('[field_selvbetjening_direkte]'),
     t('selvbetjening-megamenu'),
     t('SB-block-forside-att-1'),
-    t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="/soeg-nemindsigt">Søg nemindsig</a></div>'),
+    t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
     t('SB-block-forside-att-2'),
     t('Aktuelle Genvej'),
     t('<div class="aktuel-genvej>Aktuelle Genveje</div>'),
