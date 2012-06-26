@@ -115,8 +115,8 @@ function os2web_meeting_views_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => 'opened',
-          1 => 'closed',
+          0 => 'Lukket punkt.',
+          1 => '',
         ),
         'allowed_values_function' => '',
       ),
@@ -414,7 +414,7 @@ function os2web_meeting_views_field_default_fields() {
           'label' => 'hidden',
           'module' => 'entityreference',
           'settings' => array(
-            'view_mode' => 'full',
+            'view_mode' => 'meeting_detail_view',
           ),
           'type' => 'entityreference_entity_view',
           'weight' => '1',
