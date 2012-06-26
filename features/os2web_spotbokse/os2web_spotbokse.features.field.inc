@@ -868,96 +868,6 @@ function os2web_spotbokse_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-spotbox-field_stort_billede_spot5'
-  $fields['node-spotbox-field_stort_billede_spot5'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_stort_billede_spot5',
-      'foreign keys' => array(
-        'fid' => array(
-          'columns' => array(
-            'fid' => 'fid',
-          ),
-          'table' => 'file_managed',
-        ),
-      ),
-      'indexes' => array(
-        'fid' => array(
-          0 => 'fid',
-        ),
-      ),
-      'module' => 'image',
-      'settings' => array(
-        'default_image' => 0,
-        'uri_scheme' => 'public',
-      ),
-      'translatable' => '0',
-      'type' => 'image',
-    ),
-    'field_instance' => array(
-      'bundle' => 'spotbox',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => 'spotbox-300',
-          ),
-          'type' => 'image',
-          'weight' => '13',
-        ),
-        'related_block' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_stort_billede_spot5',
-      'label' => 'Stort billede',
-      'required' => 0,
-      'settings' => array(
-        'alt_field' => 0,
-        'default_image' => 0,
-        'file_directory' => '',
-        'file_extensions' => 'png gif jpg jpeg',
-        'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '300x261',
-        'title_field' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'imagefield_crop',
-        'settings' => array(
-          'collapsible' => '2',
-          'croparea' => '500x500',
-          'enforce_minimum' => 1,
-          'enforce_ratio' => 1,
-          'preview_image_style' => 'spotbox5',
-          'progress_indicator' => 'throbber',
-          'resolution' => '300x261',
-        ),
-        'type' => 'imagefield_crop_widget',
-        'weight' => '5',
-      ),
-    ),
-  );
-
   // Exported field: 'node-spotbox-field_termref_kle'
   $fields['node-spotbox-field_termref_kle'] = array(
     'field_config' => array(
@@ -1003,7 +913,7 @@ function os2web_spotbokse_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '0',
+          'weight' => 2,
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1084,7 +994,7 @@ function os2web_spotbokse_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '2',
+          'weight' => 6,
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1157,7 +1067,7 @@ function os2web_spotbokse_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '7',
+          'weight' => 11,
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1231,7 +1141,7 @@ function os2web_spotbokse_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '1',
+          'weight' => 4,
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1279,7 +1189,6 @@ function os2web_spotbokse_field_default_fields() {
   t('Politik');
   t('Portalkategori');
   t('Stikord');
-  t('Stort billede');
   t('Tekst');
   t('URL');
   t('Video');

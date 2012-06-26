@@ -72,7 +72,7 @@ function os2web_spotbokse_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'scheduler_publish_required_spotbox';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['scheduler_publish_required_spotbox'] = $strongarm;
 
   $strongarm = new stdClass();
