@@ -1,15 +1,49 @@
 <?php
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
+define('MEETINGS_FORCE_RECREATE', false);
+define('MEETINGS_FOCUS', false);
+define('MEETINGS_CLEAR_COMMITTEE', false);
 
 function os2web_meetings_menu() {
   $items = array();
+  $items['os2web/test/meetings/batch'] = array(
+      'page callback' => 'os2web_meetings_do_import_batch',
+      'access arguments' => array('administer os2web'),
+      'type' => MENU_CALLBACK,
+  );
   $items['os2web/test/meetings'] = array(
       'page callback' => 'os2web_meetings_test_page',
       'access arguments' => array('administer os2web'),
       'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+/**
+ * Implemetation of hook_cron()
+ * Will run import on every cron.
+ */
+function os2web_meetings_cron() {
+  $options = array(
+//      'callback' => '_os2web_meetings_process_manifest',
+      'recurse' => FALSE,
+  );
+  $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
+  $queue = DrupalQueue::get('import_agendas');
+  if ($queue->numberOfItems()==0) {
+    foreach ($files as $file) {
+      $queue->createItem($file->uri);
+    }
+  }
+}
+
+function os2web_meetings_cron_queue_info() {
+  $queues['import_agendas'] = array(
+      'worker callback' => '_os2web_meetings_process_manifest',
+      'time' => 300,
+      );
+  return $queues;
 }
 
 /**
@@ -30,6 +64,12 @@ function os2web_meetings_form_os2web_settings_settings_form_alter(&$form, &$form
       '#description' => 'Dette er stien hvor Acadre publisere .XML filer til.',
       '#default_value' => variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR),
   );
+  $form['meetings']['os2web_meetings_invalid_committee'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Udvalg der ikke skal importeres',
+      '#description' => 'Komma sepereret liste over udvalg der ikke skal inkluderes i importen.',
+      '#default_value' => variable_get('os2web_meetings_invalid_committee', 'Direktionsmøde, Direktions og afdelingschef møde, Rådhusmad, Test udvalg, Traen udvalg, Nedlagte udvalg'),
+  );
 }
 
 function os2web_meetings_test_page() {
@@ -45,10 +85,52 @@ function os2web_meetings_test_page() {
 //  $debug_info.= format_date($date,'medium','','Europe/Berlin');
   //$debug_info.= print_r($dateObj,1);
 
-  os2web_meetings_do_import();
-  os2web_meetings_order_addenums();
+//  _os2web_meetings_clear_committees();
+//  os2web_meetings_do_import();
+//  os2web_meetings_order_addenums();
 
-  return '<div><textarea cols="150" rows=50>' . print_r($debug_info, 1) . '</textarea>';
+ //os2web_meetings_do_import_batch(); 
+// _os2web_meetings_cleanup_nodes('meeting',$bleh);
+
+  //return '<div><textarea cols="150" rows=50>' . print_r($debug_info, 1) . '</textarea>';
+  return '<a href="/os2web/test/meetings/batch">Start import</a>';
+}
+
+/**
+ * Import xml files from the defined folder
+ *
+ */
+function os2web_meetings_do_import_batch() {
+  $focus = MEETINGS_FOCUS;
+  //$focus = false;
+  $batch = array(
+    'title' => 'Dagsorden import',
+    'operations' => array(
+//      array('_os2web_meetings_cleanup_nodes',array('meeting')),
+//      array('_os2web_meetings_cleanup_nodes',array('bullet_point')),
+//      array('_os2web_meetings_cleanup_nodes',array('bullet_point_attachment')),
+    ),
+    'finished' => 'os2web_meetings_order_addenums',
+  );
+  if (MEETINGS_CLEAR_COMMITTEE) {
+    $batch['operations'][]=array('_os2web_meetings_clear_committees',array());
+  }
+  $options = array(
+//      'callback' => '_os2web_meetings_process_manifest',
+      'recurse' => FALSE,
+  );
+  $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
+  foreach ($files as $file) {
+    if ($focus!==false) {
+      if (strpos($file->name,(string) $focus)!==FALSE) {
+        $batch['operations'][]=array('_os2web_meetings_process_manifest',array($file->uri));
+      }
+    } else {
+      $batch['operations'][]=array('_os2web_meetings_process_manifest',array($file->uri));
+    }
+  }
+  batch_set($batch);
+  batch_process('os2web/test/meetings');
 }
 
 /**
@@ -93,6 +175,7 @@ function os2web_meetings_order_addenums() {
  * @param string $file File URI. Works as callback in file_scan_directory works.
  */
 function _os2web_meetings_process_manifest($file) {
+//  error_log("importing file: " . $file);
   $manifest = simplexml_load_file(drupal_realpath($file));
   $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
   foreach ($items_xml as $xml_item) {
@@ -125,11 +208,15 @@ function _os2web_meetings_process_agenda($agendainfo_xml) {
       'startDate' => (string) array_shift($agendainfo_xml->xpath('field/@startDate')),
       'endDate' => (string) array_shift($agendainfo_xml->xpath('field/@endDate'))
   );
-  if ($agendainfo['publish'] === 1) {
+  if ($agendainfo['publish'] === 1 && $agendainfo['access']!=='Lukket') {
+  //error_log("Var: \$agendainfo = " . print_r($agendainfo, 1));
     $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
     if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
       $agenda_xml = simplexml_load_file(drupal_realpath($agenda_uri));
-      _os2web_meetings_publish_meeting($agendainfo, $agenda_xml);
+      if (!_os2web_meetings_publish_meeting($agendainfo, $agenda_xml,MEETINGS_FORCE_RECREATE)) {
+        // No longer a valid import
+        _os2web_meetings_unpublish_meeting($agendainfo);
+      }
     }
   } else {
     _os2web_meetings_unpublish_meeting($agendainfo);
@@ -164,18 +251,15 @@ function _os2web_meetings_unpublish_meeting($info) {
  * @param array $info
  * @param array $xml
  */
-function _os2web_meetings_publish_meeting($info, $xml) {
+function _os2web_meetings_publish_meeting($info, $xml, $force = false) {
   global $debug_info;
   $debug_info = $xml;
 
-  //FIXME: Verify this list!
-  $no_publish_committee = array(
-//      'Direktionsmøde',
-      'Direktions og afdelingschef møde',
-      'Rådhusmad',
-      'Testudvalg',
-      'Nedlagte udvalg',
-  );
+  $no_publish_committee = explode(',',variable_get('os2web_meetings_invalid_committee', 'Direktionsmøde, Direktions og afdelingschef møde, Rådhusmad, Test udvalg, Traen udvalg, Nedlagte udvalg'));
+  foreach ($no_publish_committee as $key => $value) {
+    $no_publish_committee[$key] = trim($value);
+  }
+
 
   //TODO: Look for previously imported version to update
   // Create meeting node
@@ -191,11 +275,11 @@ function _os2web_meetings_publish_meeting($info, $xml) {
       'meeting_id' => (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='sysid']")),
       'id' => $info['sysid'],
   );
-  if (in_array($options['committee'], $no_publish_committee)) {
-    return;
+  if ($options['committee']=='' || in_array($options['committee'], $no_publish_committee)) {
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() - Invalid committee');
+    error_log("Var: \$options['committee'] = " . print_r($options['committee'], 1));
+    return false;
   }
-
-
 
   $query = new EntityFieldQuery();
 
@@ -205,12 +289,26 @@ function _os2web_meetings_publish_meeting($info, $xml) {
     ->execute();
   if (isset($result['node'])) {
     $nid = array_shift($result['node'])->nid;
-    $node = node_load($nid);
-    foreach ($node->field_ref_bullet_points[$node->language] as $delta => $bullet) {
-      $bid = $bullet['target_id'];
-      node_delete($bid);
+    if ($force) {
+      node_delete($nid);
+      $node = new stdClass(); // We create a new node object
+    } else {
+      // Fix missing committee
+      if (MEETINGS_CLEAR_COMMITTEE) {
+        $node = node_load($nid);
+        $committee_term = _os2web_meetings_import_committee(array_shift($xml->xpath("//table[@name='committee']")));
+        $node->field_committee[LANGUAGE_NONE][0]['tid'] = $committee_term->tid;
+        node_save($node);
+        error_log("Updated: \$node->nid = " . print_r($node->nid, 1));
+      }
+      return true;
     }
-    $node->field_ref_bullet_points = array();
+//    $node = node_load($nid);
+//    foreach ($node->field_ref_bullet_points[$node->language] as $delta => $bullet) {
+//      $bid = $bullet['target_id'];
+//      node_delete($bid);
+//    }
+//    $node->field_ref_bullet_points = array();
   } else {
     $node = new stdClass(); // We create a new node object
   }
@@ -224,7 +322,7 @@ function _os2web_meetings_publish_meeting($info, $xml) {
 
   $node->created = $options['cdate'];
   // Let's add standard body field
-  $node->field_meeting_abbr[$node->language][0]['value'] = $options['description'];
+  $node->field_meeting_abbr[$node->language][0]['value'] = substr($options['description'],0,49);
   $node->field_meeting_abbr[$node->language][0]['format'] = 'filtered_html'; // If field has a format, you need to define it. Here we define a default filtered_html format for a body field
 
   // The date
@@ -246,7 +344,7 @@ function _os2web_meetings_publish_meeting($info, $xml) {
   $location_term = _os2web_meetings_import_location(array_shift($xml->xpath("//table[@name='meeting']")));
   $node->field_location[LANGUAGE_NONE][0]['tid'] = $location_term->tid;
 
-
+  // Add QBrick info
   $movie_id = _os2web_qbrick_get_movie_id($node);
   if ($movie_id != FALSE) {
     $info['movie_id'] = $movie_id;
@@ -257,6 +355,12 @@ function _os2web_meetings_publish_meeting($info, $xml) {
     $node->field_qbrick_ref = array();
   }
 
+  // Add full document
+  $fname=$info['docfilename'];
+  $folder=$info['filesfolder'];
+  $file = _os2web_meetings_import_file($fname,$folder);
+  if (FALSE!==$file)
+    $node->field_full_doc[LANGUAGE_NONE][] = (array) $file;
 
   //Add nodes for each bullet
 //  $items = $xml->xpath("//table[@name='agendaitem']");
@@ -277,20 +381,40 @@ function _os2web_meetings_publish_meeting($info, $xml) {
   // Save the meeting node.
   node_submit($node);
   node_save($node);
+  error_log("Created: \$node->nid = " . print_r($node->nid, 1));
   //TODO: add reference to the os2web_meetings_import table
   $record = array(
       'nid' => $node->nid,
       'aid' => $options['id'],
   );
   drupal_write_record('os2web_meetings_imported', $record);
+  return true;
 }
 
 function _os2web_meetings_add_item($info, $xml, $id) {
   $options = array(
       'sysid' => (int) array_shift($xml->xpath("fields/field[@name='sysid']")),
       'name' => (string) array_shift($xml->xpath("fields/field[@name='name']")),
+      'access' => (string) array_shift($xml->xpath("fields/field[@name='accessname']")),
   );
+  $closed = $options['access']==='Lukket';
 
+  $node = new stdClass();
+  $node->type = "bullet_point"; // Or any other content type you want
+  $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
+  $node->uid = 1; // Or any id you wish
+  $node->title = 'Punkt ' . $id . ' ' . $options['name'];
+  node_object_prepare($node); // Set some default values.
+
+  if ($closed) {
+     $node->field_bul_point_closed[LANGUAGE_NONE][]['value'] = 0;
+     node_submit($node);
+     node_save($node);
+
+     return $node->nid;
+  } // else....
+
+     $node->field_bul_point_closed[LANGUAGE_NONE][]['value'] = 1;
 
   // Gather the bullets for the item
   $bullets = $xml->xpath("table[@name='bullet']");
@@ -298,14 +422,11 @@ function _os2web_meetings_add_item($info, $xml, $id) {
   foreach ($bullets as $bullet) {
 //    $bullet_id = (int) array_shift($bullet->xpath("fields/field[@name='sysid']"));
     // Add node for each bullet
-    $nids[] = _os2web_meetings_add_bullet($bullet);
+    $nid = _os2web_meetings_add_bullet($bullet);
+    if ($nid!==FALSE) {
+      $nids[] = $nid;
+    }
   }
-  $node = new stdClass();
-  $node->type = "bullet_point"; // Or any other content type you want
-  $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
-  $node->uid = 1; // Or any id you wish
-  $node->title = 'Punkt ' . $id . ' ' . $options['name'];
-  node_object_prepare($node); // Set some default values.
 
   if (isset($info['movie_id']) && is_numeric($info['movie_chapters'][$id])) {
     $node->field_qbrick_ref[$node->language][0]['id'] = $info['movie_id'];
@@ -319,36 +440,12 @@ function _os2web_meetings_add_item($info, $xml, $id) {
   //TODO: Gather enclosures
   $enclosures = $xml->xpath("table[@name='enclosure']");
   foreach ($enclosures as $enclosure) {
-    $filename = (string) array_shift($enclosure->xpath("fields/field[@name='filename']"));
+    $filename_in = (string) array_shift($enclosure->xpath("fields/field[@name='filename']"));
     $title = (string) array_shift($enclosure->xpath("fields/field[@name='name']"));
-    $uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $info['filesfolder'], $filename));
 
-    error_log("Var: \$uri = " . print_r($uri, 1));
-
-    $fid = db_select('file_managed', 'fm')
-            ->fields('fm', array('fid'))
-            ->condition('uri', $uri)
-            ->execute()->fetchField();
-
-    $file = new stdClass();
-    if ($fid) {
-      $file->fid = $fid;
-      error_log("Var: \$file->fid = " . print_r($file->fid, 1));
-    }
-    $file->uri = $uri;
-    $file->display = 1;
-    $file->field_titel[LANGUAGE_NONE][]['value'] = $title;
-    $file->filename = drupal_basename($file->uri);
-    $file->filemime = file_get_mimetype($file->uri);
-    $file->uid = 1;
-    $file->status = FILE_STATUS_PERMANENT;
-    $file = file_save($file);
-
-    // Schedule for PDF conversion
-//    drupal_load('module','os2web_adlib_api');
-//    os2web_adlib_api_convert_to_pdf($file->fid);
-
-    $node->field_enclosures[$node->language][] = (array) $file;
+    $file = _os2web_meetings_import_file($filename_in, $info['filesfolder'], $title); 
+    if (FALSE!==$file)
+      $node->field_enclosures[$node->language][] = (array) $file;
   }
   node_submit($node);
   node_save($node);
@@ -372,6 +469,9 @@ function _os2web_meetings_add_bullet(SimpleXMLElement $xml) {
       'weight' => (int) array_shift($xml->xpath("fields/field[@name='bulletsortorder']")),
       'lastbullet' => (int) array_shift($xml->xpath("fields/field[@name='lastbullet']")),
   );
+  if ($options['content']==='') {
+    return FALSE;
+  }
   $node = new stdClass();
   $node->type = "bullet_point_attachment"; // Or any other content type you want
   $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
@@ -499,4 +599,109 @@ function os2web_meetings_node_delete($node) {
       }
     }
   }
+}
+
+function _os2web_meetings_sanetize_filename($filename) {
+  // Replace whitespace.
+//  $filename = str_replace(' ', '_', $filename);
+  // Remove remaining unsafe characters.
+  //$filename = preg_replace('![^0-9A-Za-z_.- ]!', '', $filename);
+  $filename = preg_replace('![/]!', '-', $filename);
+  // Remove multiple consecutive non-alphabetical characters.
+  $filename = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename);
+  // Force lowercase to prevent issues on case-insensitive file systems.
+  //$filename = strtolower($filename);
+  return $filename;
+  }
+
+function _os2web_meetings_clear_committees() {
+  $vid = db_select('taxonomy_vocabulary', 'tv')
+      ->fields('tv', array('vid'))
+      ->condition('machine_name', 'committee')
+      ->execute()
+      ->fetchField();
+  $terms = taxonomy_get_tree($vid);
+  foreach ($terms as $term) {
+    // code...
+    taxonomy_term_delete($term->tid);
+  }
+}
+
+function _os2web_meetings_cleanup_nodes($type,&$context) {
+  if (!isset($context['sandbox']['progress'])) {
+     $context['sandbox']['nids'] =  db_select("node",'n')->fields('n',array('nid'))->condition('type',$type)->execute()->fetchCol();
+     $context['sandbox']['max'] = count($context['sandbox']['nids']);
+   }
+  
+  while ($count++ < 5 && $nid=array_shift($context['sandbox']['nids'])) {
+    node_delete($nid);
+  }
+  $context['finished'] = 1-count($context['sandbox']['nids']) / $context['sandbox']['max'];
+  if ($context['finished']>1) $context['finished']=1;
+}
+
+function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE) {
+  $uri_in = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $folder, $filename));
+
+    $pinfo = pathinfo($uri_in);
+    if ($newname!==false) {
+      $fname = $newname;
+    } else {
+      $fname = $pinfo['filename'];
+    }
+    $fname = _os2web_meetings_sanetize_filename($fname);
+    $uri_out = $pinfo['dirname'].'/'.$fname.'.'.strtolower($pinfo['extension']);
+    $uri_pdf = $pinfo['dirname'].'/'.$fname.'.pdf';
+
+    if (_os2web_meetings_similar_file_exists(drupal_realpath($uri_pdf))) {
+      // we have an already converted pdf file
+      $uri = $uri_pdf;
+      $convert =false;
+    } elseif ($uri_tmp = _os2web_meetings_similar_file_exists(drupal_realpath($uri_out))) {
+      $uri_out = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $folder, basename($uri_tmp)));
+      // File already copied
+      $convert = true;
+      $uri = $uri_out;
+    } else {
+      // Completely unprocessed file
+      $uri_in = _os2web_meetings_similar_file_exists(drupal_realpath($uri_in));
+      if ($uri_in!==false && FALSE===file_unmanaged_copy($uri_in,$uri_out,FILE_EXISTS_OVERWRITE)) {
+        // Bummed out on copy
+        error_log('File copy failed for file: '.$uri_in);
+        error_log('Destination: '.$uri_out);
+        error_log('File skipped ');
+        return false;
+      } else {
+        $convert = true;
+        $uri = $uri_out;
+      }
+    }
+
+
+
+    $fid = db_select('file_managed', 'fm')
+            ->fields('fm', array('fid'))
+            ->condition('uri', $uri)
+            ->execute()->fetchField();
+
+    $file = new stdClass();
+    if ($fid) {
+      $file->fid = $fid;
+    }
+    $file->uri = $uri;
+    $file->display = 1;
+    $file->field_titel[LANGUAGE_NONE][]['value'] = $newname;
+    $file->filename = drupal_basename($file->uri);
+    $file->filemime = file_get_mimetype($file->uri);
+    $file->uid = 1;
+    $file->status = FILE_STATUS_PERMANENT;
+    $file = file_save($file);
+
+    // Schedule for PDF conversion
+    if ($convert) {
+      drupal_load('module','os2web_adlib_api');
+      os2web_adlib_api_convert_to_pdf($file->fid,$file->filename);
+    }
+
+  return $file;
 }
