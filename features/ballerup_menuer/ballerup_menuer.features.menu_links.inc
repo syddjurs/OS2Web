@@ -141,380 +141,6 @@ function ballerup_menuer_menu_default_menu_links() {
     'weight' => '6',
     'parent_path' => 'taxonomy/term/223',
   );
-  // Exported menu link: main-menu:node/28270
-  $menu_links['main-menu:node/28270'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28270',
-    'router_path' => 'node/%',
-    'link_title' => 'Bolig',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '1',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/60',
-  );
-  // Exported menu link: main-menu:node/28274
-  $menu_links['main-menu:node/28274'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28274',
-    'router_path' => 'node/%',
-    'link_title' => 'Boligstøtte & Lån',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28270',
-  );
-  // Exported menu link: main-menu:node/28275
-  $menu_links['main-menu:node/28275'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28275',
-    'router_path' => 'node/%',
-    'link_title' => 'Beredskab',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28270',
-  );
-  // Exported menu link: main-menu:node/28276
-  $menu_links['main-menu:node/28276'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28276',
-    'router_path' => 'node/%',
-    'link_title' => 'Almene boligselskaber',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28270',
-  );
-  // Exported menu link: main-menu:node/28357
-  $menu_links['main-menu:node/28357'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28357',
-    'router_path' => 'node/%',
-    'link_title' => 'Aktuelt og nyt',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/60',
-  );
-  // Exported menu link: main-menu:node/28608
-  $menu_links['main-menu:node/28608'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28608',
-    'router_path' => 'node/%',
-    'link_title' => 'Folkeregister',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '1',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28609
-  $menu_links['main-menu:node/28609'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28609',
-    'router_path' => 'node/%',
-    'link_title' => 'Flytning',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28608',
-  );
-  // Exported menu link: main-menu:node/28610
-  $menu_links['main-menu:node/28610'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28610',
-    'router_path' => 'node/%',
-    'link_title' => 'Adresse',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28608',
-  );
-  // Exported menu link: main-menu:node/28611
-  $menu_links['main-menu:node/28611'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28611',
-    'router_path' => 'node/%',
-    'link_title' => 'Indsigt i oplysninger',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28608',
-  );
-  // Exported menu link: main-menu:node/28612
-  $menu_links['main-menu:node/28612'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28612',
-    'router_path' => 'node/%',
-    'link_title' => 'ID-kort til unge der er fyldt 16 år',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'node/28608',
-  );
-  // Exported menu link: main-menu:node/28613
-  $menu_links['main-menu:node/28613'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28613',
-    'router_path' => 'node/%',
-    'link_title' => 'Kørekort',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28614
-  $menu_links['main-menu:node/28614'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28614',
-    'router_path' => 'node/%',
-    'link_title' => 'Opkrævning',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28615
-  $menu_links['main-menu:node/28615'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28615',
-    'router_path' => 'node/%',
-    'link_title' => 'Pas',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28617
-  $menu_links['main-menu:node/28617'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28617',
-    'router_path' => 'node/%',
-    'link_title' => 'Skat',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28618
-  $menu_links['main-menu:node/28618'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28618',
-    'router_path' => 'node/%',
-    'link_title' => 'Skilsmisse',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28619
-  $menu_links['main-menu:node/28619'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28619',
-    'router_path' => 'node/%',
-    'link_title' => 'Vielser',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28620
-  $menu_links['main-menu:node/28620'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28620',
-    'router_path' => 'node/%',
-    'link_title' => 'Hvis du -',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/28621
-  $menu_links['main-menu:node/28621'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/28621',
-    'router_path' => 'node/%',
-    'link_title' => 'Spørgsmål og svar',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '49',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/31675
-  $menu_links['main-menu:node/31675'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/31675',
-    'router_path' => 'node/%',
-    'link_title' => 'Blanketter',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '2',
-    'parent_path' => 'taxonomy/term/223',
-  );
-  // Exported menu link: main-menu:node/33766
-  $menu_links['main-menu:node/33766'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/33766',
-    'router_path' => 'node/%',
-    'link_title' => 'Oversigt',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '1',
-    'parent_path' => 'taxonomy/term/223',
-  );
-  // Exported menu link: main-menu:node/34406
-  $menu_links['main-menu:node/34406'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/34406',
-    'router_path' => 'node/%',
-    'link_title' => 'Øvrige områder i Borgerservice',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '50',
-    'parent_path' => 'taxonomy/term/56',
-  );
-  // Exported menu link: main-menu:node/34527
-  $menu_links['main-menu:node/34527'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'node/34527',
-    'router_path' => 'node/%',
-    'link_title' => 'Sagsbehandling',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-    'parent_path' => 'taxonomy/term/56',
-  );
   // Exported menu link: main-menu:taxonomy/term/195
   $menu_links['main-menu:taxonomy/term/195'] = array(
     'menu_name' => 'main-menu',
@@ -632,7 +258,7 @@ function ballerup_menuer_menu_default_menu_links() {
     'module' => 'menu',
     'hidden' => '0',
     'external' => '0',
-    'has_children' => '1',
+    'has_children' => '0',
     'expanded' => '0',
     'weight' => '1',
     'parent_path' => 'taxonomy/term/50',
@@ -649,7 +275,7 @@ function ballerup_menuer_menu_default_menu_links() {
     'module' => 'menu',
     'hidden' => '0',
     'external' => '0',
-    'has_children' => '1',
+    'has_children' => '0',
     'expanded' => '0',
     'weight' => '3',
     'parent_path' => 'taxonomy/term/50',
@@ -687,105 +313,6 @@ function ballerup_menuer_menu_default_menu_links() {
     'weight' => '-48',
     'parent_path' => '<front>',
   );
-  // Exported menu link: menu-header:node/27070
-  $menu_links['menu-header:node/27070'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/27070',
-    'router_path' => 'node/%',
-    'link_title' => ' Integration',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-50',
-    'parent_path' => '<front>',
-  );
-  // Exported menu link: menu-header:node/27365
-  $menu_links['menu-header:node/27365'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/27365',
-    'router_path' => 'node/%',
-    'link_title' => 'NetTV',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-49',
-  );
-  // Exported menu link: menu-header:node/28328
-  $menu_links['menu-header:node/28328'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/28328',
-    'router_path' => 'node/%',
-    'link_title' => 'English',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-41',
-  );
-  // Exported menu link: menu-header:node/28620
-  $menu_links['menu-header:node/28620'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/28620',
-    'router_path' => 'node/%',
-    'link_title' => 'Hvis du',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-46',
-    'parent_path' => '<front>',
-  );
-  // Exported menu link: menu-header:node/33766
-  $menu_links['menu-header:node/33766'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/33766',
-    'router_path' => 'node/%',
-    'link_title' => 'Selvbetjening',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-47',
-    'parent_path' => '<front>',
-  );
-  // Exported menu link: menu-header:node/33830
-  $menu_links['menu-header:node/33830'] = array(
-    'menu_name' => 'menu-header',
-    'link_path' => 'node/33830',
-    'router_path' => 'node/%',
-    'link_title' => 'Kontakt ',
-    'options' => array(
-      'attributes' => array(),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-50',
-  );
   // Exported menu link: menu-header:nyheder
   $menu_links['menu-header:nyheder'] = array(
     'menu_name' => 'menu-header',
@@ -820,51 +347,25 @@ function ballerup_menuer_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t(' Integration');
   t(' Job hos os');
   t('A - a');
-  t('Adresse');
-  t('Aktuelt og nyt');
-  t('Almene boligselskaber');
   t('Balkort');
-  t('Beredskab');
   t('Bestil NemID');
-  t('Blanketter');
-  t('Bolig');
-  t('Boligstøtte & Lån');
   t('Borger');
   t('Borger.dk');
   t('Borgerservice');
   t('By, Bolig & Trafik');
   t('Digital post');
   t('English');
-  t('Flytning');
-  t('Folkeregister');
   t('Forside');
   t('Hvad synes du?');
-  t('Hvis du');
-  t('Hvis du -');
-  t('ID-kort til unge der er fyldt 16 år');
-  t('Indsigt i oplysninger');
-  t('Kontakt ');
-  t('Kørekort');
   t('Min SU');
   t('Min side');
-  t('NetTV');
   t('Nyheder');
   t('Om kommunen');
-  t('Opkrævning');
-  t('Oversigt');
-  t('Pas');
   t('Politik og planer');
-  t('Sagsbehandling');
   t('Selvbetjening');
-  t('Skat');
-  t('Skilsmisse');
-  t('Spørgsmål og svar');
   t('TastSelv Skat');
-  t('Vielser');
-  t('Øvrige områder i Borgerservice');
 
 
   return $menu_links;
