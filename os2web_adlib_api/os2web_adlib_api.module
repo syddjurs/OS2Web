@@ -29,10 +29,10 @@ function os2web_adlib_api_page() {
   _os2web_adlib_api_process_pdf();
 //  sleep(5);
 //  _os2web_adlib_api_process_pdf();
-  $file = db_select('os2web_adlib_api_doc_files','df')->fields('df')->condition('fid',$fid)->execute()->fetchObject();
-  $adlib = _os2web_adlib_api_get_instance();
-  $call = $adlib->getJobStatus($file->job_id);
-//  $call.= file_load(3279);
+//  $file = db_select('os2web_adlib_api_doc_files','df')->fields('df')->condition('fid',$fid)->execute()->fetchObject();
+//  $adlib = _os2web_adlib_api_get_instance();
+//  $call = $adlib->getJobStatus($file->job_id);
+  $call= file_load(3280);
 
   return '<textarea rows=50>' . print_r($call, 1) . '</textarea>';
 }
@@ -41,7 +41,7 @@ function os2web_adlib_api_page() {
  * Implementation of hook_cron()
  */
 function os2web_adlib_api_cron() {
-  _os2web_adlib_api_process_pdf();
+//  _os2web_adlib_api_process_pdf();
 }
 
 /**
@@ -66,14 +66,14 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
           'did' => $docref,
       );
       drupal_write_record('os2web_adlib_api_doc_files', $record);
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File queued for processing.");
+ //     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File queued for processing.");
       return TRUE;
     } else {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
+//      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
       return FALSE;
     }
   } else {
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already PDF.");
+//    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already PDF.");
     $record = array(
         'fid' => $fid,
         'did' => $docref,
@@ -190,10 +190,9 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
 
     foreach ($pdfs as $file) {
       $filename = drupal_realpath($file['file']->uri);
-      error_log("Var: \$filename = " . print_r($filename, 1). ' '. (is_file($filename)?'1':'0'));
+//      error_log("Var: \$filename = " . print_r($filename, 1). ' '. (is_file($filename)?'1':'0'));
       if ($file['is_pdf'] === FALSE && is_file(drupal_realpath($file['file']->uri))) {
         $upload = $adlib->uploadData($file['file']->filename, file_get_contents(drupal_realpath($file['file']->uri)));
-        error_log("Var: \$upload = " . print_r($upload, 1));
         if ($upload) {
           $job = $adlib->addJob($upload);
           if ($job !== FALSE) {

@@ -96,9 +96,14 @@ class AdLibWS {
     } else {
       $return->status = 'Not found';
     }
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
-    if ($return->status === 'Pending') {
+    if ($return->status === '') {
+       $message = (string) $return->result->ServerInfo[0]->Error['Message'];
+       error_log(basename(__FILE__) . ':' . __LINE__ . ' AdLib Error: '.$message);
+       $return->status = 'Not Available';
+    } elseif ($return->status === 'Pending') {
       error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus'] );
+    } else {
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
     }
     return $return;
   }
@@ -146,11 +151,11 @@ class AdLibWS {
       <JobFiles>
         <JobFile FileName="' . $filename . '" Data="' . base64_encode($data) . '" Length="' . strlen($data) . '" />
       </JobFiles>';
-    $status = $this->client->AddJobFilesAsStream(array(
+    $result = $this->client->AddJobFilesAsStream(array(
             'JobFolder' => $folder . '\\Input',
             'XmlStream' => $payload,
         ))->AddJobFilesAsStreamResult;
-    $status = (string) simplexml_load_string($status)->System['Status'];
+    $status = (string) simplexml_load_string($result)->System['Status'];
     if (strcmp($status, 'Success') == 0) {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Uploaded file: " . $filename);
       return array(
@@ -164,6 +169,7 @@ class AdLibWS {
       );
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to upload: " . $filename);
+      error_log("Var: \$result = " . print_r($result, 1));
       return false;
     }
   }

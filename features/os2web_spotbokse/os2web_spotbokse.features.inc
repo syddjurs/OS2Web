@@ -61,7 +61,7 @@ function os2web_spotbokse_image_default_styles() {
   $styles['spotbox-tall'] = array(
     'name' => 'spotbox-tall',
     'effects' => array(
-      11 => array(
+      1 => array(
         'label' => 'Beskær',
         'help' => 'Beskæring fjerner dele af billedet for at give det de angivne dimensioner.',
         'effect callback' => 'image_crop_effect',
@@ -72,7 +72,7 @@ function os2web_spotbokse_image_default_styles() {
         'name' => 'image_crop',
         'data' => array(
           'width' => '230',
-          'height' => '312',
+          'height' => '337',
           'anchor' => 'center-center',
         ),
         'weight' => '1',
