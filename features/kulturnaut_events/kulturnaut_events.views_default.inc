@@ -103,6 +103,30 @@ function kulturnaut_events_views_default_views() {
   $handler->display->display_options['fields']['imported_1']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['imported_1']['date_format'] = 'custom';
   $handler->display->display_options['fields']['imported_1']['custom_date_format'] = 'd';
+  /* Felt: Indhold: Hjemmeside */
+  $handler->display->display_options['fields']['field_homepage']['id'] = 'field_homepage';
+  $handler->display->display_options['fields']['field_homepage']['table'] = 'field_data_field_homepage';
+  $handler->display->display_options['fields']['field_homepage']['field'] = 'field_homepage';
+  $handler->display->display_options['fields']['field_homepage']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_homepage']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_homepage']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_homepage']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_homepage']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_homepage']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_homepage']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_homepage']['field_api_classes'] = 0;
   /* Felt: Indhold: Titel */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -112,9 +136,10 @@ function kulturnaut_events_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['text'] = '<div class=""><div class="">[imported]</div>
 <div class="">[imported_1]</div>
 <div class="">[title]</div>';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_homepage]';
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 1;
   $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
@@ -129,7 +154,7 @@ function kulturnaut_events_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -192,9 +217,11 @@ function kulturnaut_events_views_default_views() {
 <div class="calendar-bottom">[imported_1] </div>
 </div>
 '),
+    t('Hjemmeside'),
     t('<div class=""><div class="">[imported]</div>
 <div class="">[imported_1]</div>
 <div class="">[title]</div>'),
+    t('[field_homepage]'),
     t('Page'),
     t('Blok - indholdsside'),
     t('Blok - forside'),
