@@ -195,6 +195,7 @@ function _os2web_meetings_process_manifest($file) {
  * @param SimpleXMLElement $agendainfo Chunk of XML representing the agenda part.
  */
 function _os2web_meetings_process_agenda($agendainfo_xml) {
+  error_log("Var: \$agendainfo_xml = " . print_r($agendainfo_xml, 1));
   $agendainfo = array(
       'sysid' => (int) array_shift($agendainfo_xml->xpath('field/@sysid')),
       'xmlFusionID' => (int) array_shift($agendainfo_xml->xpath('field/@xmlFusionID')),
