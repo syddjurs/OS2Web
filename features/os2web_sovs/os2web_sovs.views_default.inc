@@ -3000,7 +3000,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = FALSE;
-  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
+  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['footer']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -4357,7 +4357,7 @@ function os2web_sovs_views_default_views() {
     t('<a href=[field_selvbetjening_direkte-value]>[title]</a>'),
     t('<a href=[field_attached_node]>[title]</a>'),
     t('SB-block-forside-att-1'),
-    t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
+    t('<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
     t('SB-block-forside-att-2'),
     t('Aktuelle Genvej'),
     t('<div class="aktuel-genvej>Aktuelle Genveje</div>'),

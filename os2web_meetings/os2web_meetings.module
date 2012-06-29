@@ -1,8 +1,8 @@
 <?php
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
-define('MEETINGS_FORCE_RECREATE', true); // Delete existing nodes before import
-define('MEETINGS_FOCUS', 1567); // File key for import
+define('MEETINGS_FORCE_RECREATE', false); // Delete existing nodes before import
+define('MEETINGS_FOCUS', false); // File key for import
 define('MEETINGS_MEETING_FOCUS', false); // Meeting id
 define('MEETINGS_CLEAR_COMMITTEE', true); // Clean out invalid committees
 
