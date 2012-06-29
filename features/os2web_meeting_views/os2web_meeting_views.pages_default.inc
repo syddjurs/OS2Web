@@ -58,7 +58,7 @@ function os2web_meeting_views_default_page_manager_handlers() {
     ),
   );
   $display->cache = array();
-  $display->title = '';
+  $display->title = '%node:field_committee';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
@@ -87,7 +87,13 @@ function os2web_meeting_views_default_page_manager_handlers() {
       'override_title' => 0,
       'override_title_text' => '',
     );
-    $pane->cache = array();
+    $pane->cache = array(
+      'method' => 'simple',
+      'settings' => array(
+        'lifetime' => '300',
+        'granularity' => 'args',
+      ),
+    );
     $pane->style = array(
       'settings' => NULL,
     );
@@ -97,7 +103,7 @@ function os2web_meeting_views_default_page_manager_handlers() {
     $pane->locks = array();
     $display->content['new-1'] = $pane;
     $display->panels['center'][0] = 'new-1';
-  $display->hide_title = PANELS_TITLE_PANE;
+  $display->hide_title = PANELS_TITLE_FIXED;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $export['node_view_panel_context_4'] = $handler;
