@@ -16,7 +16,6 @@ function os2web_ad_integration_default_ldap_authorization() {
   $consumer_type->sid = 'ldap_syddjursnet';
   $consumer_type->consumer_type = 'drupal_role';
   $consumer_type->consumer_module = 'ldap_authorization_drupal_role';
-  $consumer_type->description = 'Maps syddjurs active directory users to drupal roles';
   $consumer_type->status = TRUE;
   $consumer_type->only_ldap_authenticated = TRUE;
   $consumer_type->derive_from_dn = TRUE;
@@ -24,10 +23,15 @@ function os2web_ad_integration_default_ldap_authorization() {
   $consumer_type->derive_from_attr = TRUE;
   $consumer_type->derive_from_attr_attr = 'memberOf';
   $consumer_type->derive_from_attr_use_first_attr = TRUE;
+  $consumer_type->derive_from_attr_nested = FALSE;
   $consumer_type->derive_from_entry = FALSE;
+  $consumer_type->derive_from_entry_nested = FALSE;
   $consumer_type->derive_from_entry_entries = '';
+  $consumer_type->derive_from_entry_entries_attr = '';
   $consumer_type->derive_from_entry_attr = '';
   $consumer_type->derive_from_entry_search_all = FALSE;
+  $consumer_type->derive_from_entry_use_first_attr = FALSE;
+  $consumer_type->derive_from_entry_user_ldap_attr = '';
   $consumer_type->mappings = 'syddjurs_dk_student|Student
 syddjurs_dk_editor|Editor
 syddjurs_dk_webmaster|Webmaster

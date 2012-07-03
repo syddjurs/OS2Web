@@ -45,6 +45,31 @@ function os2web_borgerservices_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = '<h3>Populære borgerservices</h3>';
   $handler->display->display_options['header']['area']['format'] = 'php_code';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
+  /* Felt: Indhold: Hjemmeside */
+  $handler->display->display_options['fields']['field_url']['id'] = 'field_url';
+  $handler->display->display_options['fields']['field_url']['table'] = 'field_data_field_url';
+  $handler->display->display_options['fields']['field_url']['field'] = 'field_url';
+  $handler->display->display_options['fields']['field_url']['label'] = '';
+  $handler->display->display_options['fields']['field_url']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_url']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_url']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_url']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_url']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_url']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_url']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_url']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_url']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_url']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_url']['field_api_classes'] = 0;
   /* Felt: Indhold: Primære billede */
   $handler->display->display_options['fields']['field_lead_image']['id'] = 'field_lead_image';
   $handler->display->display_options['fields']['field_lead_image']['table'] = 'field_data_field_lead_image';
@@ -81,7 +106,8 @@ function os2web_borgerservices_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 1;
   $handler->display->display_options['fields']['title']['alter']['text'] = '<div class="lineHeightHack">[title]</div>';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_url]';
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['title']['alter']['external'] = 0;
   $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
@@ -98,7 +124,7 @@ function os2web_borgerservices_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -133,6 +159,7 @@ function os2web_borgerservices_views_default_views() {
     t('Faldende'),
     t('<h3>Populære borgerservices</h3>'),
     t('<div class="lineHeightHack">[title]</div>'),
+    t('[field_url]'),
     t('Block'),
     t('Populære borgerservices'),
   );

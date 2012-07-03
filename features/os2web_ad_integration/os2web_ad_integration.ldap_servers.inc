@@ -34,6 +34,9 @@ function os2web_ad_integration_default_ldap_servers() {
   $ldap_servers_conf->user_dn_expression = '';
   $ldap_servers_conf->ldap_to_drupal_user = '';
   $ldap_servers_conf->testing_drupal_username = '';
+  $ldap_servers_conf->group_object_category = '';
+  $ldap_servers_conf->search_pagination = FALSE;
+  $ldap_servers_conf->search_page_size = 1000;
   $ldap_servers_conf->weight = 0;
   $export['ldap_syddjursnet'] = $ldap_servers_conf;
 

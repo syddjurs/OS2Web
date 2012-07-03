@@ -33,9 +33,12 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
   $handler->display->display_options['exposed_form']['options']['sort_desc_label'] = 'Faldende';
-  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['type'] = 'mini';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
   $handler->display->display_options['style_plugin'] = 'default';
@@ -76,9 +79,25 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'ofir_job' => 'ofir_job',
   );
+  /* Filterkriterie: Indhold: Periode - slutdato (field_period:value2) */
+  $handler->display->display_options['filters']['field_period_value2']['id'] = 'field_period_value2';
+  $handler->display->display_options['filters']['field_period_value2']['table'] = 'field_data_field_period';
+  $handler->display->display_options['filters']['field_period_value2']['field'] = 'field_period_value2';
+  $handler->display->display_options['filters']['field_period_value2']['operator'] = '>';
+  $handler->display->display_options['filters']['field_period_value2']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_period_value2']['default_date'] = 'today';
+  /* Filterkriterie: Indhold: Periode -  startdato (field_period) */
+  $handler->display->display_options['filters']['field_period_value']['id'] = 'field_period_value';
+  $handler->display->display_options['filters']['field_period_value']['table'] = 'field_data_field_period';
+  $handler->display->display_options['filters']['field_period_value']['field'] = 'field_period_value';
+  $handler->display->display_options['filters']['field_period_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_period_value']['form_type'] = 'date_text';
+  $handler->display->display_options['filters']['field_period_value']['default_date'] = 'today';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Jobs i Syddjurs Kommune';
   $handler->display->display_options['path'] = 'job-opslag';
 
   /* Display: Block */
@@ -107,6 +126,7 @@ function ofir_job_index_integration_views_default_views() {
     t('- Alle -'),
     t('Forskydning'),
     t('Page'),
+    t('Jobs i Syddjurs Kommune'),
     t('Block'),
     t('Jobs fra Ofir.dk:'),
   );

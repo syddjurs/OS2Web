@@ -287,7 +287,7 @@ class AcadrePWS extends CaseService {
     drupal_load('module', 'os2web_adlib_api');
     $fid = os2web_adlib_api_get_fid($ref);
     if ($fid > 0) {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
+      //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
       $result = file_load($fid);
       $result = file_create_url($result->uri);
     } else {

@@ -249,7 +249,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
-  $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = 0;
+  $handler->display->display_options['arguments']['tid']['default_argument_options']['term_page'] = 1;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = 1;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['limit'] = 0;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
@@ -267,7 +267,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['tid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['tid']['add_table'] = 0;
   $handler->display->display_options['arguments']['tid']['require_value'] = 0;
-  $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = 1;
   $handler->display->display_options['arguments']['tid']['set_breadcrumb'] = 0;
   /* Kontekstuelt filter: Indhold: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
@@ -1683,11 +1683,12 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_rotate_image']['table'] = 'field_data_field_rotate_image';
   $handler->display->display_options['fields']['field_rotate_image']['field'] = 'field_rotate_image';
   $handler->display->display_options['fields']['field_rotate_image']['label'] = '';
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['text'] = '<a href="[field_rotating_link]">[field_rotate_image]</a>';
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['path'] = '[field_rotating_link]';
   $handler->display->display_options['fields']['field_rotate_image']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_rotate_image']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_rotate_image']['alter']['external'] = 1;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['trim_whitespace'] = 0;
   $handler->display->display_options['fields']['field_rotate_image']['alter']['nl2br'] = 0;
@@ -2445,6 +2446,7 @@ function os2web_sovs_views_default_views() {
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
+    t('<a href="[field_rotating_link]">[field_rotate_image]</a>'),
     t('[field_rotating_link]'),
     t('<a href="[field_rotating_link]"><span>[title]</span> [body]</a>'),
     t('<a href="[field_rotating_link]"><span>[title]</span></a>'),
@@ -2532,7 +2534,6 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[field_attached_node]';
@@ -2558,8 +2559,9 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['table'] = 'field_data_field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['field'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['label'] = '';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '<a href=[field_selvbetjening_direkte-value]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '[field_selvbetjening_direkte-value]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['external'] = 0;
@@ -2574,7 +2576,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=[field_attached_node]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '[field_attached_node]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = 0;
@@ -2672,14 +2674,14 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-block-forside';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'jump_menu';
   $handler->display->display_options['style_options']['hide'] = 1;
-  $handler->display->display_options['style_options']['path'] = 'field_attached_node';
+  $handler->display->display_options['style_options']['path'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['style_options']['text'] = 'Skift';
-  $handler->display->display_options['style_options']['choose'] = 'Hvis du skal flytte, giftes osv.';
+  $handler->display->display_options['style_options']['choose'] = 'Vælg situation..';
   $handler->display->display_options['style_options']['default_value'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -2749,7 +2751,6 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
   $handler->display->display_options['fields']['title']['alter']['path'] = '[field_selvbetjening_direkte]';
@@ -2775,8 +2776,9 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['table'] = 'field_data_field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['field'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['label'] = '';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '<a href=[field_selvbetjening_direkte-value]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '[field_selvbetjening_direkte-value]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['external'] = 0;
@@ -2791,7 +2793,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=[field_attached_node]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '[field_attached_node]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = 0;
@@ -2976,15 +2978,14 @@ function os2web_sovs_views_default_views() {
   $handler = $view->new_display('block', 'SB-block-forside-att-1', 'sb_block_forside_att_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '8';
+  $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'jump_menu';
   $handler->display->display_options['style_options']['hide'] = 1;
-  $handler->display->display_options['style_options']['path'] = 'field_attached_node';
+  $handler->display->display_options['style_options']['path'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['style_options']['text'] = 'Skift';
-  $handler->display->display_options['style_options']['choose'] = 'Emner kort, affald, jobs osv. ';
+  $handler->display->display_options['style_options']['choose'] = 'Vælg emne..';
   $handler->display->display_options['style_options']['default_value'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -2999,7 +3000,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = FALSE;
-  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="/soeg-nemindsigt">Søg nemindsig</a></div>';
+  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['footer']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -3186,14 +3187,14 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-block-forside selvbetjening-block-portal';
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'jump_menu';
   $handler->display->display_options['style_options']['hide'] = 1;
-  $handler->display->display_options['style_options']['path'] = 'field_attached_node';
+  $handler->display->display_options['style_options']['path'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['style_options']['text'] = 'Skift';
-  $handler->display->display_options['style_options']['choose'] = 'Hvis du skal flytte...';
+  $handler->display->display_options['style_options']['choose'] = 'Vælg situation..';
   $handler->display->display_options['style_options']['default_value'] = 0;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -3263,7 +3264,6 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['path'] = '[field_selvbetjening_direkte]';
@@ -3290,8 +3290,9 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['table'] = 'field_data_field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['field'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['label'] = '';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '<a href=[field_selvbetjening_direkte-value]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '[field_selvbetjening_direkte-value]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['external'] = 0;
@@ -3306,7 +3307,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=[field_attached_node]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '[field_attached_node]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = 0;
@@ -3317,10 +3318,10 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['id'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'empty';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['term_page'] = 1;
-  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = 1;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['term_page'] = 0;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = 0;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = 1;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
     'site_struktur' => 'site_struktur',
@@ -3329,6 +3330,13 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['specify_validation'] = 1;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate']['type'] = 'taxonomy_term';
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['vocabularies'] = array(
+    'site_struktur' => 'site_struktur',
+  );
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['transform'] = 0;
+  $handler->display->display_options['arguments']['field_site_structure_tid']['validate']['fail'] = 'empty';
   $handler->display->display_options['arguments']['field_site_structure_tid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['field_site_structure_tid']['not'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
@@ -3352,6 +3360,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['filters']['field_selvbetjeningslink_type_value']['field'] = 'field_selvbetjeningslink_type_value';
   $handler->display->display_options['filters']['field_selvbetjeningslink_type_value']['value'] = array(
     'handling' => 'handling',
+    'emne' => 'emne',
   );
   /* Filterkriterie: Indhold: Forfremmet til forside */
   $handler->display->display_options['filters']['promote']['id'] = 'promote';
@@ -3484,14 +3493,14 @@ function os2web_sovs_views_default_views() {
   $handler = $view->new_display('block', 'SB-block-portal-att-1', 'sb_block_portal_att_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'jump_menu';
   $handler->display->display_options['style_options']['hide'] = 1;
-  $handler->display->display_options['style_options']['path'] = 'field_attached_node';
+  $handler->display->display_options['style_options']['path'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['style_options']['text'] = 'Skift';
-  $handler->display->display_options['style_options']['choose'] = 'Emner kort, affald...';
+  $handler->display->display_options['style_options']['choose'] = 'Vælg emne..';
   $handler->display->display_options['style_options']['default_value'] = 1;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
@@ -3539,7 +3548,6 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['path'] = '[field_selvbetjening_direkte]';
@@ -3565,8 +3573,9 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['table'] = 'field_data_field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['field'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['label'] = '';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '<a href=[field_selvbetjening_direkte-value]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '[field_selvbetjening_direkte-value]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['external'] = 0;
@@ -3581,7 +3590,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=[field_attached_node]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '[field_attached_node]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = 0;
@@ -4336,8 +4345,8 @@ function os2web_sovs_views_default_views() {
     t('Forskydning'),
     t('node/[field_attached_node-nid]'),
     t('node/[field_attached_node]'),
-    t('<a href=[field_selvbetjening_direkte-value]>[title]</a>'),
-    t('<a href=[field_attached_node]>[title]</a>'),
+    t('[field_selvbetjening_direkte-value]'),
+    t('[field_attached_node]'),
     t('Alle'),
     t('Page'),
     t('Feed'),
@@ -4345,13 +4354,14 @@ function os2web_sovs_views_default_views() {
     t('<h3><a href="/selvbetjening">Selvbetjening</a></h3>'),
     t('[field_selvbetjening_direkte]'),
     t('selvbetjening-megamenu'),
+    t('<a href=[field_selvbetjening_direkte-value]>[title]</a>'),
+    t('<a href=[field_attached_node]>[title]</a>'),
     t('SB-block-forside-att-1'),
-    t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="/soeg-nemindsigt">Søg nemindsig</a></div>'),
+    t('<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
     t('SB-block-forside-att-2'),
     t('Aktuelle Genvej'),
     t('<div class="aktuel-genvej>Aktuelle Genveje</div>'),
     t('<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706">Borger.dk</a><a class="virkdk" href="http://virk.dk">Virk.dk</a></div>'),
-    t('[field_attached_node]'),
     t('<a href=[field_selvbetjening_direkte]>[title]</a>'),
     t('Aktuelle genveje'),
     t('SB-block-portal'),

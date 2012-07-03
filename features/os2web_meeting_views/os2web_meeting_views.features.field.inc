@@ -115,8 +115,8 @@ function os2web_meeting_views_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => 'opened',
-          1 => 'closed',
+          0 => 'Lukket punkt.',
+          1 => '',
         ),
         'allowed_values_function' => '',
       ),
@@ -414,7 +414,7 @@ function os2web_meeting_views_field_default_fields() {
           'label' => 'hidden',
           'module' => 'entityreference',
           'settings' => array(
-            'view_mode' => 'full',
+            'view_mode' => 'meeting_detail_view',
           ),
           'type' => 'entityreference_entity_view',
           'weight' => '1',
@@ -811,7 +811,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '14',
+        'weight' => '15',
       ),
     ),
   );
@@ -895,7 +895,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -997,6 +997,94 @@ function os2web_meeting_views_field_default_fields() {
         ),
         'type' => 'date_popup',
         'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_full_doc'
+  $fields['node-meeting-field_full_doc'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_full_doc',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 17,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_full_doc',
+      'label' => 'Full doc',
+      'required' => FALSE,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'txt',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'file',
+        'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '9',
       ),
     ),
   );
@@ -1160,7 +1248,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -1319,7 +1407,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -1398,7 +1486,7 @@ function os2web_meeting_views_field_default_fields() {
           'display_label' => 0,
         ),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1500,7 +1588,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'computed_field',
         'settings' => array(),
         'type' => 'computed',
-        'weight' => '13',
+        'weight' => '14',
       ),
     ),
   );
@@ -1759,7 +1847,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -1833,7 +1921,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -2123,6 +2211,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
   t('Ekstern URL');
   t('Enclosures');
   t('File');
+  t('Full doc');
   t('HEXColor');
   t('Hvis den taksonomi der bruges findes i en drop down list kan der angives en ekstern url som åbnes i stedet. ');
   t('ID');

@@ -42,7 +42,7 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = FALSE;
-  $handler->display->display_options['footer']['area']['content'] = '<a href="/kontakt">Gå til kontaktoversigt</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a href="/indhold/om-syddjurs-kommune">Gå til kontaktoversigt</a>';
   $handler->display->display_options['footer']['area']['format'] = 'php_code';
   $handler->display->display_options['footer']['area']['tokenize'] = 0;
   /* Felt: Indhold: Titel */
@@ -683,7 +683,7 @@ function os2web_kontaktblok_views_default_views() {
 
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>';
+<p>Du kan få hjælp til selvbetjening på <a href="http://bibliotek.syddjurs.dk">bibliotekerne</a>.</p>';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['alter']['external'] = 0;
@@ -1552,7 +1552,7 @@ return os2web_kontaktblok_get_block();
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
-    t('<a href="/kontakt">Gå til kontaktoversigt</a>'),
+    t('<a href="/indhold/om-syddjurs-kommune">Gå til kontaktoversigt</a>'),
     t('Kontakt [title]'),
     t('<a id="tlf" href="tel:[field_phone1]">[field_phone1]</a>'),
     t(' - [field_kontaktblok_aa_manolk]'),
@@ -1594,7 +1594,7 @@ return os2web_kontaktblok_get_block();
 
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>'),
+<p>Du kan få hjælp til selvbetjening på <a href="http://bibliotek.syddjurs.dk">bibliotekerne</a>.</p>'),
     t('Vis åbningstider'),
     t('Alle'),
     t('Block'),
@@ -1608,6 +1608,15 @@ return os2web_kontaktblok_get_block();
 [field_kontaktblok_aa_freaa]
 [field_kontaktblok_aa_loeaa]
 [field_kontaktblok_aa_soeaa] '),
+    t('<h3>Callcenter</h3>
+<div class="telfonnummer"><a href="tel:87535000">87 53 50 00</a></div>
+<div class="dag">Mandag-onsdag:</div><div class="aaben">08.30 - 15.00</div>
+<div class="dag">Torsdag:</div><div class="aaben"> 08.30 - 17.00</div>
+<div class="dag">Fredag:</div><div class="aaben> 08.30 - 12.00</div>
+
+<p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
+
+<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>'),
     t('Kontaktblok'),
     t('View panes'),
   );

@@ -116,7 +116,7 @@ function ballerup_content_types_field_default_fields() {
         'display_field' => 1,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'file',
     ),
     'field_instance' => array(
@@ -187,7 +187,7 @@ function ballerup_content_types_field_default_fields() {
   $fields['node-files-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -601,7 +601,7 @@ function ballerup_content_types_field_default_fields() {
         'display_field' => 1,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'file',
     ),
     'field_instance' => array(
@@ -745,7 +745,7 @@ function ballerup_content_types_field_default_fields() {
   $fields['node-local_plan-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -955,7 +955,7 @@ function ballerup_content_types_field_default_fields() {
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'number_integer',
     ),
     'field_instance' => array(
@@ -1422,7 +1422,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -1498,7 +1498,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -1626,7 +1626,7 @@ function ballerup_content_types_field_default_fields() {
   $fields['node-person-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -1944,7 +1944,7 @@ function ballerup_content_types_field_default_fields() {
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'number_integer',
     ),
     'field_instance' => array(
@@ -2112,7 +2112,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '140',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -2485,7 +2485,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -2567,7 +2567,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '10',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -2648,7 +2648,7 @@ function ballerup_content_types_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -2709,7 +2709,7 @@ function ballerup_content_types_field_default_fields() {
   $fields['node-politician-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',
@@ -3004,7 +3004,7 @@ function ballerup_content_types_field_default_fields() {
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'number_integer',
     ),
     'field_instance' => array(
@@ -3079,7 +3079,7 @@ function ballerup_content_types_field_default_fields() {
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'number_integer',
     ),
     'field_instance' => array(
@@ -4182,7 +4182,7 @@ function ballerup_content_types_field_default_fields() {
         'display_field' => 1,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'file',
     ),
     'field_instance' => array(
@@ -5121,7 +5121,7 @@ function ballerup_content_types_field_default_fields() {
         'display_field' => 1,
         'uri_scheme' => 'public',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'file',
     ),
     'field_instance' => array(
@@ -5195,7 +5195,7 @@ function ballerup_content_types_field_default_fields() {
   $fields['node-tema-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_lead_image',

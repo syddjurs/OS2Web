@@ -5986,7 +5986,7 @@ function os2web_indholdstyper_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_site_structure',
       'label' => 'Portalkategori',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -6063,7 +6063,7 @@ function os2web_indholdstyper_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_termref_kle',
       'label' => 'KL Emneord',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),

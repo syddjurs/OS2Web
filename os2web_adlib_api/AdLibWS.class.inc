@@ -175,11 +175,11 @@ class AdLibWS {
       <JobFiles>
         <JobFile FileName="' . $filename . '" Data="' . base64_encode($data) . '" Length="' . strlen($data) . '" />
       </JobFiles>';
-    $status = $this->client->AddJobFilesAsStream(array(
+    $result = $this->client->AddJobFilesAsStream(array(
             'JobFolder' => $folder . '\\Input',
             'XmlStream' => $payload,
         ))->AddJobFilesAsStreamResult;
-    $status = (string) simplexml_load_string($status)->System['Status'];
+    $status = (string) simplexml_load_string($result)->System['Status'];
     if (strcmp($status, 'Success') == 0) {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Uploaded file: " . $filename);
       return array(
@@ -193,6 +193,7 @@ class AdLibWS {
       );
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to upload: " . $filename);
+      error_log("Var: \$result = " . print_r($result, 1));
       return false;
     }
   }

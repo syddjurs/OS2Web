@@ -796,18 +796,21 @@ function os2web_sovs_default_page_manager_handlers() {
     $pane->configuration = array(
       'override_pager_settings' => 0,
       'use_pager' => 0,
-      'nodes_per_page' => '5',
+      'nodes_per_page' => '0',
       'pager_id' => '0',
       'offset' => '0',
       'more_link' => 0,
       'feed_icons' => 0,
       'panel_args' => 0,
       'link_to_view' => 0,
-      'args' => '',
+      'args' => '6',
       'url' => '',
       'display' => 'block_2',
       'override_title' => 1,
       'override_title_text' => '',
+      'context' => array(
+        0 => '',
+      ),
     );
     $pane->cache = array();
     $pane->style = array(
