@@ -1,0 +1,5 @@
+name = Acadre Webservice Implementation
+description = Implements webservice implementation for Acadre Rule-based Publishing
+package = OS2Web
+core = 7.x
+
