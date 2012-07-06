@@ -1,32 +1,39 @@
 <?php
 /**
+ * @file
+ * Code for the OS2Web Acadre ARP Handler feature.
+ */
+
+include_once 'os2web_acadre_arp.features.inc';
+
+/**
  * Implementation of hook_menu().
  */
-function os2web_acadre_ws_menu() {
+function os2web_acadre_arp_menu() {
   $items['os2web/ws/arp'] = array(
       'type' => MENU_CALLBACK,
-      'page callback' => '_os2web_acadre_ws_soap_server',
+      'page callback' => '_os2web_acadre_arp_soap_server',
       'access callback' => TRUE, 
       );
   return $items;
 }
 
 /**
- * _os2web_acadre_ws_soap_server 
+ * _os2web_acadre_arp_soap_server 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_soap_server(){
+function _os2web_acadre_arp_soap_server(){
   if (isset($_GET['wsdl'])) {
-    _os2web_acadre_ws_get_wsdl();
+    _os2web_acadre_arp_get_wsdl();
   }
   global $HTTP_RAW_POST_DATA;
   ini_set("soap.wsdl_cache_enabled","0");
-  $server = new SoapServer(drupal_get_path('module', 'os2web_acadre_ws').'/os2web_acadre_ws_publishing_handler.wsdl');
-  $count = variable_get('os2web_acadre_ws_soap_count',0);
+  $server = new SoapServer(drupal_get_path('module', 'os2web_acadre_arp').'/os2web_acadre_arp_publishing_handler.wsdl');
+  $count = variable_get('os2web_acadre_arp_soap_count',0);
   file_unmanaged_save_data($HTTP_RAW_POST_DATA,'public://soap/request-'.$count++.'.soap.xml');
-  variable_set('os2web_acadre_ws_soap_count',$count);
+  variable_set('os2web_acadre_arp_soap_count',$count);
 
   $server->AddFunction('publish');
   $server->AddFunction('unpublish');
@@ -53,11 +60,11 @@ function publish($info, $parentItemId){
   $type = $meta->getName();
   switch (strtolower($type)) {
     case 'publishedcase':
-      return _os2web_acadre_ws_process_case($item_id,$meta);
+      return _os2web_acadre_arp_process_case($item_id,$meta);
     case 'publisheddocument':
-      return _os2web_acadre_ws_process_document($item_id,$meta,$parentItemId);
+      return _os2web_acadre_arp_process_document($item_id,$meta,$parentItemId);
     case 'publishedmemo':
-      return _os2web_acadre_ws_process_memo($item_id,$meta,$parentItemId);
+      return _os2web_acadre_arp_process_memo($item_id,$meta,$parentItemId);
     default:
       error_log("Unhandled request: \$type = " . print_r($type, 1));
       soap_error(4);
@@ -67,12 +74,12 @@ function publish($info, $parentItemId){
 //
 //  $supplement = $info->MetaData->SupplementDocument;
 //  if (!empty($supplement)){
-//    return _os2web_acadre_ws_process_suplement();
+//    return _os2web_acadre_arp_process_suplement();
 //  } 
 //
 //  $party = $info->MetaData->Party;
 //  if (!empty($party)){
-//    return _os2web_acadre_ws_process_party();
+//    return _os2web_acadre_arp_process_party();
 //  } 
 //
 //  $memo = $info->MetaData->Memo;
@@ -91,7 +98,7 @@ function publish($info, $parentItemId){
  */
 function unpublish($item_id, $location_id){
   error_log("Unpublish: \$item_id = " . print_r($item_id, 1));
-  $nids =  _os2web_acadre_ws_find_item($item_id);
+  $nids =  _os2web_acadre_arp_find_item($item_id);
   if (empty($nids)) {
     return 'Success. No nodes removed.';
   } else {
@@ -105,12 +112,12 @@ function unpublish($item_id, $location_id){
 // Publishing functions:
 
 /**
- * _os2web_acadre_ws_process_case 
+ * _os2web_acadre_arp_process_case 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_process_case($item_id,$meta){
+function _os2web_acadre_arp_process_case($item_id,$meta){
   $node = (object) NULL;
   $node->type = 'arp_case';
   $node->uid = 0;
@@ -136,12 +143,12 @@ function _os2web_acadre_ws_process_case($item_id,$meta){
 }
 
 /**
- * _os2web_acadre_ws_process_document 
+ * _os2web_acadre_arp_process_document 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_process_document($item_id,$meta,$parent_item_id){
+function _os2web_acadre_arp_process_document($item_id,$meta,$parent_item_id){
   $node = (object) NULL;
   $node->type = 'arp_document';
   $node->uid = 0;
@@ -163,7 +170,7 @@ function _os2web_acadre_ws_process_document($item_id,$meta,$parent_item_id){
   }
 
   // Locate parent node.
-  $parent_nid =  array_shift(_os2web_acadre_ws_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
+  $parent_nid =  array_shift(_os2web_acadre_arp_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
   if ($parent_node = node_load($parent_nid)) {
     $parent_node->field_documents[LANGUAGE_NONE][]['nid'] = $node->nid;
     error_log("Var: \$var = " . print_r($parent_node->field_documents, 1));
@@ -178,32 +185,32 @@ function _os2web_acadre_ws_process_document($item_id,$meta,$parent_item_id){
 }
 
 /**
- * _os2web_acadre_ws_process_memo 
+ * _os2web_acadre_arp_process_memo 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_process_memo($item_id,$meta,$parent_item_id){
+function _os2web_acadre_arp_process_memo($item_id,$meta,$parent_item_id){
   return "memo is processed";
 }
 
 /**
- * _os2web_acadre_ws_process_supplement 
+ * _os2web_acadre_arp_process_supplement 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_process_supplement(){
+function _os2web_acadre_arp_process_supplement(){
   return "supplement is processed";
 }
 
 /**
- * _os2web_acadre_ws_process_party 
+ * _os2web_acadre_arp_process_party 
  * 
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_process_party(){
+function _os2web_acadre_arp_process_party(){
   return "party is processed";
 }
 
@@ -215,8 +222,8 @@ function _os2web_acadre_ws_process_party(){
  * @access protected
  * @return void
  */
-function _os2web_acadre_ws_get_wsdl(){
-  $filename = drupal_get_path('module', 'os2web_acadre_ws').'/os2web_acadre_ws_publishing_handler.wsdl';
+function _os2web_acadre_arp_get_wsdl(){
+  $filename = drupal_get_path('module', 'os2web_acadre_arp').'/os2web_acadre_arp_publishing_handler.wsdl';
   $handle = fopen ($filename, 'r'); 
   $contents = fread ($handle, filesize ($filename)); 
   fclose ($handle); 
@@ -258,7 +265,7 @@ function soap_error($code) {
  * @access protected
  * @return array of nids
  */
-function _os2web_acadre_ws_find_item($item_id) {
+function _os2web_acadre_arp_find_item($item_id) {
   $query = new EntityFieldQuery;
   $result = $query
     ->entityCondition('entity_type', 'node')
@@ -270,7 +277,7 @@ function _os2web_acadre_ws_find_item($item_id) {
   return $nids;
 }
 
-function os2web_acadre_ws_node_delete($node) {
+function os2web_acadre_arp_node_delete($node) {
   if ($node->type == 'arp_case') {
     foreach ($node->field_documents[LANGUAGE_NONE] as $delta => $info) {
       node_delete($info['nid']);
@@ -278,6 +285,6 @@ function os2web_acadre_ws_node_delete($node) {
   }
 }
 
-function _os2web_acadre_ws_get_file($item_id, $version) {
+function _os2web_acadre_arp_get_file($item_id, $version) {
 
 }
