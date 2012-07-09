@@ -39,26 +39,19 @@ function os2web_adlib_api_schema() {
               'serialize' => TRUE,
           ),
       ),
+      'primary key' => array('fid','jobtype'),
   );
   return $schema;
 }
 
-function os2web_adlib_api_install() {
-
-}
-
-function os2web_adlib_api_uninstall() {
-
-}
-
-function os2web_adlib_api_update_7001(&$sandbox) {
+function os2web_adlib_api_update_7002(&$sandbox) {
   $ret = array();
-  $schema = os2web_adlib_api_schema();
-  db_add_field('os2web_adlib_api_doc_files', 'jobtype', array(
+  $ret[] = db_add_field('os2web_adlib_api_doc_files', 'jobtype', array(
               'description' => 'Jobtype identifier. 0 = PDF , 1 = HTML',
               'type' => 'int',
               'unsigned' => TRUE,
           ));
+  $ret[] = db_add_primary_key('os2web_adlib_api_doc_files',array('fid','jobtype'));
   return $ret;
 }
 
