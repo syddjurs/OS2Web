@@ -96,6 +96,16 @@ class AdLibWS {
     }
   }
 
+  public function deleteJobFolder($id) {
+    if (ADLIB_DISABLED) {
+      return false;
+    }
+    if (isset($this->client)) {
+      $reply = $this->client->deleteJobFolder(array('JobFolder' => $id));
+      return $reply;
+    }
+  }
+
   public function getJobStatus($id) {
     if (ADLIB_DISABLED) {
       $return->status = 'Disabled';
