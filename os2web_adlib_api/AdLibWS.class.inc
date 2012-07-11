@@ -75,6 +75,9 @@ class AdLibWS {
             </JOB:DOCOUTPUTS>
             <JOB:SETTINGS>
               <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
+              <JOB:NATIVEAPPSETTINGS>
+                <JOB:MSOUTLOOK CONVERSIONMODE="IFTS" />  
+              </JOB:NATIVEAPPSETTINGS>
             </JOB:SETTINGS>
           </JOB>
         </JOBS>';
