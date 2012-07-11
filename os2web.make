@@ -161,7 +161,13 @@ projects[print][version] = "1.1"
 projects[calendar][subdir] = "contrib"
 projects[calendar][version] = "3.3"
 
+projects[securelogin][subdir] = "contrib"
+projects[securelogin][version] = "1.2"
+
 ; Misc
+projects[customfilter][subdir] = "contrib"
+projects[customfilter][version] = "1.0"
+
 projects[superfish][subdir] = "contrib"
 projects[superfish][version] = "1.8"
 
@@ -182,6 +188,9 @@ projects[field_slideshow][version] = "1.6"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
+
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = "2.2"
 
 ; projects[forward][subdir] = "contrib"
 ; projects[forward][version] = "1.3"
@@ -315,6 +324,9 @@ projects[fontyourface][version] = "2.3"
 
 projects[nice_menus][subdir] = "contrib"
 projects[nice_menus][version] = "2.1"
+
+projects[bigmenu][subdir] = "contrib"
+projects[bigmenu][version] = "1.0"
 
 projects[special_menu_items][subdir] = "contrib"
 projects[special_menu_items][version] = "1.0"
