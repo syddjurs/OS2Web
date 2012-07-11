@@ -54,6 +54,10 @@ libraries[solr-php-client][download][url] = "http://solr-php-client.googlecode.c
 libraries[solr-php-client][directory_name] = "SolrPhpClient"
 libraries[solr-php-client][destination] = "libraries"
 
+libraries[superfish][download][type] = "git"
+libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal.git"
+libraries[superfish][download][revision] = "master"
+
 ; Contrib modules
 
 ; Features + related
@@ -158,6 +162,9 @@ projects[calendar][subdir] = "contrib"
 projects[calendar][version] = "3.3"
 
 ; Misc
+projects[superfish][subdir] = "contrib"
+projects[superfish][version] = "1.8"
+
 projects[better_formats][subdir] = "contrib"
 projects[better_formats][version] = "1.x-dev"
 
@@ -209,6 +216,9 @@ projects[wysiwyg][version] = "2.1"
 projects[menu_block][subdir] = "contrib"
 projects[menu_block][version] = "2.3"
 
+projects[menu_position][subdir] = "contrib"
+projects[menu_position][version] = "1.1"
+
 projects[delta][subdir] = "contrib"
 projects[delta][version] = "3.0-beta9"
 
@@ -256,6 +266,9 @@ projects[prepopulate][version] = "2.x-dev"
 
 projects[imagefield_crop][subdir] = "contrib"
 projects[imagefield_crop][version] = "1.0"
+
+projects[shurly][subdir] = "contrib"
+projects[shurly][version] = "1.0-beta2"
 
 projects[linkit][subdir] = "contrib"
 projects[linkit][version] = "2.5"
