@@ -106,8 +106,8 @@ projects[filefield_sources][version] = "1.4"
 projects[filefield_sources_plupload][subdir] = "contrib"
 projects[filefield_sources_plupload][version] = "1.x-dev"
 
-projects[file_entity][subdir] = "contrib"
-projects[file_entity][version] = "2.0-unstable5"
+; projects[file_entity][subdir] = "contrib"
+; projects[file_entity][version] = "2.0-unstable5"
 
 ; Workbench
 projects[workbench][subdir] = "contrib"
