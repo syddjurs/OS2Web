@@ -14,15 +14,7 @@ class AcadrePWS extends CaseService {
   private $client6;
   private $client_search;
 
-  /**
-   * Initial service setup.
-   */
-  function __construct() {
-    // Using a static allows singleton use of the connector class 
-    $this->client = &drupal_static('os2web_acadre_pws_client');
-    $this->client6 = &drupal_static('os2web_acadre_pws_client6');
-    $this->client_search = &drupal_static('os2web_acadre_pws_client_search');
-
+  private function _get_ws_base_setup() {
     $user = variable_get('os2web_pws_user');
     $password = variable_get('os2web_pws_password');
 
@@ -32,14 +24,19 @@ class AcadrePWS extends CaseService {
     $options['trace'] = TRUE; // For debugging purposes. Remove on prod.
     $options['exceptions'] = TRUE;
     $options['login'] = $user;
-    $options['cache_wsdl'] = WSDL_CACHE_DISK;
+    $options['cache_wsdl'] = WSDL_CACHE_BOTH;
     $options['password'] = $password;
     $options['soap_version'] = SOAP_1_1;
     if ($proxy) {
       $options['proxy_host'] = $proxy_host;
       $options['proxy_port'] = $proxy_port;
     }
+    return $options;
+  }
 
+  private function get_client() {
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+    $this->client = &drupal_static('os2web_acadre_pws_client');
     if (!$this->client) {
       $url = variable_get('os2web_pws_url');
       $url = trim($url);
@@ -47,22 +44,30 @@ class AcadrePWS extends CaseService {
         drupal_set_message(t('Error, no endpoint url set for v4soap.'), 'error');
       } else {
         //FIXME: Use a wellformed WSDL for V4 services.
+        $options = $this->_get_ws_base_setup();
         $options['location'] = $url;
         $options['uri'] = 'http://www.traen.com/2007/09/06/';
-//        $this->client = new SoapClient('/home/jm/workspace/sites/os2web'.base_path().drupal_get_path('module','os2web_pws').'/wsdl/AcadreServiceV4.wsdl', $options);
-        $this->client = new SoapClient(null, $options);
+        try {
+          $this->client = new SoapClient(null, $options);
+        } catch (Exception $e) {
+          drupal_set_message('Error connecting to PWSv4 endpoint', 'error');
+          return false;
+        }
       }
     }
+    return isset($this->client);
+  }
+
+  private function get_client6() {
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+    $this->client6 = &drupal_static('os2web_acadre_pws_client6');
     if (!$this->client6) {
       $url = variable_get('os2web_pws_url_v6');
       $url = trim($url);
       if ($url == '') {
         drupal_set_message(t('Error, no endpoint url set for v6.'), 'error');
       } else {
-//        $options['cache_wsdl'] = WSDL_CACHE_DISK;
-        $options['soap_version'] = SOAP_1_2;
-        unset($options['location']);
-        unset($options['uri']);
+        $options = $this->_get_ws_base_setup();
         try {
           $this->client6 = new SoapClient($url . '?WSDL', $options);
         } catch (Exception $sf) {
@@ -70,23 +75,36 @@ class AcadrePWS extends CaseService {
         }
       }
     }
+    return isset($this->client6);
+  }
+
+  private function get_client_search() {
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+    $this->client_search = &drupal_static('os2web_acadre_pws_client_search');
     if (!$this->client_search) {
       $url = variable_get('os2web_pws_url_search');
       $url = trim($url);
       if ($url == '') {
         drupal_set_message(t('Error, no endpoint url set for document search searvice.'), 'error');
       } else {
-//        $options['cache_wsdl'] = WSDL_CACHE_DISK;
-        $options['soap_version'] = SOAP_1_2;
-        unset($options['location']);
-        unset($options['uri']);
+        $options = $this->_get_ws_base_setup();
         try {
           $this->client_search = new SoapClient($url . '?WSDL', $options);
+          return true;
         } catch (SoapFault $sf) {
           drupal_set_message('Error connecting to PWS document search service endpoint', 'error');
+          return false;
         }
       }
     }
+    return isset($this->client_search);
+  }
+
+  /**
+   * Initial service setup.
+   */
+  function __construct() {
+    // Using a static allows singleton use of the connector class 
   }
 
   /**
@@ -96,17 +114,20 @@ class AcadrePWS extends CaseService {
    * @param string $query A case journaling number, ie. 11/14293
    */
   public function lookupCase($query) {
-    $result = &drupal_static(__FUNCTION__ . $query, FALSE);
+    $cid = __FUNCTION__ . $query;
+    $result = &drupal_static($cid, FALSE);
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client_search) {
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client_search()) {
       $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
           $result = (int) $this->client_search->getCaseSystemIdByYearAndSerial(array('year' => $query[0], 'serial' => $query[1]))->GetCaseSystemIdByYearAndSerialResult;
-//          $result = $result!=-1?$result:false;
+          cache_set($cid, $result, 'cache_os2web_pws');
         } catch (SoapFault $sf) {
           $trace = $this->client_search->__getLastRequest();
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $trace = ' . print_r($trace, 1));
@@ -123,17 +144,21 @@ class AcadrePWS extends CaseService {
    * @param string $query A case journaling number, ie. 14293/11
    */
   public function lookupDoc($query) {
-    $result = &drupal_static(__FUNCTION__ . $query, FALSE);
+    $cid = __FUNCTION__ . $query;
+    $result = &drupal_static($cid, FALSE);
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client_search) {
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client_search()) {
       $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
           $result = (int) $this->client_search->getDocumentSystemIdByYearAndSerial(array('year' => $query[1], 'serial' => $query[0]))->GetDocumentSystemIdByYearAndSerialResult;
           $result = $result != -1 ? $result : false;
+          cache_set($cid, $result, 'cache_os2web_pws');
         } catch (SoapFault $sf) {
           $trace = $this->client_search->__getLastRequest();
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $trace = ' . print_r($trace, 1));
@@ -145,16 +170,20 @@ class AcadrePWS extends CaseService {
   }
 
   public function fetchCase($id) {
-    $result = &drupal_static(__FUNCTION__ . $id, FALSE);
+    $cid = __FUNCTION__ . $id;
+    $result = &drupal_static($cid, FALSE);
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client6) {
-
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client6()) {
       try {
         $result = $this->client6->getCase($id);
+        cache_set($cid, $result, 'cache_os2web_pws');
       } catch (Exception $exc) {
-
+       //TODO: Handle exception better...
+       return false;
       }
     }
     return $result;
@@ -165,34 +194,43 @@ class AcadrePWS extends CaseService {
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client) {
-      $request = '<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">!CaseID</CaseFileIdentifier>
-  </soap:Body>
-</soap:Envelope> ';
-      try {
+    if (($cache = cache_get(__FUNCTION__. $id,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } else {
+      if ($this->get_client()) {
+        $request = '<?xml version="1.0" encoding="utf-8"?>
+          <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+          <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">!CaseID</CaseFileIdentifier>
+          </soap:Body>
+          </soap:Envelope> ';
         $request = format_string($request, array('!CaseID' => $id));
-        $result = $this->client->__doRequest($request, $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
-      } catch (SoapFault $sf) {
-        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
+        try {
+          $result = $this->client->__doRequest($request, $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
+          cache_set(__FUNCTION__ . $id, $result, 'cache_os2web_pws');
+        } catch (SoapFault $sf) {
+          error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
+          return false;
+        }
       }
-      if (is_string($result)) {
-        $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
-      } else {
-        return false;
-      }
+    }
+    if (is_string($result)) {
+      $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
+    } else {
+      return false;
     }
     return $result;
   }
 
   public function getDocLock($id) {
-    $result = &drupal_static(__FUNCTION__ . $id, FALSE);
+    $cid = __FUNCTION__ . $id;
+    $result = &drupal_static($cid, FALSE);
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client) {
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -214,23 +252,27 @@ class AcadrePWS extends CaseService {
       } catch (SoapFault $sf) {
 
       }
+      cache_set($cid, $result, 'cache_os2web_pws');
     }
     return $result;
   }
 
   public function getDocument($id) {
-    $result = &drupal_static(__FUNCTION__ . $id, FALSE);
+    $cid = __FUNCTION__ . $id;
+    $result = &drupal_static($cid, FALSE);
     if ($result != FALSE) {
       return $result;
     }
-    if ($this->client6) {
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client6()) {
       try {
         $result = $this->client6->getMainDocument($id);
+        cache_set($cid, $result, 'cache_os2web_pws');
       } catch (SoapFault $sf) {
         $result = FALSE;
       }
     }
-
     return $result;
   }
 
@@ -253,7 +295,10 @@ class AcadrePWS extends CaseService {
       $ref = $info['ref'];
       $ver = $info['ver'];
     }
-    if ($this->client) {
+    $cid = __FUNCTION__.$ref.$ver;
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -269,6 +314,7 @@ class AcadrePWS extends CaseService {
         // Use md5sum to avoid long  and guessable filenames
         $info = pathinfo($result);
         $result = md5('adlibsalt'.$info['basename']) . '.' . $info['extension'];
+        cache_set($cid, $result, 'cache_os2web_pws');
       } catch (SoapFault $sf) {
       error_log("Var: \$sf = " . print_r($sf, 1));
       }
@@ -292,7 +338,7 @@ class AcadrePWS extends CaseService {
       $result = file_create_url($result->uri);
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS. Ref: ".$ref);
-      if ($this->client) {
+      if ($this->get_client()) {
         $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -334,8 +380,10 @@ class AcadrePWS extends CaseService {
       $ref = $info['ref'];
       $ver = $info['ver'];
     }
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS.");
-    if ($this->client) {
+    $cid = __FUNCTION__.$ref.$ver;
+    if (($cache = cache_get($cid,'cache_os2web_pws'))  && !empty($cache->data)) {
+      $result = $cache->data;
+    } elseif ($this->get_client()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -348,47 +396,11 @@ class AcadrePWS extends CaseService {
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetPhysicalDocument', SOAP_1_1);
         $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->XMLBinary;
+        cache_set($cid, $result, 'cache_os2web_pws');
       } catch (SoapFault $sf) {
-        
+         return false;
       }
     }
     return $result;
   }
-
-  public function fetchDoc($id) {
-    if ($this->client) {
-      return $this->client->getCase($id);
-    } else {
-      return false;
-    }
-  }
-
-  public function searchCases($query) {
-    $search = array(
-//        'CaseFileTitleText' => 'test',
-//        'CaseFileTitleText' => '*',
-//        'CaseFileTypeCode' => 'EMSAG',
-//        'CaseFileNumberIdentifier' => '11/14293',
-//        'AdvancedSearchCaseCriterion' => array(
-        'ClassificationCriterion' => array(
-            'PrincipleLiteral' => 'Facetter',
-            'ClassificationLiteral' => 'P19',
-        )
-//        )
-    );
-    $result = false;
-//    try {
-    $result = $this->client->searchCases($search);
-//    } catch (Exception $exc) {}
-//    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $this->client = ' . $this->client->__getLastRequest());
-    return $result;
-  }
-
-  public function getTrace() {
-    return array(
-        'request' => $this->client6->__getLastRequest(),
-        'response' => $this->client6->__getLastResponse(),
-    );
-  }
-
 }
