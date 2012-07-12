@@ -147,13 +147,14 @@ function os2web_test_page() {
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/14293'));
 //  $call = $pws->fetchCase($pws->lookupCase('12/6202'));
 //  $call = $pws->getCaseDocs(373830);
-  $call = $pws->getCaseDocs(373830);
+//  $call = $pws->getCaseDocs(373830);
 //  $call = $pws->fetchCase(73335);
 //  return _os2web_get_rendered_doc(array(1420175,1369822));
 //  $call = $pws->getDocument(1565429);
 //  $call = $pws->getCaseDocs($pws->lookupCase('07/4408'));
 //  $call = $pws->getCaseDocs(73335);
 //  $call = $pws->getDocLock($pws->lookupDoc('268704/07'));
+//  $call = $pws->lookupDoc('268704/07');
 //  $call = $pws->getDocLock(1);
 //  $call = $pws->getDocument($pws->lookupDoc('268704/07'));
 //  _os2web_pws_cleanup_files();
@@ -196,6 +197,5 @@ function os2web_test_page() {
 //    $call = 'fail';
 //  }
 
-  return '<div><textarea cols="150" rows=50>' . print_r($call, 1) . '</textarea>
-    <textarea cols="150" rows=20>' . print_r($pws->getTrace(), 1) . '</textarea></div>';
+  return '<div><textarea cols="150" rows=50>' . print_r($call, 1) . '</textarea></div>';
 }
