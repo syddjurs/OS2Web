@@ -20,12 +20,6 @@ abstract class CaseService {
    */
   abstract public function fetchCase($id);
 
-  /**
-   * Must return an array with information regarding a given document.
-   *
-   * Input should be a case identifier, obtainable from fetchCase()
-   */
-  abstract public function fetchDoc($id);
 }
 
 ?>
