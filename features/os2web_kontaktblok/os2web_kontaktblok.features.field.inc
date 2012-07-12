@@ -10,6 +10,84 @@
 function os2web_kontaktblok_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'node-kontaktblok-field_afdeling'
+  $fields['node-kontaktblok-field_afdeling'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_afdeling',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'kontaktblok',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 23,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_afdeling',
+      'label' => 'Afdeling',
+      'required' => 1,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Exported field: 'node-kontaktblok-field_email'
   $fields['node-kontaktblok-field_email'] = array(
     'field_config' => array(
@@ -35,7 +113,7 @@ function os2web_kontaktblok_field_default_fields() {
       'settings' => array(
         'max_length' => '100',
       ),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'text',
     ),
     'field_instance' => array(
@@ -79,7 +157,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -157,7 +235,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '18',
+        'weight' => '35',
       ),
     ),
   );
@@ -235,7 +313,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '19',
+        'weight' => '36',
       ),
     ),
   );
@@ -308,7 +386,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'text_textfield',
-        'weight' => '20',
+        'weight' => '37',
       ),
     ),
   );
@@ -382,7 +460,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '21',
+        'weight' => '38',
       ),
     ),
   );
@@ -460,7 +538,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '10',
+        'weight' => '27',
       ),
     ),
   );
@@ -538,7 +616,163 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '11',
+        'weight' => '28',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manolk'
+  $fields['node-kontaktblok-field_kontaktblok_aa_manolk'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_kontaktblok_aa_manolk',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '6',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'kontaktblok',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 25,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_kontaktblok_aa_manolk',
+      'label' => 'Man-Ons, lukker',
+      'required' => 0,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '6',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '26',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manons'
+  $fields['node-kontaktblok-field_kontaktblok_aa_manons'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_kontaktblok_aa_manons',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '6',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'kontaktblok',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 24,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_kontaktblok_aa_manons',
+      'label' => 'Man-Ons, åbner',
+      'required' => 0,
+      'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '6',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '25',
       ),
     ),
   );
@@ -616,7 +850,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '14',
+        'weight' => '31',
       ),
     ),
   );
@@ -694,7 +928,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '15',
+        'weight' => '32',
       ),
     ),
   );
@@ -768,7 +1002,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '22',
+        'weight' => '39',
       ),
     ),
   );
@@ -842,7 +1076,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '23',
+        'weight' => '40',
       ),
     ),
   );
@@ -920,7 +1154,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '12',
+        'weight' => '29',
       ),
     ),
   );
@@ -998,7 +1232,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '13',
+        'weight' => '30',
       ),
     ),
   );
@@ -1076,7 +1310,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '16',
+        'weight' => '33',
       ),
     ),
   );
@@ -1154,7 +1388,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '17',
+        'weight' => '34',
       ),
     ),
   );
@@ -1228,7 +1462,7 @@ function os2web_kontaktblok_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -1264,7 +1498,7 @@ function os2web_kontaktblok_field_default_fields() {
       'default_value' => array(
         0 => array(
           'value' => '',
-          'format' => 'blokindhold',
+          'format' => 'full_html',
         ),
       ),
       'deleted' => '0',
@@ -1295,6 +1529,10 @@ function os2web_kontaktblok_field_default_fields() {
       'label' => 'Eget indhold',
       'required' => 0,
       'settings' => array(
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -1305,7 +1543,7 @@ function os2web_kontaktblok_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -1327,8 +1565,8 @@ function os2web_kontaktblok_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => '',
-          1 => '',
+          0 => '0',
+          1 => 'vis',
         ),
         'allowed_values_function' => '',
       ),
@@ -1379,7 +1617,7 @@ function os2web_kontaktblok_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1396,7 +1634,7 @@ function os2web_kontaktblok_field_default_fields() {
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
-      'translatable' => '1',
+      'translatable' => '0',
       'type' => 'number_integer',
     ),
     'field_instance' => array(
@@ -1446,7 +1684,7 @@ function os2web_kontaktblok_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -1520,7 +1758,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -1594,7 +1832,7 @@ function os2web_kontaktblok_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -1602,6 +1840,7 @@ function os2web_kontaktblok_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Adresse');
+  t('Afdeling');
   t('Efterlad blank for at skjule');
   t('Efterlad blank for at skjule. Alternativ skriv klokkeslæt (08:30) eller <i>Lukket</i>');
   t('Eget indhold');
@@ -1612,6 +1851,8 @@ function os2web_kontaktblok_field_default_fields() {
   t('Hvis dette felt markeres, vises Callcenterets telefonnummer og åbningstider.');
   t('Lørdag, lukker');
   t('Lørdag, åbner');
+  t('Man-Ons, lukker');
+  t('Man-Ons, åbner');
   t('Mandag, lukker');
   t('Mandag, åbner');
   t('Onsdag, lukker');

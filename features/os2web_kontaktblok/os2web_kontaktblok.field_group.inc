@@ -21,7 +21,7 @@ function os2web_kontaktblok_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Åbningstider',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
       0 => 'field_kontaktblok_aa_manaa',
       1 => 'field_kontaktblok_aa_manlk',
@@ -37,6 +37,8 @@ function os2web_kontaktblok_field_group_info() {
       11 => 'field_kontaktblok_aa_loelk',
       12 => 'field_kontaktblok_aa_soeaa',
       13 => 'field_kontaktblok_aa_soelk',
+      14 => 'field_kontaktblok_aa_manons',
+      15 => 'field_kontaktblok_aa_manolk',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

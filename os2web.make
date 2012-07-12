@@ -54,6 +54,10 @@ libraries[solr-php-client][download][url] = "http://solr-php-client.googlecode.c
 libraries[solr-php-client][directory_name] = "SolrPhpClient"
 libraries[solr-php-client][destination] = "libraries"
 
+libraries[superfish][download][type] = "git"
+libraries[superfish][download][url] = "https://github.com/mehrpadin/Superfish-for-Drupal.git"
+libraries[superfish][download][revision] = "master"
+
 ; Contrib modules
 
 ; Features + related
@@ -106,9 +110,6 @@ projects[filefield_sources][version] = "1.4"
 projects[filefield_sources_plupload][subdir] = "contrib"
 projects[filefield_sources_plupload][version] = "1.x-dev"
 
-; projects[file_entity][subdir] = "contrib"
-; projects[file_entity][version] = "2.0-unstable5"
-
 ; Workbench
 projects[workbench][subdir] = "contrib"
 projects[workbench][version] = "1.1"
@@ -160,7 +161,16 @@ projects[print][version] = "1.1"
 projects[calendar][subdir] = "contrib"
 projects[calendar][version] = "3.3"
 
+projects[securelogin][subdir] = "contrib"
+projects[securelogin][version] = "1.2"
+
 ; Misc
+projects[customfilter][subdir] = "contrib"
+projects[customfilter][version] = "1.0"
+
+projects[superfish][subdir] = "contrib"
+projects[superfish][version] = "1.8"
+
 projects[better_formats][subdir] = "contrib"
 projects[better_formats][version] = "1.x-dev"
 
@@ -179,8 +189,11 @@ projects[field_slideshow][version] = "1.6"
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
 
-projects[forward][subdir] = "contrib"
-projects[forward][version] = "1.3"
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = "2.2"
+
+; projects[forward][subdir] = "contrib"
+; projects[forward][version] = "1.3"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.17"
@@ -206,11 +219,14 @@ projects[menuux][version] = "1.0-beta2"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
-projects[skinr][subdir] = "contrib"
-projects[skinr][version] = "2.0-beta1"
+; projects[skinr][subdir] = "contrib"
+; projects[skinr][version] = "2.0-beta1"
 
 projects[menu_block][subdir] = "contrib"
 projects[menu_block][version] = "2.3"
+
+projects[menu_position][subdir] = "contrib"
+projects[menu_position][version] = "1.1"
 
 projects[delta][subdir] = "contrib"
 projects[delta][version] = "3.0-beta9"
@@ -221,8 +237,8 @@ projects[float_filter][version] = "1.0"
 projects[omega_tools][subdir] = "contrib"
 projects[omega_tools][version] = "3.0-rc4"
 
-projects[megamenu][subdir] = "contrib"
-projects[megamenu][version] = "1.x-dev"
+; projects[megamenu][subdir] = "contrib"
+; projects[megamenu][version] = "1.x-dev"
 
 projects[rel][subdir] = "contrib"
 projects[rel][version] = "1.0-alpha1"
@@ -260,14 +276,17 @@ projects[prepopulate][version] = "2.x-dev"
 projects[imagefield_crop][subdir] = "contrib"
 projects[imagefield_crop][version] = "1.0"
 
+projects[shurly][subdir] = "contrib"
+projects[shurly][version] = "1.0-beta2"
+
 projects[linkit][subdir] = "contrib"
 projects[linkit][version] = "2.5"
 
-projects[hierarchical_select][subdir] = "contrib"
-projects[hierarchical_select][version] = "3.0-alpha5"
+; projects[hierarchical_select][subdir] = "contrib"
+; projects[hierarchical_select][version] = "3.0-alpha5"
 
-projects[subdomain][subdir] = "contrib"
-projects[subdomain][version] = "2.0-beta2"
+; projects[subdomain][subdir] = "contrib"
+; projects[subdomain][version] = "2.0-beta2"
 
 projects[multistep][subdir] = "contrib"
 projects[multistep][version] = "1.x-dev"
@@ -306,13 +325,14 @@ projects[fontyourface][version] = "2.3"
 projects[nice_menus][subdir] = "contrib"
 projects[nice_menus][version] = "2.1"
 
+projects[bigmenu][subdir] = "contrib"
+projects[bigmenu][version] = "1.0"
+
 projects[special_menu_items][subdir] = "contrib"
 projects[special_menu_items][version] = "1.0"
 
-projects[cookiecontrol][subdir] = "contrib"
-projects[cookiecontrol][version] = "1.5"
-
-
+projects[scheduler][subdir] = "contrib"
+projects[scheduler][version] = "1.0"
 
 ; Solr and search
 projects[apachesolr][subdir] = "contrib"
@@ -321,8 +341,8 @@ projects[apachesolr][version] = "1.0-beta19"
 projects[apachesolr_views][subdir] = "contrib"
 projects[apachesolr_views][version] = "1.0-beta1"
 
-projects[apachesolr_autocomplete][subdir] = "contrib"
-projects[apachesolr_autocomplete][version] = "1.2"
+; projects[apachesolr_autocomplete][subdir] = "contrib"
+; projects[apachesolr_autocomplete][version] = "1.2"
 
 projects[apachesolr_attachments][subdir] = "contrib"
 projects[apachesolr_attachments][version] = "1.0"

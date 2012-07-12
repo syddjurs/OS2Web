@@ -13,34 +13,6 @@ function os2web_settings_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'media_grid_window_height';
-  $strongarm->value = 250;
-  $export['media_grid_window_height'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'media_media_per_page';
-  $strongarm->value = 10;
-  $export['media_media_per_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'media_page_items_per_page';
-  $strongarm->value = 10;
-  $export['media_page_items_per_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'media_root_folder';
-  $strongarm->value = 'media';
-  $export['media_root_folder'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'media__file_extensions';
   $strongarm->value = 'jpg jpeg bmp gif png txt mov m4v mp4 mpeg avi ogg oga ogv wmv';
   $export['media__file_extensions'] = $strongarm;
@@ -49,7 +21,7 @@ function os2web_settings_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'media__max_filesize';
-  $strongarm->value = '2000';
+  $strongarm->value = '50MB';
   $export['media__max_filesize'] = $strongarm;
 
   $strongarm = new stdClass();

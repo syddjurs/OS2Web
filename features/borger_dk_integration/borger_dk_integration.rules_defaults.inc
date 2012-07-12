@@ -12,6 +12,7 @@ function borger_dk_integration_default_rules_configuration() {
   $items['rules_borger_dk_lookup_by_url'] = entity_import('rules_config', '{ "rules_borger_dk_lookup_by_url" : {
       "LABEL" : "Borger.dk lookup by permalink",
       "PLUGIN" : "reaction rule",
+      "ACTIVE" : false,
       "REQUIRES" : [ "rules", "php" ],
       "ON" : [ "node_insert" ],
       "IF" : [

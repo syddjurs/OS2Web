@@ -193,7 +193,7 @@ function os2web_menuer_og_blokke_views_default_views() {
   $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'vis-andre-sites skjul-andre-sites';
+  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'skjul-andre-sites';
   $handler->display->display_options['fields']['nothing']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;

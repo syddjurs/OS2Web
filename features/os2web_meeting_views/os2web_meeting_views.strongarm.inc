@@ -34,13 +34,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_speaker_paper';
-  $strongarm->value = 0;
-  $export['comment_anonymous_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_bullet_point';
   $strongarm->value = '1';
   $export['comment_bullet_point'] = $strongarm;
@@ -76,13 +69,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_speaker_paper';
-  $strongarm->value = 1;
-  $export['comment_default_mode_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_default_per_page_bullet_point';
   $strongarm->value = '50';
   $export['comment_default_per_page_bullet_point'] = $strongarm;
@@ -104,13 +90,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_speaker_paper';
-  $strongarm->value = '50';
-  $export['comment_default_per_page_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_bullet_point';
   $strongarm->value = 1;
   $export['comment_form_location_bullet_point'] = $strongarm;
@@ -128,13 +107,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm->name = 'comment_form_location_meeting';
   $strongarm->value = 1;
   $export['comment_form_location_meeting'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_speaker_paper';
-  $strongarm->value = 1;
-  $export['comment_form_location_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -167,20 +139,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_speaker_paper';
-  $strongarm->value = '1';
-  $export['comment_preview_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_speaker_paper';
-  $strongarm->value = '1';
-  $export['comment_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_subject_field_bullet_point';
   $strongarm->value = 1;
   $export['comment_subject_field_bullet_point'] = $strongarm;
@@ -198,13 +156,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm->name = 'comment_subject_field_meeting';
   $strongarm->value = 1;
   $export['comment_subject_field_meeting'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_speaker_paper';
-  $strongarm->value = 1;
-  $export['comment_subject_field_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -267,13 +218,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_speaker_paper';
-  $strongarm->value = array();
-  $export['menu_options_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_bullet_point';
   $strongarm->value = 'main-menu:0';
   $export['menu_parent_bullet_point'] = $strongarm;
@@ -295,17 +239,9 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_speaker_paper';
-  $strongarm->value = 'main-menu:0';
-  $export['menu_parent_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_bullet_point';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'promote',
   );
   $export['node_options_bullet_point'] = $strongarm;
 
@@ -326,15 +262,6 @@ function os2web_meeting_views_strongarm() {
     0 => 'status',
   );
   $export['node_options_meeting'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_speaker_paper';
-  $strongarm->value = array(
-    0 => 'status',
-  );
-  $export['node_options_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -360,15 +287,8 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_speaker_paper';
-  $strongarm->value = '0';
-  $export['node_preview_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'node_submitted_bullet_point';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['node_submitted_bullet_point'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -384,27 +304,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm->name = 'node_submitted_meeting';
   $strongarm->value = 0;
   $export['node_submitted_meeting'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_speaker_paper';
-  $strongarm->value = 0;
-  $export['node_submitted_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'print_display_comment_speaker_paper';
-  $strongarm->value = 0;
-  $export['print_display_comment_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'print_display_urllist_speaker_paper';
-  $strongarm->value = 1;
-  $export['print_display_urllist_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -580,23 +479,9 @@ function os2web_meeting_views_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'print_pdf_display_comment_speaker_paper';
-  $strongarm->value = 0;
-  $export['print_pdf_display_comment_speaker_paper'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'print_pdf_display_document';
   $strongarm->value = 1;
   $export['print_pdf_display_document'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'print_pdf_display_speaker_paper';
-  $strongarm->value = 1;
-  $export['print_pdf_display_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -611,13 +496,6 @@ function os2web_meeting_views_strongarm() {
   $strongarm->name = 'print_pdf_display_urllist_document';
   $strongarm->value = 1;
   $export['print_pdf_display_urllist_document'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'print_pdf_display_urllist_speaker_paper';
-  $strongarm->value = 1;
-  $export['print_pdf_display_urllist_speaker_paper'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

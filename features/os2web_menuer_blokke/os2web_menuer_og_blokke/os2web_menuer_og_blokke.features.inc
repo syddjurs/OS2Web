@@ -8,7 +8,10 @@
  * Implements hook_ctools_plugin_api().
  */
 function os2web_menuer_og_blokke_ctools_plugin_api() {
-  return array("version" => "3");
+  list($module, $api) = func_get_args();
+  if ($module == "context" && $api == "context") {
+    return array("version" => "3");
+  }
 }
 
 /**

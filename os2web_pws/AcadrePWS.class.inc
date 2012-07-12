@@ -101,7 +101,7 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client_search) {
-      $query = str_replace('-','/',$query);
+      $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
@@ -128,7 +128,7 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client_search) {
-      $query = str_replace('-','/',$query);
+      $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
@@ -166,19 +166,22 @@ class AcadrePWS extends CaseService {
       return $result;
     }
     if ($this->client) {
-      $request = <<< XML
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
-    <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">[CaseID]</CaseFileIdentifier>
+    <CaseFileIdentifier xmlns="http://www.traen.com/2007/09/06/schema">!CaseID</CaseFileIdentifier>
   </soap:Body>
-</soap:Envelope>
-XML;
+</soap:Envelope> ';
       try {
-        $result = $this->client->__doRequest(t($request, array('[CaseID]' => $id)), $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
-        $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
+        $request = format_string($request, array('!CaseID' => $id));
+        $result = $this->client->__doRequest($request, $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
       } catch (SoapFault $sf) {
-
+        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
+      }
+      if (is_string($result)) {
+        $result = simplexml_load_string($result)->xpath('//soap:Body[1]/*/*');
+      } else {
+        return false;
       }
     }
     return $result;
@@ -190,26 +193,26 @@ XML;
       return $result;
     }
     if ($this->client) {
-      $request = <<< XML
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <GetLockStatusDocumentId xmlns="http://www.traen.com/2007/09/06/schema">[DocID]</GetLockStatusDocumentId>
   </soap:Body>
-</soap:Envelope>
-XML;
+</soap:Envelope>';
       try {
         $result = $this->client->__doRequest(t($request, array('[DocID]' => $id)), $this->client->location, $this->client->uri . 'GetLockStatus', SOAP_1_1);
         $result = simplexml_load_string($result);
-        if ('' !== (string)array_pop($result->xpath('//soap:Fault/faultcode'))) { // This will indicate fault
-          $result = false;
-
-        } else {
-        $result = $result->xpath('//soap:Body');
-        $result = ('true' === (string)$result[0]->DocumentLockStatus)?true:false;
-//        $result = (string)array_pop($result->xpath('//soap:Fault/faultcode')); // This will indicate fault
+        if (is_object($result)) {
+          if ('' !== (string)array_pop($result->xpath('//soap:Fault/faultcode'))) { // This will indicate fault
+            $result = false;
+          } else {
+            $result = $result->xpath('//soap:Body');
+            $result = ('true' === (string)$result[0]->DocumentLockStatus)?true:false;
+            //        $result = (string)array_pop($result->xpath('//soap:Fault/faultcode')); // This will indicate fault
+          }
         }
       } catch (SoapFault $sf) {
+
       }
     }
     return $result;
@@ -251,8 +254,7 @@ XML;
       $ver = $info['ver'];
     }
     if ($this->client) {
-      $request = <<< XML
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <FileVersionReference1 xmlns="http://www.traen.com/2007/09/06/schema">
@@ -260,13 +262,15 @@ XML;
       <Version>@Version</Version>
     </FileVersionReference1>
   </soap:Body>
-</soap:Envelope>
-XML;
+</soap:Envelope>';
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetFileName', SOAP_1_1);
         $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->FileName1;
+        // Use md5sum to avoid long  and guessable filenames
+        $info = pathinfo($result);
+        $result = md5('adlibsalt'.$info['basename']) . '.' . $info['extension'];
       } catch (SoapFault $sf) {
-
+      error_log("Var: \$sf = " . print_r($sf, 1));
       }
     }
     return $result;
@@ -280,17 +284,16 @@ XML;
       $ref = $info['ref'];
       $ver = $info['ver'];
     }
-    $query = db_select('os2web_pws_doc_files', 'df')->fields('df', array('fid'))->condition('did', $ref);
-    $fid = $query->execute()->fetchField();
+    drupal_load('module', 'os2web_adlib_api');
+    $fid = os2web_adlib_api_get_fid($ref);
     if ($fid > 0) {
-//      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
+      //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
       $result = file_load($fid);
       $result = file_create_url($result->uri);
     } else {
-//      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS.");
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS. Ref: ".$ref);
       if ($this->client) {
-        $request = <<< XML
-<?xml version="1.0" encoding="utf-8"?>
+        $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <FileVersionReference xmlns="http://www.traen.com/2007/09/06/schema">
@@ -298,8 +301,7 @@ XML;
       <Version>@Version</Version>
     </FileVersionReference>
   </soap:Body>
-</soap:Envelope>
-XML;
+</soap:Envelope>';
         try {
           $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetPhysicalDocument', SOAP_1_1);
 //        $result = simplexml_load_string($result)->xpath('/soap:Envelope/soap:Body/*');
@@ -307,9 +309,11 @@ XML;
           if (file_prepare_directory($dest, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
             $result = file_save_data(base64_decode($result), $dest . (string) $ref . '-' . (string) $ver . '-' . $this->getDocFileName($ref, $ver), FILE_EXISTS_REPLACE);
             if (FALSE != $result) {
-              $rec = array('fid' => $result->fid, 'did' => $ref);
-              drupal_write_record('os2web_pws_doc_files', $rec);
+              drupal_load('module', 'os2web_adlib_api');
+              os2web_adlib_api_convert_to_pdf($result->fid, $ref);
               $result = file_create_url($result->uri);
+            } else {
+            drupal_set_message('There was an error saving the file', 'error');
             }
           } else {
             drupal_set_message('There was an error creating the file', 'error');
@@ -332,8 +336,7 @@ XML;
     }
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS.");
     if ($this->client) {
-      $request = <<< XML
-<?xml version="1.0" encoding="utf-8"?>
+      $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <FileVersionReference xmlns="http://www.traen.com/2007/09/06/schema">
@@ -341,8 +344,7 @@ XML;
       <Version>@Version</Version>
     </FileVersionReference>
   </soap:Body>
-</soap:Envelope>
-XML;
+</soap:Envelope>';
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetPhysicalDocument', SOAP_1_1);
         $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->XMLBinary;

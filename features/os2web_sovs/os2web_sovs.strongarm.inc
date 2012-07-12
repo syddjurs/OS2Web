@@ -294,7 +294,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_12_level';
-  $strongarm->value = '2';
+  $strongarm->value = '3';
   $export['menu_block_12_level'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -497,7 +497,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_5_depth';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['menu_block_5_depth'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -532,7 +532,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_5_sort';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['menu_block_5_sort'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -553,7 +553,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_6_depth';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['menu_block_6_depth'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -588,7 +588,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_6_sort';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['menu_block_6_sort'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -609,7 +609,7 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_7_depth';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['menu_block_7_depth'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -644,14 +644,14 @@ function os2web_sovs_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_7_sort';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['menu_block_7_sort'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_block_7_title_link';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['menu_block_7_title_link'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -783,6 +783,7 @@ function os2web_sovs_strongarm() {
     9 => 11,
     10 => 12,
     11 => 13,
+    12 => 14,
   );
   $export['menu_block_ids'] = $strongarm;
 

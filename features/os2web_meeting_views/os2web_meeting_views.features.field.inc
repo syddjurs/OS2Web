@@ -51,6 +51,13 @@ function os2web_meeting_views_field_default_fields() {
           'type' => 'text_default',
           'weight' => '0',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '0',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -108,8 +115,8 @@ function os2web_meeting_views_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => 'opened',
-          1 => 'closed',
+          0 => 'Lukket punkt.',
+          1 => '',
         ),
         'allowed_values_function' => '',
       ),
@@ -131,7 +138,13 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 2,
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -205,7 +218,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_default',
-          'weight' => 2,
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => '4',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -255,6 +275,76 @@ function os2web_meeting_views_field_default_fields() {
         ),
         'type' => 'file_generic',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-bullet_point-field_qbrick_ref'
+  $fields['node-bullet_point-field_qbrick_ref'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_qbrick_ref',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_qbrick',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'qbrick_movie',
+    ),
+    'field_instance' => array(
+      'bundle' => 'bullet_point',
+      'default_value' => array(
+        0 => array(
+          'id' => '',
+          'seek' => '0',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '3',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '3',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_qbrick_ref',
+      'label' => 'Qbrick ref',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_qbrick',
+        'settings' => array(),
+        'type' => 'qbrick_movie_simple',
+        'weight' => '4',
       ),
     ),
   );
@@ -316,6 +406,15 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'entityreference',
           'settings' => array(
             'view_mode' => 'full',
+          ),
+          'type' => 'entityreference_entity_view',
+          'weight' => '1',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'entityreference',
+          'settings' => array(
+            'view_mode' => 'meeting_detail_view',
           ),
           'type' => 'entityreference_entity_view',
           'weight' => '1',
@@ -393,6 +492,13 @@ function os2web_meeting_views_field_default_fields() {
           'type' => 'text_default',
           'weight' => '0',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '0',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -422,6 +528,290 @@ function os2web_meeting_views_field_default_fields() {
         ),
         'type' => 'text_textarea',
         'weight' => '-4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-bullet_point_attachment-field_bpa_file'
+  $fields['node-bullet_point_attachment-field_bpa_file'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_bpa_file',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 1,
+        'display_field' => 1,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'bullet_point_attachment',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => '3',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '1',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_bpa_file',
+      'label' => 'File',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'pdf tif doc docx msg',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'file',
+        'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-bullet_point_attachment-field_bpa_id'
+  $fields['node-bullet_point_attachment-field_bpa_id'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_bpa_id',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'bullet_point_attachment',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => '2',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_bpa_id',
+      'label' => 'ID',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '0',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_addenum_to'
+  $fields['node-meeting-field_addenum_to'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_addenum_to',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'referenceable_types' => array(
+          'borger_dk_permalink' => 0,
+          'bullet_point' => 0,
+          'bullet_point_attachment' => 0,
+          'contentpage' => 0,
+          'esdh_dokument' => 0,
+          'esdh_sag' => 0,
+          'files' => 0,
+          'galleri' => 0,
+          'iframe_selvbetjeningsl_sning_mm' => 0,
+          'institution' => 0,
+          'knactivity' => 0,
+          'kontaktblok' => 0,
+          'local_plan' => 0,
+          'media' => 0,
+          'meeting' => 'meeting',
+          'news' => 0,
+          'ofir_job' => 0,
+          'panel' => 0,
+          'person' => 0,
+          'politician' => 0,
+          'referat' => 0,
+          'right_column' => 0,
+          'rotating_image' => 0,
+          'selvbetjeningslinks' => 0,
+          'speaker_paper' => 0,
+          'spotbox' => 0,
+          'tema' => 0,
+          'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => '9',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => '5',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_addenum_to',
+      'label' => 'Tillæg til',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'node_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'node_reference/autocomplete',
+          'size' => '60',
+        ),
+        'type' => 'node_reference_autocomplete',
+        'weight' => '15',
       ),
     ),
   );
@@ -471,7 +861,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 11,
+          'weight' => '11',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '0',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -498,7 +895,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '7',
+        'weight' => '11',
       ),
     ),
   );
@@ -550,6 +947,19 @@ function os2web_meeting_views_field_default_fields() {
           'type' => 'date_default',
           'weight' => '1',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+          ),
+          'type' => 'date_default',
+          'weight' => '2',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -586,7 +996,95 @@ function os2web_meeting_views_field_default_fields() {
           'year_range' => '-0:+1',
         ),
         'type' => 'date_popup',
-        'weight' => '4',
+        'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_full_doc'
+  $fields['node-meeting-field_full_doc'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_full_doc',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 17,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_full_doc',
+      'label' => 'Full doc',
+      'required' => FALSE,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'txt',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'file',
+        'settings' => array(
+          'filefield_sources' => array(
+            'filefield_sources' => array(),
+            'source_attach' => array(
+              'absolute' => 0,
+              'attach_mode' => 'move',
+              'path' => 'file_attach',
+            ),
+            'source_reference' => array(
+              'autocomplete' => '0',
+            ),
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '9',
       ),
     ),
   );
@@ -630,7 +1128,13 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 13,
+          'weight' => '13',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '10',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -660,7 +1164,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -710,7 +1214,14 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 14,
+          'weight' => '14',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '1',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -737,7 +1248,7 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '8',
+        'weight' => '12',
       ),
     ),
   );
@@ -781,13 +1292,19 @@ function os2web_meeting_views_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 7,
+          'weight' => '7',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '4',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '7',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -817,7 +1334,7 @@ function os2web_meeting_views_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '5',
       ),
     ),
   );
@@ -853,7 +1370,13 @@ function os2web_meeting_views_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => 12,
+          'weight' => '12',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '6',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -884,7 +1407,86 @@ function os2web_meeting_views_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '0',
+        'weight' => '2',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_meeting_is_regular'
+  $fields['node-meeting-field_meeting_is_regular'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_meeting_is_regular',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'no',
+          1 => 'yes',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '5',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '12',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_meeting_is_regular',
+      'label' => 'Regular',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 0,
+        ),
+        'type' => 'options_buttons',
+        'weight' => '10',
       ),
     ),
   );
@@ -947,13 +1549,19 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'module' => 'computed_field',
           'settings' => array(),
           'type' => 'computed_field_plain',
-          'weight' => 8,
+          'weight' => '8',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '5',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -980,7 +1588,7 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'computed_field',
         'settings' => array(),
         'type' => 'computed',
-        'weight' => '10',
+        'weight' => '14',
       ),
     ),
   );
@@ -1038,6 +1646,12 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'type' => 'hidden',
           'weight' => '2',
         ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '8',
+        ),
         'related_block' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1063,7 +1677,71 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '1',
+        'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-meeting-field_qbrick_ref'
+  $fields['node-meeting-field_qbrick_ref'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_qbrick_ref',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_qbrick',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'qbrick_movie',
+    ),
+    'field_instance' => array(
+      'bundle' => 'meeting',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '15',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'os2web_qbrick',
+          'settings' => array(),
+          'type' => 'qbrick_movie_simple',
+          'weight' => '3',
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_qbrick_ref',
+      'label' => 'Qbrick ref',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'os2web_qbrick',
+        'settings' => array(),
+        'type' => 'qbrick_movie_simple',
+        'weight' => '8',
       ),
     ),
   );
@@ -1127,13 +1805,22 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
             'link' => FALSE,
           ),
           'type' => 'entityreference_label',
-          'weight' => 9,
+          'weight' => '9',
         ),
         'ical' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '6',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'hidden',
+          'module' => 'entityreference',
+          'settings' => array(
+            'view_mode' => '',
+          ),
+          'type' => 'entityreference_entity_view',
+          'weight' => '4',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1160,152 +1847,49 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '13',
       ),
     ),
   );
 
-  // Exported field: 'node-speaker_paper-body'
-  $fields['node-speaker_paper-body'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(
-        0 => 'node',
-      ),
-      'field_name' => 'body',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_with_summary',
-    ),
-    'field_instance' => array(
-      'bundle' => 'speaker_paper',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 0,
-        ),
-        'related_block' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'hidden',
-          'module' => 'text',
-          'settings' => array(
-            'trim_length' => 600,
-          ),
-          'type' => 'text_summary_or_trimmed',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'body',
-      'label' => 'Body',
-      'required' => FALSE,
-      'settings' => array(
-        'display_summary' => TRUE,
-        'text_processing' => 1,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'text',
-        'settings' => array(
-          'rows' => 20,
-          'summary_rows' => 5,
-        ),
-        'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-speaker_paper-field_ref_bullet_point'
-  $fields['node-speaker_paper-field_ref_bullet_point'] = array(
+  // Exported field: 'node-meeting-field_system_id'
+  $fields['node-meeting-field_system_id'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_ref_bullet_point',
-      'field_permissions' => array(
-        'type' => '0',
-      ),
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
-        ),
-      ),
-      'module' => 'entityreference',
-      'settings' => array(
-        'handler' => 'base',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'views-select-list' => array(
-              'status' => 0,
-            ),
-          ),
-          'sort' => array(
-            'direction' => 'ASC',
-            'field' => 'body:value',
-            'property' => 'nid',
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'bullet_point' => 'bullet_point',
-          ),
-        ),
-        'handler_submit' => 'Change handler',
-        'target_type' => 'node',
-      ),
+      'field_name' => 'field_system_id',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'number_integer',
     ),
     'field_instance' => array(
-      'bundle' => 'speaker_paper',
+      'bundle' => 'meeting',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'entityreference',
+          'module' => 'number',
           'settings' => array(
-            'link' => FALSE,
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
           ),
-          'type' => 'entityreference_label',
-          'weight' => 1,
+          'type' => 'number_integer',
+          'weight' => '16',
+        ),
+        'meeting_detail_view' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1320,19 +1904,24 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
           'weight' => 0,
         ),
       ),
+      'ds_extras_field_template' => '',
       'entity_type' => 'node',
-      'field_name' => 'field_ref_bullet_point',
-      'label' => 'Ref Bullet point',
-      'required' => 1,
+      'field_name' => 'field_system_id',
+      'label' => 'System id',
+      'required' => 0,
       'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
-        'module' => 'options',
+        'active' => 0,
+        'module' => 'number',
         'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '-3',
+        'type' => 'number',
+        'weight' => '3',
       ),
     ),
   );
@@ -1621,16 +2210,21 @@ $entity_field[0][\'value\'] = $title.$abbr.$location.$committee;
   t('Date valid');
   t('Ekstern URL');
   t('Enclosures');
+  t('File');
+  t('Full doc');
   t('HEXColor');
   t('Hvis den taksonomi der bruges findes i en drop down list kan der angives en ekstern url som åbnes i stedet. ');
   t('ID');
   t('Lokation');
   t('Meeting ID');
+  t('Qbrick ref');
   t('Ref Attachment');
-  t('Ref Bullet point');
   t('Ref Bullet points');
+  t('Regular');
   t('Search meta data');
   t('Status');
+  t('System id');
+  t('Tillæg til');
 
   return $fields;
 }

@@ -85,6 +85,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -105,7 +106,8 @@ function os2web_sovs_user_default_permissions() {
     'name' => 'delete any galleri content',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Webmaster',
+      1 => 'Editor',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -115,7 +117,8 @@ function os2web_sovs_user_default_permissions() {
     'name' => 'delete any news content',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Webmaster',
+      1 => 'Editor',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -124,7 +127,9 @@ function os2web_sovs_user_default_permissions() {
   $permissions['delete any rotating_image content'] = array(
     'name' => 'delete any rotating_image content',
     'roles' => array(
-      0 => 'Kommunikation',
+      0 => 'Editor',
+      1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -182,6 +187,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -213,7 +219,8 @@ function os2web_sovs_user_default_permissions() {
     'name' => 'edit any galleri content',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Webmaster',
+      1 => 'Editor',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -223,7 +230,8 @@ function os2web_sovs_user_default_permissions() {
     'name' => 'edit any news content',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Webmaster',
+      1 => 'Editor',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -234,6 +242,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -285,6 +294,7 @@ function os2web_sovs_user_default_permissions() {
     'roles' => array(
       0 => 'Editor',
       1 => 'Kommunikation',
+      2 => 'Webmaster',
     ),
     'module' => 'node',
   );

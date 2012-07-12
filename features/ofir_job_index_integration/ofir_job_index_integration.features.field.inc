@@ -45,14 +45,14 @@ function ofir_job_index_integration_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
             'image_style' => '',
           ),
           'type' => 'image',
-          'weight' => 3,
+          'weight' => '3',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -73,6 +73,7 @@ function ofir_job_index_integration_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
@@ -144,7 +145,7 @@ function ofir_job_index_integration_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
@@ -154,7 +155,7 @@ function ofir_job_index_integration_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => 2,
+          'weight' => '2',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -234,7 +235,7 @@ function ofir_job_index_integration_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'related_block' => array(
           'label' => 'above',
