@@ -3659,8 +3659,8 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Aktuelle Genvej';
   $handler->display->display_options['header']['area']['empty'] = FALSE;
-  $handler->display->display_options['header']['area']['content'] = '<div class="aktuel-genvej-portal>Aktuelle Genveje</div>';
-  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['header']['area']['content'] = '<div class="aktuel-genvej-portal">Aktuelle Genveje</div>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Sidefod: Global: Tekstområde */
@@ -4368,7 +4368,7 @@ function os2web_sovs_views_default_views() {
     t('Selvbetjening - footerlinks'),
     t('SB-block-portal-att-1'),
     t('SB-block-portal-att-2'),
-    t('<div class="aktuel-genvej-portal>Aktuelle Genveje</div>'),
+    t('<div class="aktuel-genvej-portal">Aktuelle Genveje</div>'),
     t('SB-block-sektion'),
     t('<a href="[field_selvbetjening_direkte-value]>[title]</a>'),
     t('SB-block-sektion2'),
