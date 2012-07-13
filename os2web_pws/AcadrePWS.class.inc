@@ -181,8 +181,9 @@ class AcadrePWS extends CaseService {
       try {
         $result = $this->client6->getCase($id);
         cache_set($cid, $result, 'cache_os2web_pws');
-      } catch (Exception $exc) {
+      } catch (SoapFault $exc) {
        //TODO: Handle exception better...
+       error_log("Var: \$exc = " . print_r($exc, 1));
        return false;
       }
     }
