@@ -69,13 +69,16 @@ function os2web_case_field_field_is_empty($item, $field) {
 
 function os2web_case_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
   foreach ($items as $delta => $item) {
-    $value = trim($item['case_ident']);
-    $valid = preg_match('/^\d{2}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
-    if (!$valid && ($value!='')) {
-      $errors[$field['field_name']][$langcode][$delta][] = array(
-          'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Kun én værdi er tilladte.',
-          'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
-      );
+    $cases = explode(',',$item['case_ident']);
+    foreach ($cases as $value) {
+      $value = trim($value);     
+      $valid = preg_match('/^\d{2}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
+      if (!$valid && ($value!='')) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+            'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
+            'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
+            );
+      }
     }
   }
 }
@@ -90,12 +93,18 @@ function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $
     case 'case_ident_formatter':
       foreach ($items as $delta => $item) {
         if ($item['case_ident']) {
-          $id = $item['case_ident'];
-          if (!is_numeric($id)) {
-            $pws = _os2web_pws_get_instance();
-            $id = $pws->lookupCase($id);
+          $cases = array();
+          $ids = explode(',', $item['case_ident']);
+          error_log("Var: \$ids = " . print_r($ids, 1));
+          foreach ($ids as $id) {
+            if (!is_numeric($id)) {
+              $pws = _os2web_pws_get_instance();
+              $cases[] = $pws->lookupCase(trim($id));
+            } else {
+              $cases[] = trim($id);
+            }
           }
-          $element[$delta]['#markup'] = '<div class="fullcaserender">' . theme('esdh_case', array('id' => $id)) . '</div>';
+          $element[$delta]['#markup'] = '<div class="fullcaserender">' . theme('esdh_case', array('id' => $cases)) . '</div>';
         }
       }
       break;
@@ -112,23 +121,29 @@ function os2web_case_field_theme() {
 }
 
 function theme_esdh_case($vars) {
-  $id = $vars['id'];
+  $ids = $vars['id'];
   drupal_load('module', 'os2web_pws');
   $pws = _os2web_pws_get_instance();
-  $case = $pws->fetchCase($id);
-  $html = '';
-  if (FALSE === $case) {
-    return FALSE;
+  if (!is_array($ids)) {
+    $ids = array($ids);
   }
-  $valid = _os2web_case_field_case_access($id);
-  if (!$valid) {
-    $html .= '<p id="casenotpublic">This case is not publicly available.</p>';
-    return $html;
-  }
-  $docs = $pws->getCaseDocs($id);
   $docids = array();
-  foreach ($docs as $doc) {
-    $docids[] = (int) $doc->Document->DocumentIdentifier;
+  foreach ($ids as $id) {
+    $case = $pws->fetchCase($id);
+    error_log("Var: \$case = " . print_r($case, 1));
+    if (FALSE === $case) {
+      continue; // Ignore failed case lookups
+    }
+    $valid = _os2web_case_field_case_access($id);
+    if (!$valid) {
+      //  $html .= '<p id="casenotpublic">This case is not publicly available.</p>';
+      //  return $html;
+      continue; // Ignore hidden cases
+    }
+    $docs = $pws->getCaseDocs($id);
+    foreach ($docs as $doc) {
+      $docids[] = (int) $doc->Document->DocumentIdentifier;
+    }
   }
   $html = theme('esdh_document', array('id' => $docids, 'iscase' => true));
   return $html;
