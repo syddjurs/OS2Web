@@ -448,5 +448,3 @@ function bg_image_css_repeat_options() {
     'repeat-y' => t('Repeat Vertically (repeat-y)'),
   );
 }
-
-print $image_path;
