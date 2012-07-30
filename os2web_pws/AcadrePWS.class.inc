@@ -1,4 +1,5 @@
 <?php
+define('PWS_CACHE_TIMEOUT',3600 * 4);
 
 // $Id$
 /*
@@ -127,7 +128,7 @@ class AcadrePWS extends CaseService {
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
           $result = (int) $this->client_search->getCaseSystemIdByYearAndSerial(array('year' => $query[0], 'serial' => $query[1]))->GetCaseSystemIdByYearAndSerialResult;
-          cache_set($cid, $result, 'cache_os2web_pws');
+          cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
         } catch (SoapFault $sf) {
           $trace = $this->client_search->__getLastRequest();
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $trace = ' . print_r($trace, 1));
@@ -158,7 +159,7 @@ class AcadrePWS extends CaseService {
         try {
           $result = (int) $this->client_search->getDocumentSystemIdByYearAndSerial(array('year' => $query[1], 'serial' => $query[0]))->GetDocumentSystemIdByYearAndSerialResult;
           $result = $result != -1 ? $result : false;
-          cache_set($cid, $result, 'cache_os2web_pws');
+          cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
         } catch (SoapFault $sf) {
           $trace = $this->client_search->__getLastRequest();
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $trace = ' . print_r($trace, 1));
@@ -180,7 +181,7 @@ class AcadrePWS extends CaseService {
     } elseif ($this->get_client6()) {
       try {
         $result = $this->client6->getCase($id);
-        cache_set($cid, $result, 'cache_os2web_pws');
+        cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $exc) {
        //TODO: Handle exception better...
        error_log("Var: \$exc = " . print_r($exc, 1));
@@ -208,7 +209,7 @@ class AcadrePWS extends CaseService {
         $request = format_string($request, array('!CaseID' => $id));
         try {
           $result = $this->client->__doRequest($request, $this->client->location, $this->client->uri . 'GetAllDocuments', SOAP_1_1);
-          cache_set(__FUNCTION__ . $id, $result, 'cache_os2web_pws');
+          cache_set(__FUNCTION__ . $id, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
         } catch (SoapFault $sf) {
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $sf = ' . print_r($sf, 1));
           return false;
@@ -253,7 +254,7 @@ class AcadrePWS extends CaseService {
       } catch (SoapFault $sf) {
 
       }
-      cache_set($cid, $result, 'cache_os2web_pws');
+      cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
     }
     return $result;
   }
@@ -269,7 +270,7 @@ class AcadrePWS extends CaseService {
     } elseif ($this->get_client6()) {
       try {
         $result = $this->client6->getMainDocument($id);
-        cache_set($cid, $result, 'cache_os2web_pws');
+        cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $sf) {
         $result = FALSE;
       }
@@ -315,7 +316,7 @@ class AcadrePWS extends CaseService {
         // Use md5sum to avoid long  and guessable filenames
         $info = pathinfo($result);
         $result = md5('adlibsalt'.$info['basename']) . '.' . $info['extension'];
-        cache_set($cid, $result, 'cache_os2web_pws');
+        cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $sf) {
       error_log("Var: \$sf = " . print_r($sf, 1));
       }
@@ -397,7 +398,7 @@ class AcadrePWS extends CaseService {
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetPhysicalDocument', SOAP_1_1);
         $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->XMLBinary;
-        cache_set($cid, $result, 'cache_os2web_pws');
+        cache_set($cid, $result, 'cache_os2web_pws',time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $sf) {
          return false;
       }

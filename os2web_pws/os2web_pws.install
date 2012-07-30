@@ -23,3 +23,14 @@ function os2web_pws_update_7003(&$sandbox) {
     return drupal_install_schema('os2web_pws');
   }
 }
+
+/**
+ * Updates cache table with timeouts
+ */
+function os2web_pws_update_7004(&$sandbox) {
+  if (db_table_exists('cache_os2web_pws') != FALSE) {
+    return db_update('cache_os2web_pws')
+      ->expression('expire', 'created + :timeout',array(':timeout' => 3600*4))
+      ->execute();
+  }
+}
