@@ -38,6 +38,11 @@ function os2web_pws_menu() {
   return $items;
 }
 
+
+function os2web_pws_flush_caches() {
+  return array('cache_os2web_pws');
+}
+
 /**
  * Add configuration to the settings form
  *
@@ -145,8 +150,12 @@ function os2web_test_page() {
 //  $call = array($pws->getCaseDocs('388538'),$pws->getCaseDocs('388531'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('12/6202'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/14293'));
-//  $call = $pws->fetchCase($pws->lookupCase('12/6202'));
-//  $call = $pws->getCaseDocs(373830);
+//  $call = $pws->fetchCase($pws->lookupCase('12/11975'));
+  $call = $pws->getCaseDocs(385817);
+  foreach ($call as $key) {
+    $docs[]= (string) $key->Record[0]->DocumentDate[0] . ' - ' . (string) $key->Document[0]->DocumentTitleText[0];
+  }
+  $call= $docs;
 //  $call = $pws->getCaseDocs(373830);
 //  $call = $pws->fetchCase(73335);
 //  return _os2web_get_rendered_doc(array(1420175,1369822));
@@ -181,7 +190,7 @@ function os2web_test_page() {
 //    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $item = ' . print_r($item, 1));
 //  }
 //  return 'test';
-//  return theme('esdh_case', array('id' => 349566));
+//  return theme('esdh_case', array('id' => 385817));
 //  echo '<pre>';print_r($call);die;
 
 //  module_load_include('inc', 'os2web_pws','os2web_pws.theme');
