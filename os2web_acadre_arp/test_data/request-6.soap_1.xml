@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><Publish xmlns="http://Acadre.Publishing.CMS.PublishingHandler.Demo"><info><ItemId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">0ad6f8db-04a1-44d7-b561-f42aa8c6858b</ItemId><LocationId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">default</LocationId><Metadata xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;PublishedMemo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.traen.com/2007/20/07/"&gt;
+  &lt;Title&gt;Test Notat 1&lt;/Title&gt;
+  &lt;MemoTypeLiteral&gt;Emnejour&lt;/MemoTypeLiteral&gt;
+  &lt;MemberSequenceNumber&gt;1&lt;/MemberSequenceNumber&gt;
+  &lt;EventDate&gt;19-06-2012 00:00:00&lt;/EventDate&gt;
+  &lt;CreationDate&gt;19-06-2012 12:29:29&lt;/CreationDate&gt;
+  &lt;CreatorUser&gt;
+    &lt;UserInitials&gt;acadre&lt;/UserInitials&gt;
+    &lt;UserName&gt;acadre&lt;/UserName&gt;
+  &lt;/CreatorUser&gt;
+  &lt;FileFormat&gt;RTF&lt;/FileFormat&gt;
+  &lt;Deadline&gt;2012-06-22&lt;/Deadline&gt;
+&lt;/PublishedMemo&gt;</Metadata><PhysicalFileReference xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo"><FileName>Memo_ 19-06-2012 12_29_27.rtf</FileName><ItemId>165066</ItemId><Version>1</Version></PhysicalFileReference></info><parentItemId>0ad6f8db-04a1-44d7-b561-f42aa8c6858b</parentItemId></Publish></soap:Body></soap:Envelope>
