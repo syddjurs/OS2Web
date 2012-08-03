@@ -64,18 +64,19 @@ function publish($info, $parentItemId) {
   error_log("Publish: \$item_id = " . print_r($item_id, 1));
 
   $meta = $info->Metadata;
-  // File was decoded to utf-8 data, so charset will break.
+// File was decoded to utf-8 data, so charset will break.
   $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
   $meta = simplexml_load_string($meta) or soap_error(2);
+  $info->Metadata = (object) $meta;
 
   $type = $meta->getName();
   switch (strtolower($type)) {
     case 'publishedcase':
-      return _os2web_acadre_arp_process_case($item_id, $meta);
+      return _os2web_acadre_arp_process_case($info);
     case 'publisheddocument':
       return _os2web_acadre_arp_process_document($item_id, $meta, $parentItemId);
     case 'publishedmemo':
-      return _os2web_acadre_arp_process_memo($item_id, $meta, $parentItemId);
+      return _os2web_acadre_arp_process_memo($info, $parentItemId);
     default:
       error_log("Unhandled request: \$type = " . print_r($type, 1));
       soap_error(4);
@@ -128,7 +129,9 @@ function unpublish($item_id, $location_id) {
  * @access protected
  * @return void
  */
-function _os2web_acadre_arp_process_case($item_id, $meta) {
+function _os2web_acadre_arp_process_case($info) {
+  $item_id = $info->ItemId;
+  $meta = $info->Metadata;
   $node = (object) NULL;
   $node->type = 'arp_case';
   $node->uid = 0;
@@ -151,7 +154,7 @@ function _os2web_acadre_arp_process_case($item_id, $meta) {
   if (is_numeric($tid)) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
   }
-  
+
   $node->field_arp_case_created[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
   $node->field_arp_case_last_modified[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
 
@@ -197,7 +200,7 @@ function _os2web_acadre_arp_process_document($item_id, $meta, $parent_item_id) {
     soap_error(3);
   }
 
-  // Locate parent node.
+// Locate parent node.
   $parent_nid = array_shift(_os2web_acadre_arp_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
   if ($parent_node = node_load($parent_nid)) {
     $parent_node->field_documents[LANGUAGE_NONE][]['nid'] = $node->nid;
@@ -218,8 +221,28 @@ function _os2web_acadre_arp_process_document($item_id, $meta, $parent_item_id) {
  * @access protected
  * @return void
  */
-function _os2web_acadre_arp_process_memo($item_id, $meta, $parent_item_id) {
-  return "memo is processed";
+function _os2web_acadre_arp_process_memo($info, $parent_item_id) {
+  if ($file = _os2web_acadre_arp_get_file($info->PhysicalFileReference->FileName, $info->PhysicalFileReference->ItemId, $info->ItemId, $info->LocationId, $info->PhysicalFileReference->Version)) {
+    $parent_nid = array_shift(_os2web_acadre_arp_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
+    if ($parent_node = node_load($parent_nid)) {
+      $existing_file_key = -1;
+      foreach ($parent_node->field_additional_docs[LANGUAGE_NONE] as $key => $old_file) {
+        if ($old_file['fid'] == $file->fid) {
+          $existing_file_key = $key;
+          break;
+        }
+      }
+      $file->display = 1; // To avoid contraint violation.
+      if ($existing_file_key === -1) {
+        $parent_node->field_additional_docs[LANGUAGE_NONE][] = (array) $file;
+      } else {
+        $parent_node->field_additional_docs[LANGUAGE_NONE][$existing_file_key] = (array) $file;
+      }
+      node_save($parent_node);
+      return "Success: Updated node-id = " . $parent_node->nid;
+    }
+  }
+  return "Success: No updates.";
 }
 
 /**
@@ -313,6 +336,28 @@ function os2web_acadre_arp_node_delete($node) {
   }
 }
 
-function _os2web_acadre_arp_get_file($item_id, $version) {
+function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_id, $version) {
+  $args = array(
+      'itemId' => $item_id,
+      'locationId' => $location_id,
+      'fileReference' => $file_ref,
+      'version' => $version,
+  );
+// Replace with actual WS call
+  $data = 'test';
 
+  $uri = 'public://arp-docs/' . $filename;
+  $fid = db_select('file_managed', 'fm')
+          ->fields('fm', array('fid'))
+          ->condition('uri', $uri)
+          ->execute()->fetchField();
+  if ($fid) {
+    return file_load($fid);
+  } elseif ($file = file_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
+    return $file;
+  } else {
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File save failed.");
+    return false;
+  }
 }
