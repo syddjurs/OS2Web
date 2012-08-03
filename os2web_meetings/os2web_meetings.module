@@ -24,7 +24,7 @@ function os2web_meetings_menu() {
       'access callback' => '_os2web_meetings_node_tab_access',
       'access arguments' => array(1),
       'title' => 'Meeting control',
-      'type' => MENU_CALLBACK,
+      'type' => MENU_LOCAL_TASK,
   );
   return $items;
 }
@@ -48,7 +48,8 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
     if ($meeting_id == $xml_mid) {
       $filename = $file->filename;
       $agenda = $xml->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$system_id']/../field");
-      break;
+      if (!empty($agenda))
+        break;
     }
   }
 
@@ -292,7 +293,7 @@ function _os2web_meetings_process_agenda($agendainfo_xml, $force = false) {
         // No longer a valid import
         _os2web_meetings_unpublish_meeting($agendainfo);
       } elseif (is_numeric($force) && is_numeric($import_nid)) {
-        drupal_goto('node/'.$import_nid.'/control');
+        drupal_goto('node/' . $import_nid . '/control');
       }
     }
   } else {
