@@ -74,7 +74,7 @@ function publish($info, $parentItemId) {
     case 'publishedcase':
       return _os2web_acadre_arp_process_case($info);
     case 'publisheddocument':
-      return _os2web_acadre_arp_process_document($item_id, $meta, $parentItemId);
+      return _os2web_acadre_arp_process_document($info, $parentItemId);
     case 'publishedmemo':
       return _os2web_acadre_arp_process_memo($info, $parentItemId);
     default:
@@ -179,7 +179,7 @@ function _os2web_acadre_arp_process_case($info) {
  * @access protected
  * @return void
  */
-function _os2web_acadre_arp_process_document($item_id, $meta, $parent_item_id) {
+function _os2web_acadre_arp_process_document($info, $parent_item_id) {
   $node = (object) NULL;
   $node->type = 'arp_document';
   $node->uid = 0;
@@ -191,13 +191,29 @@ function _os2web_acadre_arp_process_document($item_id, $meta, $parent_item_id) {
   $node->language = LANGUAGE_NONE;
   node_object_prepare($node);
 
-  $node->title = (string) $meta->Title;
-  $node->field_itemid[LANGUAGE_NONE][]['value'] = $item_id;
+  if ($nid = array_shift(_os2web_acadre_arp_find_item($info->ItemId))) {
+    $node->nid = $nid;
+  }
+
+  $node->title = (string) $info->Metadata->Title;
+  $node->field_itemid[LANGUAGE_NONE][]['value'] = $info->ItemId;
+
+
+  // Add Main document to node
+  if ($file = _os2web_acadre_arp_get_file($info->PhysicalFileReference->FileName, $info->PhysicalFileReference->ItemId, $info->ItemId, $info->LocationId, $info->PhysicalFileReference->Version)) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $file = ' . print_r($file, 1));
+    $file->display = 1; // To avoid contraint violation.
+    $node->field_main_document[LANGUAGE_NONE][0] = (array) $file;
+  }
 
   node_submit($node);
   node_save($node);
   if (!is_numeric($node->nid)) {
     soap_error(3);
+  }
+
+  if ($nid) {
+    return "Success: Updated Node-id = " . $nid;
   }
 
 // Locate parent node.
