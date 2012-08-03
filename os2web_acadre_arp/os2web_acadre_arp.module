@@ -77,6 +77,8 @@ function publish($info, $parentItemId) {
       return _os2web_acadre_arp_process_document($info, $parentItemId);
     case 'publishedmemo':
       return _os2web_acadre_arp_process_memo($info, $parentItemId);
+    case 'publishedparty':
+      return _os2web_acadre_arp_process_party($info, $parentItemId);
     default:
       error_log("Unhandled request: \$type = " . print_r($type, 1));
       soap_error(4);
@@ -201,7 +203,6 @@ function _os2web_acadre_arp_process_document($info, $parent_item_id) {
 
   // Add Main document to node
   if ($file = _os2web_acadre_arp_get_file($info->PhysicalFileReference->FileName, $info->PhysicalFileReference->ItemId, $info->ItemId, $info->LocationId, $info->PhysicalFileReference->Version)) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $file = ' . print_r($file, 1));
     $file->display = 1; // To avoid contraint violation.
     $node->field_main_document[LANGUAGE_NONE][0] = (array) $file;
   }
@@ -220,7 +221,6 @@ function _os2web_acadre_arp_process_document($info, $parent_item_id) {
   $parent_nid = array_shift(_os2web_acadre_arp_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
   if ($parent_node = node_load($parent_nid)) {
     $parent_node->field_documents[LANGUAGE_NONE][]['nid'] = $node->nid;
-    error_log("Var: \$var = " . print_r($parent_node->field_documents, 1));
     node_submit($parent_node);
     node_save($parent_node);
   } else {
@@ -277,8 +277,19 @@ function _os2web_acadre_arp_process_supplement() {
  * @access protected
  * @return void
  */
-function _os2web_acadre_arp_process_party() {
-  return "party is processed";
+function _os2web_acadre_arp_process_party($info, $parent_item_id) {
+  $name = $info->Metadata->Name;
+  if ($node = node_load(array_shift(_os2web_acadre_arp_find_item($parent_item_id)))) { // Assume first element in case of confusion (shouldn't happen)
+    foreach ($node->field_arp_party[LANGUAGE_NONE] as $old_party) {
+      if ($old_party['value'] == $name) {
+        Return "Succes: Already exists.";
+      }
+    }
+    $node->field_arp_party[LANGUAGE_NONE][]['value'] = $info->Metadata->Name;
+    node_save($node);
+    return "Success: Update node-id = " . $node->nid;
+  }
+  return "Success: No updates.";
 }
 
 // Helpers
@@ -368,7 +379,7 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
           ->condition('uri', $uri)
           ->execute()->fetchField();
   if ($fid) {
-    return file_load($fid);
+    return file_unmanaged_save_data($data, $uri, FILE_EXISTS_REPLACE) ? file_load($fid) : false;
   } elseif ($file = file_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
     return $file;
   } else {
