@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><Publish xmlns="http://Acadre.Publishing.CMS.PublishingHandler.Demo"><info><ItemId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">06d6f520-2fe6-41a0-b72a-d16f415e9bc8</ItemId><LocationId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">default</LocationId><Metadata xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <Publish xmlns="http://Acadre.Publishing.CMS.PublishingHandler.Demo">
+      <info>
+        <ItemId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">06d6f520-2fe6-41a0-b72a-d16f415e9bc8</ItemId>
+        <LocationId xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">default</LocationId>
+        <Metadata xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;PublishedDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.traen.com/2007/20/07/"&gt;
   &lt;AdministrativeUnit&gt;
     &lt;AdministrativeUnitGUID&gt;127f4700-88d7-48a0-b285-6d2271ec9694&lt;/AdministrativeUnitGUID&gt;
@@ -27,4 +34,14 @@
   &lt;/DocResponsibleUser&gt;
   &lt;IsPaperBased&gt;false&lt;/IsPaperBased&gt;
   &lt;ArrayOfSendersReceivers /&gt;
-&lt;/PublishedDocument&gt;</Metadata><PhysicalFileReference xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo"><FileName>Dokument 1.DOCX</FileName><ItemId>1635233</ItemId><Version>1</Version></PhysicalFileReference></info><parentItemId>f6db0d0e-cdef-4b9e-b68f-7c67136f916c</parentItemId></Publish></soap:Body></soap:Envelope>
+&lt;/PublishedDocument&gt;</Metadata>
+        <PhysicalFileReference xmlns="http://schemas.datacontract.org/2004/07/Acadre.Publishing.CMS.PublishingHandler.Demo">
+          <FileName>Dokument 1.DOCX</FileName>
+          <ItemId>1635233</ItemId>
+          <Version>1</Version>
+        </PhysicalFileReference>
+      </info>
+      <parentItemId>f6db0d0e-cdef-4b9e-b68f-7c67136f916c</parentItemId>
+    </Publish>
+  </soap:Body>
+</soap:Envelope>

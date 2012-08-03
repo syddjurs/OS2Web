@@ -24,9 +24,37 @@ function os2web_acadre_arp_menu() {
 }
 
 function _os2web_acadre_arp_test_page() {
-  $name = '00.01.00';
-  $tid = db_query('SELECT tid FROM  `taxonomy_term_data` WHERE  `name` LIKE  :term', array(':term' => $name . '%'))->fetchField();
-  return '<pre>' . print_r($tid, 1);
+  module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
+  $options = array(
+      'proxy_host' => 'localhost',
+      'proxy_port' => 8080,
+      'cache_wsdl' => WSDL_CACHE_BOTH,
+      'exceptions' => true,
+      'trace' => true,
+  );
+  $xdebug = function_exists('xdebug_enable');
+  if ($xdebug)
+    xdebug_disable();
+  try {
+    $client = new SoapClientAuth('http://10.1.1.112/Acadre/Acadre.Publishing.PublishingDataProviderService/PublishingDataProviderService.svc?wsdl', $options);
+  } catch (Exception $exc) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc->getTraceAsString(), 1));
+  }
+  if ($xdebug)
+    xdebug_enable();
+  $args = array(
+      'itemId' => '06d6f520-2fe6-41a0-b72a-d16f415e9bc8',
+      'locationId' => 'default',
+      'fileReference' => 1635233,
+      'version' => 1,
+  );
+  try {
+    $call = $client->getPhysicalFile($args);
+  } catch (Exception $exc) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $client = ' . print_r($client, 1));
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc, 1));
+  }
+  return '<pre>' . print_r($call, 1);
 }
 
 /**
@@ -385,14 +413,45 @@ function os2web_acadre_arp_node_delete($node) {
 }
 
 function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_id, $version) {
+
+  $client = &drupal_static(__FUNCTION__);
+  if (!$client) {
+    module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
+    $options = array(
+        'proxy_host' => 'localhost',
+        'proxy_port' => 8080,
+        'cache_wsdl' => WSDL_CACHE_BOTH,
+        'exceptions' => true,
+    );
+    $xdebug = function_exists('xdebug_enable');
+    if ($xdebug)
+      xdebug_disable();
+    try {
+      $client = new SoapClientAuth('http://10.1.1.112/Acadre/Acadre.Publishing.PublishingDataProviderService/PublishingDataProviderService.svc?wsdl', $options);
+    } catch (Exception $exc) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc->getTraceAsString(), 1));
+      if ($xdebug)
+        xdebug_enable();
+      return false;
+    }
+    if ($xdebug)
+      xdebug_enable();
+  }
+
   $args = array(
       'itemId' => $item_id,
       'locationId' => $location_id,
       'fileReference' => $file_ref,
       'version' => $version,
   );
-// Replace with actual WS call
-  $data = 'test';
+  try {
+    $call = $client->getPhysicalFile($args);
+  } catch (Exception $exc) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $client = ' . print_r($client, 1));
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc, 1));
+    return false;
+  }
+  $data = $call->GetPhysicalFileResult;
 
   $uri = 'public://arp-docs/' . $filename;
   $fid = db_select('file_managed', 'fm')

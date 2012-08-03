@@ -116,6 +116,7 @@ function os2web_acadre_arp_field_group_info() {
       4 => 'field_arp_case_last_modified',
       5 => 'field_arp_case_id',
       6 => 'title',
+      7 => 'field_arp_party',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
