@@ -1,6 +1,4 @@
 <?php
-
-define('PROXY_SERVER', 'localhost:8080');
 /**
  *    SoapClientAuth for accessing Web Services protected by HTTP authentication
  *    Author: tc
