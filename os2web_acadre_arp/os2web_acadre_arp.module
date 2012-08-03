@@ -79,6 +79,8 @@ function publish($info, $parentItemId) {
       return _os2web_acadre_arp_process_memo($info, $parentItemId);
     case 'publishedparty':
       return _os2web_acadre_arp_process_party($info, $parentItemId);
+    case 'publishedsupplementdocument':
+      return _os2web_acadre_arp_process_supplement($info, $parentItemId);
     default:
       error_log("Unhandled request: \$type = " . print_r($type, 1));
       soap_error(4);
@@ -165,7 +167,6 @@ function _os2web_acadre_arp_process_case($info) {
 
   node_submit($node);
 
-  error_log("Var: \$node = " . print_r($node, 1));
   node_save($node);
 
   if (is_numeric($node->nid)) {
@@ -267,8 +268,28 @@ function _os2web_acadre_arp_process_memo($info, $parent_item_id) {
  * @access protected
  * @return void
  */
-function _os2web_acadre_arp_process_supplement() {
-  return "supplement is processed";
+function _os2web_acadre_arp_process_supplement($info, $parent_item_id) {
+  if ($file = _os2web_acadre_arp_get_file($info->PhysicalFileReference->FileName, $info->PhysicalFileReference->ItemId, $info->ItemId, $info->LocationId, $info->PhysicalFileReference->Version)) {
+    $parent_nid = array_shift(_os2web_acadre_arp_find_item($parent_item_id)); // Assume first element in case of confusion (shouldn't happen)
+    if ($parent_node = node_load($parent_nid)) {
+      $existing_file_key = -1;
+      foreach ($parent_node->field_arp_supplement[LANGUAGE_NONE] as $key => $old_file) {
+        if ($old_file['fid'] == $file->fid) {
+          $existing_file_key = $key;
+          break;
+        }
+      }
+      $file->display = 1; // To avoid contraint violation.
+      if ($existing_file_key === -1) {
+        $parent_node->field_arp_supplement[LANGUAGE_NONE][] = (array) $file;
+      } else {
+        $parent_node->field_arp_supplement[LANGUAGE_NONE][$existing_file_key] = (array) $file;
+      }
+      node_save($parent_node);
+      return "Success: Updated node-id = " . $parent_node->nid;
+    }
+  }
+  return "Success: No updates.";
 }
 
 /**
