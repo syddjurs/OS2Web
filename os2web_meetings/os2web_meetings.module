@@ -44,7 +44,7 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
   $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', array('recurse' => false));
   foreach ($files as $file) {
     $xml = simplexml_load_file(drupal_realpath($file->uri));
-    if (is_object($xml)) {
+    if (is_object($xml)){
       $xml_mid = (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field/@sysid"));
       if ($meeting_id == $xml_mid) {
         $filename = $file->filename;
@@ -722,7 +722,7 @@ function _os2web_meetings_sanetize_filename($filename) {
   $filename = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename);
   // Force lowercase to prevent issues on case-insensitive file systems.
   //$filename = strtolower($filename);
-  return $filename;
+  return substr($filename,0,160);
 }
 
 function _os2web_meetings_clear_committees() {
@@ -774,7 +774,7 @@ function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE
   } else {
     // Completely unprocessed file
     $uri_in = _os2web_meetings_similar_file_exists(drupal_realpath($uri_in));
-    if ($uri_in !== false && FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
+    if ($uri_in !== false || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
       // Bummed out on copy
       error_log('File copy failed for file: ' . $uri_in);
       error_log('Destination: ' . $uri_out);
@@ -785,8 +785,6 @@ function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE
       $uri = $uri_out;
     }
   }
-
-
 
   $fid = db_select('file_managed', 'fm')
           ->fields('fm', array('fid'))
@@ -807,7 +805,6 @@ function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE
   $file = file_save($file);
 
   // Schedule for PDF conversion
-  $convert = false;
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
