@@ -2,7 +2,7 @@
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
 define('MEETINGS_FORCE_RECREATE', false); // Delete existing nodes before import
-define('MEETINGS_FOCUS', false); // File key for import
+define('MEETINGS_FOCUS', false); // File key for import Ex 1571 from XML_1571.xml
 define('MEETINGS_MEETING_FOCUS', false); // Meeting id
 define('MEETINGS_CLEAR_COMMITTEE', true); // Clean out invalid committees
 
@@ -44,12 +44,14 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
   $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', array('recurse' => false));
   foreach ($files as $file) {
     $xml = simplexml_load_file(drupal_realpath($file->uri));
-    $xml_mid = (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field/@sysid"));
-    if ($meeting_id == $xml_mid) {
-      $filename = $file->filename;
-      $agenda = $xml->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$system_id']/../field");
-      if (!empty($agenda))
-        break;
+    if (is_object($xml)) {
+      $xml_mid = (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field/@sysid"));
+      if ($meeting_id == $xml_mid) {
+        $filename = $file->filename;
+        $agenda = $xml->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$system_id']/../field");
+        if (!empty($agenda))
+          break;
+      }
     }
   }
 
@@ -142,22 +144,22 @@ function os2web_meetings_form_os2web_settings_settings_form_alter(&$form, &$form
 
 function os2web_meetings_test_page() {
   global $debug_info;
-//  $date = '2012-06-21 13:00';
+ // $date = '2012-06-21 13:00';
 //
 //  $date_obj = date_create($date);
 //  date_timezone_set($date_obj, timezone_open( 'UTC'));
 //  $date = date_format($date_obj, 'Y-m-d H:i');
 //
-//  $debug_info = $date . "\n";
-//  $date = strtotime($date);
-//  $debug_info.= format_date($date,'medium','','Europe/Berlin');
-  //$debug_info.= print_r($dateObj,1);
-//  _os2web_meetings_clear_committees();
+ // $debug_info = $date . "\n";
+ // $date = strtotime($date);
+ // $debug_info.= format_date($date,'medium','','Europe/Berlin');
+//$debug_info.= print_r($dateObj,1);
+ // _os2web_meetings_clear_committees();
 //  os2web_meetings_do_import();
-//  os2web_meetings_order_addenums();
-  //os2web_meetings_do_import_batch();
+ // os2web_meetings_order_addenums();
+//os2web_meetings_do_import_batch();
 // _os2web_meetings_cleanup_nodes('meeting',$bleh);
-  //return '<div><textarea cols="150" rows=50>' . print_r($debug_info, 1) . '</textarea>';
+// return '<div><textarea cols="150" rows=50>' . print_r($debug_info, 1) . '</textarea>';
   return '<a href="/os2web/test/meetings/batch">Start import</a>';
 }
 
@@ -185,18 +187,24 @@ function os2web_meetings_do_import_batch() {
       'recurse' => FALSE,
   );
   $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
+  error_log("Var filenames: " . print_r($files, 1));
   foreach ($files as $file) {
     if ($focus !== false) {
       if (strpos($file->name, (string) $focus) !== FALSE) {
         $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri));
+        error_log("FOCUS Importing " .  $file->name . " from: " . $file->uri);
+      } else {
+        error_log("FOCUS Importing did nothing. Did you set the right format only the number from the XML file. You set it to " . $focus);
       }
     } else {
       $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri));
+        error_log("Import without FOCUS: " . $file->uri);
     }
   }
   if ($focus) {
-    error_log("Var: \$batch = " . print_r($batch, 1));
+    error_log("Var FOCUS SET: \$batch = " . print_r($batch, 1));
   }
+        error_log("Var filenames: no foreach " . $file->uri);
   batch_set($batch);
   batch_process('os2web/test/meetings');
 }
@@ -245,8 +253,9 @@ function os2web_meetings_order_addenums() {
  * @param string $file File URI. Works as callback in file_scan_directory works.
  */
 function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREATE) {
-//  error_log("importing file: " . $file);
+  error_log("importing file in _os2web_meetings_process_manifest: " . $file);
   $manifest = simplexml_load_file(drupal_realpath($file));
+  if (is_object($manifest)) {
   if (is_numeric($force)) {
     $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$force']/..");
   } else {
@@ -254,6 +263,9 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
   }
   foreach ($items_xml as $xml_item) {
     _os2web_meetings_process_agenda($xml_item, $force);
+  }
+  } else {
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: '.$file);
   }
 }
 
@@ -285,15 +297,20 @@ function _os2web_meetings_process_agenda($agendainfo_xml, $force = false) {
   );
   if ($agendainfo['publish'] === 1 && $agendainfo['access'] !== 'Lukket') {
     $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
+      error_log("meeting_process: \$agendauri = " . print_r($agenda_uri, 1));
+    
     if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
 //      error_log("Var: \$agendainfo = " . print_r($agendainfo, 1));
       $agenda_xml = simplexml_load_file(drupal_realpath($agenda_uri));
       $import_nid = _os2web_meetings_publish_meeting($agendainfo, $agenda_xml, $force);
       if (!$import_nid) {
         // No longer a valid import
-        _os2web_meetings_unpublish_meeting($agendainfo);
+      error_log("No longer valid import in _os2web_meetings_process_agenda:" . $agendainfo);
+  
+       _os2web_meetings_unpublish_meeting($agendainfo);
       } elseif (is_numeric($force) && is_numeric($import_nid)) {
-        drupal_goto('node/' . $import_nid . '/control');
+      error_log("Valid import in _os2web_meetings_process_agenda:" . $import_nid);
+       drupal_goto('node/' . $import_nid . '/control');
       }
     }
   } else {
@@ -659,13 +676,18 @@ function _os2web_meetings_import_location(SimpleXMLElement $xml) {
  */
 function _os2web_meetings_similar_file_exists($filename) {
   if (file_exists($filename)) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
     return $filename;
   }
+  
   $dir = dirname($filename);
   $files = glob($dir . '/*');
   $lcaseFilename = strtolower($filename);
   foreach ($files as $file) {
+    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists looking for file = ' . $file);
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists compare file = ' . $file . ' == ' . $lcaseFilename);
     if (strtolower($file) == $lcaseFilename) {
+    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists  = file check ' . $strtolower($file) . ' == ' . $lcaseFilename);
       return $file;
     }
   }
