@@ -247,6 +247,7 @@ function os2web_meetings_order_addenums() {
 function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREATE) {
 //  error_log("importing file: " . $file);
   $manifest = simplexml_load_file(drupal_realpath($file));
+  if (is_object($manifest)) {
   if (is_numeric($force)) {
     $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$force']/..");
   } else {
@@ -254,6 +255,7 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
   }
   foreach ($items_xml as $xml_item) {
     _os2web_meetings_process_agenda($xml_item, $force);
+  }
   }
 }
 
