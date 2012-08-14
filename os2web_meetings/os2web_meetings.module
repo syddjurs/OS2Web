@@ -267,9 +267,7 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
     }
   } else {
     watchdog('os2web_meetings', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
-  }
-  } else {
-  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: '.$file);
+    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: ' . $file);
   }
 }
 
@@ -301,10 +299,7 @@ function _os2web_meetings_process_agenda($agendainfo_xml, $force = false) {
   );
   if ($agendainfo['publish'] === 1 && $agendainfo['access'] !== 'Lukket') {
     $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
-      error_log("meeting_process: \$agendauri = " . print_r($agenda_uri, 1));
-    
     if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
-//      error_log("Var: \$agendainfo = " . print_r($agendainfo, 1));
       $agenda_xml = simplexml_load_file(drupal_realpath($agenda_uri));
       $import_nid = _os2web_meetings_publish_meeting($agendainfo, $agenda_xml, $force);
       if (!$import_nid) {
@@ -679,7 +674,7 @@ function _os2web_meetings_similar_file_exists($filename) {
     //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists looking for file = ' . $file);
     error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists compare file = ' . $file . ' == ' . $lcaseFilename);
     if (strtolower($file) == $lcaseFilename) {
-    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists  = file check ' . $strtolower($file) . ' == ' . $lcaseFilename);
+      //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists  = file check ' . $strtolower($file) . ' == ' . $lcaseFilename);
       return $file;
     }
   }
