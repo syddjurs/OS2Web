@@ -20,6 +20,12 @@ function os2web_adlib_api_menu() {
       'page callback' => 'os2web_adlib_api_status',
       'type' => MENU_LOCAL_TASK,
   );
+  $items['os2web/adlib/ajax/status/%'] = array(
+      'page callback' => 'os2web_adlib_api_status_ajax',
+      'page arguments' => array(4),
+      'type' => MENU_CALLBACK,
+      'access callback' => TRUE,
+  );
   $items['os2web/adlib/test'] = array(
       'title' => t('AdLib test page'),
 //    'description' => t('Your description goes here.'),
@@ -28,6 +34,26 @@ function os2web_adlib_api_menu() {
       'type' => MENU_CALLBACK,
   );
   return $items;
+}
+
+function os2web_adlib_api_status_ajax($fid) {
+  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $fid = ' . print_r($fid, 1));
+  $file = db_select('os2web_adlib_api_doc_files', 'df')
+      ->fields('df')
+      ->condition('fid', $fid)
+      ->execute()
+      ->fetchObject();
+  if (is_object($file)) {
+    if ($file->job_id != '') {
+      $adlib = _os2web_adlib_api_get_instance();
+      $status = $adlib->getJobStatus($file->job_id);
+      drupal_json_output($status->status);
+    } else {
+      drupal_json_output('Not queued.');
+    }
+  } else {
+    drupal_json_output('Not found.');
+  }
 }
 
 /**
@@ -67,17 +93,17 @@ function os2web_adlib_api_status() {
         $status->ServerInfo['JobCount'],
     );
   }
+  drupal_add_js(drupal_get_path('module', 'os2web_adlib_api') . '/os2web_adlib_api.js', 'file');
   $html = theme('table', array('header' => $head, 'rows' => $rows));
-  $head = array('Fid', 'Job-id', 'Status', 'Message', 'action');
+  $head = array('Fid', 'Job-id', 'Status', 'action');
   $rows = array();
-  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id NOT LIKE 'Complete' OR job_id IS NULL");
+  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id NOT LIKE 'Complete' or job_id is null");
   foreach ($files as $file) {
-    $status = $adlib->getJobStatus($file->job_id);
+    $fdata = file_load($file->fid);
     $rows[] = array(
-        l($file->fid, 'media/' . $file->fid),
+        l($fdata->filename, file_create_url($fdata->uri)),
         $file->job_id,
-        $status->status,
-        $status->result,
+        array('data' => 'Looking up..', 'class' => 'status', 'id' => $file->fid),
         l('delete', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => $file->fid))) . ' ' . l('reset', 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))),
     );
   }
@@ -95,7 +121,7 @@ function os2web_adlib_api_status() {
  */
 function os2web_adlib_api_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-  $fid = 225147;
+  $fid = 225735;
 //  db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
 //  os2web_adlib_api_convert_to_pdf($fid);
 //  $nid = 74558;
@@ -112,7 +138,16 @@ function os2web_adlib_api_page() {
   // $call= file_load(ADLIB_TEST_FID);
 // $call = node_load($nid,NULL,TRUE);
 
-  return '<textarea cols=100 rows=50>' . print_r($call, 1) . '</textarea>';
+  $files = db_select('file_managed','fm')->fields('fm')->condition('filemime','application/msword')->execute();
+  $rows=array();
+  foreach ($files as $file) {
+    if (file_exists(drupal_realpath($file->uri))) {
+      $rows[]= array(l($file->fid, 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))) ,$file->filename);
+    }
+  }
+  return theme('table',array('rows'=>$rows));
+
+//  return '<textarea cols=100 rows=50>' . print_r($call, 1) . '</textarea>';
 }
 
 /**
@@ -163,6 +198,12 @@ function os2web_adlib_api_convert_to_html($fid, $nid) {
  * @return boolean
  */
 function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
+  $file = file_load($fid);
+  if (!file_exists(drupal_realpath($file->uri))) {
+    watchdog('adlib_api', 'Cannot queue file %file. File does not exist.', array('%file' => $file->filename), WATCHDOG_WARNING);
+    db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid);
+    return false;
+  }
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
     if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid AND jobtype = :jobtype', array(':fid' => $fid, ':jobtype' => 0))->rowCount()) {
       $record = array(
