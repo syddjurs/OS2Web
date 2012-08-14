@@ -22,7 +22,8 @@ class AdLibWS {
   private static $base_url = 'http://10.1.1.180/';
 
   public function __construct() {
-    if (ADLIB_DISABLED) return;
+    if (ADLIB_DISABLED)
+      return;
     if (!isset($this->client)) {
       $options = array(
           'soapversion' => SOAP_1_2,
@@ -40,6 +41,7 @@ class AdLibWS {
         $this->client = new SoapClient($url, $options);
         error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
+
       }
     }
   }
@@ -51,7 +53,8 @@ class AdLibWS {
    * @return type
    */
   public function addJob($fileInfo, $type = ADLIB_JOBTYPE_PDF) {
-    if (ADLIB_DISABLED) return false;
+    if (ADLIB_DISABLED)
+      return false;
     if (!isset($this->client)) {
       return false;
     }
@@ -71,7 +74,7 @@ class AdLibWS {
               <JOB:DOCINPUT FILENAME="' . $fileInfo['filename'] . '" FOLDER="' . self::$base_path . $fileInfo['in_folder'] . '" />
             </JOB:DOCINPUTS>
             <JOB:DOCOUTPUTS>
-              <JOB:DOCOUTPUT FILENAME="' . $fileInfo['out_filename'] . '" FOLDER="' . self::$base_path . $fileInfo['out_folder'] . '" DOCTYPE="' . ($type==ADLIB_JOBTYPE_HTML?'HTML':'PDF') . '" />
+              <JOB:DOCOUTPUT FILENAME="' . $fileInfo['out_filename'] . '" FOLDER="' . self::$base_path . $fileInfo['out_folder'] . '" DOCTYPE="' . ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF') . '" />
             </JOB:DOCOUTPUTS>
             <JOB:SETTINGS>
               <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
@@ -81,8 +84,13 @@ class AdLibWS {
             </JOB:SETTINGS>
           </JOB>
         </JOBS>';
+    $result = simplexml_load_string($this->client->addJob(array('jobInfo' => $jobInfo, 'jobTicket' => $jobTicket))->AddJobResult);
+    if (is_object($result) && isset($result->JobSettings['JobID'])) {
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added job for file: " . $fileInfo['filename']);
-    return simplexml_load_string($this->client->addJob(array('jobInfo' => $jobInfo, 'jobTicket' => $jobTicket))->AddJobResult);
+    return $result;
+    } else {
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to add job.");
+    }
   }
 
   public function deleteJob($id) {
@@ -109,6 +117,22 @@ class AdLibWS {
     }
   }
 
+  public function getConnectorStatusList() {
+    if (ADLIB_DISABLED) {
+      return 'Adblib connection disabled.';
+    }
+    if (isset($this->client)) {
+      $result = $this->client->getConnectorStatusList()->GetConnectorStatusListResult;
+      $result = simplexml_load_string($result);
+      if (is_object($result)) {
+        return $result->xpath('//Server');
+      } else {
+        return 'Invalid response from AdLib.';
+      }
+    }
+    return 'AdLib connection failed.';
+  }
+
   public function getJobStatus($id) {
     if (ADLIB_DISABLED) {
       $return->status = 'Disabled';
@@ -132,11 +156,11 @@ class AdLibWS {
       $return->status = 'Not found';
     }
     if ($return->status === '') {
-       $message = (string) $return->result->ServerInfo[0]->Error['Message'];
-       error_log(basename(__FILE__) . ':' . __LINE__ . ' AdLib Error: '.$message);
-       $return->status = 'Not Available';
+      $message = (string) $return->result->ServerInfo[0]->Error['Message'];
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' AdLib Error: ' . $message);
+      $return->status = 'Not Available';
     } elseif ($return->status === 'Pending') {
-      error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus'] );
+      error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus']);
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
     }
@@ -144,7 +168,8 @@ class AdLibWS {
   }
 
   public function addJobFolder() {
-    if (ADLIB_DISABLED) return false;
+    if (ADLIB_DISABLED)
+      return false;
     if ($this->client) {
       $reply = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
       $folder_info = $reply;
@@ -163,7 +188,8 @@ class AdLibWS {
    * @return mixed - False if call failed, otherwise a fileinfo structure
    */
   public function uploadData($filename, $data, $type = ADLIB_JOBTYPE_PDF, $folder = NULL) {
-    if (ADLIB_DISABLED) return false;
+    if (ADLIB_DISABLED)
+      return false;
     if (!isset($this->client)) {
       return false;
     }
