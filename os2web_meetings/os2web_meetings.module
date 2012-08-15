@@ -1,7 +1,7 @@
 <?php
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
-define('MEETINGS_FORCE_RECREATE', false); // Delete existing nodes before import
+define('MEETINGS_FORCE_RECREATE',true); // Delete existing nodes before import
 define('MEETINGS_FOCUS', false); // File key for import
 define('MEETINGS_MEETING_FOCUS', false); // Meeting id
 define('MEETINGS_CLEAR_COMMITTEE', true); // Clean out invalid committees
@@ -192,13 +192,13 @@ function os2web_meetings_do_import_batch() {
   foreach ($files as $file) {
     if ($focus !== false) {
       if (strpos($file->name, (string) $focus) !== FALSE) {
-        $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri));
+        $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri,MEETING_FORCE_RECREATE));
         error_log("FOCUS Importing " . $file->name . " from: " . $file->uri);
       } else {
         error_log("FOCUS Importing did nothing. Did you set the right format only the number from the XML file. You set it to " . $focus);
       }
     } else {
-      $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri));
+      $batch['operations'][] = array('_os2web_meetings_process_manifest', array($file->uri,MEETING_FORCE_RECREATE));
       error_log("Import without FOCUS: " . $file->uri);
     }
   }
@@ -261,8 +261,11 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
     } else {
       $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
     }
+    if (empty($items_xml)) {
+      watchdog('os2web_meetings', 'Empty list of import items in %file.',array('%file'=> $file),WATCHDOG_WARNING);
+    }
     foreach ($items_xml as $xml_item) {
-      _os2web_meetings_process_agenda($xml_item, $force);
+      _os2web_meetings_process_agenda($file, $xml_item, $force);
     }
   } else {
     watchdog('os2web_meetings', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
@@ -275,8 +278,7 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
  *
  * @param SimpleXMLElement $agendainfo Chunk of XML representing the agenda part.
  */
-function _os2web_meetings_process_agenda($agendainfo_xml, $force = false) {
-//  error_log("Var: \$agendainfo_xml = " . print_r($agendainfo_xml, 1));
+function _os2web_meetings_process_agenda($file, $agendainfo_xml, $force = false) {
   $agendainfo = array(
       'sysid' => (int) array_shift($agendainfo_xml->xpath('field/@sysid')),
       'xmlFusionID' => (int) array_shift($agendainfo_xml->xpath('field/@xmlFusionID')),
@@ -294,25 +296,37 @@ function _os2web_meetings_process_agenda($agendainfo_xml, $force = false) {
       'filesfolder' => (string) array_shift($agendainfo_xml->xpath('field/@filesfolder')),
       'casePublish' => (string) array_shift($agendainfo_xml->xpath('field/@casePublish')),
       'startDate' => (string) array_shift($agendainfo_xml->xpath('field/@startDate')),
-      'endDate' => (string) array_shift($agendainfo_xml->xpath('field/@endDate'))
+      'endDate' => (string) array_shift($agendainfo_xml->xpath('field/@endDate')),
   );
   if ($agendainfo['publish'] === 1 && $agendainfo['access'] !== 'Lukket') {
-    $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
-    error_log("meeting_process: \$agendauri = " . print_r($agenda_uri, 1));
-
-    if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
-//      error_log("Var: \$agendainfo = " . print_r($agendainfo, 1));
-      $agenda_xml = simplexml_load_file(drupal_realpath($agenda_uri));
-      $import_nid = _os2web_meetings_publish_meeting($agendainfo, $agenda_xml, $force);
-      if (!$import_nid) {
-        // No longer a valid import
-        error_log("No longer valid import in _os2web_meetings_process_agenda:" . $agendainfo);
-
-        _os2web_meetings_unpublish_meeting($agendainfo);
-      } elseif (is_numeric($force) && is_numeric($import_nid)) {
-        error_log("Valid import in _os2web_meetings_process_agenda:" . $import_nid);
-        drupal_goto('node/' . $import_nid . '/control');
+    if ($agendainfo['filesFolder']=='') {
+      $matches = array();
+      preg_match_all('/\d+/',pathinfo($file,PATHINFO_FILENAME),$matches);
+      if (is_numeric($matches[0][0]) && is_numeric($agendainfo['docID'])) {
+        $file_id = "Files_".$matches[0][0]."_".$agendainfo['docID'];
+        $agendainfo['filesfolder'] = $file_id;
+        watchdog('os2web_meetings','No FilesFolder attribute for item. Making a guess %guess',array('%guess' => $agendainfo['filesfolder']),WATCHDOG_INFO);
+      } else {
+        watchdog('os2web_meetings','No FilesFolder attribute for item. Not enough info to guess.',null,WATCHDOG_WARNING);
       }
+    }
+    $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
+    if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
+      $agenda_xml = simplexml_load_file(drupal_realpath($agenda_uri));
+      if (is_object($agenda_xml)) {
+        $import_nid = _os2web_meetings_publish_meeting($agendainfo, $agenda_xml, $force);
+        if (!$import_nid) {
+          // No longer a valid import
+          error_log("No longer valid import in _os2web_meetings_process_agenda:" . $agendainfo['sysid']);
+
+          _os2web_meetings_unpublish_meeting($agendainfo);
+        } elseif (is_numeric($force) && is_numeric($import_nid)) {
+          error_log("Valid import in _os2web_meetings_process_agenda:" . $import_nid);
+          drupal_goto('node/' . $import_nid . '/control');
+        }
+      }
+    } else {
+      watchdog('os2web_meetings','Failed to read agenda manifest file %uri',array('%uri'=>$agenda_uri),WATCHDOG_WARNING);
     }
   } else {
     _os2web_meetings_unpublish_meeting($agendainfo);
@@ -432,6 +446,14 @@ function _os2web_meetings_publish_meeting($info, $xml, $force = false) {
   // Proper id tagging
   $node->field_meeting_id[$node->language][0]['value'] = $options['meeting_id'];
   $node->field_system_id[$node->language][0]['value'] = $options['id'];
+  // Type import
+  if ($info['type']==1) {
+    $node->field_meeting_type[$node->language][0]['value'] = 'Dagsorden';
+  } elseif ($info['type']==2) {
+    $node->field_meeting_type[$node->language][0]['value'] = 'Referat';
+  } else {
+    watchdog('os2web_meetings','Unknown meeting type value: %type',array('%type' => $info['type']),WATCHDOG_WARNING);
+  }
   // Make sure the committee term is created and get the term.
   $committee_term = _os2web_meetings_import_committee(array_shift($xml->xpath("//table[@name='committee']")));
   $node->field_committee[LANGUAGE_NONE][0]['tid'] = $committee_term->tid;
@@ -702,12 +724,17 @@ function _os2web_meetings_sanetize_filename($filename) {
 //  $filename = str_replace(' ', '_', $filename);
   // Remove remaining unsafe characters.
   //$filename = preg_replace('![^0-9A-Za-z_.- ]!', '', $filename);
-  $filename = preg_replace('![/]!', '-', $filename);
+  $filename = preg_replace('![/"]!', '-', $filename);
   // Remove multiple consecutive non-alphabetical characters.
   $filename = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename);
   // Force lowercase to prevent issues on case-insensitive file systems.
   //$filename = strtolower($filename);
-  return substr($filename, 0, 160);
+  $pi = pathinfo($filename);
+  if (isset($pi['extension'])) {
+    return substr(trim($pi['filename']), 0, 160).'.'.$pi['extension'];;
+  } else {
+    return substr(trim($pi['filename']), 0, 160);
+  }
 }
 
 function _os2web_meetings_clear_committees() {
@@ -750,7 +777,7 @@ function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE
   $uri = FALSE;
   if ($uri_tmp = _os2web_meetings_similar_file_exists(drupal_realpath($uri_pdf))) {
     // we have an already converted pdf file
-    $uri = $uri_tmp;
+    $uri = $uri_pdf;
     $convert = false;
   } elseif ($uri_tmp = _os2web_meetings_similar_file_exists(drupal_realpath($uri_out))) {
     $uri_out = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $folder, basename($uri_tmp)));
@@ -774,6 +801,14 @@ function _os2web_meetings_import_file($filename, $folder = '.', $newname = FALSE
   if (false === $uri) {
     watchdog('os2web_meetings', 'Processing of %infile failed. If exists, check permissions.', array('%infile', $uri_in), WATCHDOG_WARNING);
     return false;
+  }
+
+  if (file_uri_scheme($uri)!='public') {
+    watchdog('os2web_meetings', 'Invalid scheme for uri %uri, Possibly absolut path ?', array('%uri', $uri), WATCHDOG_ERROR);
+    error_log("Var: \$uri = " . print_r($uri, 1));
+  error_log("Var: \$uri_in = " . print_r($uri_in, 1));
+  error_log("Var: \$uri_out = " . print_r($uri_out, 1));
+  error_log("Var: \$uri_pdf = " . print_r($uri_pdf, 1));
   }
 
   $fid = db_select('file_managed', 'fm')
