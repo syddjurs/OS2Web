@@ -39,7 +39,7 @@ class AdLibWS {
       self::$base_url = array_shift($matches);
       try {
         $this->client = new SoapClient($url, $options);
-        error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
+        //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
 
       }
@@ -86,8 +86,7 @@ class AdLibWS {
         </JOBS>';
     $result = simplexml_load_string($this->client->addJob(array('jobInfo' => $jobInfo, 'jobTicket' => $jobTicket))->AddJobResult);
     if (is_object($result) && isset($result->JobSettings['JobID'])) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added job for file: " . $fileInfo['filename']);
-    return $result;
+      return $result;
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to add job.");
     }
@@ -160,9 +159,9 @@ class AdLibWS {
       error_log(basename(__FILE__) . ':' . __LINE__ . ' AdLib Error: ' . $message);
       $return->status = 'Not Available';
     } elseif ($return->status === 'Pending') {
-      error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus']);
+      //error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus']);
     } else {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
+      //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
     }
     return $return;
   }
@@ -174,7 +173,7 @@ class AdLibWS {
       $reply = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
       $folder_info = $reply;
       $result = 'ExponentJobs\\' . ((string) $folder_info['FolderID']);
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Added folder: " . $result);
+      watchdog('adlib_api','Added a folder: %folder',array('%folder' => $result),WATCHDOG_DEBUG);
       return $result;
     }
   }
@@ -232,7 +231,7 @@ class AdLibWS {
       );
     } else {
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to upload: " . $filename);
-      error_log("Var: \$result = " . print_r($result, 1));
+      watchdog('adlib_api','Upload of %filename failed with message: %msg',array('%file' => $filename, '%msg' => $result),WATCHDOG_ERROR);
       return false;
     }
   }
