@@ -60,6 +60,7 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
     switch ($op) {
       case 'reimport':
         _os2web_meetings_process_manifest($file->uri, $system_id);
+        os2web_meetings_order_addenums();
         break;
       default:
         drupal_set_message($op . ' not yet implemented.', 'error');
@@ -126,7 +127,6 @@ function os2web_meetings_form_os2web_settings_settings_form_alter(&$form, &$form
       '#type' => 'fieldset',
       '#title' => 'Referat import',
       '#description' => 'Indstillinger der vedrører importen af Acadre referater og dagsordener.',
-      '#tree' => TRUE,
       '#collapsible' => TRUE,
       '#collapsed' => FALSE,
   );
@@ -139,7 +139,7 @@ function os2web_meetings_form_os2web_settings_settings_form_alter(&$form, &$form
   $form['meetings']['os2web_meetings_invalid_committee'] = array(
       '#type' => 'textfield',
       '#title' => 'Udvalg der ikke skal importeres',
-      '#maxlength' => 255,
+      '#maxlength' => 200,
       '#description' => 'Komma sepereret liste over udvalg der ikke skal inkluderes i importen.',
       '#default_value' => variable_get('os2web_meetings_invalid_committee', 'Direktionsmøde, Direktions og afdelingschef møde, Rådhusmad, Test udvalg, Traen udvalg, Nedlagte udvalg'),
   );
@@ -378,13 +378,11 @@ function _os2web_meetings_process_agenda($file, $agendainfo_xml, $force = false)
  * @param array $info
  */
 function _os2web_meetings_unpublish_meeting($info) {
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $info = ' . print_r($info, 1));
   $query = new EntityFieldQuery();
   $result = $query->entityCondition('entity_type', 'node')
       ->propertyCondition('type', 'meeting')
       ->fieldCondition('field_system_id', 'value', $info['sysid'], '=')
       ->execute();
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $result = ' . print_r($result, 1));
   if (isset($result['node'])) {
     $nid = array_shift($result['node'])->nid;
     node_delete($nid);
@@ -425,6 +423,8 @@ function _os2web_meetings_publish_meeting($info, $xml, $force = false) {
       'id' => $info['sysid'],
   );
   if ($options['committee'] == '' || in_array($options['committee'], $no_publish_committee)) {
+  error_log("Var: \$no_publish_committee = " . print_r($no_publish_committee, 1));
+  error_log("Var: \$committee = " . print_r($options['committee'], 1));
     return false;
   }
 
