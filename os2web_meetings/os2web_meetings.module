@@ -98,16 +98,22 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
  * Will run import on every cron.
  */
 function os2web_meetings_cron() {
-  $options = array(
-//      'callback' => '_os2web_meetings_process_manifest',
-      'recurse' => FALSE,
-  );
-  $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
-  $queue = DrupalQueue::get('import_agendas');
-  if ($queue->numberOfItems() == 0) {
-    foreach ($files as $file) {
-      $queue->createItem($file->uri);
+  $run_hours = array(10,14,18,22,2,6);
+  if (in_array(date('G'),$run_hours)) {
+    watchdog('os2web_meetings','It\'s %hour\'o\'clock, time to import meetings.',array('%hour'=> date('G')),WATCHDOG_INFO);
+    $options = array(
+  //      'callback' => '_os2web_meetings_process_manifest',
+        'recurse' => FALSE,
+    );
+    $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
+    $queue = DrupalQueue::get('import_agendas');
+    if ($queue->numberOfItems() == 0) {
+      foreach ($files as $file) {
+        $queue->createItem($file->uri);
+      }
     }
+  } else {
+    watchdog('os2web_meetings','It\'s %hour\'o\'clock, skipping import of meetings.',array('%hour'=> date('G')),WATCHDOG_INFO);
   }
 }
 
