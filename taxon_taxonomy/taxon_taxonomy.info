@@ -1,0 +1,5 @@
+name = Taxon classification using a taxonomy field
+description = Classify text acording to a taxonomy.
+core = 7.x
+files[] = taxon_taxonomy.module
+
