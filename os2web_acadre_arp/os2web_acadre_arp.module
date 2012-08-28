@@ -13,7 +13,7 @@ function os2web_acadre_arp_menu() {
   $items['os2web/test/arp'] = array(
       'type' => MENU_CALLBACK,
       'page callback' => '_os2web_acadre_arp_test_page',
-      'access callback' => TRUE,
+      'access callback' => array('administer os2web'),
   );
   $items['os2web/ws/arp'] = array(
       'type' => MENU_CALLBACK,
