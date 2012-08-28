@@ -5,7 +5,7 @@ function os2web_doc_field_field_schema($field) {
       'columns' => array(
           'doc_ident' => array(
               'type' => 'varchar',
-              'length' => 32,
+              'length' => 255,
               'not null' => TRUE,
               'default' => '',
           )
@@ -14,8 +14,37 @@ function os2web_doc_field_field_schema($field) {
 }
 
 function os2web_doc_field_install() {
-  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+//  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
 }
 
 function os2web_doc_field_uninstall() {
+
+}
+
+/**
+ * Add more room for documents in the DB
+ */
+function os2web_doc_field_update_7001(&$sandbox) {
+  foreach (field_info_fields() as $field_name => $field) {
+    if ($field['type'] != 'doc_ident') {
+      // Not an entity reference field.
+      continue;
+    }
+
+    // Update the field settings.
+    $field = field_info_field($field_name);
+    unset($field['indexes']['target_entity']);
+    $field['indexes']['doc_ident'] = array('doc_ident');
+    field_update_field($field);
+
+    $table_name = _field_sql_storage_tablename($field);
+    $revision_name = _field_sql_storage_revision_tablename($field);
+    
+    db_change_field($table_name, $field_name . '_doc_ident', $field_name . '_doc_ident', array(
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ));
+  }
 }
