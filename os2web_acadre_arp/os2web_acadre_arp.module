@@ -26,8 +26,10 @@ function os2web_acadre_arp_menu() {
 function _os2web_acadre_arp_test_page() {
   module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
   $options = array(
-      'proxy_host' => 'localhost',
-      'proxy_port' => 8080,
+      'login' => 'acadre',
+      'password' => 'PernoD=38%',
+//      'proxy_host' => 'localhost',
+//      'proxy_port' => 8080,
       'cache_wsdl' => WSDL_CACHE_BOTH,
       'exceptions' => true,
       'trace' => true,
@@ -36,7 +38,8 @@ function _os2web_acadre_arp_test_page() {
   if ($xdebug)
     xdebug_disable();
   try {
-    $client = new SoapClientAuth('http://10.1.1.112/Acadre/Acadre.Publishing.PublishingDataProviderService/PublishingDataProviderService.svc?wsdl', $options);
+    //$client = new SoapClientAuth('http://10.1.1.112/Acadre/Acadre.Publishing.PublishingDataProviderService/PublishingDataProviderService.svc?wsdl', $options);
+    $client = new SoapClientAuth('http://10.1.1.108/Acadre/Acadre.Publishing.PublishingDataProviderService/PublishingDataProviderService.svc?wsdl', $options);
   } catch (Exception $exc) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc->getTraceAsString(), 1));
   }
@@ -89,7 +92,6 @@ function _os2web_acadre_arp_soap_server() {
  */
 function publish($info, $parentItemId) {
   $item_id = $info->ItemId;
-  error_log("Publish: \$item_id = " . print_r($item_id, 1));
 
   $meta = $info->Metadata;
 // File was decoded to utf-8 data, so charset will break.
@@ -141,7 +143,6 @@ function publish($info, $parentItemId) {
  * @return void
  */
 function unpublish($item_id, $location_id) {
-  error_log("Unpublish: \$item_id = " . print_r($item_id, 1));
   $nids = _os2web_acadre_arp_find_item($item_id);
   if (empty($nids)) {
     return 'Success. No nodes removed.';
@@ -418,8 +419,10 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
   if (!$client) {
     module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
     $options = array(
-        'proxy_host' => 'localhost',
-        'proxy_port' => 8080,
+      'login' => 'acadre',
+      'password' => 'PernoD=38%',
+//      'proxy_host' => 'localhost',
+//      'proxy_port' => 8080,
         'cache_wsdl' => WSDL_CACHE_BOTH,
         'exceptions' => true,
     );

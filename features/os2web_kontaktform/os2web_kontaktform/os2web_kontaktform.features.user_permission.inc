@@ -23,7 +23,9 @@ function os2web_kontaktform_user_default_permissions() {
   // Exported permission: access user contact forms.
   $permissions['access user contact forms'] = array(
     'name' => 'access user contact forms',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'contact',
   );
 
