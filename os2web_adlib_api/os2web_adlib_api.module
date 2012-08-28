@@ -416,6 +416,8 @@ function _os2web_adlib_api_process_pdf($limit = FALSE) {
             watchdog('adlib_api', 'Upload of %file failed. Check permissions.', array('%file' => $file->file->filename));
             db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->file->fid)->execute();
           }
+        } else {
+        //FIXME: Insert folder cleanup here jm@bellcom.dk
         }
       }
     }

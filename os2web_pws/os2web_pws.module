@@ -145,17 +145,17 @@ function os2web_test_page() {
   $pws = _os2web_pws_get_instance();
 //  $adlib = _os2web_adlib_get_instance();
 //  $call = $pws->lookupCase('11/14293');
-//  $call = $pws->fetchCase($pws->lookupCase('11/4949'));
+  $call = $pws->fetchCase($pws->lookupCase('11/4949'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/4949'));
 //  $call = array($pws->getCaseDocs('388538'),$pws->getCaseDocs('388531'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('12/6202'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/14293'));
 //  $call = $pws->fetchCase($pws->lookupCase('12/11975'));
-  $call = $pws->getCaseDocs(385817);
-  foreach ($call as $key) {
-    $docs[]= (string) $key->Record[0]->DocumentDate[0] . ' - ' . (string) $key->Document[0]->DocumentTitleText[0];
-  }
-  $call= $docs;
+//  $call = $pws->getCaseDocs(385817);
+//  foreach ($call as $key) {
+//    $docs[]= (string) $key->Record[0]->DocumentDate[0] . ' - ' . (string) $key->Document[0]->DocumentTitleText[0];
+//  }
+//  $call= $docs;
 //  $call = $pws->getCaseDocs(373830);
 //  $call = $pws->fetchCase(73335);
 //  return _os2web_get_rendered_doc(array(1420175,1369822));
@@ -206,5 +206,5 @@ function os2web_test_page() {
 //    $call = 'fail';
 //  }
 
-  return '<div><textarea cols="150" rows=50>' . print_r($call, 1) . '</textarea></div>';
+  return '<div><textarea cols="150" rows=50>x' . print_r($call, 1) . '</textarea></div>';
 }

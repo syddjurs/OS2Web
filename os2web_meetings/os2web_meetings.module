@@ -113,7 +113,8 @@ function os2web_meetings_cron() {
       }
     }
   } else {
-    watchdog('os2web_meetings','It\'s %hour\'o\'clock, skipping import of meetings.',array('%hour'=> date('G')),WATCHDOG_INFO);
+  // Dont spam watchdog..
+//    watchdog('os2web_meetings','It\'s %hour\'o\'clock, skipping import of meetings.',array('%hour'=> date('G')),WATCHDOG_INFO);
   }
 }
 
@@ -175,17 +176,22 @@ function os2web_meetings_test_page() {
     case 'clean':
       _os2web_meetings_delete_meetings();
       break;
-
+    case 'addenums':
+      os2web_meetings_order_addenums();
+      drupal_set_message(t('Addenum meetings reordered'));
+      break;
     default:
       $links = array(
           'heading' => 'Actions:',
           'links' => array(
               array('title' => 'Kør import', 'href' => "os2web/test/meetings/batch"),
+              array('title' => 'Reorder addenums', 'href' => "os2web/test/meetings",'query' => array('op' => 'addenums')),
               array('title' => 'Slet meetings', 'href' => "os2web/test/meetings",'query' => array('op' => 'clean')),
           )
       );
       return theme('links',$links);
   }
+  drupal_goto('os2web/test/meetings');
 }
 
 function _os2web_meetings_delete_meetings($nids = false) {
@@ -320,6 +326,7 @@ function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREA
     foreach ($items_xml as $xml_item) {
       _os2web_meetings_process_agenda($file, $xml_item, $force);
     }
+    os2web_meetings_order_addenums();
   } else {
     watchdog('os2web_meetings', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
     error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: ' . $file);
@@ -428,8 +435,8 @@ function _os2web_meetings_publish_meeting($info, $xml, $force = false) {
       'id' => $info['sysid'],
   );
   if ($options['committee'] == '' || in_array($options['committee'], $no_publish_committee)) {
-  error_log("Var: \$no_publish_committee = " . print_r($no_publish_committee, 1));
-  error_log("Var: \$committee = " . print_r($options['committee'], 1));
+    error_log("Ignored committee = " . print_r($options['committee'], 1));
+    watchdog('os2web_meetings','Ignored agenda from %committee .',array('%committee'=>$options['committee']));
     return false;
   }
 
@@ -740,6 +747,8 @@ function _os2web_meetings_similar_file_exists($filename) {
   $files = glob($dir . '/*');
   $lcaseFilename = strtolower($filename);
   foreach ($files as $file) {
+    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists looking for file = ' . $file);
+    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists compare file = ' . $file . ' == ' . $lcaseFilename);
     if (strtolower($file) == $lcaseFilename) {
       return $file;
     }
