@@ -59,8 +59,8 @@ function os2web_settings_menu() {
       'title' => 'OS2web Test',
       'page callback' => 'drupal_get_form',
       'page arguments' => array('os2web_settings_start_form'),
-      'access callback' => true,
-      'type' => MENU_NORMAL_ITEM,
+      'access callback' => array('administer os2web'),
+      'type' => MENU_CALLBACK,
   );
   $items['os2web/settings/ahahdebug'] = array(
       'page callback' => 'os2web_settings_ahahdebug',
