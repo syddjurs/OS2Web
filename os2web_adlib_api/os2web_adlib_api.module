@@ -264,7 +264,7 @@ function _os2web_adlib_api_get_instance() {
  * @access protected
  * @return void
  */
-function _os2web_adlib_api_process_pdf($limit = FALSE) {
+function _os2web_adlib_api_do_processing($limit = FALSE) {
   if (!lock_acquire(__FUNCTION__, 60)) {
     return;
   }
