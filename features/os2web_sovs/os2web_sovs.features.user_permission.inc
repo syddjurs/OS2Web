@@ -83,9 +83,10 @@ function os2web_sovs_user_default_permissions() {
   $permissions['create rotating_image content'] = array(
     'name' => 'create rotating_image content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -127,9 +128,10 @@ function os2web_sovs_user_default_permissions() {
   $permissions['delete any rotating_image content'] = array(
     'name' => 'delete any rotating_image content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -149,14 +151,18 @@ function os2web_sovs_user_default_permissions() {
   // Exported permission: delete own esdh_dokument content.
   $permissions['delete own esdh_dokument content'] = array(
     'name' => 'delete own esdh_dokument content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: delete own esdh_sag content.
   $permissions['delete own esdh_sag content'] = array(
     'name' => 'delete own esdh_sag content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'node',
   );
 
@@ -185,9 +191,10 @@ function os2web_sovs_user_default_permissions() {
   $permissions['delete own rotating_image content'] = array(
     'name' => 'delete own rotating_image content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -240,9 +247,10 @@ function os2web_sovs_user_default_permissions() {
   $permissions['edit any rotating_image content'] = array(
     'name' => 'edit any rotating_image content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -259,14 +267,18 @@ function os2web_sovs_user_default_permissions() {
   // Exported permission: edit own esdh_dokument content.
   $permissions['edit own esdh_dokument content'] = array(
     'name' => 'edit own esdh_dokument content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: edit own esdh_sag content.
   $permissions['edit own esdh_sag content'] = array(
     'name' => 'edit own esdh_sag content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'node',
   );
 
@@ -292,9 +304,10 @@ function os2web_sovs_user_default_permissions() {
   $permissions['edit own rotating_image content'] = array(
     'name' => 'edit own rotating_image content',
     'roles' => array(
-      0 => 'Editor',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Kommunikation',
+      3 => 'Webmaster',
     ),
     'module' => 'node',
   );

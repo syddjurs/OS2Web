@@ -194,7 +194,6 @@ class streamWrapperHttpAuth {
     curl_setopt($this->curlHandle, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($this->curlHandle, CURLOPT_FOLLOWLOCATION, TRUE);
     if (streamWrapperHttpAuth::$Username) {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Using login.");
       curl_setopt($this->curlHandle, CURLOPT_HTTPAUTH, $authType);
       curl_setopt($this->curlHandle, CURLOPT_USERPWD, streamWrapperHttpAuth::$Username . ':' . streamWrapperHttpAuth::$Password);
     }
@@ -204,7 +203,6 @@ class streamWrapperHttpAuth {
     curl_setopt($this->curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
 
     if (streamWrapperHttpAuth::$Proxy) {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Using Proxy.");
       curl_setopt($this->curlHandle, CURLOPT_PROXY, streamWrapperHttpAuth::$Proxy);
     }
 
@@ -217,7 +215,6 @@ class streamWrapperHttpAuth {
         throw new Exception(curl_error($this->curlHandle), curl_errno($this->curlHandle));
     }else if ($info['http_code'] == 401) { // Attempt NTLM Auth only, CURLAUTH_ANY does not work with NTML
       if ($authType != CURLAUTH_NTLM) {
-        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() Reattempting with NTLM');
         return $this->postRequest($path, CURLAUTH_NTLM);
       } else {
         throw new Exception('Access Denied', 401);

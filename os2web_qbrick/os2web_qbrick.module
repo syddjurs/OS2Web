@@ -16,7 +16,7 @@ function os2web_qbrick_menu() {
 //    'title arguments' => array(),
 //    'title callback' => 't',
       'description' => t('Your description goes here.'),
-      'access callback' => TRUE,
+      'access callback' => array('administer os2web'),
 //    'access callback' => 'object_check_access',
 //    'access arguments' => array(1),
       'page arguments' => array(1),
@@ -28,7 +28,7 @@ function os2web_qbrick_menu() {
 //    'file' => 'name_of_file.inc',
 //    'file path' => drupal_get_path('module', 'os2web_qbrick'),
 //    'weight' => 0,
-      'type' => MENU_NORMAL_ITEM,
+      'type' => MENU_CALLBACK,
   );
   return $items;
 }

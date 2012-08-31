@@ -5001,6 +5001,7 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['filters']['field_promoteto_tid']['field'] = 'field_promoteto_tid';
   $handler->display->display_options['filters']['field_promoteto_tid']['value'] = array(
     12264 => '12264',
+    12265 => '12265',
   );
   $handler->display->display_options['filters']['field_promoteto_tid']['reduce_duplicates'] = 0;
   $handler->display->display_options['filters']['field_promoteto_tid']['type'] = 'select';
