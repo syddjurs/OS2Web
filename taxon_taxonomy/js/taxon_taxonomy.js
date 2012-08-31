@@ -45,7 +45,7 @@
 			
 			if(test.length == 0)
 			{
-				$(taxonomy_tag_name).after("<div class='description'><br>Knappen herunder foreslår KLE opmærkning på baggrund af teksten i indholdsfeltet.<br>Funktionen kan indtil videre kun foreslå emner inden for hovedgrupperne 02, 15, 23, 28, 29 og 32.<br>Hvis du ønsker at anvende et eller flere af de foreslåede emner, skal du trykke på dem med musen, så de bliver flyttet op i KL Emneord feltet ovenfor.<br><input style = 'margin-top:10px;' id = 'taxon-classify-button' class = 'form-submit ajax-processed' type='button' value='" + taxonomy_button_text +"'><br></div>" );
+				$(taxonomy_tag_name).after("<div class='description'><br>Knappen herunder foreslår KLE opmærkning på baggrund af teksten i indholdsfeltet.<br>Funktionen kan indtil videre kun foreslå emner inden for hovedgrupperne 02, 15, 23, 28, 29 og 32.<br>Hvis du ønsker at anvende et eller flere af de foreslåede emner, skal du trykke på dem med musen, så de bliver flyttet op i KL Emneord feltet ovenfor.<br><input style = 'margin-top:10px;' id = 'taxon-classify-button' class = 'form-submit ajax-processed' type='button' value='" + taxonomy_button_text +"'><br><br></div>" );
 			}
 			// Get the text from the textarea
 			$('div').find('#taxon-classify-button').click(function() 
