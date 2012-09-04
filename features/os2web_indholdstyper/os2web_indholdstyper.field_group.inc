@@ -18,18 +18,23 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_indholdsside';
   $field_group->data = array(
     'label' => 'Billeder og filer',
-    'weight' => '1',
+    'weight' => '5',
     'children' => array(
       0 => 'field_lead_image',
       1 => 'field_mediafile',
       2 => 'field_billede',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'label' => 'Billeder og filer',
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
     ),
   );
   $export['group_billeder|node|contentpage|form'] = $field_group;
@@ -118,18 +123,23 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_indholdsside';
   $field_group->data = array(
-    'label' => 'Acadre sager og dokumenter',
-    'weight' => '2',
+    'label' => 'Sager og dokumenter',
+    'weight' => '6',
     'children' => array(
       0 => 'field_case',
       1 => 'field_doc',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
+      'label' => 'Sager og dokumenter',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'closed',
     ),
   );
   $export['group_esdh|node|contentpage|form'] = $field_group;
@@ -142,19 +152,24 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_indholdsside';
   $field_group->data = array(
     'label' => 'Emneord',
-    'weight' => '3',
+    'weight' => '7',
     'children' => array(
       0 => 'field_editortags',
       1 => 'field_termref_sted',
       2 => 'field_organization',
       3 => 'field_politics',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'label' => 'Emneord',
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
     ),
   );
   $export['group_extras|node|contentpage|form'] = $field_group;
@@ -167,20 +182,22 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_indholdsside';
   $field_group->data = array(
-    'label' => 'Generelt',
-    'weight' => '0',
+    'label' => 'Tekst',
+    'weight' => '4',
     'children' => array(
       0 => 'body',
-      1 => 'field_resume_long',
-      2 => 'field_termref_kle',
-      3 => 'title',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
+      'label' => 'Tekst',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'closed',
     ),
   );
   $export['group_general|node|contentpage|form'] = $field_group;
@@ -193,27 +210,31 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_indholdsside';
   $field_group->data = array(
     'label' => 'Indstillinger',
-    'weight' => '4',
+    'weight' => '8',
     'children' => array(
       0 => 'field_rotate_publish',
       1 => 'field_node_reference_kontaktblok',
       2 => 'field_indholdsside_spotboxe',
       3 => 'field_site_structure',
       4 => 'field_noderef_selvbtjn',
-      5 => 'path',
+      5 => 'field_skjul_relaterede_links',
       6 => 'additional_settings',
       7 => 'revision_information',
       8 => 'author',
       9 => 'options',
       10 => 'group_hidden',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
     ),
   );
   $export['group_gruppe3|node|contentpage|form'] = $field_group;
@@ -229,7 +250,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_gruppe3';
   $field_group->data = array(
     'label' => 'Skjult',
-    'weight' => '39',
+    'weight' => '18',
     'children' => array(
       0 => 'field_source_id',
     ),
@@ -303,6 +324,35 @@ function os2web_indholdstyper_field_group_info() {
     ),
   );
   $export['group_hidden|node|news|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_indholdsside|node|contentpage|form';
+  $field_group->group_name = 'group_indholdsside';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'contentpage';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Indholdsside',
+    'weight' => '4',
+    'children' => array(
+      0 => 'group_billeder',
+      1 => 'group_esdh',
+      2 => 'group_extras',
+      3 => 'group_general',
+      4 => 'group_gruppe3',
+    ),
+    'format_type' => 'htabs',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'classes' => '',
+      ),
+    ),
+  );
+  $export['group_indholdsside|node|contentpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
