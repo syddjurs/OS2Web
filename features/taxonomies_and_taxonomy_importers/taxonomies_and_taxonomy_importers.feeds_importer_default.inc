@@ -18,11 +18,10 @@ function taxonomies_and_taxonomy_importers_feeds_importer_default() {
     'name' => 'Taksonomi: Egennavne/stednavne',
     'description' => 'Importerer Egennavne/stednavne taksonomien',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
-        'designated_hub' => '',
+        'allowed_extensions' => 'xml',
+        'direct' => 1,
       ),
     ),
     'parser' => array(
@@ -117,11 +116,10 @@ function taxonomies_and_taxonomy_importers_feeds_importer_default() {
     'name' => 'Taksonomi: KLE',
     'description' => 'Importerer KLE taksonomien',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
-        'designated_hub' => '',
+        'allowed_extensions' => 'xml',
+        'direct' => 1,
       ),
     ),
     'parser' => array(
@@ -240,11 +238,10 @@ function taxonomies_and_taxonomy_importers_feeds_importer_default() {
     'name' => 'Taksonomi: Organisation',
     'description' => 'Importerer Organisation taksonomien',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
-        'designated_hub' => '',
+        'allowed_extensions' => 'xml',
+        'direct' => 1,
       ),
     ),
     'parser' => array(
@@ -331,11 +328,10 @@ function taxonomies_and_taxonomy_importers_feeds_importer_default() {
     'name' => 'Taksonomi: Politik',
     'description' => 'Importerer Politik taksonomien',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
-        'designated_hub' => '',
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
       ),
     ),
     'parser' => array(
