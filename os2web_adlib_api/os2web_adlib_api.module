@@ -141,7 +141,7 @@ function os2web_adlib_api_page() {
   // $call= file_load(ADLIB_TEST_FID);
 // $call = node_load($nid,NULL,TRUE);
 
-  $files = db_select('file_managed', 'fm')->fields('fm')->condition('filemime', 'application/msword')->execute();
+  $files = db_select('file_managed', 'fm')->fields('fm')->execute();
   $rows = array();
   foreach ($files as $file) {
     if (file_exists(drupal_realpath($file->uri))) {
@@ -359,7 +359,7 @@ function _os2web_adlib_api_process_file($file) {
       switch ($file->jobtype) {
         case 0: // PDF
           $upd_file = file_load($file->fid);
-          $uri = file_unmanaged_save_data($data, dirname($upd_file->uri) . '/' . $jobfileinfo['out_filename'], FILE_EXISTS_REPLACE);
+          $uri = file_unmanaged_save_data($data, str_replace($upd_file->filename, $jobfileinfo['out_filename'], $upd_file->uri), FILE_EXISTS_REPLACE);
           if (filesize(drupal_realpath($uri)) > 0) {
             db_delete('file_managed')->condition('uri', $uri)->execute();
             $upd_file->uri = $uri;
@@ -370,6 +370,7 @@ function _os2web_adlib_api_process_file($file) {
             os2web_adlib_api_destroy_job($file->job_id);
             $record = array(
                 'fid' => $file->fid,
+                'jobtype' => $file->jobtype,
                 'job_id' => 'Complete',
             );
             drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
@@ -389,6 +390,7 @@ function _os2web_adlib_api_process_file($file) {
             os2web_adlib_api_destroy_job($file->job_id);
             $record = array(
                 'fid' => $file->fid,
+                'jobtype' => $file->jobtype,
                 'job_id' => 'Complete',
             );
             drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
