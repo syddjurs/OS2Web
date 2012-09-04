@@ -25,7 +25,9 @@ function os2web_kontaktblok_user_default_permissions() {
   // Exported permission: delete any kontaktblok content.
   $permissions['delete any kontaktblok content'] = array(
     'name' => 'delete any kontaktblok content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'node',
   );
 

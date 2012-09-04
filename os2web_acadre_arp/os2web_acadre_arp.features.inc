@@ -9,9 +9,24 @@
  */
 function os2web_acadre_arp_ctools_plugin_api() {
   list($module, $api) = func_get_args();
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
+  list($module, $api) = func_get_args();
+  if ($module == "page_manager" && $api == "pages_default") {
+    return array("version" => "1");
+  }
+  list($module, $api) = func_get_args();
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function os2web_acadre_arp_views_api() {
+  return array("version" => "3.0");
 }
 
 /**
@@ -24,7 +39,7 @@ function os2web_acadre_arp_node_info() {
       'base' => 'node_content',
       'description' => t('Container for documents related to a case published by ARP'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Titel'),
       'help' => '',
     ),
     'arp_document' => array(
@@ -32,7 +47,7 @@ function os2web_acadre_arp_node_info() {
       'base' => 'node_content',
       'description' => t('Hold a document and related supplements for an ARP Publication.'),
       'has_title' => '1',
-      'title_label' => t('Title'),
+      'title_label' => t('Titel'),
       'help' => '',
     ),
   );

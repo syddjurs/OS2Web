@@ -243,6 +243,7 @@ function os2web_meetings_do_import_batch() {
       'recurse' => FALSE,
   );
   $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', $options);
+  error_log("Var filenames: " . print_r($files, 1));
   foreach ($files as $file) {
     if ($focus !== false) {
       if (strpos($file->name, (string) $focus) !== FALSE) {
@@ -256,7 +257,7 @@ function os2web_meetings_do_import_batch() {
     }
   }
   if ($focus) {
-    error_log("Var: \$batch = " . print_r($batch, 1));
+    error_log("Var FOCUS SET: \$batch = " . print_r($batch, 1));
   }
   batch_set($batch);
   batch_process('os2web/test/meetings');
@@ -740,6 +741,7 @@ function _os2web_meetings_import_location(SimpleXMLElement $xml) {
  */
 function _os2web_meetings_similar_file_exists($filename) {
   if (file_exists($filename)) {
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
     return $filename;
   }
 
@@ -750,6 +752,7 @@ function _os2web_meetings_similar_file_exists($filename) {
     //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists looking for file = ' . $file);
     //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists compare file = ' . $file . ' == ' . $lcaseFilename);
     if (strtolower($file) == $lcaseFilename) {
+      //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists  = file check ' . $strtolower($file) . ' == ' . $lcaseFilename);
       return $file;
     }
   }

@@ -1,6 +1,7 @@
 <?php
 
 define('ADLIB_TEST_FID', FALSE);
+define('ADLIB_HTML_IMG_FOLDER', 'public://bpimg/');
 
 /*
  *
@@ -122,11 +123,12 @@ function os2web_adlib_api_status() {
  */
 function os2web_adlib_api_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-  $fid = 225735;
+  $fid = 236605;
+  $nid = 840980;
+//  os2web_adlib_api_file_delete($fid);
 //  db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
 //  os2web_adlib_api_convert_to_pdf($fid);
-//  $nid = 74558;
-//   os2web_adlib_api_convert_to_html($fid,$nid);
+//  os2web_adlib_api_convert_to_html($fid, $nid);
 //  _os2web_adlib_api_process_pdf();
 //  sleep(5);
 //  _os2web_adlib_api_process_pdf();
@@ -149,6 +151,7 @@ function os2web_adlib_api_page() {
   return theme('table', array('rows' => $rows));
 
 //  return '<textarea cols=100 rows=50>' . print_r($call, 1) . '</textarea>';
+  return '';
 }
 
 /**
@@ -262,7 +265,10 @@ function _os2web_adlib_api_get_instance() {
  * @return void
  */
 function _os2web_adlib_api_do_processing($limit = FALSE) {
-  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+  if (!lock_acquire(__FUNCTION__, 60)) {
+    return;
+  }
+  watchdog('adlib_api', 'Running PDF/HTML Conversion batch..', null, WATCHDOG_DEBUG);
 // Locate any finished jobs
   $files = db_select('os2web_adlib_api_doc_files', 'f')
       ->fields('f')
@@ -279,6 +285,7 @@ function _os2web_adlib_api_do_processing($limit = FALSE) {
     $adlib = _os2web_adlib_api_get_instance();
 
     foreach ($files as $file) {
+      lock_acquire(__FUNCTION__, 60); // Refresh lock to avoid timeout
       $jobinfo = $adlib->getJobStatus($file->job_id);
       if (in_array($jobinfo->status, array('Not found', 'Failed'))) {
         $jobfileinfo = unserialize($file->job_info);
@@ -337,32 +344,29 @@ function _os2web_adlib_api_do_processing($limit = FALSE) {
                 $upd_file->filemime = file_get_mimetype($upd_file->uri);
                 $upd_file->filesize = filesize(drupal_realpath($upd_file->uri));
                 $upd_file->timestamp = time();
+                os2web_adlib_api_destroy_job($file->job_id);
                 drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
                 drupal_write_record('file_managed', $upd_file, array('fid'));
-                $adlib->deleteJob($file->job_id);
-                $folder = explode('\\', $jobfileinfo['basefolder']);
-                $adlib->deleteJobFolder($folder[1]);
                 error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated.");
               } else {
                 error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Filesize was 0. Aborting update.");
               }
               break;
-            case 1: // HTML 
+            case 1: // HTML
               $nid = $file->did;
               if ($node = node_load($nid)) {
-                $node->field_bpa_body[LANGUAGE_NONE][0]['value'] = $data;
-                $node->field_bpa_body[LANGUAGE_NONE][0]['format'] = 'full_html';
+                $node->field_bpa_body[LANGUAGE_NONE][0]['value'] = _os2web_adlib_api_process_html($data, $jobfileinfo['out_url']);
+                $node->field_bpa_body[LANGUAGE_NONE][0]['format'] = 'filtered_html';
                 $node->feeds = array();
                 node_save($node);
-                $adlib->deleteJob($file->job_id);
-                $folder = explode('\\', $jobfileinfo['basefolder']);
-                $adlib->deleteJobFolder($folder[1]);
-                drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
+//                os2web_adlib_api_destroy_job($file->job_id);
+//                drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
                 error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() - File converted, node updated.');
+                watchdog('adlib_api', 'File (fid: %fid) was converted successfully.', array('%fid' => $file->fid), WATCHDOG_INFO);
               }
               break;
             default:
-              error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '() - Unknown jobtype');
+              watchdog('adlib_api', 'Unknown jobtype returned from AdLib.', null, WATCHDOG_WARNING);
           }
         } elseif ($info['http_code'] === 404) { // File not found ??
           $record = array(
@@ -390,6 +394,62 @@ function _os2web_adlib_api_do_processing($limit = FALSE) {
   while ($file = $files->fetchObject()) {
     _os2web_adlib_api_queue_file($file);
   }
+  lock_release(__FUNCTION__);
+}
+
+/**
+ * This function validates html and fixes all image links
+ *
+ * @param type $data
+ * @return processed version of input
+ */
+function _os2web_adlib_api_process_html($data, $base_url) {
+  $base_dir = ADLIB_HTML_IMG_FOLDER;
+  if (!file_prepare_directory($base_dir, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+    watchdog('adlib_api', 'Cannot get write permission for the AdLib image store folder.', null, WATCHDOG_ERROR);
+    return;
+  }
+  module_load_include('php', 'os2web_adlib_api', 'simple_html_dom');
+  $html = str_get_html($data);
+  $img = $html->find('img');
+  for ($i = 0; $i < count($img); $i++) {
+    watchdog('adlib_api', 'Importing image for HTML: %fname', array('%fname' => basename($img[$i]->src)));
+    $image_url = $base_url . '/' . rawurlencode($img[$i]->src);
+    $download = curl_init($image_url);
+    if (variable_get('os2web_pws_proxy')) {
+      curl_setopt($download, CURLOPT_PROXY, variable_get('os2web_pws_proxy_host'));
+      curl_setopt($download, CURLOPT_PROXYPORT, variable_get('os2web_pws_proxy_port'));
+      curl_setopt($download, CURLOPT_HTTPPROXYTUNNEL, TRUE);
+    }
+    curl_setopt($download, CURLOPT_RETURNTRANSFER, TRUE);
+    $image = curl_exec($download);
+
+    $info = curl_getinfo($download);
+    if ($info['http_code'] === 200) {
+      $file_uri = $base_dir . basename(str_replace('\\', '/', $img[$i]->src)); // AdLib uses Windows folder notation
+      $file = file_save_data($image, $file_uri, FILE_EXISTS_REPLACE);
+      $img[$i]->src = file_create_url($file->uri);
+    } else {
+      watchdog('adlib_api', 'Failed to fetch image for HTML: %fname', array('%fname' => basename($element->src)), WATCHDOG_WARNING);
+    }
+  }
+  $data = (string) $html;
+
+  // Clean up the html, since AdLib sometimes return less-than-valid html and hence can cause PDO exceptions
+  if (!function_exists('tidy_repair_string')) {
+    watchdog('adlib_api', 'Tidy API not found! Cannot process HTML.', null, WATCHDOG_ERROR);
+  } else {
+    $config = array(
+//        'clean' => true,
+        'indent' => true,
+        'output-xhtml' => true,
+        'wrap' => 200,
+        'word-2000' => true,
+        'show-body-only' => true,
+    );
+    $data = tidy_repair_string($data, $config);
+  }
+  return $data;
 }
 
 /**
@@ -466,6 +526,14 @@ function _os2web_adlib_api_is_file_pdf($fid) {
 }
 
 function os2web_adlib_api_file_delete($file) {
+  if (is_numeric($file)) {
+    $file = db_select('os2web_adlib_api_doc_files', 'f')
+        ->fields('f')
+        ->condition('fid', $file)
+        ->execute()
+        ->fetchObject();
+  }
+  os2web_adlib_api_destroy_job($file->job_id);
   db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->fid)->execute();
   watchdog('adlib_api', 'File %file has been cleaned up from adlib conversion table.', array('%file' => $file->uri), WATCHDOG_DEBUG);
 }

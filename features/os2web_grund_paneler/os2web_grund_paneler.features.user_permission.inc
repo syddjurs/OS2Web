@@ -63,7 +63,9 @@ function os2web_grund_paneler_user_default_permissions() {
   // Exported permission: change layouts in place editing.
   $permissions['change layouts in place editing'] = array(
     'name' => 'change layouts in place editing',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'panels',
   );
 
@@ -140,7 +142,9 @@ function os2web_grund_paneler_user_default_permissions() {
   // Exported permission: use panels in place editing.
   $permissions['use panels in place editing'] = array(
     'name' => 'use panels in place editing',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'Administrator',
+    ),
     'module' => 'panels',
   );
 

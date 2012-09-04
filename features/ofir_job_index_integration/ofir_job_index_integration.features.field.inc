@@ -52,7 +52,7 @@ function ofir_job_index_integration_field_default_fields() {
             'image_style' => '',
           ),
           'type' => 'image',
-          'weight' => '3',
+          'weight' => '0',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -64,7 +64,7 @@ function ofir_job_index_integration_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '2',
         ),
       ),
       'entity_type' => 'node',
@@ -145,11 +145,11 @@ function ofir_job_index_integration_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
+          'label' => 'inline',
           'module' => 'date',
           'settings' => array(
             'format_type' => 'long',
-            'fromto' => 'both',
+            'fromto' => 'value2',
             'multiple_from' => '',
             'multiple_number' => '',
             'multiple_to' => '',
@@ -164,15 +164,22 @@ function ofir_job_index_integration_field_default_fields() {
           'weight' => 0,
         ),
         'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'label' => 'inline',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'value2',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+          ),
+          'type' => 'date_default',
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_period',
-      'label' => 'Periode',
+      'label' => 'Ansøgninsfrist',
       'required' => 0,
       'settings' => array(
         'default_value' => 'blank',
@@ -231,11 +238,11 @@ function ofir_job_index_integration_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -247,7 +254,7 @@ function ofir_job_index_integration_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '1',
         ),
       ),
       'entity_type' => 'node',
@@ -272,9 +279,9 @@ function ofir_job_index_integration_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Ansøgninsfrist');
   t('Beskrivelse');
   t('Logo');
-  t('Periode');
 
   return $fields;
 }

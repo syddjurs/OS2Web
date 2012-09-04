@@ -107,7 +107,7 @@ function ofir_job_index_integration_feeds_importer_default() {
     ),
     'content_type' => '',
     'update' => 0,
-    'import_period' => '-1',
+    'import_period' => '10800',
     'expire_period' => 3600,
     'import_on_create' => 1,
     'process_in_background' => 0,

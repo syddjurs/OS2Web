@@ -60,11 +60,10 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Sorteringskriterie: Indhold: Oprettelsesdato */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sorteringskriterie: Indhold: Ansøgninsfrist - slutdato (field_period:value2) */
+  $handler->display->display_options['sorts']['field_period_value2']['id'] = 'field_period_value2';
+  $handler->display->display_options['sorts']['field_period_value2']['table'] = 'field_data_field_period';
+  $handler->display->display_options['sorts']['field_period_value2']['field'] = 'field_period_value2';
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
@@ -79,14 +78,14 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'ofir_job' => 'ofir_job',
   );
-  /* Filterkriterie: Indhold: Periode - slutdato (field_period:value2) */
+  /* Filterkriterie: Indhold: Ansøgninsfrist - slutdato (field_period:value2) */
   $handler->display->display_options['filters']['field_period_value2']['id'] = 'field_period_value2';
   $handler->display->display_options['filters']['field_period_value2']['table'] = 'field_data_field_period';
   $handler->display->display_options['filters']['field_period_value2']['field'] = 'field_period_value2';
   $handler->display->display_options['filters']['field_period_value2']['operator'] = '>';
   $handler->display->display_options['filters']['field_period_value2']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_period_value2']['default_date'] = 'today';
-  /* Filterkriterie: Indhold: Periode -  startdato (field_period) */
+  /* Filterkriterie: Indhold: Ansøgninsfrist -  startdato (field_period) */
   $handler->display->display_options['filters']['field_period_value']['id'] = 'field_period_value';
   $handler->display->display_options['filters']['field_period_value']['table'] = 'field_data_field_period';
   $handler->display->display_options['filters']['field_period_value']['field'] = 'field_period_value';
