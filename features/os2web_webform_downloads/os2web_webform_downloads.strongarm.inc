@@ -238,7 +238,7 @@ function os2web_webform_downloads_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'webform_default_from_address';
-  $strongarm->value = 'admin@example.com';
+  $strongarm->value = 'hjemmeside@syddjurs.dk';
   $export['webform_default_from_address'] = $strongarm;
 
   $strongarm = new stdClass();

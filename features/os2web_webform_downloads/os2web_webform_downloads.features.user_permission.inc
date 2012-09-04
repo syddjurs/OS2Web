@@ -26,6 +26,8 @@ function os2web_webform_downloads_user_default_permissions() {
     'name' => 'access own webform results',
     'roles' => array(
       0 => 'Administrator',
+      1 => 'Editor',
+      2 => 'Webmaster',
     ),
     'module' => 'webform',
   );
@@ -55,6 +57,7 @@ function os2web_webform_downloads_user_default_permissions() {
     'name' => 'delete all webform submissions',
     'roles' => array(
       0 => 'Administrator',
+      1 => 'Webmaster',
     ),
     'module' => 'webform',
   );
@@ -94,6 +97,7 @@ function os2web_webform_downloads_user_default_permissions() {
     'name' => 'edit all webform submissions',
     'roles' => array(
       0 => 'Administrator',
+      1 => 'Webmaster',
     ),
     'module' => 'webform',
   );

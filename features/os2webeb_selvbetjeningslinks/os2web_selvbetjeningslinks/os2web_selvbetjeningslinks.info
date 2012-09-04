@@ -8,3 +8,13 @@ dependencies[] = feeds
 features[ctools][] = feeds:feeds_importer_default:1
 features[features_api][] = api:1
 features[feeds_importer][] = borger_online
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=1.1
+timestamp=1346750231
+
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=7.x-1.1
+timestamp=1346751781
+

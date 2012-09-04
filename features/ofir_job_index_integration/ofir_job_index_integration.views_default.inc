@@ -97,6 +97,16 @@ function ofir_job_index_integration_views_default_views() {
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Jobs i Syddjurs Kommune';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Overskrift: Global: Tekstområde */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Jobagent - header link';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
+  $handler->display->display_options['header']['area']['content'] = '<p style="padding-top:20px; padding-bottom:20px">Ønsker du at få tilsendt fremtidige stillingsopslag pr. e-mail? <a href="http://job.ofir.dk/Templates/Advertiser.asp?aguid=7DAE0E45-E8C0-43EF-9D3C-350F69BE5C9B&method=jobagent">Klik her for at oprette en jobagent.</a></p><br /><br />';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = 0;
   $handler->display->display_options['path'] = 'job-opslag';
 
   /* Display: Block */
@@ -126,6 +136,8 @@ function ofir_job_index_integration_views_default_views() {
     t('Forskydning'),
     t('Page'),
     t('Jobs i Syddjurs Kommune'),
+    t('Jobagent - header link'),
+    t('<p style="padding-top:20px; padding-bottom:20px">Ønsker du at få tilsendt fremtidige stillingsopslag pr. e-mail? <a href="http://job.ofir.dk/Templates/Advertiser.asp?aguid=7DAE0E45-E8C0-43EF-9D3C-350F69BE5C9B&method=jobagent">Klik her for at oprette en jobagent.</a></p><br /><br />'),
     t('Block'),
     t('Jobs fra Ofir.dk:'),
   );

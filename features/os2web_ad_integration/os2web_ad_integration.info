@@ -24,3 +24,13 @@ features[variable][] = ldap_profile_conf
 features[variable][] = ldap_servers_encrypt_key
 features[variable][] = ldap_servers_encryption
 features[variable][] = ldap_servers_require_ssl_for_credentails
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=1.1
+timestamp=1346750231
+
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=7.x-1.1
+timestamp=1346751781
+

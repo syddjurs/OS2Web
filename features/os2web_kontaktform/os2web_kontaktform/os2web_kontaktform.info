@@ -11,3 +11,13 @@ features[features_api][] = api:1
 features[user_permission][] = access site-wide contact form
 features[user_permission][] = access user contact forms
 features[user_permission][] = administer contact forms
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=1.1
+timestamp=1346750231
+
+;Added by OS2Web 2012-09-04
+project=OS2Web
+version=7.x-1.1
+timestamp=1346751781
+

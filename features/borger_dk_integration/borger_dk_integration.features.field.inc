@@ -523,7 +523,7 @@ function borger_dk_integration_field_default_fields() {
       'label' => 'Subsite logo',
       'required' => 0,
       'settings' => array(
-        'alt_field' => 0,
+        'alt_field' => 1,
         'default_image' => 0,
         'file_directory' => 'subsite/logo',
         'file_extensions' => 'png gif jpg jpeg',
@@ -538,10 +538,15 @@ function borger_dk_integration_field_default_fields() {
         'module' => 'image',
         'settings' => array(
           'filefield_sources' => array(
-            'filefield_sources' => array(),
+            'filefield_sources' => array(
+              'attach' => 0,
+              'plupload' => 0,
+              'reference' => 0,
+              'remote' => 0,
+            ),
             'source_attach' => array(
-              'absolute' => 0,
-              'attach_mode' => 'move',
+              'absolute' => '0',
+              'attach_mode' => 'copy',
               'path' => 'file_attach',
             ),
             'source_reference' => array(

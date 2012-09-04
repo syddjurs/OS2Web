@@ -31,7 +31,7 @@ function kulturnaut_events_feeds_importer_default() {
         'sources' => array(
           'xpathparser:1' => 'overskrift',
           'xpathparser:2' => 'beskrivelse',
-          'xpathparser:4' => 'url',
+          'xpathparser:4' => 'concat(\'http://www.djurslive.dk\', substring-after(url,\'.dk\'))',
           'xpathparser:7' => 'sted',
           'xpathparser:13' => 'startdato',
           'xpathparser:14' => 'slutdato',

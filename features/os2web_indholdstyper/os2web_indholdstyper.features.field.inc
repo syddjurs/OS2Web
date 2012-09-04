@@ -272,7 +272,11 @@ function os2web_indholdstyper_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_doc',
       'foreign keys' => array(),
-      'indexes' => array(),
+      'indexes' => array(
+        'doc_ident' => array(
+          0 => 'doc_ident',
+        ),
+      ),
       'module' => 'os2web_doc_field',
       'settings' => array(),
       'translatable' => '0',
