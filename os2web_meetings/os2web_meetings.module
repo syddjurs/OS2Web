@@ -284,7 +284,12 @@ function os2web_meetings_order_addenums() {
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
   // meetings as: $meetings[<meeting_id>][<system_id>][<node_id>]
+  $nids = array();
   foreach ($nodes as $node) {
+    $addenum_to =field_get_items('node', $node, 'field_addenum_to'); 
+    if (isset($addenum_to[0]['nid']) && is_numeric($addenum_to[0]['nid'])) {
+      $nids[$node->nid]=$node->nid;
+    }
     $meeting_id = array_shift(field_get_items('node', $node, 'field_meeting_id'));
     $system_id = array_shift(field_get_items('node', $node, 'field_system_id'));
     if (isset($meetings[$meeting_id['value']][$system_id['value']])) {
@@ -303,8 +308,14 @@ function os2web_meetings_order_addenums() {
       $node = $nodes[$next];
       $node->field_addenum_to[$node->language][0]['nid'] = $primary;
       node_save($node);
+      unset($nids[$node->nid]);
       watchdog('os2web_meetings', 'Updated %nid1 as addenum to %nid2 .', array('%nid1' => $node->nid, '%nid2' => $primary), WATCHDOG_INFO);
     }
+  }
+  foreach ($nids as $nid) {
+    $node = node_load($nid);
+    $node->field_addenum_to = array();
+    node_save($node);
   }
 }
 
