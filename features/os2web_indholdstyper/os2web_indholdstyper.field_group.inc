@@ -221,11 +221,7 @@ function os2web_indholdstyper_field_group_info() {
       3 => 'field_site_structure',
       4 => 'field_noderef_selvbtjn',
       5 => 'field_skjul_relaterede_links',
-      6 => 'additional_settings',
-      7 => 'revision_information',
-      8 => 'author',
-      9 => 'options',
-      10 => 'group_hidden',
+      6 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

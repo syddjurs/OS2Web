@@ -1128,7 +1128,7 @@ function os2web_indholdstyper_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '0',
+        'weight' => '1',
       ),
     ),
   );
@@ -1479,7 +1479,7 @@ function os2web_indholdstyper_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );

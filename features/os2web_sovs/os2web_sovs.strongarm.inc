@@ -893,48 +893,6 @@ function os2web_sovs_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'multistep_button_done';
-  $strongarm->value = 'Færdig';
-  $export['multistep_button_done'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'multistep_button_next';
-  $strongarm->value = 'Næste >';
-  $export['multistep_button_next'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'multistep_button_prev';
-  $strongarm->value = '< Forrige';
-  $export['multistep_button_prev'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'multistep_button_save';
-  $strongarm->value = 'Gem';
-  $export['multistep_button_save'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'rel_build_form_registration';
-  $strongarm->value = 1;
-  $export['rel_build_form_registration'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'rel_build_registration_ignore';
-  $strongarm->value = 'admin/*';
-  $export['rel_build_registration_ignore'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'save_continue_gallery_item';
   $strongarm->value = 'Gem og tilføj felter';
   $export['save_continue_gallery_item'] = $strongarm;
