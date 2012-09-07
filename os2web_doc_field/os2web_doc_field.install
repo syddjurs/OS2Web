@@ -24,7 +24,7 @@ function os2web_doc_field_uninstall() {
 /**
  * Add more room for documents in the DB
  */
-function os2web_doc_field_update_7001(&$sandbox) {
+function os2web_doc_field_update_7002(&$sandbox) {
   foreach (field_info_fields() as $field_name => $field) {
     if ($field['type'] != 'doc_ident') {
       // Not an entity reference field.
@@ -41,6 +41,12 @@ function os2web_doc_field_update_7001(&$sandbox) {
     $revision_name = _field_sql_storage_revision_tablename($field);
     
     db_change_field($table_name, $field_name . '_doc_ident', $field_name . '_doc_ident', array(
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+          ));
+    db_change_field($revision_name, $field_name . '_doc_ident', $field_name . '_doc_ident', array(
               'type' => 'varchar',
               'length' => 255,
               'not null' => TRUE,
