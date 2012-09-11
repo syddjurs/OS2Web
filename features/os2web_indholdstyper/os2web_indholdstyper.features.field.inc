@@ -90,7 +90,7 @@ function os2web_indholdstyper_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '5',
+        'weight' => '2',
       ),
     ),
   );
@@ -1339,7 +1339,7 @@ function os2web_indholdstyper_field_default_fields() {
         'active' => 1,
         'module' => 'options',
         'settings' => array(
-          'display_label' => 0,
+          'display_label' => 1,
         ),
         'type' => 'options_onoff',
         'weight' => '6',
@@ -1403,7 +1403,7 @@ function os2web_indholdstyper_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '1',
+        'weight' => '18',
       ),
     ),
   );
@@ -1479,7 +1479,7 @@ function os2web_indholdstyper_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );

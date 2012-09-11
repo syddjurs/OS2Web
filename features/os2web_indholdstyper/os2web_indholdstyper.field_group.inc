@@ -188,6 +188,7 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'body',
+      1 => 'field_resume_long',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -218,10 +219,9 @@ function os2web_indholdstyper_field_group_info() {
       0 => 'field_rotate_publish',
       1 => 'field_node_reference_kontaktblok',
       2 => 'field_indholdsside_spotboxe',
-      3 => 'field_site_structure',
-      4 => 'field_noderef_selvbtjn',
-      5 => 'field_skjul_relaterede_links',
-      6 => 'group_hidden',
+      3 => 'field_noderef_selvbtjn',
+      4 => 'field_skjul_relaterede_links',
+      5 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -249,6 +249,7 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '18',
     'children' => array(
       0 => 'field_source_id',
+      1 => 'field_site_structure',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -332,7 +333,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Indholdsside',
-    'weight' => '4',
+    'weight' => '2',
     'children' => array(
       0 => 'group_billeder',
       1 => 'group_esdh',
