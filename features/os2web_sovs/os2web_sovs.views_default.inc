@@ -296,6 +296,25 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['filters']['field_termref_kle_tid']['value'] = '';
   $handler->display->display_options['filters']['field_termref_kle_tid']['reduce_duplicates'] = 0;
   $handler->display->display_options['filters']['field_termref_kle_tid']['vocabulary'] = 'kle';
+  /* Filterkriterie: Indhold: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'baggrund' => 'baggrund',
+    'rotating_image' => 'rotating_image',
+    'borger_dk_permalink' => 'borger_dk_permalink',
+    'borgerservices' => 'borgerservices',
+    'bullet_point_attachment' => 'bullet_point_attachment',
+    'right_column' => 'right_column',
+    'kontaktblok' => 'kontaktblok',
+    'media' => 'media',
+    'panel' => 'panel',
+    'selvbetjeningslinks' => 'selvbetjeningslinks',
+    'spotbox' => 'spotbox',
+    'tema' => 'tema',
+  );
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'kle_links_boks');
@@ -2918,12 +2937,14 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['field'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['label'] = '';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '<a href=[field_selvbetjening_direkte-value]>[title]</a>';
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['path'] = '[field_selvbetjening_direkte-value]';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['external'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alt'] = '[title]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['ellipsis'] = 1;
@@ -2933,7 +2954,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['html'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=[field_attached_node]>[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href=/[field_attached_node]>[title]</a>';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = 1;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = 0;
@@ -4151,7 +4172,8 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-indholdsside';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -4226,6 +4248,7 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_attached_node_1']['field'] = 'field_attached_node';
   $handler->display->display_options['fields']['field_attached_node_1']['relationship'] = 'field_noderef_selvbtjn_nid';
   $handler->display->display_options['fields']['field_attached_node_1']['label'] = '';
+  $handler->display->display_options['fields']['field_attached_node_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_attached_node_1']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_attached_node_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_attached_node_1']['alter']['absolute'] = 0;
@@ -4244,7 +4267,11 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['field_attached_node_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_attached_node_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_attached_node_1']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_attached_node_1']['type'] = 'node_reference_nid';
+  $handler->display->display_options['fields']['field_attached_node_1']['type'] = 'node_reference_path';
+  $handler->display->display_options['fields']['field_attached_node_1']['settings'] = array(
+    'alias' => 1,
+    'absolute' => 0,
+  );
   $handler->display->display_options['fields']['field_attached_node_1']['field_api_classes'] = 0;
   /* Felt: Indhold: Titel */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -4274,6 +4301,32 @@ function os2web_sovs_views_default_views() {
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Felt: Indhold: Sti */
+  $handler->display->display_options['fields']['path']['id'] = 'path';
+  $handler->display->display_options['fields']['path']['table'] = 'node';
+  $handler->display->display_options['fields']['path']['field'] = 'path';
+  $handler->display->display_options['fields']['path']['relationship'] = 'field_noderef_selvbtjn_nid';
+  $handler->display->display_options['fields']['path']['label'] = '';
+  $handler->display->display_options['fields']['path']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['path']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['path']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['path']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['path']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['path']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['path']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['path']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['path']['absolute'] = 0;
   /* Felt: Indhold: Direkte link */
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['id'] = 'field_selvbetjening_direkte';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['table'] = 'field_data_field_selvbetjening_direkte';
@@ -4354,8 +4407,8 @@ function os2web_sovs_views_default_views() {
     t('<h3><a href="/selvbetjening">Selvbetjening</a></h3>'),
     t('[field_selvbetjening_direkte]'),
     t('selvbetjening-megamenu'),
-    t('<a href=[field_selvbetjening_direkte-value]>[title]</a>'),
-    t('<a href=[field_attached_node]>[title]</a>'),
+    t('[title]'),
+    t('<a href=/[field_attached_node]>[title]</a>'),
     t('SB-block-forside-att-1'),
     t('<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
     t('SB-block-forside-att-2'),
@@ -4363,9 +4416,11 @@ function os2web_sovs_views_default_views() {
     t('<div class="aktuel-genvej>Aktuelle Genveje</div>'),
     t('<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706">Borger.dk</a><a class="virkdk" href="http://virk.dk">Virk.dk</a></div>'),
     t('<a href=[field_selvbetjening_direkte]>[title]</a>'),
+    t('<a href=[field_attached_node]>[title]</a>'),
     t('Aktuelle genveje'),
     t('SB-block-portal'),
     t('Selvbetjening - footerlinks'),
+    t('<a href=[field_selvbetjening_direkte-value]>[title]</a>'),
     t('SB-block-portal-att-1'),
     t('SB-block-portal-att-2'),
     t('<div class="aktuel-genvej-portal">Aktuelle Genveje</div>'),

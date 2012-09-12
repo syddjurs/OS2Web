@@ -14,6 +14,7 @@ function os2web_acadre_arp_menu() {
       'type' => MENU_CALLBACK,
       'page callback' => '_os2web_acadre_arp_test_page',
       'access callback' => array('administer os2web'),
+      'access callback' => TRUE,
   );
   $items['os2web/ws/arp'] = array(
       'type' => MENU_CALLBACK,
@@ -25,7 +26,8 @@ function os2web_acadre_arp_menu() {
 
 function _os2web_acadre_arp_test_page() {
   module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
-  $options = array(
+
+$options = array(
       'login' => 'acadre',
       'password' => 'PernoD=38%',
 //      'proxy_host' => 'localhost',
@@ -54,8 +56,8 @@ function _os2web_acadre_arp_test_page() {
   try {
     $call = $client->getPhysicalFile($args);
   } catch (Exception $exc) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $client = ' . print_r($client, 1));
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc, 1));
+//    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $client = ' . print_r($client, 1));
+    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc->getTraceAsString(), 1));
   }
   return '<pre>' . print_r($call, 1);
 }
@@ -65,12 +67,15 @@ function _os2web_acadre_arp_test_page() {
  * 
  * @access protected
  * @return void
+ *
+ * Example http://mydomain.dk/os2web/ws/arp?wsdl 
  */
 function _os2web_acadre_arp_soap_server() {
   if (isset($_GET['wsdl'])) {
     _os2web_acadre_arp_get_wsdl();
   }
   global $HTTP_RAW_POST_DATA;
+  
   ini_set("soap.wsdl_cache_enabled", "0");
   $server = new SoapServer(drupal_get_path('module', 'os2web_acadre_arp') . '/os2web_acadre_arp_publishing_handler.wsdl');
   $count = variable_get('os2web_acadre_arp_soap_count', 0);
@@ -456,7 +461,9 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
   }
   $data = $call->GetPhysicalFileResult;
 
-  $uri = 'public://arp-docs/' . $filename;
+  $directory = variable_get('os2web_arp_directory', 'public://arp-docs');
+  file_prepare_directory($directory, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSONS);
+  $uri = $directory . '/' . $filename;
   $fid = db_select('file_managed', 'fm')
           ->fields('fm', array('fid'))
           ->condition('uri', $uri)

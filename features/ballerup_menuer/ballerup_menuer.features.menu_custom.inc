@@ -10,12 +10,6 @@
 function ballerup_menuer_menu_default_menu_custom() {
   $menus = array();
 
-  // Exported menu: devel
-  $menus['devel'] = array(
-    'menu_name' => 'devel',
-    'title' => 'Development',
-    'description' => 'Development link',
-  );
   // Exported menu: features
   $menus['features'] = array(
     'menu_name' => 'features',
@@ -131,8 +125,6 @@ function ballerup_menuer_menu_default_menu_custom() {
   t('BFO\'er og Klubber');
   t('Botilbud');
   t('Dette er et testområde til demo');
-  t('Development');
-  t('Development link');
   t('Din kommune');
   t('Egenskaber');
   t('Erhverv genveje');

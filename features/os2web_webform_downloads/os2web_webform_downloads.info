@@ -3,7 +3,7 @@ description = Download af filer vha. webforms
 core = 7.x
 package = OS2Web
 php = 5.2.4
-version = 7.x-3.0
+version = 7.x-1.1
 project = os2web_webform_downloads
 dependencies[] = borger_dk_integration
 dependencies[] = features
@@ -76,3 +76,9 @@ features[variable][] = webform_search_index
 features[variable][] = webform_submission_access_control
 features[variable][] = webform_use_cookies
 features[variable][] = workbench_access_node_type_webform
+timestamp = 1346751781
+;Added by OS2Web 2012-09-12
+project=OS2Web
+version=7.x-1.2
+timestamp=1347452763
+

@@ -977,7 +977,7 @@ return os2web_kontaktblok_get_block();
   $handler->display->display_options['fields']['field_phone1']['element_class'] = 'telefonnummer, kontaktblok-indhold';
   $handler->display->display_options['fields']['field_phone1']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_phone1']['element_default_classes'] = 0;
-  $handler->display->display_options['fields']['field_phone1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_phone1']['hide_empty'] = 1;
   $handler->display->display_options['fields']['field_phone1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_phone1']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_phone1']['type'] = 'number_unformatted';

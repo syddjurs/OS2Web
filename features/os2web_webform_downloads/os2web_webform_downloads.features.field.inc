@@ -693,7 +693,7 @@ function os2web_webform_downloads_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_webform_attachment',
       'label' => 'Webform attachment',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'description_field' => 0,
         'file_directory' => '',
