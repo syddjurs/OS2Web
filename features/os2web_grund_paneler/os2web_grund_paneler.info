@@ -46,3 +46,8 @@ features[user_permission][] = use panels locks
 features[user_permission][] = view pane admin links
 features[views_view][] = redaktoer_info
 timestamp = 1346751781
+;Added by OS2Web 2012-09-12
+project=OS2Web
+version=7.x-1.2
+timestamp=1347452763
+
