@@ -1655,5 +1655,40 @@ function os2web_design_delta_default_templates() {
   );
   $export['portalforside'] = $delta;
 
+  $delta = new stdClass();
+  $delta->disabled = FALSE; /* Edit this to true to make a default delta disabled initially */
+  $delta->api_version = 3;
+  $delta->machine_name = 'standard';
+  $delta->name = 'Standard';
+  $delta->description = '';
+  $delta->theme = 'cmstheme';
+  $delta->mode = 'preserve';
+  $delta->parent = '';
+  $delta->settings = array(
+    'theme_cmstheme_settings' => array(
+      'alpha_debug_block_toggle' => 0,
+      'alpha_debug_grid_toggle' => 0,
+      'alpha_debug_grid_roles' => array(
+        1 => 0,
+        2 => 0,
+        6 => 0,
+        4 => 0,
+        7 => 0,
+        3 => 0,
+        5 => 0,
+      ),
+      'alpha_region_preface_second_columns' => '4',
+      'alpha_region_preface_third_columns' => '4',
+      'alpha_region_preface_first_css' => '',
+      'alpha_region_sidebar_second_css' => 'omega',
+    ),
+    'color_cmstheme_files' => NULL,
+    'color_cmstheme_logo' => NULL,
+    'color_cmstheme_palette' => NULL,
+    'color_cmstheme_stylesheets' => NULL,
+    'color_cmstheme_screenshot' => NULL,
+  );
+  $export['standard'] = $delta;
+
   return $export;
 }
