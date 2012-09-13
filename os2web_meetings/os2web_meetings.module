@@ -1,7 +1,7 @@
 <?php
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
-define('MEETINGS_FORCE_RECREATE', false); // Delete existing nodes before import
+define('MEETINGS_FORCE_RECREATE', true); // Delete existing nodes before import
 define('MEETINGS_FOCUS', false); // File key for import
 define('MEETINGS_MEETING_FOCUS', false); // Meeting id
 define('MEETINGS_CLEAR_COMMITTEE', false); // Clean out invalid committees
@@ -288,6 +288,7 @@ function os2web_meetings_do_import() {
  *
  */
 function os2web_meetings_order_addenums() {
+  $rev_meetings = array( 1458);
   // Find all meetings and gather meeting and agenda_ids
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
@@ -310,6 +311,9 @@ function os2web_meetings_order_addenums() {
   }
   foreach ($meetings as $m_id => $meeting) {
     ksort($meeting); // Lowest system id first
+    if (in_array($m_id, $rev_meetings)) {
+      $meeting = array_reverse($meeting);
+    }
     $primary = array_shift($meeting); // Lowest system id is primary
     while ($next = array_shift($meeting)) {
       // Set up references for addenum agendas
@@ -767,7 +771,7 @@ function _os2web_meetings_import_location(SimpleXMLElement $xml) {
  */
 function _os2web_meetings_similar_file_exists($filename) {
   if (file_exists($filename)) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
+//    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
     return $filename;
   }
 
