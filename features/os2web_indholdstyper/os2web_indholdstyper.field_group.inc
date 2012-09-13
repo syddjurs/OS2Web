@@ -18,23 +18,18 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_indholdsside';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Billeder og filer',
-    'weight' => '5',
+    'weight' => '1',
     'children' => array(
       0 => 'field_lead_image',
       1 => 'field_mediafile',
       2 => 'field_billede',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'multistep',
     'format_settings' => array(
-      'formatter' => 'closed',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
+      'label' => 'Billeder og filer',
     ),
   );
   $export['group_billeder|node|contentpage|form'] = $field_group;
@@ -123,23 +118,18 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_indholdsside';
+  $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Sager og dokumenter',
-    'weight' => '6',
+    'label' => 'Acadre sager og dokumenter',
+    'weight' => '2',
     'children' => array(
       0 => 'field_case',
       1 => 'field_doc',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'multistep',
     'format_settings' => array(
-      'label' => 'Sager og dokumenter',
-      'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => '',
-        'description' => '',
-      ),
-      'formatter' => 'closed',
+      'formatter' => '',
+      'instance_settings' => NULL,
     ),
   );
   $export['group_esdh|node|contentpage|form'] = $field_group;
@@ -152,24 +142,19 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_indholdsside';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Emneord',
-    'weight' => '7',
+    'weight' => '3',
     'children' => array(
       0 => 'field_editortags',
       1 => 'field_termref_sted',
       2 => 'field_organization',
       3 => 'field_politics',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'multistep',
     'format_settings' => array(
-      'formatter' => 'closed',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
+      'label' => 'Emneord',
     ),
   );
   $export['group_extras|node|contentpage|form'] = $field_group;
@@ -182,23 +167,20 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_indholdsside';
+  $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Tekst',
-    'weight' => '4',
+    'label' => 'Generelt',
+    'weight' => '0',
     'children' => array(
       0 => 'body',
       1 => 'field_resume_long',
+      2 => 'field_termref_kle',
+      3 => 'title',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'multistep',
     'format_settings' => array(
-      'label' => 'Tekst',
-      'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => '',
-        'description' => '',
-      ),
-      'formatter' => 'closed',
+      'formatter' => '',
+      'instance_settings' => NULL,
     ),
   );
   $export['group_general|node|contentpage|form'] = $field_group;
@@ -211,26 +193,27 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'contentpage';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_indholdsside';
+  $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Indstillinger',
-    'weight' => '8',
+    'weight' => '4',
     'children' => array(
       0 => 'field_rotate_publish',
       1 => 'field_node_reference_kontaktblok',
       2 => 'field_indholdsside_spotboxe',
-      3 => 'field_noderef_selvbtjn',
-      4 => 'field_skjul_relaterede_links',
-      5 => 'group_hidden',
+      3 => 'field_site_structure',
+      4 => 'field_noderef_selvbtjn',
+      5 => 'path',
+      6 => 'additional_settings',
+      7 => 'revision_information',
+      8 => 'author',
+      9 => 'options',
+      10 => 'group_hidden',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'multistep',
     'format_settings' => array(
-      'formatter' => 'closed',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
+      'formatter' => '',
+      'instance_settings' => NULL,
     ),
   );
   $export['group_gruppe3|node|contentpage|form'] = $field_group;
@@ -246,10 +229,9 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_gruppe3';
   $field_group->data = array(
     'label' => 'Skjult',
-    'weight' => '18',
+    'weight' => '39',
     'children' => array(
       0 => 'field_source_id',
-      1 => 'field_site_structure',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

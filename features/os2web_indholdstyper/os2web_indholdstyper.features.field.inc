@@ -694,11 +694,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 'default',
-            0 => 0,
             'image' => 0,
             'video' => 0,
+            0 => 0,
+            'audio' => 0,
+            'default' => 'default',
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -1279,74 +1279,6 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_skjul_relaterede_links'
-  $fields['node-contentpage-field_skjul_relaterede_links'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_skjul_relaterede_links',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          0 => '0',
-          1 => '1',
-        ),
-        'allowed_values_function' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_boolean',
-    ),
-    'field_instance' => array(
-      'bundle' => 'contentpage',
-      'default_value' => array(
-        0 => array(
-          'value' => 0,
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => 17,
-        ),
-        'related_block' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_skjul_relaterede_links',
-      'label' => 'Skjul relaterede links',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(
-          'display_label' => 1,
-        ),
-        'type' => 'options_onoff',
-        'weight' => '6',
-      ),
-    ),
-  );
-
   // Exported field: 'node-contentpage-field_source_id'
   $fields['node-contentpage-field_source_id'] = array(
     'field_config' => array(
@@ -1403,7 +1335,7 @@ function os2web_indholdstyper_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '18',
+        'weight' => '1',
       ),
     ),
   );
@@ -1479,7 +1411,7 @@ function os2web_indholdstyper_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '3',
+        'weight' => '-1',
       ),
     ),
   );
@@ -1555,7 +1487,7 @@ function os2web_indholdstyper_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '9',
+        'weight' => '28',
       ),
     ),
   );
@@ -6205,7 +6137,6 @@ function os2web_indholdstyper_field_default_fields() {
   t('Sag');
   t('Selvbetjeningslinks');
   t('Skal være inkl. <i>http://</i> hvis det er sider uden for sitet. Skal kun bruges til sider ser ikke kan indlejres som indhold via iframe.');
-  t('Skjul relaterede links');
   t('Source ID');
   t('Spotboxe');
   t('Stikord');
