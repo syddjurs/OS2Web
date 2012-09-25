@@ -1,4 +1,27 @@
 <?php
+
+/**
+ * Inject additional Javascripts 
+ * 
+ * @access public
+ * @return void
+ */
+function os2web_special_init() {
+  $script = <<<EOS
+    /*<![CDATA[*/
+    (function() {
+     var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+     sz.src = '//ssl.siteimprove.com/js/siteanalyze_1480.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+     })();
+  /*]]>*/
+EOS;
+  drupal_add_js($script, array(
+        'scope' => 'footer', 
+        'type' => 'inline', 
+        'every_page' => true));
+}
+
 /**
  * Implements hook_menu_minipanels_styles();
  * Adds extra style selection for minipanel
