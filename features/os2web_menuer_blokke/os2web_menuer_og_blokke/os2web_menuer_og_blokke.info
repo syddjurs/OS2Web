@@ -2,11 +2,12 @@ name = OS2Web Menuer og Blokke
 core = 7.x
 package = Features
 php = 5.2.4
-version = 7.x-3.0
+version = 7.x-1.2
 project = os2web_menuer_og_blokke
 dependencies[] = block
 dependencies[] = context
 dependencies[] = ctools
+dependencies[] = features
 dependencies[] = menu
 dependencies[] = nice_menus
 dependencies[] = views
@@ -15,19 +16,7 @@ features[context][] = os2web_diverse
 features[ctools][] = context:context:3
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
+features[menu_custom][] = menu-indholdsmenu
+features[menu_custom][] = menu-overordnet-sitemenu
 features[views_view][] = os2web_diverse
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=1.1
-timestamp=1346750231
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=7.x-1.1
-timestamp=1346751781
-
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763
