@@ -145,7 +145,8 @@ function os2web_test_page() {
   $pws = _os2web_pws_get_instance();
 //  $adlib = _os2web_adlib_get_instance();
 //  $call = $pws->lookupCase('11/14293');
-  $call = $pws->fetchCase($pws->lookupCase('11/4949'));
+//  $call = $pws->fetchCase($pws->lookupCase('11/4949'));
+    $call = $pws->getDocInfo(1420175);
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/4949'));
 //  $call = array($pws->getCaseDocs('388538'),$pws->getCaseDocs('388531'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('12/6202'));
