@@ -19,22 +19,7 @@ function os2web_acadre_arp_field_group_info() {
   $field_group->bundle = 'arp_case';
   $field_group->mode = 'default';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Filer',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_additional_docs',
-      1 => 'field_documents',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_arp_files|node|arp_case|default'] = $field_group;
 
   $field_group = new stdClass();
@@ -46,23 +31,7 @@ function os2web_acadre_arp_field_group_info() {
   $field_group->bundle = 'arp_case';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Filer',
-    'weight' => '1',
-    'children' => array(
-      0 => 'field_additional_docs',
-      1 => 'field_documents',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_arp_files|node|arp_case|form'] = $field_group;
 
   $field_group = new stdClass();
@@ -74,26 +43,7 @@ function os2web_acadre_arp_field_group_info() {
   $field_group->bundle = 'arp_case';
   $field_group->mode = 'default';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Meta',
-    'weight' => '0',
-    'children' => array(
-      0 => 'field_termref_kle',
-      1 => 'field_arp_case_type',
-      2 => 'body',
-      3 => 'field_arp_case_created',
-      4 => 'field_arp_case_last_modified',
-      5 => 'field_arp_case_id',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_arp_meta|node|arp_case|default'] = $field_group;
 
   $field_group = new stdClass();
@@ -105,29 +55,7 @@ function os2web_acadre_arp_field_group_info() {
   $field_group->bundle = 'arp_case';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Meta',
-    'weight' => '0',
-    'children' => array(
-      0 => 'field_termref_kle',
-      1 => 'field_arp_case_type',
-      2 => 'body',
-      3 => 'field_arp_case_created',
-      4 => 'field_arp_case_last_modified',
-      5 => 'field_arp_case_id',
-      6 => 'title',
-      7 => 'field_arp_party',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_arp_meta|node|arp_case|form'] = $field_group;
 
   return $export;
