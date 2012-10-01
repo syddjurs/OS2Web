@@ -2,8 +2,8 @@ name = OS2Web Ofir Job
 core = 7.x
 package = Features
 php = 5.2.4
-version = 7.x-3.0
-project = os2web_ofir_job
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = block
 dependencies[] = context
 dependencies[] = ctools
@@ -13,18 +13,4 @@ dependencies[] = views
 features[context][] = jobliste
 features[ctools][] = context:context:3
 features[features_api][] = api:1
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=1.1
-timestamp=1346750231
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=7.x-1.1
-timestamp=1346751781
-
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763

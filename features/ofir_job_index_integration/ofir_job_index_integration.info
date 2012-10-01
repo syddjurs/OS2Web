@@ -3,8 +3,8 @@ description = Varetager integration af job opslag fra Ofir.dk
 core = 7.x
 package = OS2Web
 php = 5.2.4
-version = 7.x-1.1
-project = ofir_job_index_integration
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = date
 dependencies[] = features
 dependencies[] = feeds
@@ -32,9 +32,4 @@ features[variable][] = node_preview_ofir_job
 features[variable][] = node_submitted_ofir_job
 features[variable][] = save_continue_ofir_job
 features[views_view][] = ofir_job_lister
-timestamp = 1346751781
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763

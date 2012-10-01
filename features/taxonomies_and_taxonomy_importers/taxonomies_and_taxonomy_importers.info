@@ -3,8 +3,8 @@ description = Feature tilføjer taxonomier og feeds importers
 core = 7.x
 package = OS2Web
 php = 5.2.4
-version = 7.x-1.1
-project = taxonomies_and_taxonomy_importers
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = feeds
@@ -48,9 +48,4 @@ features[taxonomy][] = portalkategori
 features[taxonomy][] = redaktoertags
 features[taxonomy][] = tags
 features[taxonomy][] = user_position
-timestamp = 1346751781
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763

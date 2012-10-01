@@ -19,37 +19,7 @@ function os2web_kontaktblok_field_group_info() {
   $field_group->bundle = 'kontaktblok';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Åbningstider',
-    'weight' => '11',
-    'children' => array(
-      0 => 'field_kontaktblok_aa_manaa',
-      1 => 'field_kontaktblok_aa_manlk',
-      2 => 'field_kontaktblok_aa_tiraa',
-      3 => 'field_kontaktblok_aa_tirlk',
-      4 => 'field_kontaktblok_aa_onsaa',
-      5 => 'field_kontaktblok_aa_onslk',
-      6 => 'field_kontaktblok_aa_toraa',
-      7 => 'field_kontaktblok_aa_torlk',
-      8 => 'field_kontaktblok_aa_freaa',
-      9 => 'field_kontaktblok_aa_frelk',
-      10 => 'field_kontaktblok_aa_loeaa',
-      11 => 'field_kontaktblok_aa_loelk',
-      12 => 'field_kontaktblok_aa_soeaa',
-      13 => 'field_kontaktblok_aa_soelk',
-      14 => 'field_kontaktblok_aa_manons',
-      15 => 'field_kontaktblok_aa_manolk',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_aabningstider|node|kontaktblok|form'] = $field_group;
 
   return $export;

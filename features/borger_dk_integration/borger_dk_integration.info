@@ -3,14 +3,13 @@ description = Integration og præsentation af Borger.dk materiale
 core = 7.x
 package = Features
 php = 5.2.4
-version = 7.x-1.1
+version = 7.x-1.2
 project = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = image
 dependencies[] = list
 dependencies[] = node_reference
-dependencies[] = os2web_sovs
 dependencies[] = page_manager
 dependencies[] = php
 dependencies[] = rules
@@ -46,9 +45,4 @@ features[variable][] = menu_parent_borger_dk_permalink
 features[variable][] = node_options_borger_dk_permalink
 features[variable][] = node_preview_borger_dk_permalink
 features[variable][] = node_submitted_borger_dk_permalink
-timestamp = 1346751781
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763

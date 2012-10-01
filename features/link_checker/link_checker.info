@@ -3,8 +3,8 @@ description = Opsætning af Link checker
 core = 7.x
 package = OS2Web
 php = 5.2.4
-version = 7.x-3.0
-project = link_checker
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = ctools
 dependencies[] = strongarm
 datestamp = 1338117520
@@ -29,18 +29,4 @@ features[variable][] = linkchecker_ignore_response_codes
 features[variable][] = linkchecker_scan_blocks
 features[variable][] = linkchecker_scan_comments
 features[variable][] = linkchecker_scan_nodetypes
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=1.1
-timestamp=1346750231
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=7.x-1.1
-timestamp=1346751781
-
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763

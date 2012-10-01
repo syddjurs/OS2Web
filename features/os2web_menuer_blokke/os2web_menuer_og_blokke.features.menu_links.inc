@@ -264,11 +264,11 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
       'alter' => TRUE,
     ),
     'module' => 'system',
-    'hidden' => '1',
+    'hidden' => '0',
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-42',
+    'weight' => '-10',
   );
   // Exported menu link: user-menu:user/logout
   $menu_links['user-menu:user/logout'] = array(
@@ -282,7 +282,7 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-41',
+    'weight' => '10',
   );
   // Translatables
   // Included for use with string extractors like potx.

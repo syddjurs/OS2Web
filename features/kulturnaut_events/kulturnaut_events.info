@@ -3,8 +3,8 @@ description = Varetager integration af begivenhed fra Kulturnaut.dk
 core = 7.x
 package = OS2Web
 php = 5.2.4
-version = 7.x-1.1
-project = kulturnaut_events
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = date
 dependencies[] = features
 dependencies[] = feeds
@@ -43,9 +43,4 @@ features[variable][] = node_preview_knactivity
 features[variable][] = node_submitted_knactivity
 features[variable][] = save_continue_knactivity
 features[views_view][] = kulturnaut_events_lister
-timestamp = 1346751781
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
-
+timestamp = 1347452763
