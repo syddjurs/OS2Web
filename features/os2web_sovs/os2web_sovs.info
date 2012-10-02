@@ -10,7 +10,6 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = fontyourface
 dependencies[] = image
-dependencies[] = multistep
 dependencies[] = node_reference
 dependencies[] = page_manager
 dependencies[] = panels_mini

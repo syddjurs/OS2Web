@@ -10,6 +10,246 @@
 function os2web_menuer_og_blokke_menu_default_menu_links() {
   $menu_links = array();
 
+  // Exported menu link: main-menu:taxonomy/term/4
+  $menu_links['main-menu:taxonomy/term/4'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'taxonomy/term/4',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Borger',
+    'options' => array(
+      'minipanel' => 'mega_menu_borger',
+      'menu_minipanels_hover' => array(
+        'position' => array(
+          'target' => 'custom',
+          'target_custom' => '#zone-menu',
+          'type' => 'absolute',
+          'corner' => array(
+            'target' => 'bottomLeft',
+            'tooltip' => 'topLeft',
+          ),
+        ),
+        'show' => array(
+          'delay' => '0',
+          'when' => array(
+            'event' => 'mouseover',
+          ),
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'hide' => array(
+          'delay' => '30',
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'style' => array(
+          'name' => 'cmstheme',
+          'width' => array(
+            'min' => '970',
+            'max' => '970',
+          ),
+          'border' => array(
+            'width' => '0',
+            'color' => '#fff',
+            'radius' => '0',
+          ),
+          'tip' => 'none',
+        ),
+        'mlid' => '782',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: main-menu:taxonomy/term/5
+  $menu_links['main-menu:taxonomy/term/5'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'taxonomy/term/5',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Erhverv',
+    'options' => array(
+      'minipanel' => 'mega_menu_for_erhverv',
+      'menu_minipanels_hover' => array(
+        'position' => array(
+          'target' => 'custom',
+          'target_custom' => '#zone-menu',
+          'type' => 'absolute',
+          'corner' => array(
+            'target' => 'bottomLeft',
+            'tooltip' => 'topLeft',
+          ),
+        ),
+        'show' => array(
+          'delay' => '0',
+          'when' => array(
+            'event' => 'mouseover',
+          ),
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'hide' => array(
+          'delay' => '0',
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'style' => array(
+          'name' => 'cmstheme',
+          'width' => array(
+            'min' => '970',
+            'max' => '970',
+          ),
+          'border' => array(
+            'width' => '0',
+            'color' => '#fff',
+            'radius' => '0',
+          ),
+          'tip' => 'none',
+        ),
+        'mlid' => '783',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: main-menu:taxonomy/term/6
+  $menu_links['main-menu:taxonomy/term/6'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'taxonomy/term/6',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Politik og planer',
+    'options' => array(
+      'minipanel' => 'mega_menu_for_politik_og_planer',
+      'menu_minipanels_hover' => array(
+        'position' => array(
+          'target' => 'custom',
+          'target_custom' => '#zone-menu',
+          'type' => 'absolute',
+          'corner' => array(
+            'target' => 'bottomLeft',
+            'tooltip' => 'topLeft',
+          ),
+        ),
+        'show' => array(
+          'delay' => '0',
+          'when' => array(
+            'event' => 'mouseover',
+          ),
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'hide' => array(
+          'delay' => '0',
+          'effect' => array(
+            'type' => 'false',
+            'length' => '0',
+          ),
+        ),
+        'style' => array(
+          'name' => 'cmstheme',
+          'width' => array(
+            'min' => '970',
+            'max' => '970',
+          ),
+          'border' => array(
+            'width' => '0',
+            'color' => '#fff',
+            'radius' => '0',
+          ),
+          'tip' => 'none',
+        ),
+        'mlid' => '784',
+      ),
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: menu-indholdsmenu:taxonomy/term/4
+  $menu_links['menu-indholdsmenu:taxonomy/term/4'] = array(
+    'menu_name' => 'menu-indholdsmenu',
+    'link_path' => 'taxonomy/term/4',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Borger',
+    'options' => array(
+      'minipanel' => '',
+      'attributes' => array(
+        'title' => 'Se alle punkter under Borger',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '1',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: menu-indholdsmenu:taxonomy/term/5
+  $menu_links['menu-indholdsmenu:taxonomy/term/5'] = array(
+    'menu_name' => 'menu-indholdsmenu',
+    'link_path' => 'taxonomy/term/5',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Erhverv',
+    'options' => array(
+      'minipanel' => '',
+      'attributes' => array(
+        'title' => 'Se alle punkter under Erhverv',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '1',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: menu-indholdsmenu:taxonomy/term/6
+  $menu_links['menu-indholdsmenu:taxonomy/term/6'] = array(
+    'menu_name' => 'menu-indholdsmenu',
+    'link_path' => 'taxonomy/term/6',
+    'router_path' => 'taxonomy/term/%',
+    'link_title' => 'Politik & planer',
+    'options' => array(
+      'minipanel' => '',
+      'attributes' => array(
+        'title' => 'Se alle punkter under Politik & planer',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '1',
+    'expanded' => '0',
+    'weight' => '0',
+  );
   // Exported menu link: menu-top-menu:http://www.adgangforalle.dk/
   $menu_links['menu-top-menu:http://www.adgangforalle.dk/'] = array(
     'menu_name' => 'menu-top-menu',
@@ -293,12 +533,16 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
   t('+kontaktblok');
   t('+nyhed');
   t('+spotboks');
+  t('Borger');
   t('Cookies');
+  t('Erhverv');
   t('Log out');
   t('Log ud');
   t('Læs højt');
   t('Opret ESDH dokument');
   t('Opret ESDH sag');
+  t('Politik & planer');
+  t('Politik og planer');
   t('User account');
   t('Workbench');
 

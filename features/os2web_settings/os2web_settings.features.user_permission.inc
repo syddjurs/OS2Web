@@ -436,18 +436,6 @@ function os2web_settings_user_default_permissions() {
     'module' => 'better_formats',
   );
 
-  // Exported permission: toggle multistep.
-  $permissions['toggle multistep'] = array(
-    'name' => 'toggle multistep',
-    'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
-    ),
-    'module' => 'multistep',
-  );
-
   // Exported permission: view media.
   $permissions['view media'] = array(
     'name' => 'view media',
