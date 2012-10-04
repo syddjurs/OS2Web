@@ -1,7 +1,7 @@
 name = Kulturnaut events
 description = Varetager integration af begivenhed fra Kulturnaut.dk
 core = 7.x
-package = OS2Web
+package = OS2Web - Imports
 php = 5.2.4
 version = 7.x-1.2
 project = OS2Web

@@ -458,5 +458,56 @@ function os2web_settings_strongarm() {
   $strongarm->value = 'cmstheme';
   $export['theme_default'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_action_status_code_301';
+  $strongarm->value = '3';
+  $export['linkchecker_action_status_code_301'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_action_status_code_404';
+  $strongarm->value = '0';
+  $export['linkchecker_action_status_code_404'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_check_links_interval';
+  $strongarm->value = '86400';
+  $export['linkchecker_check_links_interval'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_check_links_types';
+  $strongarm->value = '0';
+  $export['linkchecker_check_links_types'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_check_useragent';
+  $strongarm->value = 'Drupal (+http://drupal.org/)';
+  $export['linkchecker_check_useragent'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_cleanup_links_last';
+  $strongarm->value = 1337260201;
+  $export['linkchecker_cleanup_links_last'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'linkchecker_disable_link_check_for_urls';
+  $strongarm->value = 'example.com
+example.net
+example.org';
+  $export['linkchecker_disable_link_check_for_urls'] = $strongarm;
+
   return $export;
 }

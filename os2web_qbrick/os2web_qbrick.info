@@ -8,7 +8,7 @@ name = QBrick integration for OS2Web
 ; Module description
 description = This generates links for agenda items. NOTE: Module requires naming convention on Qbrick site.
 
-package = OS2Web
+package = OS2Web - AcadreMM
 core = 7.x
 
 

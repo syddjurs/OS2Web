@@ -1,4 +1,4 @@
-name = Annotator
+name = DEPRECATED! Annotator
 description = A module allowing to add notes documents. <b>Requires php5-curl to be installed</b>
 core = 7.x
 

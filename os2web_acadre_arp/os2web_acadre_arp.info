@@ -1,7 +1,7 @@
 name = OS2Web Acadre ARP Handler
 description = Content types and SOAP Handler for for the ARP feature
 core = 7.x
-package = Features
+package = OS2Web - AcadreRP
 php = 5.2.4
 version = 7.x-1.2
 project = OS2Web

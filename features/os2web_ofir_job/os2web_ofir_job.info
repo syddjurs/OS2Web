@@ -1,4 +1,4 @@
-name = OS2Web Ofir Job
+name = DEPRECATED! OS2Web Ofir Job
 core = 7.x
 package = Features
 php = 5.2.4
@@ -10,7 +10,6 @@ dependencies[] = ctools
 dependencies[] = menu_block
 dependencies[] = os2web_indholdstyper
 dependencies[] = views
-features[context][] = jobliste
 features[ctools][] = context:context:3
 features[features_api][] = api:1
 timestamp = 1347452763

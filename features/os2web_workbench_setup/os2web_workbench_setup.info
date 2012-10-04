@@ -1,7 +1,7 @@
 name = OS2Web Workbench setup
 description = Sets up workbench and related permissions for OS2Web
 core = 7.x
-package = OS2Web
+package = OS2Web - Brugere
 php = 5.2.4
 version = 7.x-0.3
 project = os2web_workbench_setup

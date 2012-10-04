@@ -1,7 +1,7 @@
 name = Taxonomies and taxonomy importers
 description = Feature tilføjer taxonomier og feeds importers
 core = 7.x
-package = OS2Web
+package = OS2Web - Imports
 php = 5.2.4
 version = 7.x-1.2
 project = OS2Web

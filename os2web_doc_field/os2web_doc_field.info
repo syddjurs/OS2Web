@@ -1,6 +1,6 @@
 name = ESDH Doc Field
 description = Field which display a document from the pws webservice.
-package = OS2Web
+package = OS2Web - AcadreCM
 core = 7.x
 configure = admin/config/os2web/pws
 tags[] = os2web

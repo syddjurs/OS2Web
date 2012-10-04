@@ -1,7 +1,7 @@
 name = OS2Web indholdstyper
 description = Frit overtaget fra Ballerup
 core = 7.x
-package = OS2Web
+package = OS2Web - Struktur
 php = 5.2.4
 version = 7.x-1.2
 project = os2web_indholdstyper

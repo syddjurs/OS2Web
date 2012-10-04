@@ -1,6 +1,6 @@
 name = Meeting import module
 description = This module will import exported meetings from Acadre
-package = OS2Web
+package = OS2Web - AcadreMM
 core = 7.x
 configure = admin/config/os2web/meetings
 tags[] = os2web
