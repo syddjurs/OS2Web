@@ -10,6 +10,7 @@ dependencies[] = context
 dependencies[] = ctools
 dependencies[] = facetapi
 dependencies[] = strongarm
+dependencies[] = taxonomy
 features[apachesolr_environment][] = solr
 features[apachesolr_search_page][] = core_search
 features[apachesolr_search_page][] = taxonomy_search
