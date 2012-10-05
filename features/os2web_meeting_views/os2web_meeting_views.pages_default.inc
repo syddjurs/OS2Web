@@ -90,7 +90,7 @@ function os2web_meeting_views_default_page_manager_handlers() {
     $pane->cache = array(
       'method' => 'simple',
       'settings' => array(
-        'lifetime' => '300',
+        'lifetime' => '604800',
         'granularity' => 'args',
       ),
     );
