@@ -1114,11 +1114,12 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_committee']['label'] = 'Udvalg';
   $handler->display->display_options['fields']['field_committee']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_committee']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['field_committee']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['field_committee']['alter']['path'] = 'meeting/[nid]/[field_committee]';
   $handler->display->display_options['fields']['field_committee']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_committee']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_committee']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_committee']['alter']['replace_spaces'] = 1;
   $handler->display->display_options['fields']['field_committee']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_committee']['alter']['target'] = '_blank';
   $handler->display->display_options['fields']['field_committee']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_committee']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_committee']['alter']['ellipsis'] = 1;
@@ -1259,7 +1260,8 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Tillæg'),
     t('<h2 class="pane-title">Tillæg</h2>'),
     t('field_addenum_to'),
-    t('node/[nid]'),
+    t('meeting/[nid]/[field_committee]'),
+    t('_blank'),
     t('Lokation'),
   );
   $export['meeting_details'] = $view;
