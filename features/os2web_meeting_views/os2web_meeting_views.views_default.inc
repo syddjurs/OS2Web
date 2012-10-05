@@ -376,7 +376,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Møde detaljer';
+  $handler->display->display_options['title'] = 'Mødedetaljer';
   $handler->display->display_options['css_class'] = 'bullet-point-attachments';
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'none';
@@ -1211,7 +1211,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['attachment_position'] = 'after';
   $translatables['meeting_details'] = array(
     t('Master'),
-    t('Møde detaljer'),
+    t('Mødedetaljer'),
     t('mere'),
     t('Udfør'),
     t('Gendan'),
