@@ -61,3 +61,8 @@ features[variable][] = node_preview_kontaktblok
 features[variable][] = node_submitted_kontaktblok
 features[views_view][] = kontaktblok
 timestamp = 1347452763
+;Added by OS2Web 2012-10-09
+project=OS2Web
+version=7.x-1.3
+timestamp=1349771943
+

@@ -26,3 +26,8 @@ features[variable][] = node_options_sektionsside
 features[variable][] = node_preview_sektionsside
 features[variable][] = node_submitted_sektionsside
 timestamp = 1347452763
+;Added by OS2Web 2012-10-09
+project=OS2Web
+version=7.x-1.3
+timestamp=1349771943
+
