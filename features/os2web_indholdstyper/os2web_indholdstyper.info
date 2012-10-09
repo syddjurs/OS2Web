@@ -9,6 +9,7 @@ dependencies[] = balk_custom
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = date
+dependencies[] = eim
 dependencies[] = field_group
 dependencies[] = field_slideshow
 dependencies[] = fieldable_panels_panes
