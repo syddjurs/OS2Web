@@ -174,6 +174,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 1,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -181,6 +182,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '470x230',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -189,9 +191,9 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
-            'youtube' => 0,
           ),
           'allowed_types' => array(
+            0 => 0,
             'audio' => 0,
             'default' => 0,
             'image' => 'image',
@@ -589,6 +591,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 1,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg swf',
@@ -596,6 +599,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '460x260',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -604,13 +608,13 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
-            'youtube' => 0,
           ),
           'allowed_types' => array(
             'audio' => 0,
             'default' => 0,
             'image' => 'image',
             'video' => 'video',
+            0 => 0,
           ),
           'progress_indicator' => 'throbber',
         ),
@@ -694,11 +698,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 'default',
-            0 => 0,
             'image' => 0,
             'video' => 0,
+            0 => 0,
+            'audio' => 0,
+            'default' => 'default',
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -1808,6 +1812,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => 'gallery_images',
         'file_extensions' => 'png gif jpg jpeg',
@@ -1815,6 +1820,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '5000x5000',
         'min_resolution' => '',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1978,6 +1984,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -1988,6 +1995,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '',
         'title_field' => 1,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3443,6 +3451,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -3450,6 +3459,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -4205,6 +4215,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -4212,6 +4223,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '800x600',
         'min_resolution' => '500x300',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5301,6 +5313,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -5308,6 +5321,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '460x260',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
