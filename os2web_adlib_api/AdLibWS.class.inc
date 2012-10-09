@@ -2,7 +2,7 @@
 
 define('ADLIB_JOBTYPE_PDF', 0);
 define('ADLIB_JOBTYPE_HTML', 1);
-define('ADLIB_DISABLED', false);
+define('ADLIB_DISABLED', true);
 /*
  *
  * @author Jesper Mathiassen <jm@bellcom.dk>

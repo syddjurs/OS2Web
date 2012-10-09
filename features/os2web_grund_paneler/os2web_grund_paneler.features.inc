@@ -20,6 +20,10 @@ function os2web_grund_paneler_ctools_plugin_api() {
   if ($module == "panels" && $api == "layouts") {
     return array("version" => "1");
   }
+  list($module, $api) = func_get_args();
+  if ($module == "panels_mini" && $api == "panels_default") {
+    return array("version" => "1");
+  }
 }
 
 /**

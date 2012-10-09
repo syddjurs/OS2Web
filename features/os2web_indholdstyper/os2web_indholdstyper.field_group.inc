@@ -64,32 +64,6 @@ function os2web_indholdstyper_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_borgerdk|node|contentpage|form';
-  $field_group->group_name = 'group_borgerdk';
-  $field_group->entity_type = 'node';
-  $field_group->bundle = 'contentpage';
-  $field_group->mode = 'form';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Borger.dk',
-    'weight' => '2',
-    'children' => array(
-      0 => 'field_borger_url',
-      1 => 'field_local_coda',
-      2 => 'field_local_intro',
-      3 => 'field_local_title',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
-    ),
-  );
-  $export['group_borgerdk|node|contentpage|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_document|node|contentpage|default';
   $field_group->group_name = 'group_document';
   $field_group->entity_type = 'node';
@@ -359,7 +333,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Indstillinger',
     'weight' => '3',
@@ -368,9 +342,15 @@ function os2web_indholdstyper_field_group_info() {
       1 => 'path',
       2 => 'group_hidden',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => '',
+      'label' => 'Indstillinger',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'open',
     ),
   );
   $export['group_indstillinger|node|news|form'] = $field_group;
@@ -378,67 +358,29 @@ function os2web_indholdstyper_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_menu|node|contentpage|form';
-  $field_group->group_name = 'group_menu';
+  $field_group->identifier = 'group_news_tabs|node|news|form';
+  $field_group->group_name = 'group_news_tabs';
   $field_group->entity_type = 'node';
-  $field_group->bundle = 'contentpage';
+  $field_group->bundle = 'news';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Menu',
-    'weight' => '8',
-    'children' => array(),
-    'format_type' => 'div',
+    'label' => 'News',
+    'weight' => '0',
+    'children' => array(
+      0 => 'group_indstillinger',
+      1 => 'group_taksonomi',
+      2 => 'group_tekst',
+    ),
+    'format_type' => 'htabs',
     'format_settings' => array(
-      'formatter' => 'open',
+      'formatter' => '',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'classes' => '',
-        'required_fields' => 1,
       ),
     ),
   );
-  $export['group_menu|node|contentpage|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
-  $field_group->identifier = 'group_right_column_unique|node|contentpage|form';
-  $field_group->group_name = 'group_right_column_unique';
-  $field_group->entity_type = 'node';
-  $field_group->bundle = 'contentpage';
-  $field_group->mode = 'form';
-  $field_group->parent_name = '';
-  $field_group->data = '';
-  $export['group_right_column_unique|node|contentpage|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
-  $field_group->identifier = 'group_right_column|node|contentpage|form';
-  $field_group->group_name = 'group_right_column';
-  $field_group->entity_type = 'node';
-  $field_group->bundle = 'contentpage';
-  $field_group->mode = 'form';
-  $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Højrespalte Genbrug',
-    'weight' => '10',
-    'children' => array(
-      0 => 'field_inherit_right_column',
-      1 => 'field_parent_node',
-    ),
-    'format_type' => 'multistep',
-    'format_settings' => array(
-      'formatter' => '',
-      'instance_settings' => NULL,
-    ),
-  );
-  $export['group_right_column|node|contentpage|form'] = $field_group;
+  $export['group_news_tabs|node|news|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -510,7 +452,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Emneord',
     'weight' => '2',
@@ -521,9 +463,15 @@ function os2web_indholdstyper_field_group_info() {
       3 => 'field_termref_sted',
       4 => 'field_politics',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
       'label' => 'Emneord',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'open',
     ),
   );
   $export['group_taksonomi|node|news|form'] = $field_group;
@@ -536,10 +484,10 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'news';
   $field_group->mode = 'form';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Tekst',
-    'weight' => '0',
+    'weight' => '1',
     'children' => array(
       0 => 'body',
       1 => 'field_lead_image',
@@ -547,9 +495,15 @@ function os2web_indholdstyper_field_group_info() {
       3 => 'field_site_structure',
       4 => 'title',
     ),
-    'format_type' => 'multistep',
+    'format_type' => 'htab',
     'format_settings' => array(
       'label' => 'Tekst',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
+      ),
+      'formatter' => 'open',
     ),
   );
   $export['group_tekst|node|news|form'] = $field_group;

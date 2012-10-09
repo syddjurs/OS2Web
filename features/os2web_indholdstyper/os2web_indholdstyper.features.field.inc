@@ -174,6 +174,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 1,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -181,6 +182,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '470x230',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -189,9 +191,9 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
-            'youtube' => 0,
           ),
           'allowed_types' => array(
+            0 => 0,
             'audio' => 0,
             'default' => 0,
             'image' => 'image',
@@ -371,7 +373,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'inline',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -469,7 +471,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -589,6 +591,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 1,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg swf',
@@ -596,6 +599,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '460x260',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -604,13 +608,13 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
-            'youtube' => 0,
           ),
           'allowed_types' => array(
             'audio' => 0,
             'default' => 0,
             'image' => 'image',
             'video' => 'video',
+            0 => 0,
           ),
           'progress_indicator' => 'throbber',
         ),
@@ -694,11 +698,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 'default',
-            0 => 0,
             'image' => 0,
             'video' => 0,
+            0 => 0,
+            'audio' => 0,
+            'default' => 'default',
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -778,7 +782,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '11',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -877,7 +881,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -953,7 +957,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '16',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1029,7 +1033,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1253,7 +1257,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1316,10 +1320,9 @@ function os2web_indholdstyper_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => 17,
+          'type' => 'hidden',
+          'weight' => '7',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1372,7 +1375,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '17',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1454,7 +1457,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'inline',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '13',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1530,7 +1533,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '15',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -1809,6 +1812,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => 'gallery_images',
         'file_extensions' => 'png gif jpg jpeg',
@@ -1816,6 +1820,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '5000x5000',
         'min_resolution' => '',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1979,6 +1984,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -1989,6 +1995,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '',
         'title_field' => 1,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3444,6 +3451,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -3451,6 +3459,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -4206,6 +4215,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -4213,6 +4223,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '800x600',
         'min_resolution' => '500x300',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5302,6 +5313,7 @@ function os2web_indholdstyper_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -5309,6 +5321,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '460x260',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -6153,6 +6166,191 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_struktur-field_attached_node'
+  $fields['taxonomy_term-site_struktur-field_attached_node'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_attached_node',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'referenceable_types' => array(
+          'borger_dk_permalink' => 0,
+          'contentpage' => 'contentpage',
+          'esdh_dokument' => 0,
+          'esdh_sag' => 0,
+          'files' => 0,
+          'galleri' => 0,
+          'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+          'institution' => 0,
+          'knactivity' => 0,
+          'kontaktblok' => 0,
+          'local_plan' => 0,
+          'media' => 0,
+          'news' => 0,
+          'ofir_job' => 0,
+          'panel' => 0,
+          'person' => 0,
+          'politician' => 0,
+          'referat' => 0,
+          'right_column' => 0,
+          'rotating_image' => 0,
+          'selvbetjeningslinks' => 0,
+          'spotbox' => 0,
+          'tema' => 0,
+          'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_struktur',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Vælg de spotboxe der skal vises nederst på siden.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 4,
+        ),
+      ),
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_attached_node',
+      'label' => 'Spotboxe Bund',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'node_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'node_reference/autocomplete',
+          'size' => '120',
+        ),
+        'type' => 'node_reference_autocomplete',
+        'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_struktur-field_attached_node_fokus'
+  $fields['taxonomy_term-site_struktur-field_attached_node_fokus'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_attached_node_fokus',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'referenceable_types' => array(
+          'borger_dk_permalink' => 0,
+          'contentpage' => 0,
+          'esdh_dokument' => 0,
+          'esdh_sag' => 0,
+          'files' => 0,
+          'galleri' => 0,
+          'iframe_selvbetjeningsl_sning_mm' => 0,
+          'institution' => 0,
+          'knactivity' => 0,
+          'local_plan' => 0,
+          'media' => 0,
+          'news' => 0,
+          'ofir_job' => 0,
+          'panel' => 0,
+          'person' => 0,
+          'politician' => 0,
+          'referat' => 0,
+          'right_column' => 0,
+          'rotating_image' => 0,
+          'selvbetjeningslinks' => 0,
+          'spotbox' => 'spotbox',
+          'tema' => 0,
+          'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_struktur',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 5,
+        ),
+      ),
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_attached_node_fokus',
+      'label' => 'Spotbox fokus',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'node_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'node_reference/autocomplete',
+          'size' => '120',
+        ),
+        'type' => 'node_reference_autocomplete',
+        'weight' => '7',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Billede');
@@ -6207,7 +6405,9 @@ function os2web_indholdstyper_field_default_fields() {
   t('Skal være inkl. <i>http://</i> hvis det er sider uden for sitet. Skal kun bruges til sider ser ikke kan indlejres som indhold via iframe.');
   t('Skjul relaterede links');
   t('Source ID');
+  t('Spotbox fokus');
   t('Spotboxe');
+  t('Spotboxe Bund');
   t('Stikord');
   t('Tilføj medie');
   t('Type');
@@ -6216,6 +6416,7 @@ function os2web_indholdstyper_field_default_fields() {
   t('Unikt indhold');
   t('Vises før indholdet af iframe');
   t('Vælg billede');
+  t('Vælg de spotboxe der skal vises nederst på siden.');
   t('iFrame URL');
 
   return $fields;

@@ -43,6 +43,22 @@ function os2web_context_node_info() {
       'title_label' => t('Overskrift'),
       'help' => '',
     ),
+    'local_plan' => array(
+      'name' => t('Lokalplan'),
+      'base' => 'node_content',
+      'description' => t('Lokalplaner vedtaget i kommunen.'),
+      'has_title' => '1',
+      'title_label' => t('Titel'),
+      'help' => '',
+    ),
+    'referat' => array(
+      'name' => t('Referat'),
+      'base' => 'node_content',
+      'description' => t('Mødereferater og anden dokumentation.'),
+      'has_title' => '1',
+      'title_label' => t('Titel'),
+      'help' => '',
+    ),
   );
   return $items;
 }

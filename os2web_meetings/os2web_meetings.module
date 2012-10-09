@@ -1,11 +1,11 @@
 <?php
 
 define('DEFAULT_ACADRE_IMPORT_DIR', 'public://acadre');
-define('MEETINGS_FORCE_RECREATE', false); // Delete existing nodes before import
+define('MEETINGS_FORCE_RECREATE', true); // Delete existing nodes before import
 define('MEETINGS_FOCUS', false); // File key for import
 define('MEETINGS_MEETING_FOCUS', false); // Meeting id
 define('MEETINGS_CLEAR_COMMITTEE', false); // Clean out invalid committees
-define('MEETINGS_DEFAULT_APPROVED','62,59,64,53,54,56,57,63,58,51,55,61,68,69,42');
+define('MEETINGS_DEFAULT_APPROVED', '62,59,64,53,54,56,57,63,58,51,55,61,68,69,42');
 
 function os2web_meetings_menu() {
   $items = array();
@@ -99,14 +99,14 @@ function _os2web_meetings_node_tab_page($nid, $op = FALSE) {
  * Will run import on every cron.
  */
 function os2web_meetings_cron() {
-    $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', array('recurse' => FALSE));
-    $queue = DrupalQueue::get('import_agendas');
-    if ($queue->numberOfItems() == 0) {
-      foreach ($files as $file) {
-        $queue->createItem($file->uri);
-      }
+  $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', array('recurse' => FALSE));
+  $queue = DrupalQueue::get('import_agendas');
+  if ($queue->numberOfItems() == 0) {
+    foreach ($files as $file) {
+      $queue->createItem($file->uri);
     }
-    $queue->createItem(FALSE); // Runs the addenum reordering
+  }
+  $queue->createItem(FALSE); // Runs the addenum reordering
 }
 
 function os2web_meetings_cron_queue_info() {
@@ -183,11 +183,11 @@ function os2web_meetings_test_page() {
           'heading' => 'Actions:',
           'links' => array(
               array('title' => 'Kør import', 'href' => "os2web/test/meetings/batch"),
-              array('title' => 'Reorder addenums', 'href' => "os2web/test/meetings",'query' => array('op' => 'addenums')),
-              array('title' => 'Slet meetings', 'href' => "os2web/test/meetings",'query' => array('op' => 'clean')),
+              array('title' => 'Reorder addenums', 'href' => "os2web/test/meetings", 'query' => array('op' => 'addenums')),
+              array('title' => 'Slet meetings', 'href' => "os2web/test/meetings", 'query' => array('op' => 'clean')),
           )
       );
-      return theme('links',$links);
+      return theme('links', $links);
   }
   drupal_goto('os2web/test/meetings');
 }
@@ -200,7 +200,7 @@ function _os2web_meetings_delete_meetings($nids = false) {
     );
     $nids = db_select('node', 'n')
         ->fields('n', array('nid'))
-        ->condition('type', array('meeting','bullet_point','bullet_point_attachment'))
+        ->condition('type', array('meeting', 'bullet_point', 'bullet_point_attachment'))
         ->execute()
         ->fetchCol();
     $nids = array_chunk($nids, 10);
@@ -277,15 +277,16 @@ function os2web_meetings_do_import() {
  *
  */
 function os2web_meetings_order_addenums() {
+  $rev_meetings = array(1458);
   // Find all meetings and gather meeting and agenda_ids
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
   // meetings as: $meetings[<meeting_id>][<system_id>][<node_id>]
   $nids = array();
   foreach ($nodes as $node) {
-    $addenum_to =field_get_items('node', $node, 'field_addenum_to'); 
+    $addenum_to = field_get_items('node', $node, 'field_addenum_to');
     if (isset($addenum_to[0]['nid']) && is_numeric($addenum_to[0]['nid'])) {
-      $nids[$node->nid]=$node->nid;
+      $nids[$node->nid] = $node->nid;
     }
     $meeting_id = array_shift(field_get_items('node', $node, 'field_meeting_id'));
     $system_id = array_shift(field_get_items('node', $node, 'field_system_id'));
@@ -299,6 +300,9 @@ function os2web_meetings_order_addenums() {
   }
   foreach ($meetings as $m_id => $meeting) {
     ksort($meeting); // Lowest system id first
+    if (in_array($m_id, $rev_meetings)) {
+      $meeting = array_reverse($meeting);
+    }
     $primary = array_shift($meeting); // Lowest system id is primary
     while ($next = array_shift($meeting)) {
       // Set up references for addenum agendas
@@ -322,25 +326,27 @@ function os2web_meetings_order_addenums() {
  * @param string $file File URI. Works as callback in file_scan_directory works.
  */
 function _os2web_meetings_process_manifest($file, $force = MEETINGS_FORCE_RECREATE) {
-  if ($file === FALSE) { 
+  if ($file === FALSE) {
     os2web_meetings_order_addenums();
   }
-  $manifest = simplexml_load_file(drupal_realpath($file));
-  if (is_object($manifest)) {
-    if (is_numeric($force)) {
-      $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$force']/..");
+  if (is_file(drupal_realpath($file))) {
+    $manifest = simplexml_load_file(drupal_realpath($file));
+    if (is_object($manifest)) {
+      if (is_numeric($force)) {
+        $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$force']/..");
+      } else {
+        $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
+      }
+      if (empty($items_xml)) {
+        watchdog('os2web_meetings', 'Empty list of import items in %file.', array('%file' => $file), WATCHDOG_WARNING);
+      }
+      foreach ($items_xml as $xml_item) {
+        _os2web_meetings_process_agenda($file, $xml_item, $force);
+      }
     } else {
-      $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
+      watchdog('os2web_meetings', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
+      error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: ' . $file);
     }
-    if (empty($items_xml)) {
-      watchdog('os2web_meetings', 'Empty list of import items in %file.', array('%file' => $file), WATCHDOG_WARNING);
-    }
-    foreach ($items_xml as $xml_item) {
-      _os2web_meetings_process_agenda($file, $xml_item, $force);
-    }
-  } else {
-    watchdog('os2web_meetings', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
-    error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Failed to read file: ' . $file);
   }
 }
 
@@ -368,10 +374,9 @@ function _os2web_meetings_process_agenda($file, $agendainfo_xml, $force = false)
       'casePublish' => (string) array_shift($agendainfo_xml->xpath('field/@casePublish')),
       'startDate' => (string) array_shift($agendainfo_xml->xpath('field/@startDate')),
       'endDate' => (string) array_shift($agendainfo_xml->xpath('field/@endDate')),
- 
   );
-  if ($agendainfo['publish'] === 1 && 
-      $agendainfo['access'] !== 'Lukket' && 
+  if ($agendainfo['publish'] === 1 &&
+      $agendainfo['access'] !== 'Lukket' &&
       $agendainfo['filesfolder'] != '') {
     $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
     if (($agenda_uri = _os2web_meetings_similar_file_exists(drupal_realpath($agenda_uri))) !== FALSE) {
@@ -451,10 +456,10 @@ function _os2web_meetings_publish_meeting($info, $xml, $force = false) {
       'id' => $info['sysid'],
   );
   if ($options['committee'] == '' || !in_array($options['committee_id'], $publish_committee)) {
-    watchdog('os2web_meetings','Ignored agenda from %committee .',array('%committee'=>$options['committee']));
+    watchdog('os2web_meetings', 'Ignored agenda from %committee .', array('%committee' => $options['committee']));
     return false;
   }
-  
+
 
   if (MEETINGS_MEETING_FOCUS) {
     if ($options['meeting_id'] != MEETINGS_MEETING_FOCUS) {
@@ -756,7 +761,7 @@ function _os2web_meetings_import_location(SimpleXMLElement $xml) {
  */
 function _os2web_meetings_similar_file_exists($filename) {
   if (file_exists($filename)) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
+//    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
     return $filename;
   }
 

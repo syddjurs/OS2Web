@@ -1,15 +1,16 @@
 name = OS2Web Search
 core = 7.x
-package = Features
+package = OS2Web - Søgning
 php = 5.2.4
-version = 7.x-3.0
-project = os2web_search
+version = 7.x-1.2
+project = OS2Web
 dependencies[] = apachesolr
 dependencies[] = apachesolr_search
 dependencies[] = context
 dependencies[] = ctools
 dependencies[] = facetapi
 dependencies[] = strongarm
+dependencies[] = taxonomy
 features[apachesolr_environment][] = solr
 features[apachesolr_search_page][] = core_search
 features[apachesolr_search_page][] = taxonomy_search
@@ -154,18 +155,9 @@ features[variable][] = facetapi_pretty_paths_searcher_apachesolr@solr
 features[variable][] = facetapi_pretty_paths_searcher_search
 features[variable][] = search_active_modules
 features[variable][] = search_default_module
-;Added by OS2Web 2012-09-04
+timestamp = 1347452763
+;Added by OS2Web 2012-10-09
 project=OS2Web
-version=1.1
-timestamp=1346750231
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=7.x-1.1
-timestamp=1346751781
-
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
+version=7.x-1.3
+timestamp=1349771943
 

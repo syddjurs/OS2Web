@@ -19,27 +19,7 @@ function os2web_webform_downloads_field_group_info() {
   $field_group->bundle = 'webform';
   $field_group->mode = 'form';
   $field_group->parent_name = '';
-  $field_group->data = array(
-    'label' => 'Taksonomi',
-    'weight' => '6',
-    'children' => array(
-      0 => 'field_site_structure',
-      1 => 'field_termref_kle',
-      2 => 'field_organization',
-      3 => 'field_termref_sofd',
-      4 => 'field_termref_sted',
-      5 => 'field_editortags',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'formatter' => 'collapsible',
-      'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
+  $field_group->data = '';
   $export['group_taksonomi|node|webform|form'] = $field_group;
 
   return $export;
