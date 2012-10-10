@@ -193,6 +193,96 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '0',
   );
+  // Exported menu link: menu-erhverv-genveje:contact
+  $menu_links['menu-erhverv-genveje:contact'] = array(
+    'menu_name' => 'menu-erhverv-genveje',
+    'link_path' => 'contact',
+    'router_path' => 'contact',
+    'link_title' => 'Kontakt',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-50',
+  );
+  // Exported menu link: menu-erhverv-genveje:job-opslag/ofir
+  $menu_links['menu-erhverv-genveje:job-opslag/ofir'] = array(
+    'menu_name' => 'menu-erhverv-genveje',
+    'link_path' => 'job-opslag/ofir',
+    'router_path' => 'job-opslag',
+    'link_title' => 'Job',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-47',
+  );
+  // Exported menu link: menu-erhverv-genveje:node/2212
+  $menu_links['menu-erhverv-genveje:node/2212'] = array(
+    'menu_name' => 'menu-erhverv-genveje',
+    'link_path' => 'node/2212',
+    'router_path' => 'node/%',
+    'link_title' => 'Om Kommunen',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-45',
+  );
+  // Exported menu link: menu-erhverv-genveje:nyheder
+  $menu_links['menu-erhverv-genveje:nyheder'] = array(
+    'menu_name' => 'menu-erhverv-genveje',
+    'link_path' => 'nyheder',
+    'router_path' => 'nyheder',
+    'link_title' => 'Nyheder',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-49',
+  );
+  // Exported menu link: menu-erhverv-genveje:selvbetjening
+  $menu_links['menu-erhverv-genveje:selvbetjening'] = array(
+    'menu_name' => 'menu-erhverv-genveje',
+    'link_path' => 'selvbetjening',
+    'router_path' => 'selvbetjening',
+    'link_title' => 'Selvbetjening',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-48',
+  );
   // Exported menu link: menu-indholdsmenu:taxonomy/term/4
   $menu_links['menu-indholdsmenu:taxonomy/term/4'] = array(
     'menu_name' => 'menu-indholdsmenu',
@@ -536,13 +626,18 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
   t('Borger');
   t('Cookies');
   t('Erhverv');
+  t('Job');
+  t('Kontakt');
   t('Log out');
   t('Log ud');
   t('Læs højt');
+  t('Nyheder');
+  t('Om Kommunen');
   t('Opret ESDH dokument');
   t('Opret ESDH sag');
   t('Politik & planer');
   t('Politik og planer');
+  t('Selvbetjening');
   t('User account');
   t('Workbench');
 
