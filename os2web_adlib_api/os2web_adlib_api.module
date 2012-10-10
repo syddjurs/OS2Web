@@ -14,7 +14,16 @@ define('ADLIB_HTML_IMG_FOLDER', 'public://bpimg/');
  *
  */
 function os2web_adlib_api_menu() {
-  $items['admin/config/os2web/adlibstatus'] = array(
+ $items['admin/config/os2web/reprocess'] = array(
+      'title' => t('AdLib reprocess'),
+      'description' => t('Provides an overview of unfinished AdLib jobs.'),
+      'access arguments' => array('administer os2web'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('os2web_adlib_api_reprocess_form'),
+      'type' => MENU_LOCAL_TASK,
+      'access callback' => TRUE,
+  );
+ $items['admin/config/os2web/adlibstatus'] = array(
       'title' => t('AdLib Status'),
       'description' => t('Provides an overview of known AdLib jobs.'),
       'access arguments' => array('administer os2web'),
@@ -54,6 +63,114 @@ function os2web_adlib_api_status_ajax($fid) {
   } else {
     drupal_json_output('Not found.');
   }
+}
+
+
+/**
+ * Provides form for user to start reprocessing
+ * 
+ * @access public
+ * @return array
+ */
+function os2web_adlib_api_reprocess_form() {
+  $form['submit']  = array(
+    '#type' => 'submit',
+    '#value' => 'Re-konverter importerede dokumenter',
+  );
+
+  return $form;
+}
+
+/**
+ * Starts reprocessing on submit
+ * 
+ * @access public
+ * @return void
+ */
+function os2web_adlib_api_reprocess_form_submit() {
+  os2web_adlib_api_reprocess();
+}
+
+/**
+ * Sets up and starts batchjob
+ * 
+ * @access public
+ * @return void
+ */
+function os2web_adlib_api_reprocess() {
+  $ids = _os2web_adlib_api_bulletpoint_nid();
+  foreach ($ids as $nodeid)
+  {
+    $operations[] = array('_os2web_adlib_api_reprocess_nid', array($nodeid));
+  }
+  $batch = array(
+    'operations' => $operations,
+    'title' => 'adlib_reprocess',
+    'init_message' => t('initializing'),
+    'progress_message' => t('finished @current of @total'),
+    'error_message' => t('something went wrong'),
+    'finished'  => '_os2web_adlib_api_bulletpoint_finished',
+    'file' => drupal_get_path('module', 'os2web_adlib_api') . '/os2web_adlib_api.module',
+  );
+  batch_set($batch);
+  batch_process();
+}
+
+/* 
+ * Provides userfeedback when batchjob is finished
+ */
+function _os2web_adlib_api_bulletpoint_finished($success, $results, $operations) {
+  error_log(print_r($success, 1).print_r($results, 1));
+  drupal_set_message(t('All bullet points have been rescheduled for conversion'));
+}
+
+/*
+ * Fetch all nid's for bulletspoints
+ *
+ * @return array
+ */
+function _os2web_adlib_api_bulletpoint_nid() {
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'node')
+	->propertyCondition('type', 'bullet_point')
+	->execute();
+ 
+  $nodeid = array();
+
+  // Entity query returns an object containing an array, containing arrays...
+  foreach ($result as $item)
+  {
+    foreach ($item as $key => $value) 
+    {
+      $nodeid[] = $key;   
+    }
+  }
+  return $nodeid;
+}
+
+/*
+ * Worker function, adds fid's attached to nid's to adlib queue
+ */
+function _os2web_adlib_api_reprocess_nid($nid, &$context) {
+  error_log("reprocess_nid");
+  $node = node_load($nid);
+  if(isset($node->field_enclosures))
+  {
+    foreach($node->field_enclosures['und'] as $file)
+    {
+//      error_log(print_r($file['fid'], 1));
+    }
+  }
+}
+
+/*
+ * Implements hook_cron_queue_info()
+ */
+function os2web_adlib_api_queue_info() {
+  $queue['os2web_adlib_api'] = array(
+    'worker callback' => '_os2web_adlib_api_reprocess_nid',
+  );
+  return $queue;
 }
 
 /**
@@ -98,7 +215,7 @@ function os2web_adlib_api_status() {
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $head = array('Fid', 'Job-id', 'Status', 'action');
   $rows = array();
-  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete'");
+  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete' LIMIT 50");
   foreach ($files as $file) {
     $fdata = file_load($file->fid);
     $rows[] = array(
@@ -159,6 +276,15 @@ function os2web_adlib_api_page() {
  */
 function os2web_adlib_api_cron() {
   _os2web_adlib_api_do_processing(100);
+
+/*  $queue = DrupalQueue::get('os2web_adlib_api_queue');
+
+  $items = array();
+  $items = _os2web_adlib_api_bulletpoint_nid();
+  foreach ($items as $item){
+    $queue->createItem($item);
+  }
+ */
 }
 
 /**
@@ -203,6 +329,7 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   if (!file_exists(drupal_realpath($file->uri))) {
     watchdog('adlib_api', 'Cannot queue file %file. File does not exist.', array('%file' => $file->filename), WATCHDOG_WARNING);
     db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
+	error_log("filen findes ikke");
     return false;
   }
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
