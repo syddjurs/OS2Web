@@ -766,6 +766,26 @@ function os2web_kontaktblok_views_default_views() {
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['id'] = 'field_kontaktblok_vis_aabnen_1';
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['table'] = 'field_data_field_kontaktblok_vis_aabnen';
   $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['field'] = 'field_kontaktblok_vis_aabnen';
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_kontaktblok_vis_aabnen_1']['field_api_classes'] = 0;
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
