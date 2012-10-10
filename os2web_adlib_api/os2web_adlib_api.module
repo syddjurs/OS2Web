@@ -152,25 +152,14 @@ function _os2web_adlib_api_bulletpoint_nid() {
  * Worker function, adds fid's attached to nid's to adlib queue
  */
 function _os2web_adlib_api_reprocess_nid($nid, &$context) {
-  error_log("reprocess_nid");
   $node = node_load($nid);
   if(isset($node->field_enclosures))
   {
     foreach($node->field_enclosures['und'] as $file)
     {
-//      error_log(print_r($file['fid'], 1));
+      //os2web_adlib_api_convert_to_pdf($file);
     }
   }
-}
-
-/*
- * Implements hook_cron_queue_info()
- */
-function os2web_adlib_api_queue_info() {
-  $queue['os2web_adlib_api'] = array(
-    'worker callback' => '_os2web_adlib_api_reprocess_nid',
-  );
-  return $queue;
 }
 
 /**
@@ -277,14 +266,27 @@ function os2web_adlib_api_page() {
 function os2web_adlib_api_cron() {
   _os2web_adlib_api_do_processing(100);
 
-/*  $queue = DrupalQueue::get('os2web_adlib_api_queue');
+  $queue = DrupalQueue::get('os2web_adlib_reprocess');
 
   $items = array();
   $items = _os2web_adlib_api_bulletpoint_nid();
-  foreach ($items as $item){
-    $queue->createItem($item);
+  if ($queue->numberOfItems() == 0) {
+    foreach ($items as $item){
+      $queue->createItem($item);
+    }
   }
+}
+
+/*
+ * Implements hook_cron_queue_info()
  */
+function os2web_adlib_api_cron_queue_info() {
+ error_log("queue_info");
+  $queues['os2web_adlib_reprocess'] = array(
+    'worker callback' => '_os2web_adlib_api_reprocess_nid',
+    'time' => 300,
+  );
+  return $queues;
 }
 
 /**
