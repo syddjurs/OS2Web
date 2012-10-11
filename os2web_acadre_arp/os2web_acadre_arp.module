@@ -193,11 +193,14 @@ function _os2web_acadre_arp_process_case($info) {
   if (is_numeric($tid)) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
   }
-
+  
+  $responsible = $meta->CaseResponsibleUser;
+  $node->field_arp_case_handler_ini[LANGUAGE_NONE][]['value'] = $responsible->UserInitials;
+  $node->field_arp_casehandler_name[LANGUAGE_NONE][]['value'] = $responsible->UserName;
   $node->field_arp_case_created[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
   $node->field_arp_case_last_modified[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
-  $node->field_arp_sag[LANGUAGE_NONE][]['case_ident'] = (string) $arp_year . '/' . (string) $meta->SequenceNumber;
-  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = (string) $arp_year . '/' . (string) $meta->SequenceNumber;
+  $node->field_case[LANGUAGE_NONE][]['case_ident'] = $arp_year . '/' . (string) $meta->SequenceNumber;
+  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = $arp_year . '/' . (string) $meta->SequenceNumber;
 
 
 
