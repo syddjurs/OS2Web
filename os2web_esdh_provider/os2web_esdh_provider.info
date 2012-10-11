@@ -1,0 +1,14 @@
+; $Id$
+; 
+; @author Jesper Mathiassen <jm@bellcom.dk>
+; @copyright Bellcom Open Source aps.
+
+; Module name (human readable)
+name = OS2Web ESDH Provider service
+; Module description
+description = Implements provider abstraction for ESDH services.
+
+package = OS2Web - ESDH
+core = 7.x
+
+dependencies[]=ctools

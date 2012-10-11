@@ -1,4 +1,5 @@
 <?php
+
 define('ACADRE_CM_ACCESS_OPEN_CASE', '3');
 
 /* Field information hooks */
@@ -69,15 +70,15 @@ function os2web_case_field_field_is_empty($item, $field) {
 
 function os2web_case_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
   foreach ($items as $delta => $item) {
-    $cases = explode(',',$item['case_ident']);
+    $cases = explode(',', $item['case_ident']);
     foreach ($cases as $value) {
-      $value = trim($value);     
+      $value = trim($value);
       $valid = preg_match('/^\d{2}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
-      if (!$valid && ($value!='')) {
+      if (!$valid && ($value != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
             'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
             'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
-            );
+        );
       }
     }
   }
@@ -97,12 +98,7 @@ function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $
           $ids = explode(',', $item['case_ident']);
           //error_log("Var: \$ids = " . print_r($ids, 1));
           foreach ($ids as $id) {
-            if (!is_numeric($id)) {
-              $pws = _os2web_pws_get_instance();
-              $cases[] = $pws->lookupCase(trim($id));
-            } else {
-              $cases[] = trim($id);
-            }
+            $cases[] = trim($id);
           }
           $element[$delta]['#markup'] = '<div class="fullcaserender">' . theme('esdh_case', array('id' => $cases)) . '</div>';
         }
@@ -121,15 +117,17 @@ function os2web_case_field_theme() {
 }
 
 function theme_esdh_case($vars) {
+  // Check for correct api and required functions are implemented.
+  if (!os2web_esdh_provider_has_api('cm')) {
+    drupal_set_message('Error in case lookup API. Check status.', 'error');
+    return '';
+  }
   $ids = $vars['id'];
-  drupal_load('module', 'os2web_pws');
-  $pws = _os2web_pws_get_instance();
   if (!is_array($ids)) {
     $ids = array($ids);
   }
-  $docids = array();
   foreach ($ids as $id) {
-    $case = $pws->fetchCase($id);
+    $case = os2web_esdh_provider_invoke('cm', 'get_case_data', $id);
 //    error_log("Var: \$case = " . print_r($case, 1));
     if (FALSE === $case) {
       continue; // Ignore failed case lookups
@@ -140,19 +138,14 @@ function theme_esdh_case($vars) {
       //  return $html;
       continue; // Ignore hidden cases
     }
-    $docs = $pws->getCaseDocs($id);
-    foreach ($docs as $doc) {
-      $docids[] = (int) $doc->Document->DocumentIdentifier;
-    }
+    $docids = os2web_esdh_provider_invoke('cm', 'get_case_docs', $id);
   }
   $html = theme('esdh_document', array('id' => $docids, 'iscase' => true));
   return $html;
 }
 
 function _os2web_case_field_case_access($caseid) {
-  drupal_load('module', 'os2web_pws');
-  $pws = _os2web_pws_get_instance();
-  $case = $pws->fetchCase($caseid);
+  $case = os2web_esdh_provider_invoke('cm', 'get_case_data', $caseid);
   if (FALSE === $case) {
     return FALSE;
   }
@@ -161,8 +154,8 @@ function _os2web_case_field_case_access($caseid) {
       'restricted' => ACADRE_CM_ACCESS_OPEN_CASE,
   );
   $access = array(
-      'accesscode' => $case->AccessCode,
-      'restricted' => $case->RestrictedFromPublicText,
+      'accesscode' => $case['access_code'],
+      'restricted' => $case['restricted_from_public'],
   );
   return _os2web_case_field_array_compare($access, $access_grant);
 }

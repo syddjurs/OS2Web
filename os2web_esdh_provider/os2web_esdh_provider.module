@@ -1,0 +1,178 @@
+<?php
+
+/*
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
+
+/**
+ * Implementation of hook_menu()
+ *
+ */
+function os2web_esdh_provider_menu() {
+  $items['os2web/test/esdh_provider'] = array(
+      'title' => t('ESDH Provider TEST'),
+      'access callback' => TRUE,
+      'page callback' => 'os2web_esdh_provider_page',
+      'type' => MENU_CALLBACK,
+  );
+  $items['admin/config/os2web/esdh_provider'] = array(
+      'title' => t('ESDH Provider API status'),
+      'access arguments' => array('administer os2web'),
+      'page callback' => 'os2web_esdh_provider_status',
+      'type' => MENU_LOCAL_TASK,
+  );
+  return $items;
+}
+
+function os2web_esdh_provider_status() {
+
+  $apis = array(
+      'cm',
+      'mm',
+      'rp',
+  );
+  $head = array('API name', 'Description', 'module', 'status');
+  $rows = array();
+  foreach ($apis as $api) {
+    $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
+    $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
+    if (count($plugins) > 0) {
+      foreach ($plugins as $plugin) {
+
+        error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $plugin = ' . print_r($plugin, 1));
+        $rows[] = array(
+            $api,
+            $plugin['description'],
+            $plugin['module'],
+            os2web_esdh_provider_has_api($api) ? 'Working' : 'Error',
+        );
+      }
+    } else {
+      $rows[] = array($api, 'Unavailable', 'Not enabled.', 'Error');
+    }
+  }
+  return '<h2>' . t('ESDH Provider API status') . '</h2>' . theme('table', array('header' => $head, 'rows' => $rows));
+}
+
+function os2web_esdh_provider_page() {
+  if (os2web_esdh_provider_supports('cm', 'test')) {
+    return '<pre>' . os2web_esdh_provider_invoke('cm', 'test', 'hest');
+  }
+  return '<pre>BLABLA' . print_r($plugins, 1) . '</pre><pre>';
+}
+
+function os2web_esdh_provider_ctools_plugin_type() {
+  $plugins['cm'] = array(
+      'required methods' => array(
+          'get_document',
+          'get_document_file',
+          'get_case_docs',
+          'get_case_data',
+          'lookup_doc',
+          'lookup_case',
+      )
+  );
+  $plugins['mm'] = array();
+  $plugins['cp'] = array();
+  return $plugins;
+}
+
+/**
+ * Validate an API implementation for use. This function validates all required methods are available, and that only 1 implementation exists.
+ *
+ * @param string $api
+ * @return boolean
+ */
+function os2web_esdh_provider_has_api($api) {
+  $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
+  if ($info) {
+    $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
+    if (count($plugins) > 1) {
+      watchdog('esdh provider', 'API %api has multiple implementations active.', array('%api' => $api), WATCHDOG_ERROR);
+      return false;
+    }
+    if (isset($info['required methods'])) {
+      foreach ($info['required methods'] as $method) {
+        if (!os2web_esdh_provider_supports($api, $method)) {
+          watchdog('esdh provider', 'Incomplete API found during check: %api', array('%api' => $api), WATCHDOG_ERROR);
+          return false;
+        }
+      }
+    }
+  } else {
+    watchdog('esdh provider', 'Unimplemented API requested: %api', array('%api' => $api), WATCHDOG_ERROR);
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Check if the api supports a given method.
+ *
+ * @param string $api
+ * @param string $method
+ * @return bool - true if method is available
+ */
+function os2web_esdh_provider_supports($api, $method) {
+  ctools_include('plugins');
+  if ($plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api))) {
+    return function_exists(ctools_plugin_get_function($plugin, $method));
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Invokes a method from an api
+ *
+ * @param string $api
+ * @param string $method
+ * @param any $args... additional arguments passed to the method
+ * @return fowarded return value from method
+ */
+function os2web_esdh_provider_invoke() {
+  $args = func_get_args();
+  $api = array_shift($args);
+  $method = array_shift($args);
+  ctools_include('plugins');
+  $plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api));
+  if ($plugin) {
+    $function = ctools_plugin_get_function($plugin, $method);
+    if ($function) {
+      return call_user_func_array($function, $args);
+    }
+    watchdog('esdh_provider', 'Incomplete api implementation: method %method in api: %api called, but does not exists.', array(
+        '%method' => $method,
+        '%api' => $api,
+        ), WATCHDOG_ERROR);
+  }
+}
+
+/**
+ * builds an array with required content for a case structure
+ */
+function os2web_esdh_provider_default_case() {
+  return array(
+      'id' => NULL, // Int - CaseId
+      'access_code' => NULL, // String
+      'restricted_from_public' => NULL, // Int
+  );
+}
+
+/**
+ * builds an array with required content for a document structure
+ */
+function os2web_esdh_provider_default_document() {
+  return array(
+      'id' => NULL, // Int - DocId
+      'case_reference' => NULL, // Int - CaseId
+      'title' => NULL, // String
+      'last_update' => NULL, // String
+      'access_code' => NULL, // String
+      'publication_indicator' => NULL, // Int
+      'lock_status' => NULL, // Bool
+  );
+}
