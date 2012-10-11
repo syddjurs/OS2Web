@@ -591,6 +591,64 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-arp_case-field_case'
+  $fields['node-arp_case-field_case'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_case',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_case_field',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'case_ident',
+    ),
+    'field_instance' => array(
+      'bundle' => 'arp_case',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_case_field',
+          'settings' => array(),
+          'type' => 'case_ident_formatter',
+          'weight' => 13,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_case',
+      'label' => 'Arp Sag',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_case_field',
+        'settings' => array(),
+        'type' => 'case_ident_widget',
+        'weight' => '32',
+      ),
+    ),
+  );
+
   // Exported field: 'node-arp_case-field_documents'
   $fields['node-arp_case-field_documents'] = array(
     'field_config' => array(
@@ -1135,6 +1193,7 @@ function os2web_acadre_arp_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Arp Sag');
   t('Bilag');
   t('Documents');
   t('Indhold');
