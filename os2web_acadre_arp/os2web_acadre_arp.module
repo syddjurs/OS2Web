@@ -179,6 +179,7 @@ function _os2web_acadre_arp_process_case($info) {
   $node->moderate = 0;
   $node->sticky = 0;
   $node->language = LANGUAGE_NONE;
+  $arp_year = $meta->Year % 100;
   node_object_prepare($node);
 
   $node->title = (string) $meta->Title;
@@ -195,8 +196,9 @@ function _os2web_acadre_arp_process_case($info) {
 
   $node->field_arp_case_created[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
   $node->field_arp_case_last_modified[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
+  $node->field_arp_sag[LANGUAGE_NONE][]['case_ident'] = (string) $arp_year . '/' . (string) $meta->SequenceNumber;
+  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = (string) $arp_year . '/' . (string) $meta->SequenceNumber;
 
-  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = (string) $meta->Year . '/' . (string) $meta->SequenceNumber;
 
 
   node_submit($node);
