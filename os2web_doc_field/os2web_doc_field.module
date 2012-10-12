@@ -1,4 +1,5 @@
 <?php
+
 define('ACADRE_CM_ACCESS_OPEN_DOCUMENT', '3');
 
 /* Field information hooks */
@@ -96,12 +97,7 @@ function os2web_doc_field_field_formatter_view($entity_type, $entity, $field, $i
           $docs = array();
           $ids = explode(',', $item['doc_ident']);
           foreach ($ids as $id) {
-            if (!is_numeric($id)) {
-              $pws = _os2web_pws_get_instance();
-              $docs[] = $pws->lookupDoc(trim($id));
-            } else {
-              $docs[] = trim($id);
-            }
+            $docs[] = trim($id);
           }
           $element[$delta]['#markup'] = '<div class="documenttable">' . theme('esdh_document', array('id' => $docs)) . '</div>';
         }
@@ -120,21 +116,24 @@ function os2web_doc_field_theme() {
 }
 
 function theme_esdh_document($vars) {
+  // Check for correct api and required functions are implemented.
+  if (!os2web_esdh_provider_has_api('cm')) {
+    drupal_set_message('Error in document lookup API. Check status.', 'error');
+    return '';
+  }
   $id = $vars['id'];
-  drupal_load('module', 'os2web_pws');
   drupal_load('module', 'os2web_case_field');
-  $pws = _os2web_pws_get_instance();
   if (!is_array($id)) {
     $id = array($id);
   }
   $html = '';
   $rows = array();
   foreach ($id as $docid) {
-    $doc = $pws->getDocument($docid);
+    $doc = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
     if (_os2web_doc_field_doc_access($docid)) { // Only show public documents
-      if (isset($doc->Document) && _os2web_case_field_case_access($doc->Record->CaseFileReference)) {
+      if (($doc !== FALSE) && _os2web_case_field_case_access($doc['case_reference'])) {
         $rows[] = array(
-            l($doc->Document->DocumentTitleText, $pws->getDocData($doc->Document->DocumentIdentifier)) . '<span class="documentdate">' . format_date(strtotime($doc->Record->RecordLatestUpdateDate), 'custom', 'd/m/Y') . '</span>',
+            l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $id)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
         );
       }
     }
@@ -155,18 +154,16 @@ function theme_esdh_document($vars) {
 }
 
 function _os2web_doc_field_doc_access($docid) {
-  drupal_load('module', 'os2web_pws');
-  $pws = _os2web_pws_get_instance();
-  $doc = $pws->getDocument($docid);
+  $doc = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
   $access_grant = array(
       'accesscode' => 'KK',
       'publication' => ACADRE_CM_ACCESS_OPEN_DOCUMENT,
       'lockstatus' => true,
   );
   $access = array(
-      'accesscode' => $doc->Record->AccessCode,
-      'publication' => $doc->Record->PublicationIndicator,
-      'lockstatus' => $pws->getDocLock($docid),
+      'accesscode' => $doc['access_code'],
+      'publication' => $doc['publication_indicator'],
+      'lockstatus' => $doc['lock_status'],
   );
   return _os2web_doc_field_array_compare($access, $access_grant);
 }

@@ -38,62 +38,8 @@ function os2web_pws_menu() {
   return $items;
 }
 
-
 function os2web_pws_flush_caches() {
   return array('cache_os2web_pws');
-}
-
-/**
- * Add configuration to the settings form
- *
- * @param type $form
- * @param type $form_state
- */
-function os2web_pws_form_os2web_settings_settings_form_alter(&$form, &$form_state) {
-  $form['os2web_pws_config_group'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('PWS Endpoint configuration'),
-  );
-  $form['os2web_pws_config_group']['os2web_pws_url'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_pws_url'),
-      '#title' => t('PWS URL for V4'),
-      '#description' => t('URL to the PWS webservice endpoint.'),
-  );
-  $form['os2web_pws_config_group']['os2web_pws_url_v6'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_pws_url_v6'),
-      '#title' => t('PWS URL for  V6'),
-      '#description' => t('URL to the PWSv6 webservice endpoint.'),
-  );
-  $form['os2web_pws_config_group']['os2web_pws_url_search'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_pws_url_search'),
-      '#title' => t('PWS URL for Search service'),
-      '#description' => t('URL to the webservice endpoint that runs the search service.'),
-  );
-  $form['os2web_pws_config_group']['os2web_pws_user'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_pws_user'),
-      '#title' => t('PWS login user'),
-      '#description' => t('PWS HTTP authentification user.'),
-  );
-  $form['os2web_pws_config_group']['os2web_pws_password'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_pws_password'),
-      '#title' => t('PWS password'),
-      '#description' => t('PWS HTTP authentification password.'),
-  );
-  $form['os2web_pws_adlib_group'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Adlib Endpoint configuration'),
-  );
-  $form['os2web_pws_adlib_group']['os2web_adlib_url'] = array(
-      '#type' => 'textfield',
-      '#default_value' => variable_get('os2web_adlib_url','http://706CAR01/ExponentWSA/ExponentWSA.asmx?wsdl'),
-      '#title' => t('URL for Adlib service endpoint'),
-      '#description' => t('URL to the webservice endpoint that runs the Adlib service.'),
-  );
 }
 
 /**
@@ -142,11 +88,11 @@ function os2web_pws_case_listing($id, $id2 = false) {
 
 function os2web_test_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-  $pws = _os2web_pws_get_instance();
+//  $pws = _os2web_pws_get_instance();
 //  $adlib = _os2web_adlib_get_instance();
 //  $call = $pws->lookupCase('11/14293');
 //  $call = $pws->fetchCase($pws->lookupCase('11/4949'));
-    $call = $pws->getDocInfo(1420175);
+//    $call = $pws->getDocInfo(1420175);
 //  $call = $pws->getCaseDocs($pws->lookupCase('11/4949'));
 //  $call = array($pws->getCaseDocs('388538'),$pws->getCaseDocs('388531'));
 //  $call = $pws->getCaseDocs($pws->lookupCase('12/6202'));
@@ -193,7 +139,6 @@ function os2web_test_page() {
 //  return 'test';
 //  return theme('esdh_case', array('id' => 385817));
 //  echo '<pre>';print_r($call);die;
-
 //  module_load_include('inc', 'os2web_pws','os2web_pws.theme');
 //  $a1 = array(
 //      'test' => 1,
@@ -206,6 +151,9 @@ function os2web_test_page() {
 //  } else {
 //    $call = 'fail';
 //  }
-
+  if (os2web_esdh_provider_has_api('cm')) {
+  $call = os2web_esdh_provider_invoke('cm','get_document',1420175);
+//    $call = os2web_esdh_provider_invoke('cm', 'get_case_data', '11/4949');
+  }
   return '<div><textarea cols="150" rows=50>x' . print_r($call, 1) . '</textarea></div>';
 }
