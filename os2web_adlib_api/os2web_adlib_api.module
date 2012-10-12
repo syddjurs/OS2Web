@@ -85,7 +85,6 @@ function os2web_adlib_api_reprocess_form() {
  * Starts reprocessing on submit
  * 
  * @access public
- * @return void
  */
 function os2web_adlib_api_reprocess_form_submit() {
   os2web_adlib_api_reprocess();
@@ -95,7 +94,6 @@ function os2web_adlib_api_reprocess_form_submit() {
  * Sets up and starts batchjob
  * 
  * @access public
- * @return void
  */
 function os2web_adlib_api_reprocess() {
   $ids = _os2web_adlib_api_bulletpoint_nid();
@@ -105,7 +103,7 @@ function os2web_adlib_api_reprocess() {
   }
   $batch = array(
     'operations' => $operations,
-    'title' => 'adlib_reprocess',
+    'title' => 'Re-konverter adlib dokumenter',
     'init_message' => t('initializing'),
     'progress_message' => t('finished @current of @total'),
     'error_message' => t('something went wrong'),
@@ -116,18 +114,18 @@ function os2web_adlib_api_reprocess() {
   batch_process();
 }
 
-/* 
+/** 
  * Provides userfeedback when batchjob is finished
  */
 function _os2web_adlib_api_bulletpoint_finished($success, $results, $operations) {
-  error_log(print_r($success, 1).print_r($results, 1));
+  error_log("reschedule finished");
   drupal_set_message(t('All bullet points have been rescheduled for conversion'));
 }
 
-/*
+/**
  * Fetch all nid's for bulletspoints
  *
- * @return array
+ * @return array with bulletpoint nids
  */
 function _os2web_adlib_api_bulletpoint_nid() {
   $query = new EntityFieldQuery();
@@ -148,16 +146,20 @@ function _os2web_adlib_api_bulletpoint_nid() {
   return $nodeid;
 }
 
-/*
+/**
  * Worker function, adds fid's attached to nid's to adlib queue
+ *
+ * @param array containing bulletpoint nids, context information
  */
 function _os2web_adlib_api_reprocess_nid($nid, &$context) {
   $node = node_load($nid);
+
   if(isset($node->field_enclosures))
   {
     foreach($node->field_enclosures['und'] as $file)
     {
-      //os2web_adlib_api_convert_to_pdf($file);
+      os2web_adlib_api_convert_to_pdf($file[fid]);
+      watchdog('adlib_api', 'readded fid to conversion queue:'.$file[fid], null, WATCHDOG_DEBUG);
     }
   }
 }
@@ -204,6 +206,7 @@ function os2web_adlib_api_status() {
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $head = array('Fid', 'Job-id', 'Status', 'action');
   $rows = array();
+  $count = db_query("SELECT COUNT(*) as count FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete'")->fetch();
   $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete' LIMIT 50");
   foreach ($files as $file) {
     $fdata = file_load($file->fid);
@@ -214,7 +217,8 @@ function os2web_adlib_api_status() {
         l('delete', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => $file->fid))) . ' ' . l('reset', 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))),
     );
   }
-  $html .= '<h2>Active jobs</h2>';
+  $html .= '<h2>Active jobs (first 50)</h2>';
+  $html .= 'jobs total: '. $count->count;
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $html .= l('Delete all', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => 'all')));
   $html .= ' - ' . l('Run processing', 'admin/config/os2web/adlibstatus', array('query' => array('process' => true)));
@@ -277,8 +281,10 @@ function os2web_adlib_api_cron() {
   }
 }
 
-/*
+/**
  * Implements hook_cron_queue_info()
+ *
+ * @return array with queue info
  */
 function os2web_adlib_api_cron_queue_info() {
  error_log("queue_info");
