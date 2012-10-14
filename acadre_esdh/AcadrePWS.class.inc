@@ -49,12 +49,16 @@ class AcadrePWS extends CaseService {
         $options = $this->_get_ws_base_setup();
         $options['location'] = $url;
         $options['uri'] = 'http://www.traen.com/2007/09/06/';
+        if (function_exists('xdebug_disable'))
+          xdebug_disable();
         try {
           $this->client = new SoapClient(null, $options);
         } catch (Exception $e) {
           drupal_set_message('Error connecting to PWSv4 endpoint', 'error');
           return false;
         }
+        if (function_exists('xdebug_enable'))
+          xdebug_enable();
       }
     }
     return isset($this->client);
@@ -70,11 +74,15 @@ class AcadrePWS extends CaseService {
         drupal_set_message(t('Error, no endpoint url set for v6.'), 'error');
       } else {
         $options = $this->_get_ws_base_setup();
+        if (function_exists('xdebug_disable'))
+          xdebug_disable();
         try {
           $this->client6 = new SoapClient($url . '?WSDL', $options);
         } catch (Exception $sf) {
           drupal_set_message('Error connecting to PWSv6 endpoint', 'error');
         }
+        if (function_exists('xdebug_enable'))
+          xdebug_enable();
       }
     }
     return isset($this->client6);
@@ -90,6 +98,8 @@ class AcadrePWS extends CaseService {
         drupal_set_message(t('Error, no endpoint url set for document search searvice.'), 'error');
       } else {
         $options = $this->_get_ws_base_setup();
+        if (function_exists('xdebug_disable'))
+          xdebug_disable();
         try {
           $this->client_search = new SoapClient($url . '?WSDL', $options);
           return true;
@@ -97,6 +107,8 @@ class AcadrePWS extends CaseService {
           drupal_set_message('Error connecting to PWS document search service endpoint', 'error');
           return false;
         }
+        if (function_exists('xdebug_enable'))
+          xdebug_enable();
       }
     }
     return isset($this->client_search);
