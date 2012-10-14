@@ -1,0 +1,83 @@
+<?php
+
+// $Id$
+/*
+ * 
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
+
+function _os2web_esdh_provider_status() {
+  $apis = array_keys(os2web_esdh_provider_ctools_plugin_type());
+  $head = array('API name', 'Description', 'module', 'status');
+  $rows = array();
+  foreach ($apis as $api) {
+    $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
+    $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
+    if (count($plugins) > 0) {
+      foreach ($plugins as $plugin) {
+        $rows[] = array(
+            $api,
+            $plugin['description'],
+            $plugin['module'],
+            os2web_esdh_provider_has_api($api) ? 'Working' : 'Error',
+        );
+      }
+    } else {
+      $rows[] = array($api, 'Unavailable', 'Not enabled.', 'Error');
+    }
+  }
+  return '<h2>' . t('ESDH Provider API status') . '</h2>' . theme('table', array('header' => $head, 'rows' => $rows));
+}
+
+/**
+ * Import form
+ */
+function os2web_esdh_provider_import_form() {
+  $form = array();
+  $form['run_import'] = array(
+      '#type' => 'submit',
+      '#value' => t('Run import'),
+  );
+  $form['group'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Extended options.'),
+  );
+  $form['group']['force'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Force recreation of nodes'),
+      '#default_value' => true,
+      '#description' => t('WARNING: This will destroy existing nodes and replace with freshly imported. All node-id\s will change'),
+  );
+  $form['group']['focus'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Focused import id'),
+      '#description' => t('Ie. 1577 to reimport XML_1577.xml.'),
+  );
+  return $form;
+}
+
+function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
+  if (!os2web_esdh_provider_has_api('mm')) {
+    drupal_set_message(t('ERROR: No valid MM importer plugin active!'), 'error');
+    return;
+  }
+  $force = $form['values']['force'] == 1;
+  $focus = (int) $form['values']['focus'];
+
+  $batch = array(
+      'title' => 'Dagsorden import',
+      'operations' => array(),
+      'file' => drupal_get_path('module', 'os2web_esdh_provider') . '/os2web_esdh_provider.mmapi.inc',
+  );
+  $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
+  foreach ($meetings as $meeting) {
+    if ($focus === 0 || $focus === $meeting['id'])
+      $batch['operations'][] = array('_os2web_esdh_provider_import_meeting', array($meeting, $force));
+  }
+  if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+    $batch['operations'][] = array('os2web_esdh_provider_invoke', array('mm', 'post_import_process'));
+  }
+  batch_set($batch);
+//  _os2web_esdh_provider_import_meeting(array_pop($meetings), $force);
+}
