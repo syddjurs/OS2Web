@@ -26,6 +26,36 @@ function acadre_esdh_ctools_plugin_directory($module, $plugin) {
  * @param type $form_state
  */
 function acadre_esdh_form_os2web_settings_settings_form_alter(&$form, &$form_state) {
+  // MM configuration
+  $form['meetings'] = array(
+      '#type' => 'fieldset',
+      '#title' => 'Referat import',
+      '#description' => 'Indstillinger der vedrører importen af Acadre referater og dagsordener.',
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+  );
+  $form['meetings']['os2web_meetings_path'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Sti til acadre publish folder.',
+      '#description' => 'Dette er stien hvor Acadre publisere .XML filer til.',
+      '#default_value' => variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR),
+  );
+//  $form['meetings']['os2web_meetings_invalid_committee'] = array(
+//      '#type' => 'textfield',
+//      '#title' => 'Udvalg der ikke skal importeres',
+//      '#maxlength' => 200,
+//      '#description' => 'Komma sepereret liste over udvalg der ikke skal inkluderes i importen.',
+//      '#default_value' => variable_get('os2web_meetings_invalid_committee', 'Direktionsmøde, Direktions og afdelingschef møde, Rådhusmad, Test udvalg, Traen udvalg, Nedlagte udvalg'),
+//  );
+  $form['meetings']['os2web_meetings_approved_committee'] = array(
+      '#type' => 'textfield',
+      '#title' => 'Godkendte Udvalg',
+      '#maxlength' => 200,
+      '#description' => 'Komma sepereret liste over udvalgs-id der er godkendt til publisering.',
+      '#default_value' => variable_get('os2web_meetings_approved_committee', MEETINGS_DEFAULT_APPROVED),
+  );
+
+  // CM Configuration
   $form['os2web_pws_config_group'] = array(
       '#type' => 'fieldset',
       '#title' => t('PWS Endpoint configuration'),
