@@ -27,7 +27,10 @@ function _os2web_esdh_provider_status() {
       $rows[] = array($api, 'Unavailable', 'Not enabled.', 'Error');
     }
   }
-  return '<h2>' . t('ESDH Provider API status') . '</h2>' . theme('table', array('header' => $head, 'rows' => $rows));
+  return '<h2>' . t('ESDH Provider API plugin status') . '</h2>' .
+      theme('table', array('header' => $head, 'rows' => $rows)) .
+      '<h2>' . t('Import of MM Based ESDH documents.'). '</h2>' .
+      drupal_render(drupal_get_form('os2web_esdh_provider_import_form'));
 }
 
 /**
@@ -42,11 +45,13 @@ function os2web_esdh_provider_import_form() {
   $form['group'] = array(
       '#type' => 'fieldset',
       '#title' => t('Extended options.'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
   );
   $form['group']['force'] = array(
       '#type' => 'checkbox',
       '#title' => t('Force recreation of nodes'),
-      '#default_value' => true,
+      '#default_value' => FALSE,
       '#description' => t('WARNING: This will destroy existing nodes and replace with freshly imported. All node-id\s will change'),
   );
   $form['group']['focus'] = array(

@@ -12,17 +12,9 @@
  */
 function os2web_esdh_provider_menu() {
   $items['admin/config/os2web/esdh_provider'] = array(
-      'title' => t('ESDH Provider API status'),
+      'title' => t('ESDH status'),
       'access arguments' => array('administer os2web'),
       'page callback' => '_os2web_esdh_provider_status',
-      'type' => MENU_LOCAL_TASK,
-      'file' => 'os2web_esdh_provider.admin.inc',
-  );
-  $items['admin/config/os2web/meetings'] = array(
-      'title' => t('Meeting importer'),
-      'access arguments' => array('administer os2web'),
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('os2web_esdh_provider_import_form'),
       'type' => MENU_LOCAL_TASK,
       'file' => 'os2web_esdh_provider.admin.inc',
   );
