@@ -284,7 +284,7 @@ function os2web_adlib_api_cron() {
   $items = _os2web_adlib_api_bulletpoint_nid();
   if ($queue->numberOfItems() == 0) {
     foreach ($items as $item){
-      $queue->createItem($item);
+//      $queue->createItem($item);
     }
   }
 }
@@ -296,10 +296,9 @@ function os2web_adlib_api_cron() {
  * @return array with queue info
  */
 function os2web_adlib_api_cron_queue_info() {
- error_log("queue_info");
   $queues['os2web_adlib_reprocess'] = array(
     'worker callback' => '_os2web_adlib_api_reprocess_nid',
-    'time' => 300,
+    'time' => 10,
   );
   return $queues;
 }
@@ -409,6 +408,7 @@ function _os2web_adlib_api_get_instance() {
  * @return void
  */
 function _os2web_adlib_api_do_processing($limit = FALSE) {
+  return;
   if (!lock_acquire(__FUNCTION__, 60)) {
     return;
   }

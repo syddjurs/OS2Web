@@ -27,7 +27,7 @@ function os2web_esdh_provider_menu() {
       'type' => MENU_LOCAL_TASK,
       'file' => 'os2web_esdh_provider.mmapi.inc',
   );
-    $items['os2web/esdh/v1'] = array(
+  $items['os2web/esdh/v1'] = array(
       'type' => MENU_CALLBACK,
       'page callback' => '_os2web_esdh_provider_handler',
       'access callback' => TRUE,
@@ -101,6 +101,40 @@ function os2web_esdh_provider_node_delete($node) {
       foreach ($bullets as $nids) {
         node_delete($nids['target_id']);
       }
+  }
+}
+
+/**
+ * Implemetation of hook_cron()
+ * Will run import on every cron.
+ */
+function os2web_esdh_provider_cron() {
+  $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
+  $queue = DrupalQueue::get('acadre_mm_import');
+  if ($queue->numberOfItems() == 0) {
+    foreach ($meetings as $meeting) {
+      $queue->createItem(array('meeting' => $meeting, 'force' => $force));
+    }
+    $queue->createItem(false);
+  }
+}
+
+function os2web_esdh_provider_cron_queue_info() {
+  $queues['acadre_mm_import'] = array(
+      'worker callback' => '_os2web_esdh_provider_cron_queue_worker',
+      'time' => 30,
+  );
+  return $queues;
+}
+
+function _os2web_esdh_provider_cron_queue_worker($args) {
+  if ($args === FALSE) {
+    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+      os2web_esdh_provider_invoke('mm', 'post_import_process');
+    }
+  } else {
+    module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
+    _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
   }
 }
 
@@ -211,6 +245,7 @@ function os2web_esdh_provider_default_meeting() {
       'title' => NULL, // String
       'meeting_id' => NULL, // Int
       'system_id' => NULL, // Int
+      'publish' => NULL, // Boolean
       'publication_id' => NULL, // Int - optional
       'creation_date' => NULL, // Date
       'description' => NULL, // String

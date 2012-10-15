@@ -1,6 +1,7 @@
 <?php
 
 define('PWS_CACHE_TIMEOUT', 3600 * 4);
+define('ACADRE_CM_DEFAULT_DOC_CACHE_PATH', 'public://pws_documents/');
 
 // $Id$
 /*
@@ -80,6 +81,7 @@ class AcadrePWS extends CaseService {
           $this->client6 = new SoapClient($url . '?WSDL', $options);
         } catch (Exception $sf) {
           drupal_set_message('Error connecting to PWSv6 endpoint', 'error');
+          return false;
         }
         if (function_exists('xdebug_enable'))
           xdebug_enable();
@@ -349,11 +351,14 @@ class AcadrePWS extends CaseService {
 </soap:Envelope>';
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetFileName', SOAP_1_1);
-        $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->FileName1;
-        // Use md5sum to avoid long  and guessable filenames
-        $info = pathinfo($result);
-        $result = md5('adlibsalt' . $info['basename']) . '.' . $info['extension'];
-        cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
+        if (is_object($result = simplexml_load_string($result))) {
+          error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $request = ' . print_r($request, 1));
+          $result = (string) array_shift($result->xpath('//soap:Body'))->FileName1;
+          // Use md5sum to avoid long  and guessable filenames
+          $info = pathinfo($result);
+          $result = md5('adlibsalt' . $info['basename']) . '.' . $info['extension'];
+          cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
+        }
       } catch (SoapFault $sf) {
         error_log("Var: \$sf = " . print_r($sf, 1));
       }
@@ -362,7 +367,7 @@ class AcadrePWS extends CaseService {
   }
 
   public function getDocData($id, $ver = FALSE) {
-    $dest = DEFAULT_DOC_CACHE_PATH;
+    $dest = ACADRE_CM_DEFAULT_DOC_CACHE_PATH;
     $result = false;
     if (!is_numeric($ver)) {
       $info = $this->getDocRef($id);
@@ -405,21 +410,25 @@ class AcadrePWS extends CaseService {
 </soap:Envelope>';
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetPhysicalDocument', SOAP_1_1);
-//        $result = simplexml_load_string($result)->xpath('/soap:Envelope/soap:Body/*');
-        $result = (string) array_shift(simplexml_load_string($result)->xpath('//soap:Body'))->XMLBinary;
-        if (file_prepare_directory($dest, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
-          $filename = (string) $ref . '-' . (string) $ver . '-' . $this->getDocFileName($ref, $ver);
-          error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $name = ' . print_r($filename, 1));
-          $result = file_save_data(base64_decode($result), $dest . $filename, FILE_EXISTS_REPLACE);
-          if (FALSE != $result) {
-            drupal_load('module', 'os2web_adlib_api');
-            os2web_adlib_api_convert_to_pdf($result->fid, $ref);
-            $result = file_create_url($result->uri);
+        if (is_object($result = simplexml_load_string($result))) {
+          $result = (string) array_shift($result->xpath('//soap:Body'))->XMLBinary;
+          if (file_prepare_directory($dest, FILE_CREATE_DIRECTORY | FILE_MODIFY_PERMISSIONS)) {
+            $filename = (string) $ref . '-' . (string) $ver . '-' . $this->getDocFileName($ref, $ver);
+            $result = file_save_data(base64_decode($result), $dest . $filename, FILE_EXISTS_REPLACE);
+            if (FALSE != $result) {
+              if (drupal_load('module', 'os2web_adlib_api')) {
+                os2web_adlib_api_convert_to_pdf($result->fid, $ref);
+              }
+              $result = file_create_url($result->uri);
+            } else {
+              drupal_set_message('There was an error saving the file', 'error');
+            }
           } else {
-            drupal_set_message('There was an error saving the file', 'error');
+            drupal_set_message('There was an error creating the file', 'error');
           }
         } else {
-          drupal_set_message('There was an error creating the file', 'error');
+          error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Error parse output from WS.');
+          return false;
         }
 //        $result = $result[0];
       } catch (SoapFault $sf) {

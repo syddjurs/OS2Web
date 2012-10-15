@@ -22,22 +22,34 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
 
     // Run check to see if meeting is already imported
     $query = new EntityFieldQuery();
+    $published = $meeting['publish'] ? 'Published' : 'Unpublished';
     $result = $query->entityCondition('entity_type', 'node')
         ->propertyCondition('type', 'meeting')
         ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
         ->execute();
     if (isset($result['node'])) {
       $nid = array_shift($result['node'])->nid;
-      if ($force) {
-        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Removing nid: ' . $nid);
+      if (!$meeting['publish']) {
+        // Meeting needs to be unpublished
+//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
         node_delete($nid);
-        watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
+        watchdog('ESDH', 'Unpublished %nid .', array('%nid' => $nid), WATCHDOG_INFO);
+        continue;
+      }
+      if ($force) {
+//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Republish nid: ' . $nid);
+        node_delete($nid);
+//        watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
         $node = new stdClass(); // We create a new node object
       } else {
-        watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
+//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
+//        watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
         continue;
       }
     } else {
+      if (!$meeting['publish']) {
+        continue;
+      }
       $node = new stdClass(); // We create a new node object
     }
 
@@ -197,7 +209,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
     $uri = $uri_pdf;
     $convert = false;
   } elseif ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_out))) {
-    $uri_out = implode('/', array(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), $folder, basename($uri_tmp)));
+    $uri_out = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $folder, basename($uri_tmp)));
     // File already copied
     $convert = true;
     $uri = $uri_out;
@@ -297,7 +309,7 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
   $meeting_id = $node->field_meeting_id[LANGUAGE_NONE][0]['value'];
   $system_id = $node->field_system_id[LANGUAGE_NONE][0]['value'];
   $filename = 'Unknown';
-  $files = file_scan_directory(variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR), '/\.xml$/i', array('recurse' => false));
+  $files = file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => false));
   foreach ($files as $file) {
     $xml = simplexml_load_file(drupal_realpath($file->uri));
     if (is_object($xml)) {

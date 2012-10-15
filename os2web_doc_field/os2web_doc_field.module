@@ -133,7 +133,7 @@ function theme_esdh_document($vars) {
     if (_os2web_doc_field_doc_access($docid)) { // Only show public documents
       if (($doc !== FALSE) && _os2web_case_field_case_access($doc['case_reference'])) {
         $rows[] = array(
-            l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $id)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
+            l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $docid)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
         );
       }
     }

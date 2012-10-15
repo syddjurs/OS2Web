@@ -1,7 +1,5 @@
 <?php
 
-define('ACADRE_MM_IMPORT_DIR', 'public://acadre');
-define('ACADRE_MM_DEFAULT_APPROVED', '62,59,64,53,54,56,57,63,58,51,55,61,68,69,42');
 define('ACADRE_MM_PUB_FOCUS', false); // Set this to the publication-id ie. 1577 for file XML_1577.
 // $Id$
 /*
@@ -99,11 +97,16 @@ function acadre_esdh_mm_import_meeting($meeting) {
           $agendainfo['agenda_uri'] = $agenda_uri;
           $imported = _acadre_esdh_import_meeting($agendainfo);
           if (is_array($imported)) {
+            $imported['publish'] = TRUE;
             $meetings[] = $imported;
           }
         } else {
 // Publication not published or public.
 //          _os2web_meetings_unpublish_meeting($meeting);
+          $meetings[] = array(
+              'system_id' => $agendainfo['sysid'],
+              'publish' => FALSE,
+              ) + os2web_esdh_provider_default_meeting();
         }
       }
     } else {
@@ -175,7 +178,6 @@ function _acadre_esdh_import_meeting($info) {
     }
     $meeting += os2web_esdh_provider_default_meeting(); // Apply defaults, just in case we missed something.
     return $meeting;
-//    return (array) $xml;
   } else {
 // Requested file not found
     watchdog('acadre MM', 'Failed to read agenda manifest file %uri', array('%uri' => $agenda_uri), WATCHDOG_WARNING);

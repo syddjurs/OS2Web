@@ -69,8 +69,12 @@ function acadre_esdh_get_document_file($doc_id) {
   if (!is_numeric($doc_id)) {
     $doc_id = acadre_esdh_lookup_doc($doc_id);
   }
-  $file = $pws->getDocData($doc_id);
-  return $file;
+  if ($doc_id > 0) {
+    $file = $pws->getDocData($doc_id);
+    return $file;
+  } else {
+    return (object) NULL;
+  }
 }
 
 /**

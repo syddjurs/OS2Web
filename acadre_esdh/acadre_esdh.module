@@ -7,6 +7,8 @@
  * @copyright Bellcom Open Source aps.
  */
 
+define('ACADRE_MM_IMPORT_DIR', 'public://acadre');
+define('ACADRE_MM_DEFAULT_APPROVED', '62,59,64,53,54,56,57,63,58,51,55,61,68,69,42');
 
 /**
  * Register as provider of esdh plugins
@@ -38,7 +40,7 @@ function acadre_esdh_form_os2web_settings_settings_form_alter(&$form, &$form_sta
       '#type' => 'textfield',
       '#title' => 'Sti til acadre publish folder.',
       '#description' => 'Dette er stien hvor Acadre publisere .XML filer til.',
-      '#default_value' => variable_get('os2web_meetings_path', DEFAULT_ACADRE_IMPORT_DIR),
+      '#default_value' => variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
   );
 //  $form['meetings']['os2web_meetings_invalid_committee'] = array(
 //      '#type' => 'textfield',
@@ -52,7 +54,7 @@ function acadre_esdh_form_os2web_settings_settings_form_alter(&$form, &$form_sta
       '#title' => 'Godkendte Udvalg',
       '#maxlength' => 200,
       '#description' => 'Komma sepereret liste over udvalgs-id der er godkendt til publisering.',
-      '#default_value' => variable_get('os2web_meetings_approved_committee', MEETINGS_DEFAULT_APPROVED),
+      '#default_value' => variable_get('os2web_meetings_approved_committee', ACADRE_MM_DEFAULT_APPROVED),
   );
 
   // CM Configuration
