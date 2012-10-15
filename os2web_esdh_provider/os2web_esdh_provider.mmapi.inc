@@ -259,7 +259,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
   $file = file_save($file);
 
   // Schedule for PDF conversion
-  $convert = false; // DEBUG
+//  $convert = false; // DEBUG
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
