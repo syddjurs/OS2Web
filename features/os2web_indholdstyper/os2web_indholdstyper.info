@@ -223,3 +223,8 @@ features[variable][] = node_submitted_news
 features[variable][] = node_submitted_rotating_image
 features[variable][] = node_submitted_selvbetjeningslinks
 timestamp = 1349771943
+;Added by OS2Web 2012-10-15
+project=OS2Web
+version=7.x-1.5
+timestamp=1350300162
+

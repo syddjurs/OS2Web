@@ -1,5 +1,5 @@
 name = PWS Integration module
-description = Supplies api calls and unified setup for easy integration with the PWS
+description = DEPRECATED! Supplies api calls and unified setup for easy integration with the PWS
 package = OS2Web - AcadreCM
 core = 7.x
 configure = admin/config/os2web/pws
@@ -28,4 +28,9 @@ timestamp=1347452763
 project=OS2Web
 version=7.x-1.3
 timestamp=1349771943
+
+;Added by OS2Web 2012-10-15
+project=OS2Web
+version=7.x-1.5
+timestamp=1350300162
 

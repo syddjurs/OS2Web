@@ -11,4 +11,8 @@ description = Implements provider abstraction for ESDH services.
 package = OS2Web - ESDH
 core = 7.x
 
-dependencies[]=ctools
+dependencies[]=ctools;Added by OS2Web 2012-10-15
+project=OS2Web
+version=7.x-1.5
+timestamp=1350300162
+
