@@ -219,7 +219,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
     $uri_in = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_in));
     if ($uri_in === false || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
       // Bummed out on copy
-      watchdog('os2web_meetings', 'File copy failed for %infile -> %outfile. Check folder permissions.', array('%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
+      watchdog('acadre MM', 'File copy failed for %infile -> %outfile. Check folder permissions.', array('%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
       return false;
     } else {
       $convert = true;
@@ -228,12 +228,12 @@ function _os2web_esdh_provider_import_file($file_meta) {
   }
 
   if (false === $uri) {
-    watchdog('os2web_meetings', 'Processing of %infile failed. If exists, check permissions.', array('%infile', $uri_in), WATCHDOG_WARNING);
+    watchdog('acadre MM', 'Processing of %infile failed. If exists, check permissions.', array('%infile', $uri_in), WATCHDOG_WARNING);
     return false;
   }
 
   if (file_uri_scheme($uri) != 'public') {
-    watchdog('os2web_meetings', 'Invalid scheme for uri %uri, Possibly absolut path ?', array('%uri', $uri), WATCHDOG_ERROR);
+    watchdog('acadre MM', 'Invalid scheme for uri %uri, Possibly absolut path ?', array('%uri', $uri), WATCHDOG_ERROR);
     error_log("Var: \$uri = " . print_r($uri, 1));
     error_log("Var: \$uri_in = " . print_r($uri_in, 1));
     error_log("Var: \$uri_out = " . print_r($uri_out, 1));
@@ -263,10 +263,10 @@ function _os2web_esdh_provider_import_file($file_meta) {
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
-    watchdog('os2web_meetings', 'File , %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
+    watchdog('acadre MM', 'File , %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
   }
 
-//  watchdog('os2web_meetings', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);
+//  watchdog('acadre MM', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);
   return $file;
 }
 
