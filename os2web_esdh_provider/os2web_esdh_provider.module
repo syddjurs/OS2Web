@@ -21,7 +21,7 @@ function os2web_esdh_provider_menu() {
   $items['node/%/info'] = array(
       'page callback' => '_os2web_esdh_provider_node_tab_page',
       'page arguments' => array(1, 3),
-      'access callback' => '_os2web_meetings_node_tab_access',
+      'access callback' => '_os2web_esdh_provider_node_tab_access',
       'access arguments' => array(1),
       'title' => 'Meeting control',
       'type' => MENU_LOCAL_TASK,
@@ -34,6 +34,17 @@ function os2web_esdh_provider_menu() {
       'file' => 'os2web_esdh_provider.cpapi.inc',
   );
   return $items;
+}
+
+function os2web_esdh_provider_requirements($phase) {
+  $t = get_t();
+  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $phase = ' . print_r($phase, 1));
+  $requirements = array(
+      'title' => $t('OS2Web ESDH integration.'),
+      'value' => REQUIREMENT_OK,
+      'description' => '',
+  );
+  return $requirements;
 }
 
 /**

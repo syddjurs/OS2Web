@@ -407,15 +407,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
-  /* Overskrift: Global: Tekstområde */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
-  $handler->display->display_options['header']['area']['content'] = '
-<h2 class="pane-title">Møde detaljer</h2>';
-  $handler->display->display_options['header']['area']['format'] = 'php_code';
-  $handler->display->display_options['header']['area']['tokenize'] = 0;
   /* Opførsel ved ingen resultater: Global: Tekstområde */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -1226,8 +1217,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
-    t('
-<h2 class="pane-title">Møde detaljer</h2>'),
     t('Meetings bullet points'),
     t('bullet point attachments'),
     t('Video fra mødet:'),

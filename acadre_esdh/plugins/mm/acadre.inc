@@ -67,7 +67,7 @@ function acadre_esdh_mm_get_import_list() {
  * @return array of meeting_structures to save
  */
 function acadre_esdh_mm_import_meeting($meeting) {
-  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $meeting = ' . print_r($meeting, 1));
+//  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $meeting = ' . print_r($meeting, 1));
   $file = $meeting['uri'];
   if ($file === FALSE) {
     os2web_meetings_order_addenums();
