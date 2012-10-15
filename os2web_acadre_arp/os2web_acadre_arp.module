@@ -27,7 +27,7 @@ function os2web_acadre_arp_menu() {
 function _os2web_acadre_arp_test_page() {
   module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
 
-$options = array(
+  $options = array(
       'login' => 'acadre',
       'password' => 'PernoD=38%',
 //      'proxy_host' => 'localhost',
@@ -75,7 +75,7 @@ function _os2web_acadre_arp_soap_server() {
     _os2web_acadre_arp_get_wsdl();
   }
   global $HTTP_RAW_POST_DATA;
-  
+
   ini_set("soap.wsdl_cache_enabled", "0");
   $server = new SoapServer(drupal_get_path('module', 'os2web_acadre_arp') . '/os2web_acadre_arp_publishing_handler.wsdl');
   $count = variable_get('os2web_acadre_arp_soap_count', 0);
@@ -85,42 +85,41 @@ function _os2web_acadre_arp_soap_server() {
   $server->AddFunction('publish');
   $server->AddFunction('unpublish');
   $server->handle();
-}
 
-/**
- * Published a given input type. Delegates actual node creation to worker functions 
- * 
- * @param mixed $info 
- * @param mixed $parentItemId 
- * @access public
- * @return void
- */
-function publish($info, $parentItemId) {
-  $item_id = $info->ItemId;
+  /**
+   * Published a given input type. Delegates actual node creation to worker functions 
+   * 
+   * @param mixed $info 
+   * @param mixed $parentItemId 
+   * @access public
+   * @return void
+   */
+  function publish($info, $parentItemId) {
+    $item_id = $info->ItemId;
 
-  $meta = $info->Metadata;
+    $meta = $info->Metadata;
 // File was decoded to utf-8 data, so charset will break.
-  $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
-  $meta = simplexml_load_string($meta) or soap_error(2);
-  $info->Metadata = (object) $meta;
+    $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
+    $meta = simplexml_load_string($meta) or soap_error(2);
+    $info->Metadata = (object) $meta;
 
-  $type = $meta->getName();
-  switch (strtolower($type)) {
-    case 'publishedcase':
-      return _os2web_acadre_arp_process_case($info);
-    case 'publisheddocument':
-      return _os2web_acadre_arp_process_document($info, $parentItemId);
-    case 'publishedmemo':
-      return _os2web_acadre_arp_process_memo($info, $parentItemId);
-    case 'publishedparty':
-      return _os2web_acadre_arp_process_party($info, $parentItemId);
-    case 'publishedsupplementdocument':
-      return _os2web_acadre_arp_process_supplement($info, $parentItemId);
-    default:
-      error_log("Unhandled request: \$type = " . print_r($type, 1));
-      soap_error(4);
-  }
-  return 'Ilde request';
+    $type = $meta->getName();
+    switch (strtolower($type)) {
+      case 'publishedcase':
+        return _os2web_acadre_arp_process_case($info);
+      case 'publisheddocument':
+        return _os2web_acadre_arp_process_document($info, $parentItemId);
+      case 'publishedmemo':
+        return _os2web_acadre_arp_process_memo($info, $parentItemId);
+      case 'publishedparty':
+        return _os2web_acadre_arp_process_party($info, $parentItemId);
+      case 'publishedsupplementdocument':
+        return _os2web_acadre_arp_process_supplement($info, $parentItemId);
+      default:
+        error_log("Unhandled request: \$type = " . print_r($type, 1));
+        soap_error(4);
+    }
+    return 'Ilde request';
 //TODO: Old ignored code... needs handling
 //
 //  $supplement = $info->MetaData->SupplementDocument;
@@ -137,26 +136,28 @@ function publish($info, $parentItemId) {
 //  if (!empty($memo)){
 //  }
 //  return $to_return;
-}
-
-/**
- * Unpublishes a given ItemId
- * 
- * @param mixed $item_id 
- * @param mixed $location_id 
- * @access public
- * @return void
- */
-function unpublish($item_id, $location_id) {
-  $nids = _os2web_acadre_arp_find_item($item_id);
-  if (empty($nids)) {
-    return 'Success. No nodes removed.';
-  } else {
-    foreach ($nids as $nid) {
-      node_delete($nid);
-    }
-    return 'Success. Removed node-id(s): ' . implode(',', $nids);
   }
+
+  /**
+   * Unpublishes a given ItemId
+   *
+   * @param mixed $item_id
+   * @param mixed $location_id
+   * @access public
+   * @return void
+   */
+  function unpublish($item_id, $location_id) {
+    $nids = _os2web_acadre_arp_find_item($item_id);
+    if (empty($nids)) {
+      return 'Success. No nodes removed.';
+    } else {
+      foreach ($nids as $nid) {
+        node_delete($nid);
+      }
+      return 'Success. Removed node-id(s): ' . implode(',', $nids);
+    }
+  }
+
 }
 
 // Publishing functions:
@@ -179,6 +180,7 @@ function _os2web_acadre_arp_process_case($info) {
   $node->moderate = 0;
   $node->sticky = 0;
   $node->language = LANGUAGE_NONE;
+  $arp_year = $meta->Year % 100;
   node_object_prepare($node);
 
   $node->title = (string) $meta->Title;
@@ -193,10 +195,14 @@ function _os2web_acadre_arp_process_case($info) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
   }
 
+  $responsible = $meta->CaseResponsibleUser;
+  $node->field_arp_case_handler_ini[LANGUAGE_NONE][]['value'] = $responsible->UserInitials;
+  $node->field_arp_casehandler_name[LANGUAGE_NONE][]['value'] = $responsible->UserName;
   $node->field_arp_case_created[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
   $node->field_arp_case_last_modified[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
+  $node->field_case[LANGUAGE_NONE][]['case_ident'] = $arp_year . '/' . (string) $meta->SequenceNumber;
+  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = $arp_year . '/' . (string) $meta->SequenceNumber;
 
-  $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = (string) $meta->Year . '/' . (string) $meta->SequenceNumber;
 
 
   node_submit($node);
@@ -424,8 +430,8 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
   if (!$client) {
     module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
     $options = array(
-      'login' => 'acadre',
-      'password' => 'PernoD=38%',
+        'login' => 'acadre',
+        'password' => 'PernoD=38%',
 //      'proxy_host' => 'localhost',
 //      'proxy_port' => 8080,
         'cache_wsdl' => WSDL_CACHE_BOTH,

@@ -269,6 +269,118 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-arp_case-field_arp_case_handler_ini'
+  $fields['node-arp_case-field_arp_case_handler_ini'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_arp_case_handler_ini',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'arp_case',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Initialerne på den der håndterer sagen',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 14,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_arp_case_handler_ini',
+      'label' => 'Sagsbehandler initialer',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'blokindhold' => 'blokindhold',
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'php_code' => 'php_code',
+            'plain_text' => 'plain_text',
+            'raw' => 'raw',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'blokindhold' => array(
+                'weight' => '-7',
+              ),
+              'filtered_html' => array(
+                'weight' => '-10',
+              ),
+              'full_html' => array(
+                'weight' => '-9',
+              ),
+              'php_code' => array(
+                'weight' => '-6',
+              ),
+              'plain_text' => array(
+                'weight' => '-8',
+              ),
+              'raw' => array(
+                'weight' => '0',
+              ),
+            ),
+          ),
+        ),
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '33',
+      ),
+    ),
+  );
+
   // Exported field: 'node-arp_case-field_arp_case_id'
   $fields['node-arp_case-field_arp_case_id'] = array(
     'field_config' => array(
@@ -513,6 +625,118 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-arp_case-field_arp_casehandler_name'
+  $fields['node-arp_case-field_arp_casehandler_name'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_arp_casehandler_name',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'arp_case',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Sagsbehanlderens navn',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 15,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_arp_casehandler_name',
+      'label' => 'Sagsbehandler navn',
+      'required' => 0,
+      'settings' => array(
+        'better_formats' => array(
+          'allowed_formats' => array(
+            'blokindhold' => 'blokindhold',
+            'filtered_html' => 'filtered_html',
+            'full_html' => 'full_html',
+            'php_code' => 'php_code',
+            'plain_text' => 'plain_text',
+            'raw' => 'raw',
+          ),
+          'allowed_formats_toggle' => 0,
+          'default_order_toggle' => 0,
+          'default_order_wrapper' => array(
+            'formats' => array(
+              'blokindhold' => array(
+                'weight' => '-7',
+              ),
+              'filtered_html' => array(
+                'weight' => '-10',
+              ),
+              'full_html' => array(
+                'weight' => '-9',
+              ),
+              'php_code' => array(
+                'weight' => '-6',
+              ),
+              'plain_text' => array(
+                'weight' => '-8',
+              ),
+              'raw' => array(
+                'weight' => '0',
+              ),
+            ),
+          ),
+        ),
+        'linkit' => array(
+          'enable' => 0,
+          'insert_plugin' => '',
+        ),
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '34',
+      ),
+    ),
+  );
+
   // Exported field: 'node-arp_case-field_arp_party'
   $fields['node-arp_case-field_arp_party'] = array(
     'field_config' => array(
@@ -587,6 +811,64 @@ function os2web_acadre_arp_field_default_fields() {
         ),
         'type' => 'text_textfield',
         'weight' => '8',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-arp_case-field_case'
+  $fields['node-arp_case-field_case'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_case',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'os2web_case_field',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'case_ident',
+    ),
+    'field_instance' => array(
+      'bundle' => 'arp_case',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_case_field',
+          'settings' => array(),
+          'type' => 'case_ident_formatter',
+          'weight' => 13,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_case',
+      'label' => 'Arp Sag',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_case_field',
+        'settings' => array(),
+        'type' => 'case_ident_widget',
+        'weight' => '32',
       ),
     ),
   );
@@ -1135,9 +1417,11 @@ function os2web_acadre_arp_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Arp Sag');
   t('Bilag');
   t('Documents');
   t('Indhold');
+  t('Initialerne på den der håndterer sagen');
   t('ItemId');
   t('KL Emneord');
   t('Main document');
@@ -1145,6 +1429,9 @@ function os2web_acadre_arp_field_default_fields() {
   t('Oprettelses dato');
   t('Parti');
   t('Sags Id');
+  t('Sagsbehandler initialer');
+  t('Sagsbehandler navn');
+  t('Sagsbehanlderens navn');
   t('Sagstype');
   t('Sidste rettelses dato');
 

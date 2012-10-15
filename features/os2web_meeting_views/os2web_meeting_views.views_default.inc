@@ -407,15 +407,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
   $handler->display->display_options['style_options']['empty_table'] = 0;
-  /* Overskrift: Global: Tekstområde */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
-  $handler->display->display_options['header']['area']['content'] = '
-<h2 class="pane-title">Møde detaljer</h2>';
-  $handler->display->display_options['header']['area']['format'] = 'php_code';
-  $handler->display->display_options['header']['area']['tokenize'] = 0;
   /* Opførsel ved ingen resultater: Global: Tekstområde */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -1226,8 +1217,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Sortér efter'),
     t('Stigende'),
     t('Faldende'),
-    t('
-<h2 class="pane-title">Møde detaljer</h2>'),
     t('Meetings bullet points'),
     t('bullet point attachments'),
     t('Video fra mødet:'),
@@ -1980,6 +1969,12 @@ return TRUE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'dagsorden';
   $handler->display->display_options['defaults']['footer'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Forbindelse: Entity Reference: Refereret entity */
+  $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['id'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['table'] = 'field_data_field_ref_bullet_points';
+  $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['field'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['required'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Indhold: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -2158,7 +2153,7 @@ return TRUE;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['operator_id'] = 'field_meeting_search_meta_date_value_op';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['operator'] = 'field_meeting_search_meta_date_value_op';
-  $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['identifier'] = 'field_meeting_search_meta_date_value';
+  $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['identifier'] = 'field_meeting_search_advanced_meta_date_value';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['multiple'] = FALSE;
   /* Filterkriterie: Indhold: Date -  startdato (field_date) */
@@ -2250,6 +2245,7 @@ return TRUE;
     t('Seneste'),
     t('Seneste møder med publicerede referater'),
     t('Avanceret soegning'),
+    t('Indhold entity refereret fra field_ref_bullet_points'),
   );
   $export['meetings_search'] = $view;
 

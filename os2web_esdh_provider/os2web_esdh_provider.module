@@ -1,0 +1,320 @@
+<?php
+
+/*
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
+
+/**
+ * Implementation of hook_menu()
+ *
+ */
+function os2web_esdh_provider_menu() {
+  $items['admin/config/os2web/esdh_provider'] = array(
+      'title' => t('ESDH status'),
+      'access arguments' => array('administer os2web'),
+      'page callback' => '_os2web_esdh_provider_status',
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'os2web_esdh_provider.admin.inc',
+  );
+  $items['node/%/info'] = array(
+      'page callback' => '_os2web_esdh_provider_node_tab_page',
+      'page arguments' => array(1, 3),
+      'access callback' => '_os2web_esdh_provider_node_tab_access',
+      'access arguments' => array(1),
+      'title' => 'Meeting control',
+      'type' => MENU_LOCAL_TASK,
+      'file' => 'os2web_esdh_provider.mmapi.inc',
+  );
+  $items['os2web/esdh/v1'] = array(
+      'type' => MENU_CALLBACK,
+      'page callback' => '_os2web_esdh_provider_handler',
+      'access callback' => TRUE,
+      'file' => 'os2web_esdh_provider.cpapi.inc',
+  );
+  return $items;
+}
+
+function os2web_esdh_provider_requirements($phase) {
+  if ($phase!=='runtime') {
+    return array();
+  }
+  $t = get_t();
+  $plugins = os2web_esdh_provider_ctools_plugin_type();
+  $status = $count = count(array_keys($plugins));
+  foreach (array_keys($plugins) as $plugin) {
+    if (os2web_esdh_provider_has_api($plugin)) {
+      $status--;
+    }
+  }
+  if ($status == 0) {
+    $value = $t('Fully supported.');
+    $severity = REQUIREMENT_OK;
+    $desc = $t('All ESDH plugins seems to be working as intended. <a href="admin/config/os2web/esdh_provider">Status</a>');
+  } elseif ($status<$count) {
+    $value = $t('Partial support.');
+    $severity = REQUIREMENT_WARNING;
+    $desc = $t('Some ESDH plugins not activated! This can lead to not-working or misleading behavior on the site! <a href="admin/config/os2web/esdh_provider">Check status</a>');
+  } else {
+    $value = $t('Not support.');
+    $severity = REQUIREMENT_ERROR;
+    $desc = $t('No ESDH plugins activated! This can lead to not-working or misleading behavior on the site! <a href="admin/config/os2web/esdh_provider">Check status</a>');
+  }
+
+
+  $requirements['os2web_esdh_provider_plugins'] = array(
+      'title' => $t('OS2Web ESDH integration.'),
+      'value' => $value,
+      'severity' => $severity,
+      'description' => $desc,
+  );
+  return $requirements;
+}
+
+/**
+ * Descripes the plugins needed for the api's
+ *
+ * @return array
+ */
+function os2web_esdh_provider_ctools_plugin_type() {
+  $plugins['cm'] = array(
+      'cache' => TRUE,
+      'required methods' => array(
+          'get_document',
+          'get_document_file',
+          'get_case_docs',
+          'get_case_data',
+          'lookup_doc',
+          'lookup_case',
+      )
+  );
+  $plugins['mm'] = array(
+      'cache' => TRUE,
+      'required methods' => array(
+          'get_import_list',
+          'import_meeting'
+      ),
+      'optional methods' => array(
+          'post_import_process',
+      )
+  );
+  $plugins['cp'] = array(
+      'cache' => TRUE,
+      'required methods' => array(
+          'handle_request',
+      ),
+  );
+  return $plugins;
+}
+
+/**
+ * Show tab only on meeting pages, and if user has access
+ * @param int $nid
+ * @return boolean
+ */
+function _os2web_esdh_provider_node_tab_access($nid) {
+  $node = node_load($nid);
+  if ($node->type != 'meeting')
+    return false;
+  return user_access('administer os2web');
+}
+
+function os2web_esdh_provider_node_delete($node) {
+  if ($node->type === 'meeting') {
+    db_delete('os2web_meetings_imported')->condition('nid', $node->nid)->execute();
+    //TODO: Delete bullets from meeting.
+    $items = array_shift($node->field_ref_bullet_points);
+    if (is_array($items))
+      foreach ($items as $nids) {
+        node_delete($nids['target_id']);
+      }
+  }
+  if ($node->type === 'bullet_point') {
+    //TODO: Delete bullet attachments from meeting.
+    $bullets = array_shift($node->field_ref_attachment);
+    if (is_array($bullets))
+      foreach ($bullets as $nids) {
+        node_delete($nids['target_id']);
+      }
+  }
+}
+
+/**
+ * Implemetation of hook_cron()
+ * Will run import on every cron.
+ */
+function os2web_esdh_provider_cron() {
+  $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
+  $queue = DrupalQueue::get('acadre_mm_import');
+  if ($queue->numberOfItems() == 0) {
+    foreach ($meetings as $meeting) {
+      $queue->createItem(array('meeting' => $meeting, 'force' => $force));
+    }
+    $queue->createItem(false);
+  }
+}
+
+function os2web_esdh_provider_cron_queue_info() {
+  $queues['acadre_mm_import'] = array(
+      'worker callback' => '_os2web_esdh_provider_cron_queue_worker',
+      'time' => 30,
+  );
+  return $queues;
+}
+
+function _os2web_esdh_provider_cron_queue_worker($args) {
+  if ($args === FALSE) {
+    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+      os2web_esdh_provider_invoke('mm', 'post_import_process');
+    }
+  } else {
+    module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
+    _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
+  }
+}
+
+/**
+ * Validate an API implementation for use. This function validates all required methods are available, and that only 1 implementation exists.
+ *
+ * @param string $api
+ * @return boolean
+ */
+function os2web_esdh_provider_has_api($api) {
+  $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
+  if ($info) {
+    $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
+    if (count($plugins) > 1) {
+      watchdog('esdh provider', 'API %api has multiple implementations active.', array('%api' => $api), WATCHDOG_ERROR);
+      return false;
+    }
+    if (isset($info['required methods'])) {
+      foreach ($info['required methods'] as $method) {
+        if (!os2web_esdh_provider_supports($api, $method)) {
+          watchdog('esdh provider', 'Incomplete API found during check: %api', array('%api' => $api), WATCHDOG_ERROR);
+          return false;
+        }
+      }
+    }
+  } else {
+    watchdog('esdh provider', 'Unimplemented API requested: %api', array('%api' => $api), WATCHDOG_ERROR);
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Check if the api supports a given method.
+ *
+ * @param string $api
+ * @param string $method
+ * @return bool - true if method is available
+ */
+function os2web_esdh_provider_supports($api, $method) {
+  ctools_include('plugins');
+  if ($plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api))) {
+    return function_exists(ctools_plugin_get_function($plugin, $method));
+  } else {
+    return false;
+  }
+}
+
+/**
+ * Invokes a method from an api
+ *
+ * @param string $api
+ * @param string $method
+ * @param any $args... additional arguments passed to the method
+ * @return fowarded return value from method
+ */
+function os2web_esdh_provider_invoke() {
+  $args = func_get_args();
+  $api = array_shift($args);
+  $method = array_shift($args);
+  ctools_include('plugins');
+  $plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api));
+  if ($plugin) {
+    $function = ctools_plugin_get_function($plugin, $method);
+    if ($function) {
+      return call_user_func_array($function, $args);
+    }
+    watchdog('esdh_provider', 'Incomplete api implementation: method %method in api: %api called, but does not exists.', array(
+        '%method' => $method,
+        '%api' => $api,
+        ), WATCHDOG_ERROR);
+  }
+}
+
+/* * *************** API METHODS BELOW HERE ************************************ */
+
+/**
+ * builds an array with required content for a case structure
+ */
+function os2web_esdh_provider_default_case() {
+  return array(
+      'id' => NULL, // Int - CaseId
+      'access_code' => NULL, // String
+      'restricted_from_public' => NULL, // Int
+  );
+}
+
+/**
+ * builds an array with required content for a document structure
+ */
+function os2web_esdh_provider_default_document() {
+  return array(
+      'id' => NULL, // Int - DocId
+      'case_reference' => NULL, // Int - CaseId
+      'title' => NULL, // String
+      'last_update' => NULL, // String
+      'access_code' => NULL, // String
+      'publication_indicator' => NULL, // Int
+      'lock_status' => NULL, // Bool
+  );
+}
+
+/**
+ * builds an array with required content for a meeting structure
+ */
+function os2web_esdh_provider_default_meeting() {
+  return array(
+      'title' => NULL, // String
+      'meeting_id' => NULL, // Int
+      'system_id' => NULL, // Int
+      'publish' => NULL, // Boolean
+      'publication_id' => NULL, // Int - optional
+      'creation_date' => NULL, // Date
+      'description' => NULL, // String
+      'meeting_date_start' => NULL, // Datetime
+      'meeting_date_finish' => NULL, // Datetime
+      'type' => NULL, // String
+      'committee' => NULL, // String
+      'location' => NULL, // String
+      'full_doc' => NULL, // File
+      'items' => NULL, // item_struct
+  );
+}
+
+/**
+ * builds an array with required content for a meeting-item structure
+ */
+function os2web_esdh_provider_default_item() {
+  return array(
+      'id' => NULL, // Int
+      'title' => NULL, // String
+      'access' => NULL, // String
+      'enclosures' => NULL, // File[]
+      'bullets' => NULL, // bullet_struct
+  );
+}
+
+/**
+ * builds an array with required content for a meeting-bullet structure
+ */
+function os2web_esdh_provider_default_bullet() {
+  return array(
+      'title' => NULL, // String
+      'body' => NULL, // string
+  );
+}
+

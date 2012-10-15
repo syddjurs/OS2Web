@@ -14,6 +14,16 @@ define('ADLIB_HTML_IMG_FOLDER', 'public://bpimg/');
  *
  */
 function os2web_adlib_api_menu() {
+  // Added fan for requeueing Adlib jobs
+  $items['admin/config/os2web/reprocess'] = array(
+      'title' => t('AdLib requeue'),
+      'description' => t('Requeue AdLib jobs.'),
+      'access arguments' => array('administer os2web'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('os2web_adlib_api_reprocess_form'),
+      'type' => MENU_LOCAL_TASK,
+      'access callback' => TRUE,
+  );
   $items['admin/config/os2web/adlibstatus'] = array(
       'title' => t('AdLib Status'),
       'description' => t('Provides an overview of known AdLib jobs.'),
@@ -57,6 +67,105 @@ function os2web_adlib_api_status_ajax($fid) {
 }
 
 /**
+ * Provides form for user to start reprocessing
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ *
+ * @access public
+ * @return array
+ */
+function os2web_adlib_api_reprocess_form() {
+  $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Re-konverter importerede dokumenter',
+  );
+
+  return $form;
+}
+
+/**
+ * Starts reprocessing on submit
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ * 
+ * @access public
+ */
+function os2web_adlib_api_reprocess_form_submit() {
+  os2web_adlib_api_reprocess();
+}
+
+/**
+ * Sets up and starts batchjob
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ *
+ * @access public
+ */
+function os2web_adlib_api_reprocess() {
+  $ids = _os2web_adlib_api_bulletpoint_nid();
+  foreach ($ids as $nodeid) {
+    $operations[] = array('_os2web_adlib_api_reprocess_nid', array($nodeid));
+  }
+  $batch = array(
+      'operations' => $operations,
+      'title' => 'Re-konverter adlib dokumenter',
+      'init_message' => t('initializing'),
+      'progress_message' => t('finished @current of @total'),
+      'error_message' => t('something went wrong'),
+      'finished' => '_os2web_adlib_api_bulletpoint_finished',
+      'file' => drupal_get_path('module', 'os2web_adlib_api') . '/os2web_adlib_api.module',
+  );
+  batch_set($batch);
+  batch_process();
+}
+
+/**
+ * Provides userfeedback when batchjob is finished
+ * @author Thomas Thune Hansen <tth@bellcom.dk>
+ */
+function _os2web_adlib_api_bulletpoint_finished($success, $results, $operations) {
+  error_log("reschedule finished");
+  drupal_set_message(t('All bullet points have been rescheduled for conversion'));
+}
+
+/**
+ * Fetch all nid's for bulletspoints
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ *
+ * @return array with bulletpoint nids
+ */
+function _os2web_adlib_api_bulletpoint_nid() {
+  $query = new EntityFieldQuery();
+  $result = $query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'bullet_point')
+      ->execute();
+
+  $nodeid = array();
+
+  // Entity query returns an object containing an array, containing arrays...
+  foreach ($result as $item) {
+    foreach ($item as $key => $value) {
+      $nodeid[] = $key;
+    }
+  }
+  return $nodeid;
+}
+
+/**
+ * Worker function, adds fid's attached to nid's to adlib queue
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ *
+ * @param array containing bulletpoint nids, context information
+ */
+function _os2web_adlib_api_reprocess_nid($nid, &$context) {
+  $node = node_load($nid);
+
+  if (isset($node->field_enclosures)) {
+    foreach ($node->field_enclosures['und'] as $file) {
+      os2web_adlib_api_convert_to_pdf($file[fid]);
+      watchdog('adlib_api', 'readded fid to conversion queue:' . $file[fid], null, WATCHDOG_DEBUG);
+    }
+  }
+}
+
+/**
  * Provides an overview of known AdLib jobs.
  * 
  * @access public
@@ -86,19 +195,21 @@ function os2web_adlib_api_status() {
   $head = array('Connector Name', 'status', 'Jobs');
   $statuslist = $adlib->getConnectorStatusList();
   $rows = array();
-  foreach ($statuslist as $status) {
-    $rows[] = array(
-        $status->ServerDetail['ServerName'],
-        ($status->ServerDetail['Enabled'] == 'True' ? 'E' : 'Not e') . 'nabled - ' . $status->ServerInfo['Status'],
-        $status->ServerInfo['JobCount'],
-    );
-  }
+  if (is_array($statuslist))
+    foreach ($statuslist as $status) {
+      $rows[] = array(
+          $status->ServerDetail['ServerName'],
+          ($status->ServerDetail['Enabled'] == 'True' ? 'E' : 'Not e') . 'nabled - ' . $status->ServerInfo['Status'],
+          $status->ServerInfo['JobCount'],
+      );
+    }
   drupal_add_js(drupal_get_path('module', 'os2web_adlib_api') . '/os2web_adlib_api.js', 'file');
   $html = '<h2>Connector information</h2>';
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $head = array('Fid', 'Job-id', 'Status', 'action');
   $rows = array();
-  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete'");
+  $count = db_query("SELECT COUNT(*) as count FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete'")->fetch();
+  $files = db_query("SELECT * FROM {os2web_adlib_api_doc_files} WHERE job_id IS NULL OR job_id NOT LIKE 'Complete' LIMIT 50");
   foreach ($files as $file) {
     $fdata = file_load($file->fid);
     $rows[] = array(
@@ -108,7 +219,8 @@ function os2web_adlib_api_status() {
         l('delete', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => $file->fid))) . ' ' . l('reset', 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))),
     );
   }
-  $html .= '<h2>Active jobs</h2>';
+  $html .= '<h2>Active jobs (first 50)</h2>';
+  $html .= 'jobs total: ' . $count->count;
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $html .= l('Delete all', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => 'all')));
   $html .= ' - ' . l('Run processing', 'admin/config/os2web/adlibstatus', array('query' => array('process' => true)));
@@ -159,6 +271,31 @@ function os2web_adlib_api_page() {
  */
 function os2web_adlib_api_cron() {
   _os2web_adlib_api_do_processing(100);
+
+  //Add set up queue for adlib requeueing
+  $queue = DrupalQueue::get('os2web_adlib_reprocess');
+
+  $items = array();
+  $items = _os2web_adlib_api_bulletpoint_nid();
+  if ($queue->numberOfItems() == 0) {
+    foreach ($items as $item) {
+//      $queue->createItem($item);
+    }
+  }
+}
+
+/**
+ * Implements hook_cron_queue_info()
+ * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ *
+ * @return array with queue info
+ */
+function os2web_adlib_api_cron_queue_info() {
+  $queues['os2web_adlib_reprocess'] = array(
+      'worker callback' => '_os2web_adlib_api_reprocess_nid',
+      'time' => 10,
+  );
+  return $queues;
 }
 
 /**
@@ -203,6 +340,7 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   if (!file_exists(drupal_realpath($file->uri))) {
     watchdog('adlib_api', 'Cannot queue file %file. File does not exist.', array('%file' => $file->filename), WATCHDOG_WARNING);
     db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
+    error_log("filen findes ikke");
     return false;
   }
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
@@ -283,7 +421,6 @@ function _os2web_adlib_api_do_processing($limit = FALSE) {
   $files = $files->execute();
   if (count($files) > 0) {
     $adlib = _os2web_adlib_api_get_instance();
-
     foreach ($files as $file) {
       lock_acquire(__FUNCTION__, 60); // Refresh lock to avoid timeout
       _os2web_adlib_api_process_file($file);
@@ -302,6 +439,7 @@ function _os2web_adlib_api_do_processing($limit = FALSE) {
     _os2web_adlib_api_queue_file($file);
   }
   lock_release(__FUNCTION__);
+  watchdog('adlib_api', 'Finished PDF/HTML Conversion batch.', null, WATCHDOG_DEBUG);
 }
 
 function _os2web_adlib_api_process_file($file) {
@@ -493,10 +631,15 @@ function _os2web_adlib_api_queue_file($file) {
         watchdog('adlib_api', 'Queued file %file for PDF.', array('%file' => $file->file->filename));
         return true;
       } else {
-        watchdog('adlib_api', 'Upload of %file failed. Check permissions.', array('%file' => $file->file->filename));
-        db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->file->fid)->execute();
+        watchdog('adlib_api', 'Failed to add job for  %file.', array('%file' => $file->file->filename));
       }
+    } else {
+      watchdog('adlib_api', 'Upload of %file failed. Check permissions.', array('%file' => $file->file->filename));
+      db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->file->fid)->execute();
     }
+  } else {
+    watchdog('adlib_api', 'Failed to add %file to adlib queue. File not found.', array('%file' => $file->file->filename));
+    db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->file->fid)->execute();
   }
   return false;
 }

@@ -55,3 +55,8 @@ features[variable][] = scheduler_unpublish_required_baggrund
 features[variable][] = scheduler_unpublish_revision_baggrund
 features[variable][] = typekit_api_token
 timestamp = 1349771943
+;Added by OS2Web 2012-10-15
+project=OS2Web
+version=7.x-1.5
+timestamp=1350300162
+

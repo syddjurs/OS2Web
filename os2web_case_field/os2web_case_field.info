@@ -5,61 +5,15 @@ core = 7.x
 configure = admin/config/os2web/pws
 tags[] = os2web
 
-dependencies[] = os2web_pws
-
-
-
-
-; Information added by drush on 2012-04-17
-version = "dev"
-project = "os2web"
-datestamp = "1334666157"
-
-
-
-; Information added by drush on 2012-04-19
-version = "dev"
-project = "os2web"
-datestamp = "1334828867"
-
-
-
-; Information added by drush on 2012-05-18
-version = "dev"
-project = "os2web"
-datestamp = "1337330067"
-
-
-
-; Information added by drush on 2012-05-25
-version = "dev"
-project = "os2web"
-datestamp = "1337937347"
-
-
-
-; Information added by drush on 2012-05-27
-version = "dev"
-project = "os2web"
-datestamp = "1338117520"
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=1.1
-timestamp=1346750231
-
-;Added by OS2Web 2012-09-04
-project=OS2Web
-version=7.x-1.1
-timestamp=1346751781
-
-;Added by OS2Web 2012-09-12
-project=OS2Web
-version=7.x-1.2
-timestamp=1347452763
+dependencies[] = os2web_esdh_provider
 
 ;Added by OS2Web 2012-10-09
 project=OS2Web
 version=7.x-1.3
 timestamp=1349771943
+
+;Added by OS2Web 2012-10-15
+project=OS2Web
+version=7.x-1.5
+timestamp=1350300162
 
