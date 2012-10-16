@@ -379,7 +379,7 @@ class AcadrePWS extends CaseService {
     // Cache files unless there is a newer version available
     $fid = os2web_adlib_api_get_fid($ref);
     if ($fid > 0 && ($result = file_load($fid)) && is_file(drupal_realpath($result->uri))) {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
+      // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
       $ctime = filectime(drupal_realpath($result->uri));
       $info = $this->getDocInfo($id);
       if (is_object($info)) {

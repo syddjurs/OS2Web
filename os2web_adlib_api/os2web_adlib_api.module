@@ -159,8 +159,10 @@ function _os2web_adlib_api_reprocess_nid($nid, &$context) {
 
   if (isset($node->field_enclosures)) {
     foreach ($node->field_enclosures['und'] as $file) {
-      os2web_adlib_api_convert_to_pdf($file[fid]);
-      watchdog('adlib_api', 'readded fid to conversion queue:' . $file[fid], null, WATCHDOG_DEBUG);
+      if (file_exists(drupal_realpath($file['uri']))) {
+            os2web_adlib_api_convert_to_pdf($file['fid']);
+            watchdog('adlib_api', 'readded fid to conversion queue:' . $file['fid'], null, WATCHDOG_DEBUG);
+      }
     }
   }
 }
@@ -172,7 +174,7 @@ function _os2web_adlib_api_reprocess_nid($nid, &$context) {
  * @return void
  */
 function os2web_adlib_api_status() {
-  if (isset($_GET['delete'])) {
+  if (FALSE && isset($_GET['delete'])) { // Disabled for safety reasons
     $query = db_delete('os2web_adlib_api_doc_files');
     if (is_numeric($_GET['delete'])) {
       $query = $query->condition('fid', $_GET['delete']);
@@ -188,7 +190,7 @@ function os2web_adlib_api_status() {
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['process'])) {
-    _os2web_adlib_api_do_processing();
+    _os2web_adlib_api_do_processing(50);
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   $adlib = _os2web_adlib_api_get_instance();
@@ -270,16 +272,23 @@ function os2web_adlib_api_page() {
  * Implementation of hook_cron()
  */
 function os2web_adlib_api_cron() {
-  _os2web_adlib_api_do_processing(100);
-
+  //Add set up queue for adlib processing
+  $queue = DrupalQueue::get('os2web_adlib_process');
+  $items = db_select('os2web_adlib_api_doc_files', 'f')
+    ->fields('f',array('fid'))
+    ->execute()
+    ->fetchCol();
+  if ($queue->numberOfItems() == 0) {
+    foreach ($items as $item) {
+      $queue->createItem($item);
+    }
+  }
   //Add set up queue for adlib requeueing
   $queue = DrupalQueue::get('os2web_adlib_reprocess');
-
-  $items = array();
   $items = _os2web_adlib_api_bulletpoint_nid();
   if ($queue->numberOfItems() == 0) {
     foreach ($items as $item) {
-//      $queue->createItem($item);
+      $queue->createItem($item);
     }
   }
 }
@@ -294,6 +303,10 @@ function os2web_adlib_api_cron_queue_info() {
   $queues['os2web_adlib_reprocess'] = array(
       'worker callback' => '_os2web_adlib_api_reprocess_nid',
       'time' => 10,
+  );
+  $queues['os2web_adlib_process'] = array(
+      'worker callback' => '_os2web_adlib_api_process_fid',
+      'time' => 120,
   );
   return $queues;
 }
@@ -402,44 +415,37 @@ function _os2web_adlib_api_get_instance() {
  * @access protected
  * @return void
  */
-function _os2web_adlib_api_do_processing($limit = FALSE) {
-  if (!lock_acquire(__FUNCTION__, 60)) {
-    return;
+function _os2web_adlib_api_do_processing() {
+  //Add set up queue for adlib processing
+  $queue = DrupalQueue::get('os2web_adlib_process');
+  $items = db_select('os2web_adlib_api_doc_files', 'f')
+    ->fields('f',array('fid'))
+    ->execute()
+    ->fetchCol();
+  if ($queue->numberOfItems() == 0) {
+    foreach ($items as $item) {
+      $queue->createItem($item);
+    }
   }
-  watchdog('adlib_api', 'Running PDF/HTML Conversion batch..', null, WATCHDOG_DEBUG);
-// Locate any finished jobs
-  $files = db_select('os2web_adlib_api_doc_files', 'f')
-      ->fields('f')
-      ->isNotNull('job_id')
-      ->condition('job_id', array('Complete'), 'NOT IN');
-  if (ADLIB_TEST_FID) {
-    $files = $files->condition('fid', ADLIB_TEST_FID);
+}
+
+function _os2web_adlib_api_process_fid($fid) {
+  if (!lock_acquire(__FUNCTION__.$fid)) {
+    lock_wait(__FUNCTION__.$fid,15);
+    return _os2web_adlib_api_process_fid($fid);
   }
-  if ($limit !== FALSE) {
-    $files->range(0, $limit);
-  }
-  $files = $files->execute();
-  if (count($files) > 0) {
-    $adlib = _os2web_adlib_api_get_instance();
-    foreach ($files as $file) {
-      lock_acquire(__FUNCTION__, 60); // Refresh lock to avoid timeout
+  $file = db_select('os2web_adlib_api_doc_files', 'f')
+    ->fields('f')
+    ->condition('fid', $fid)
+    ->execute()->fetchObject();
+  if ($file) {
+    if ($file->job_id == NULL) {
+      _os2web_adlib_api_queue_file($file);
+    } else {
       _os2web_adlib_api_process_file($file);
     }
   }
-// Start new job if needed
-  $files = db_select('os2web_adlib_api_doc_files', 'f')->fields('f')->isNull('job_id');
-  if (ADLIB_TEST_FID) {
-    $files = $files->condition('fid', ADLIB_TEST_FID);
-  }
-  if ($limit !== FALSE) {
-    $files->range(0, $limit);
-  }
-  $files = $files->execute();
-  while ($file = $files->fetchObject()) {
-    _os2web_adlib_api_queue_file($file);
-  }
-  lock_release(__FUNCTION__);
-  watchdog('adlib_api', 'Finished PDF/HTML Conversion batch.', null, WATCHDOG_DEBUG);
+  lock_release(__FUNCTION__.$fid);
 }
 
 function _os2web_adlib_api_process_file($file) {
@@ -541,8 +547,19 @@ function _os2web_adlib_api_process_file($file) {
       }
       break;
 
+    case 'Not found':
+        $record = array(
+            'fid' => $file->fid,
+            'jobtype' => $file->jobtype,
+            'job_id' => 'Requeue',
+            'job_info' => null,
+        );
+        os2web_adlib_api_destroy_job($file->job_id);
+        drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
+        watchdog('adlib_api', 'Job for file (fid: %fid) has disappeared from server. Job reset.', array('%fid' => $file->fid), WATCHDOG_WARNING);
+        break;
     default:
-      watchdog('adlib_api', 'Unknown job status: %var', array('%var' => $jobinfo->status), WATCHDOG_WARN);
+      watchdog('adlib_api', 'Unknown job status: %var', array('%var' => $jobinfo->status), WATCHDOG_WARNING);
       break;
   }
 }
