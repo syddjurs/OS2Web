@@ -315,6 +315,14 @@ function os2web_grund_paneler_views_default_views() {
     'spotbox' => 'spotbox',
     'tema' => 'tema',
   );
+  /* Filterkriterie: Global: PHP */
+  $handler->display->display_options['filters']['php']['id'] = 'php';
+  $handler->display->display_options['filters']['php']['table'] = 'views';
+  $handler->display->display_options['filters']['php']['field'] = 'php';
+  $handler->display->display_options['filters']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['filters']['php']['php_filter'] = '$node = node_load(arg(1));
+$field = array_shift(array_shift(field_get_items(\'node\',$node,\'field_skjul_relaterede_links\')));
+return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'kle_links_boks');
