@@ -73,7 +73,7 @@ function os2web_case_field_field_validate($entity_type, $entity, $field, $instan
     $cases = explode(',', $item['case_ident']);
     foreach ($cases as $value) {
       $value = trim($value);
-      $valid = preg_match('/^\d{2}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
+      $valid = preg_match('/^\d{2,4}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
       if (!$valid && ($value != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
             'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
