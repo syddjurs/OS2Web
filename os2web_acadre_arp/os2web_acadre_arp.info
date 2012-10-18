@@ -3,7 +3,7 @@ description = Content types and SOAP Handler for for the ARP feature
 core = 7.x
 package = OS2Web - AcadreRP
 php = 5.2.4
-version = 7.x-1.4
+version = 7.x-1.5
 project = os2web_acadre_arp
 dependencies[] = ctools
 dependencies[] = date
@@ -60,9 +60,4 @@ features[variable][] = pathauto_node_arp_case_pattern
 features[variable][] = pathauto_node_arp_document_pattern
 features[views_view][] = arp_case_view
 features[views_view][] = arp_cases
-timestamp = 1349771943
-;Added by OS2Web 2012-10-15
-project=OS2Web
-version=7.x-1.5
-timestamp=1350300162
-
+timestamp = 1350300162
