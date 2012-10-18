@@ -12,7 +12,7 @@
  * @param any $meeting_id
  * @return int node-id
  */
-function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$context) {
+function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$context = NULL) {
   if (!lock_acquire(__FUNCTION__ . $meeting_id['id'])) {
     return;
   }
@@ -106,7 +106,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     watchdog('ESDH', 'Imported agenda id: %aid (Meeting: %mid) into node %nid .', array('%aid' => $meeting['system_id'], '%mid' => $meeting['meeting_id'], '%nid' => $node->nid), WATCHDOG_DEBUG);
     $nids[] = $node->nid;
   }
-  $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
+  if ($context)
+    $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
   lock_release(__FUNCTION__ . $meeting_id['id']);
   return $nids;
 }
