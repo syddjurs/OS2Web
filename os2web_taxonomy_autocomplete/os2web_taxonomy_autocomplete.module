@@ -1,15 +1,14 @@
 <?php
+
 /**
  * Implement hook_enable()
  *
  * Make sure this modules hooks are called after taxonomy and i18ntaxonomy.
  */
 function os2web_taxonomy_autocomplete_enable() {
-  $weight = db_query("SELECT weight FROM {system} WHERE name IN (:tax, :i18n) ORDER by weight DESC",
-    array(':tax' => 'taxonomy', ':i18n' => 'i18ntaxonomy'))->fetchField();
+  $weight = db_query("SELECT weight FROM {system} WHERE name IN (:tax, :i18n) ORDER by weight DESC", array(':tax' => 'taxonomy', ':i18n' => 'i18ntaxonomy'))->fetchField();
   $weight++;
-  db_query("UPDATE {system} SET weight = :weight WHERE name  = :settings",
-    array(':weight' => $weight, ':settings' => 'os2web_taxonomy_autocomplete'));
+  db_query("UPDATE {system} SET weight = :weight WHERE name  = :settings", array(':weight' => $weight, ':settings' => 'os2web_taxonomy_autocomplete'));
 }
 
 /**
@@ -17,14 +16,14 @@ function os2web_taxonomy_autocomplete_enable() {
  *
  * alter taxonomy autocompletion
  */
-function os2web_taxonomy_autocomplete_menu_alter(&$items) {	
-   $items['taxonomy/autocomplete'] = array(
+function os2web_taxonomy_autocomplete_menu_alter(&$items) {
+  $items['taxonomy/autocomplete'] = array(
     'title' => 'OS2Web Autocomplete Taxonomy',
     'page callback' => 'os2web_taxonomy_autocomplete_taxonomy_autocomplete',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
     'file' => '',
-  );   
+  );
 }
 
 /**
@@ -78,32 +77,32 @@ function os2web_taxonomy_autocomplete_taxonomy_autocomplete($field_name, $tags_t
     $query = db_select('taxonomy_term_data', 't');
     $query->addTag('translatable');
     $query->addTag('term_access');
-	
-	// Do not return terms that are discontinued
-	$query->leftJoin('field_data_field_discontinued', 'd', 't.tid = d.entity_id'); 
-	$query->where('(d.field_discontinued_value IS NULL OR d.field_discontinued_value = 0)');
-	
-	// Only return KLE terms in third level of the hierarchy
-	if( in_array($vocabularies['kle']->vid,$vids) ) {
-	  $query->leftJoin('taxonomy_term_hierarchy', 'p1', 'p1.tid = t.tid'); 
-	  $query->leftJoin('taxonomy_term_hierarchy', 'p2', 'p2.tid = p1.parent');
-	  $query->condition('p2.parent','0','<>');
-	}	 
-		
+
+    // Do not return terms that are discontinued
+    $query->leftJoin('field_data_field_discontinued', 'd', 't.tid = d.entity_id');
+    $query->where('(d.field_discontinued_value IS NULL OR d.field_discontinued_value = 0)');
+
+    // Only return KLE terms in third level of the hierarchy
+    if (in_array($vocabularies['kle']->vid, $vids)) {
+      $query->leftJoin('taxonomy_term_hierarchy', 'p1', 'p1.tid = t.tid');
+      $query->leftJoin('taxonomy_term_hierarchy', 'p2', 'p2.tid = p1.parent');
+      $query->condition('p2.parent', '0', '<>');
+    }
+
     // Do not select already entered terms.
     if (!empty($tags_typed)) {
       $query->condition('t.name', $tags_typed, 'NOT IN');
     }
     // Select rows that match by term name.
     $tags_return = $query
-      ->fields('t', array('tid', 'name'))
-	  ->orderBy("LEFT(name,Length('$tag_last')-1)='$tag_last'", 'DESC')// Order by entered tag at beginning of term name
-	  ->orderBy('name','asc')
-      ->condition('t.vid', $vids)
-      ->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE')
-      ->range(0, 30)
-      ->execute()
-      ->fetchAllKeyed();
+        ->fields('t', array('tid', 'name'))
+        ->orderBy("LEFT(name,Length('$tag_last')-1)='$tag_last'", 'DESC')// Order by entered tag at beginning of term name
+        ->orderBy('name', 'asc')
+        ->condition('t.vid', $vids)
+        ->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE')
+        ->range(0, 30)
+        ->execute()
+        ->fetchAllKeyed();
 
     $prefix = count($tags_typed) ? drupal_implode_tags($tags_typed) . ', ' : '';
 

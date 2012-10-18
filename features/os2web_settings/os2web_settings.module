@@ -14,10 +14,10 @@ include_once('os2web_settings.features.inc');
  */
 function os2web_settings_permission() {
   return array(
-      'administer os2web' => array(
-          'title' => t('Administer OS2Web'),
-          'description' => t('Access settings and administration pages for OS2Web')
-      ),
+    'administer os2web' => array(
+      'title' => t('Administer OS2Web'),
+      'description' => t('Access settings and administration pages for OS2Web')
+    ),
   );
 }
 
@@ -27,24 +27,24 @@ function os2web_settings_permission() {
  */
 function os2web_settings_menu() {
   $items['admin/config/os2web'] = array(
-      'title' => 'OS2Web Setup',
-      'description' => 'Set up OS2 cms services',
-      'position' => 'right',
-      'weight' => -15,
-      'access arguments' => array('administer os2web'),
-      'page callback' => 'system_admin_menu_block_page',
-      'file' => 'system.admin.inc',
-      'file path' => drupal_get_path('module', 'system'),
-      'type' => MENU_NORMAL_ITEM,
+    'title' => 'OS2Web Setup',
+    'description' => 'Set up OS2 cms services',
+    'position' => 'right',
+    'weight' => -15,
+    'access arguments' => array('administer os2web'),
+    'page callback' => 'system_admin_menu_block_page',
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'type' => MENU_NORMAL_ITEM,
   );
   $items['admin/config/os2web/settings'] = array(
-      'title' => 'OS2web Settings',
-      'description' => t('General settings for the OS2Web project'),
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('os2web_settings_settings_form'),
-      'access arguments' => array('administer os2web'),
-      'type' => MENU_NORMAL_ITEM | MENU_DEFAULT_LOCAL_TASK,
-      'file' => 'os2web_settings.admin.inc',
+    'title' => 'OS2web Settings',
+    'description' => t('General settings for the OS2Web project'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('os2web_settings_settings_form'),
+    'access arguments' => array('administer os2web'),
+    'type' => MENU_NORMAL_ITEM | MENU_DEFAULT_LOCAL_TASK,
+    'file' => 'os2web_settings.admin.inc',
   );
 //  $items['admin/config/os2web/import'] = array(
 //      'title' => 'OS2web Imports',
@@ -55,12 +55,12 @@ function os2web_settings_menu() {
 //      'type' => MENU_LOCAL_TASK,
 //  );
   $items['node/%/dump'] = array(
-      'title' => 'Node dump',
-      'page callback' => 'os2web_settings_nodedump',
-      'page arguments' => array(1),
-      'access arguments' => array('administer os2web'),
-      'type' => MENU_LOCAL_TASK,
-      );
+    'title' => 'Node dump',
+    'page callback' => 'os2web_settings_nodedump',
+    'page arguments' => array(1),
+    'access arguments' => array('administer os2web'),
+    'type' => MENU_LOCAL_TASK,
+  );
   return $items;
 }
 
@@ -86,12 +86,11 @@ function os2web_settings_import_form_submit($form, $form_state) {
  */
 function os2web_settings_import_form($form, $form_state) {
   $form['start'] = array(
-      '#type' => 'submit',
-      '#value' => t('Start import'),
+    '#type' => 'submit',
+    '#value' => t('Start import'),
   );
   return $form;
 }
-
 
 /**
  * os2web_settings_nodedump 
@@ -101,9 +100,9 @@ function os2web_settings_import_form($form, $form_state) {
  * @return void
  */
 function os2web_settings_nodedump($nid) {
-   $node = node_load($nid);
-   $html = '<textarea rows="100">'.print_r($node,1).'</textarea>';
-   return $html;
+  $node = node_load($nid);
+  $html = '<textarea rows="100">' . print_r($node, 1) . '</textarea>';
+  return $html;
 }
 
 /**
@@ -115,13 +114,13 @@ function os2web_settings_nodedump($nid) {
  * @return void
  */
 function os2web_settings_start_form_submit(&$form, &$form_state) {
-  $fields = db_select('field_config','fc')->fields('fc',array('field_name'))->execute()->fetchCol();
+  $fields = db_select('field_config', 'fc')->fields('fc', array('field_name'))->execute()->fetchCol();
   $batch = array(
-    'operations' => array(array('os2web_settings_langfix_disable_translation',array())),
+    'operations' => array(array('os2web_settings_langfix_disable_translation', array())),
     'finished' => 'os2web_settings_langfix_finished',
-    );
+  );
   foreach ($fields as $field) {
-  //  $batch['operations'][] = array('os2web_settings_langfix_process', array('revision', $field));
+    //  $batch['operations'][] = array('os2web_settings_langfix_process', array('revision', $field));
     $batch['operations'][] = array('os2web_settings_langfix_process', array('data', $field));
   }
   batch_set($batch);
@@ -161,63 +160,64 @@ function os2web_settings_langfix_disable_translation(&$context) {
  * @access public
  * @return void
  */
-function os2web_settings_langfix_process($type, $field,&$context) {
+function os2web_settings_langfix_process($type, $field, &$context) {
   // Local init
-  $table = 'field_data_'.$field;
-  $revtable = 'field_revision_'.$field;
+  $table = 'field_data_' . $field;
+  $revtable = 'field_revision_' . $field;
 
   // Find dubes
   // Update language for all non-dupes
-  $rows = db_query('SELECT entity_id,count(language) as c FROM '.$table.' GROUP BY entity_id, delta HAVING c > 1 ORDER BY c DESC');
+  $rows = db_query('SELECT entity_id,count(language) as c FROM {' . $table . '} GROUP BY entity_id, delta HAVING c > 1 ORDER BY c DESC');
   $dupes = $rows->fetchCol();
   if (!empty($dupes)) {
     error_log("Var: \$field = " . print_r($field, 1));
     error_log("Var: \$dupes = " . print_r($dupes, 1));
   }
 
-  $context['result']['dupes'] = array_merge($context['result'],$dupes);
+  $context['result']['dupes'] = array_merge($context['result'], $dupes);
 
-  $ids = db_select($table,'f')
-  ->fields('f')
-  ->condition('language','da');
+  $ids = db_select($table, 'f')
+      ->fields('f')
+      ->condition('language', 'da');
   if (count($dupes) > 0) {
-    $ids = $ids->condition('entity_id',$dupes,'NOT IN');
+    $ids = $ids->condition('entity_id', $dupes, 'NOT IN');
   }
   $ids = $ids->execute();
   while ($row = $ids->fetchObject()) {
-  error_log("Var: \$row->entity_id = " . print_r($row->entity_id, 1));
+    error_log("Var: \$row->entity_id = " . print_r($row->entity_id, 1));
     db_update($table)
-      ->fields(array(
-        'language' => 'und'
+        ->fields(array(
+          'language' => 'und'
         ))
-      ->condition('entity_id',$row->entity_id)
-      ->condition('revision_id',$row->revision_id)
-      ->condition('delta',$row->delta)
-      ->execute();
+        ->condition('entity_id', $row->entity_id)
+        ->condition('revision_id', $row->revision_id)
+        ->condition('delta', $row->delta)
+        ->execute();
 
-    $revcount = db_select($revtable,'r')
-      ->fields('r')
-      ->condition('entity_id',$row->entity_id)
-      ->condition('revision_id',$row->revision_id)
-      ->condition('delta',$row->delta)
-      ->execute()->rowCount();
-      error_log("Var: \$revcount = " . print_r($revcount, 1));
+    $revcount = db_select($revtable, 'r')
+            ->fields('r')
+            ->condition('entity_id', $row->entity_id)
+            ->condition('revision_id', $row->revision_id)
+            ->condition('delta', $row->delta)
+            ->execute()->rowCount();
+    error_log("Var: \$revcount = " . print_r($revcount, 1));
 
     if ($revcount > 1) {
-        error_log('possible dupe found in revision table.');
-      } else {
-        db_update($revtable)
+      error_log('possible dupe found in revision table.');
+    }
+    else {
+      db_update($revtable)
           ->fields(array(
             'language' => 'und'
-            ))
-          ->condition('entity_id',$row->entity_id)
-          ->condition('revision_id',$row->revision_id)
-          ->condition('delta',$row->delta)
+          ))
+          ->condition('entity_id', $row->entity_id)
+          ->condition('revision_id', $row->revision_id)
+          ->condition('delta', $row->delta)
           ->execute();
     }
   }
 
-  $context['message'] = t('Processing %field', array('%field' => $field , '%nid' => $context['sandbox']['progress'] + 1, '%total' => $context['sandbox']['max']));
+  $context['message'] = t('Processing %field', array('%field' => $field, '%nid' => $context['sandbox']['progress'] + 1, '%total' => $context['sandbox']['max']));
 
   $context['finished'] = 1;
 }

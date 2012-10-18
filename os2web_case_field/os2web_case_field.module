@@ -6,31 +6,31 @@ define('ACADRE_CM_ACCESS_OPEN_CASE', '3');
 
 function os2web_case_field_field_info() {
   return array(
-      'case_ident' => array(
-          'label' => t('ESDH Case'),
-          'description' => 'Sags-id skal være på formen år/nummer eller år-nummer. Kun én værdi er tilladte.',
-          'default_widget' => 'case_ident_widget',
-          'default_formatter' => 'case_ident_formatter',
-      ),
+    'case_ident' => array(
+      'label' => t('ESDH Case'),
+      'description' => 'Sags-id skal være på formen år/nummer eller år-nummer. Kun én værdi er tilladte.',
+      'default_widget' => 'case_ident_widget',
+      'default_formatter' => 'case_ident_formatter',
+    ),
   );
 }
 
 function os2web_case_field_field_formatter_info() {
   return array(
-      'case_ident_formatter' => array(
-          'label' => t('ESDH Case includer'),
-          'field types' => array('case_ident'),
-      )
+    'case_ident_formatter' => array(
+      'label' => t('ESDH Case includer'),
+      'field types' => array('case_ident'),
+    )
   );
 }
 
 function os2web_case_field_field_widget_info() {
 
   return array(
-      'case_ident_widget' => array(
-          'label' => t('Case Identifier'),
-          'field types' => array('case_ident'),
-      )
+    'case_ident_widget' => array(
+      'label' => t('Case Identifier'),
+      'field types' => array('case_ident'),
+    )
   );
 }
 
@@ -49,13 +49,13 @@ function os2web_case_field_field_widget_form(&$form, &$form_state, $field, $inst
     case 'case_ident_widget':
 
       $element['case_ident'] = array(
-          '#type' => 'textfield',
-          '#title' => $element['#title'],
-          '#description' => $element['#description'],
-          '#default_value' => $default,
-          '#required' => $element['#required'],
-          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
-          '#delta' => $delta,
+        '#type' => 'textfield',
+        '#title' => check_plain($element['#title']),
+        '#description' => check_plain($element['#description']),
+        '#default_value' => $default,
+        '#required' => $element['#required'],
+        '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+        '#delta' => $delta,
       );
       break;
   }
@@ -64,7 +64,7 @@ function os2web_case_field_field_widget_form(&$form, &$form_state, $field, $inst
 
 function os2web_case_field_field_is_empty($item, $field) {
   if (empty($item['case_ident'])) {
-    return true;
+    return TRUE;
   }
 }
 
@@ -76,8 +76,8 @@ function os2web_case_field_field_validate($entity_type, $entity, $field, $instan
       $valid = preg_match('/^\d{2,4}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
       if (!$valid && ($value != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
-            'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
-            'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
+          'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
+          'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
         );
       }
     }
@@ -110,9 +110,9 @@ function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $
 
 function os2web_case_field_theme() {
   return array(
-      'esdh_case' => array(
-          'variables' => array('id' => FALSE),
-      ),
+    'esdh_case' => array(
+      'variables' => array('id' => FALSE),
+    ),
   );
 }
 
@@ -140,7 +140,7 @@ function theme_esdh_case($vars) {
     }
     $docids = os2web_esdh_provider_invoke('cm', 'get_case_docs', $id);
   }
-  $html = theme('esdh_document', array('id' => $docids, 'iscase' => true));
+  $html = theme('esdh_document', array('id' => $docids, 'iscase' => TRUE));
   return $html;
 }
 
@@ -150,23 +150,24 @@ function _os2web_case_field_case_access($caseid) {
     return FALSE;
   }
   $access_grant = array(
-      'accesscode' => 'KK',
-      'restricted' => ACADRE_CM_ACCESS_OPEN_CASE,
+    'accesscode' => 'KK',
+    'restricted' => ACADRE_CM_ACCESS_OPEN_CASE,
   );
   $access = array(
-      'accesscode' => $case['access_code'],
-      'restricted' => $case['restricted_from_public'],
+    'accesscode' => $case['access_code'],
+    'restricted' => $case['restricted_from_public'],
   );
   return _os2web_case_field_array_compare($access, $access_grant);
 }
 
 function _os2web_case_field_array_compare(array $a1, array $a2) {
-  $result = true;
+  $result = TRUE;
   foreach ($a1 as $key => $value) {
     if (isset($a2[$key]) && $a2[$key] === $value) {
-      $result = $result && true;
-    } else {
-      $result = $result && false;
+      $result = $result && TRUE;
+    }
+    else {
+      $result = $result && FALSE;
     }
   }
   return $result;

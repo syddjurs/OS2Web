@@ -1,11 +1,11 @@
 <?php
-
-/*
- * 
+/**
+ * @file
+ * This file installs the QBrick module for use in meeting views
+ *
  * @author Jesper Mathiassen <jm@bellcom.dk>
  * @copyright Bellcom Open Source aps.
  */
-
 function os2web_qbrick_field_schema($field) {
   $columns = array();
   if ($field['type'] === 'qbrick_movie') {

@@ -1,4 +1,11 @@
 <?php
+/**
+ * @file
+ * This file implements various debugging methods available from drush
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
 
 function acadre_esdh_drush_command() {
   $items = array();
@@ -33,67 +40,74 @@ function acadre_esdh_drush_command() {
   return $items;
 }
 
-
-function drush_acadre_esdh_acadre_doc($docid  = null) {
+function drush_acadre_esdh_acadre_doc($docid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
-    drush_log('API load','ok');
-    $data  = os2web_esdh_provider_invoke('cm','get_document',$docid);
+    drush_log('API load', 'ok');
+    $data = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
     if ($data === FALSE) {
-      drush_log('Document lookup..','fail');
-    } else {
-      drush_log('Document lookup..','ok');
-      error_log(print_r($data,1));
+      drush_log('Document lookup..', 'fail');
     }
-  }else{
-    drush_log('Api load','fail');
+    else {
+      drush_log('Document lookup..', 'ok');
+      error_log(print_r($data, 1));
+    }
+  }
+  else {
+    drush_log('Api load', 'fail');
   }
 }
 
-function drush_acadre_esdh_acadre_case($caseid = null) {
+function drush_acadre_esdh_acadre_case($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
-    $data  = os2web_esdh_provider_invoke('cm','get_case_data',$caseid);
-    drush_log('API load','ok');
+    $data = os2web_esdh_provider_invoke('cm', 'get_case_data', $caseid);
+    drush_log('API load', 'ok');
     if ($data === FALSE) {
-      drush_log('Case lookup..','fail');
-    } else {
-      drush_log('Case lookup..','ok');
-      error_log(print_r($data,1));
+      drush_log('Case lookup..', 'fail');
     }
-  }else{
-    drush_log('Api load','fail');
+    else {
+      drush_log('Case lookup..', 'ok');
+      error_log(print_r($data, 1));
+    }
+  }
+  else {
+    drush_log('Api load', 'fail');
   }
 }
 
-function drush_acadre_esdh_acadre_case_docs($caseid = null) {
+function drush_acadre_esdh_acadre_case_docs($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
-    drush_log('API load','ok');
-    $data  = os2web_esdh_provider_invoke('cm','get_case_docs',$caseid);
+    drush_log('API load', 'ok');
+    $data = os2web_esdh_provider_invoke('cm', 'get_case_docs', $caseid);
     if ($data === FALSE) {
-      drush_log('Case lookup..','fail');
-    } else {
-      drush_log('Case lookup..','ok');
-      error_log(print_r($data,1));
+      drush_log('Case lookup..', 'fail');
     }
-  }else{
-    drush_log('Api load','fail');
+    else {
+      drush_log('Case lookup..', 'ok');
+      error_log(print_r($data, 1));
+    }
+  }
+  else {
+    drush_log('Api load', 'fail');
   }
 }
 
-function drush_acadre_esdh_acadre_case_docs_load($caseid = null) {
+function drush_acadre_esdh_acadre_case_docs_load($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
-    drush_log('API load','ok');
-    $data  = os2web_esdh_provider_invoke('cm','get_case_docs',$caseid);
+    drush_log('API load', 'ok');
+    $data = os2web_esdh_provider_invoke('cm', 'get_case_docs', $caseid);
     if ($data === FALSE) {
-      drush_log('Case lookup..','fail');
-    } else {
-      drush_log('Case lookup..','ok');
+      drush_log('Case lookup..', 'fail');
+    }
+    else {
+      drush_log('Case lookup..', 'ok');
       $docs = array();
       foreach ($data as $doc) {
-        $docs[]=os2web_esdh_provider_invoke('cm','get_document',$doc);
+        $docs[] = os2web_esdh_provider_invoke('cm', 'get_document', $doc);
       }
-      error_log(print_r($docs,1));
+      error_log(print_r($docs, 1));
     }
-  }else{
-    drush_log('Api load','fail');
+  }
+  else {
+    drush_log('Api load', 'fail');
   }
 }

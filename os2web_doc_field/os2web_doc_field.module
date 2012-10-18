@@ -6,31 +6,31 @@ define('ACADRE_CM_ACCESS_OPEN_DOCUMENT', '3');
 
 function os2web_doc_field_field_info() {
   return array(
-      'doc_ident' => array(
-          'label' => t('ESDH Document'),
-          'description' => 'Dokument-id skal være på formen nummer/år eller nummer-år. Flere dokumenter skal være adskildt af , (komma).',
-          'default_widget' => 'doc_ident_widget',
-          'default_formatter' => 'doc_ident_formatter',
-      ),
+    'doc_ident' => array(
+      'label' => t('ESDH Document'),
+      'description' => 'Dokument-id skal være på formen nummer/år eller nummer-år. Flere dokumenter skal være adskildt af , (komma).',
+      'default_widget' => 'doc_ident_widget',
+      'default_formatter' => 'doc_ident_formatter',
+    ),
   );
 }
 
 function os2web_doc_field_field_formatter_info() {
   return array(
-      'doc_ident_formatter' => array(
-          'label' => t('ESDH Document includer'),
-          'field types' => array('doc_ident'),
-      )
+    'doc_ident_formatter' => array(
+      'label' => t('ESDH Document includer'),
+      'field types' => array('doc_ident'),
+    )
   );
 }
 
 function os2web_doc_field_field_widget_info() {
 
   return array(
-      'doc_ident_widget' => array(
-          'label' => t('Document Identifier'),
-          'field types' => array('doc_ident'),
-      )
+    'doc_ident_widget' => array(
+      'label' => t('Document Identifier'),
+      'field types' => array('doc_ident'),
+    )
   );
 }
 
@@ -49,13 +49,13 @@ function os2web_doc_field_field_widget_form(&$form, &$form_state, $field, $insta
     case 'doc_ident_widget':
 
       $element['doc_ident'] = array(
-          '#type' => 'textfield',
-          '#title' => $element['#title'],
-          '#description' => $element['#description'],
-          '#default_value' => $default,
-          '#required' => $element['#required'],
-          '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
-          '#delta' => $delta,
+        '#type' => 'textfield',
+        '#title' => check_plain($element['#title']),
+        '#description' => check_plain($element['#description']),
+        '#default_value' => $default,
+        '#required' => $element['#required'],
+        '#weight' => isset($element['#weight']) ? $element['#weight'] : 0,
+        '#delta' => $delta,
       );
       break;
   }
@@ -64,7 +64,7 @@ function os2web_doc_field_field_widget_form(&$form, &$form_state, $field, $insta
 
 function os2web_doc_field_field_is_empty($item, $field) {
   if (empty($item['doc_ident'])) {
-    return true;
+    return TRUE;
   }
 }
 
@@ -76,8 +76,8 @@ function os2web_doc_field_field_validate($entity_type, $entity, $field, $instanc
       $valid = preg_match('/^\d{1,20}[-,\/]\d{2}$/', $docid); // Adopt this for further testing
       if (!$valid && ($docid != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
-            'error' => 'Ugyldig fremstilling af dokument-id. Dokument-id skal være på formen nummer/år eller nummer-år. Flere dokumenter skal være adskildt af , (komma).',
-            'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
+          'error' => 'Ugyldig fremstilling af dokument-id. Dokument-id skal være på formen nummer/år eller nummer-år. Flere dokumenter skal være adskildt af , (komma).',
+          'message' => t('%name: illegal value.', array('%name' => $instance['label'])),
         );
       }
     }
@@ -109,9 +109,9 @@ function os2web_doc_field_field_formatter_view($entity_type, $entity, $field, $i
 
 function os2web_doc_field_theme() {
   return array(
-      'esdh_document' => array(
-          'variables' => array('id' => FALSE),
-      ),
+    'esdh_document' => array(
+      'variables' => array('id' => FALSE),
+    ),
   );
 }
 
@@ -133,7 +133,7 @@ function theme_esdh_document($vars) {
     if (_os2web_doc_field_doc_access($docid)) { // Only show public documents
       if (($doc !== FALSE) && _os2web_case_field_case_access($doc['case_reference'])) {
         $rows[] = array(
-            l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $docid)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
+          l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $docid)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
         );
       }
     }
@@ -156,25 +156,26 @@ function theme_esdh_document($vars) {
 function _os2web_doc_field_doc_access($docid) {
   $doc = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
   $access_grant = array(
-      'accesscode' => 'KK',
-      'publication' => ACADRE_CM_ACCESS_OPEN_DOCUMENT,
-      'lockstatus' => true,
+    'accesscode' => 'KK',
+    'publication' => ACADRE_CM_ACCESS_OPEN_DOCUMENT,
+    'lockstatus' => TRUE,
   );
   $access = array(
-      'accesscode' => $doc['access_code'],
-      'publication' => $doc['publication_indicator'],
-      'lockstatus' => $doc['lock_status'],
+    'accesscode' => $doc['access_code'],
+    'publication' => $doc['publication_indicator'],
+    'lockstatus' => $doc['lock_status'],
   );
   return _os2web_doc_field_array_compare($access, $access_grant);
 }
 
 function _os2web_doc_field_array_compare(array $a1, array $a2) {
-  $result = true;
+  $result = TRUE;
   foreach ($a1 as $key => $value) {
     if (isset($a2[$key]) && $a2[$key] === $value) {
-      $result = $result && true;
-    } else {
-      $result = $result && false;
+      $result = $result && TRUE;
+    }
+    else {
+      $result = $result && FALSE;
     }
   }
   return $result;

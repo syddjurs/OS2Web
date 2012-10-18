@@ -28,15 +28,15 @@ class FeedsSOAPFetcherResult extends FeedsFetcherResult {
   /**
    * Overrides FeedsFetcherResult::getRaw();
    */
-  public function getRaw() {	  
+  public function getRaw() {
     $client = new SoapClient($this->config['wsdl_url']);
 
     // Parse paremeters    
-    $paramlines    = explode("\n", $this->config['method_parameters']);
+    $paramlines = explode("\n", $this->config['method_parameters']);
     $parameters = array();
     foreach ($paramlines as $param) {
       list($name, $value) = explode('=', $param);
-      if ( isset($value) ) {
+      if (isset($value)) {
         // Named parameters
         $parameters[trim($name)] = trim($value);
       }
@@ -45,21 +45,22 @@ class FeedsSOAPFetcherResult extends FeedsFetcherResult {
       }
     }
     // Invoke web method
-    $response = $client->__soapCall($this->config['service_method_name'], array('parameters'=>$parameters));
+    $response = $client->__soapCall($this->config['service_method_name'], array('parameters' => $parameters));
     // Return first element of response array
     return reset($response);
   }
+
 }
 
 /**
  * Fetches data via SOAP.
  */
 class FeedsSOAPFetcher extends FeedsFetcher {
-  
+
   /**
    * Implements FeedsFetcher::fetch().
    */
-  public function fetch(FeedsSource $source) {	
+  public function fetch(FeedsSource $source) {
     return new FeedsSOAPFetcherResult($this->config);
   }
 
@@ -92,12 +93,13 @@ class FeedsSOAPFetcher extends FeedsFetcher {
       '#default_value' => $this->config['service_method_name'],
     );
     $form['method_parameters'] = array(
-      '#type'  => 'textarea',
+      '#type' => 'textarea',
       '#title' => t('Method Parameters'),
-      '#description' => t('Enter the parameters of the web service method. One parameter per line. '.
-                          'For named parameters, the format of <em>name=value</em> may be used. '),
+      '#description' => t('Enter the parameters of the web service method. One parameter per line. ' .
+          'For named parameters, the format of <em>name=value</em> may be used. '),
       '#default_value' => $this->config['method_parameters'],
-    );    
+    );
     return $form;
   }
+
 }

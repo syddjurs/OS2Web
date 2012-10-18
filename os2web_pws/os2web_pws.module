@@ -55,7 +55,7 @@ function _os2web_pws_get_instance() {
 //  return new AcadrePWSMock();
 }
 
-function os2web_pws_case_listing_title($id, $id2 = false) {
+function os2web_pws_case_listing_title($id, $id2 = FALSE) {
   $case = &drupal_static('os2web_pws_case', FALSE);
   if (FALSE === $case) {
     $pws = _os2web_pws_get_instance();
@@ -71,7 +71,7 @@ function os2web_pws_case_listing_title($id, $id2 = false) {
   }
 }
 
-function os2web_pws_case_listing($id, $id2 = false) {
+function os2web_pws_case_listing($id, $id2 = FALSE) {
   $pws = _os2web_pws_get_instance();
 //  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $id = ' . print_r($id, 1));
 //  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $id2 = ' . print_r($id2, 1));

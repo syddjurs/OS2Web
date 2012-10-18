@@ -1,12 +1,12 @@
 <?php
-
-// $Id$
-/*
- * 
+/**
+ * @file
+ * This file implements the importing functions of the MM functionality and depends on a
+ * plugin to do the actual filereads
+ *
  * @author Jesper Mathiassen <jm@bellcom.dk>
  * @copyright Bellcom Open Source aps.
  */
-
 /**
  * Imports meeting metadata into a node
  * @param any $meeting_id
@@ -41,12 +41,14 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         node_delete($nid);
 //        watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
         $node = new stdClass(); // We create a new node object
-      } else {
+      }
+      else {
 //        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
 //        watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
         continue;
       }
-    } else {
+    }
+    else {
       if (!$meeting['publish']) {
         continue;
       }
@@ -83,7 +85,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         $meeting['movie_chapters'] = _os2web_qbrick_get_chapters($movie_id);
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $movie_id;
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = 0;
-      } else {
+      }
+      else {
         $node->field_qbrick_ref = array();
       }
     }
@@ -131,7 +134,8 @@ function _os2web_esdh_provider_import_items($items) {
       node_submit($node);
       node_save($node);
       $nids[] = $node->nid;
-    } else {
+    }
+    else {
       $node->field_bul_point_closed[LANGUAGE_NONE][]['value'] = 1;
       if (isset($meeting['movie_id']) && is_numeric($meeting['movie_chapters'][$meeting[$id]])) {
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $meeting['movie_id'];
@@ -143,14 +147,16 @@ function _os2web_esdh_provider_import_items($items) {
         foreach ($bullet_nids as $nid) {
           $node->field_ref_attachment[LANGUAGE_NONE][]['target_id'] = $nid;
         }
-      } else {
+      }
+      else {
         $node->field_ref_attachment[LANGUAGE_NONE] = array();
       }
       // Gather enclosures
       foreach ($item['enclosures'] as $enclosure) {
         if ($file = _os2web_esdh_provider_import_file($enclosure)) {
           $node->field_enclosures[LANGUAGE_NONE][] = (array) $file;
-        } else {
+        }
+        else {
           watchdog('ESDH', 'There was an error importing file %uri ', array('%uri' => $enclosure['uri']), WATCHDOG_ERROR);
         }
       }
@@ -197,7 +203,8 @@ function _os2web_esdh_provider_import_file($file_meta) {
   $pinfo = pathinfo($uri_in);
   if ($file_meta['title'] !== '') {
     $fname = $file_meta['title'];
-  } else {
+  }
+  else {
     $fname = $pinfo['filename'];
   }
 
@@ -208,29 +215,32 @@ function _os2web_esdh_provider_import_file($file_meta) {
   if ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_pdf))) {
     // we have an already converted pdf file
     $uri = $uri_pdf;
-    $convert = false;
-  } elseif ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_out))) {
+    $convert = FALSE;
+  }
+  elseif ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_out))) {
     $uri_out = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $folder, basename($uri_tmp)));
     // File already copied
-    $convert = true;
+    $convert = TRUE;
     $uri = $uri_out;
-  } else {
+  }
+  else {
     // Completely unprocessed file
     $uri_old = $uri_in;
     $uri_in = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_in));
-    if ($uri_in === false || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
+    if ($uri_in === FALSE || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
       // Bummed out on copy
       watchdog('acadre MM', 'File copy failed for %infile -> %outfile. Check folder permissions.', array('%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
-      return false;
-    } else {
-      $convert = true;
+      return FALSE;
+    }
+    else {
+      $convert = TRUE;
       $uri = $uri_out;
     }
   }
 
-  if (false === $uri) {
+  if (FALSE === $uri) {
     watchdog('acadre MM', 'Processing of %infile failed. If exists, check permissions.', array('%infile', $uri_in), WATCHDOG_WARNING);
-    return false;
+    return FALSE;
   }
 
   if (file_uri_scheme($uri) != 'public') {
@@ -260,7 +270,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
   $file = file_save($file);
 
   // Schedule for PDF conversion
-//  $convert = false; // DEBUG
+//  $convert = FALSE; // DEBUG
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
@@ -310,7 +320,7 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
   $meeting_id = $node->field_meeting_id[LANGUAGE_NONE][0]['value'];
   $system_id = $node->field_system_id[LANGUAGE_NONE][0]['value'];
   $filename = 'Unknown';
-  $files = file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => false));
+  $files = file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => FALSE));
   foreach ($files as $file) {
     $xml = simplexml_load_file(drupal_realpath($file->uri));
     if (is_object($xml)) {
@@ -339,10 +349,10 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
 
   $head = array('Node id', 'Meeting id', 'System id', 'Filename');
   $rows[] = array(
-      $node->nid,
-      $meeting_id,
-      $system_id,
-      $filename,
+    $node->nid,
+    $meeting_id,
+    $system_id,
+    $filename,
   );
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
   $head = array('Attribute', 'Value');
@@ -373,7 +383,8 @@ function _os2web_esdh_provider_sanetize_filename($filename) {
   if (isset($pi['extension'])) {
     return substr(trim($pi['filename']), 0, 160) . '.' . $pi['extension'];
     ;
-  } else {
+  }
+  else {
     return substr(trim($pi['filename']), 0, 160);
   }
 }
@@ -392,14 +403,11 @@ function _os2web_esdh_provider_similar_file_exists($filename) {
 
   $dir = dirname($filename);
   $files = glob($dir . '/*');
-  $lcaseFilename = strtolower($filename);
+  $lcase_filename = strtolower($filename);
   foreach ($files as $file) {
-    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists looking for file = ' . $file);
-    //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists compare file = ' . $file . ' == ' . $lcaseFilename);
-    if (strtolower($file) == $lcaseFilename) {
-      //error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists  = file check ' . $strtolower($file) . ' == ' . $lcaseFilename);
+    if (strtolower($file) == $lcase_filename) {
       return $file;
     }
   }
-  return false;
+  return FALSE;
 }

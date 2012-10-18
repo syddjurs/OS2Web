@@ -1,15 +1,22 @@
 <?php
+/**
+ * @file
+ * This file install the doc field module
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
 
 function os2web_doc_field_field_schema($field) {
   return array(
-      'columns' => array(
-          'doc_ident' => array(
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          )
+    'columns' => array(
+      'doc_ident' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
       )
+    )
   );
 }
 
@@ -39,18 +46,18 @@ function os2web_doc_field_update_7002(&$sandbox) {
 
     $table_name = _field_sql_storage_tablename($field);
     $revision_name = _field_sql_storage_revision_tablename($field);
-    
+
     db_change_field($table_name, $field_name . '_doc_ident', $field_name . '_doc_ident', array(
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          ));
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'default' => '',
+    ));
     db_change_field($revision_name, $field_name . '_doc_ident', $field_name . '_doc_ident', array(
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          ));
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'default' => '',
+    ));
   }
 }

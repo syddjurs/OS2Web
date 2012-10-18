@@ -1,18 +1,25 @@
 <?php
+/**
+ * @file
+ * This file describes the CM plugin as implemented by Acadre
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
 
 /**
  * Plugin definition with callbacks
  */
 $plugin = array(
-    'description' => t('Acadre ESDH CM Backend'),
-    'version' => 1,
-    'test' => 'acadre_esdh_test',
-    'get_document' => 'acadre_esdh_get_document',
-    'get_document_file' => 'acadre_esdh_get_document_file',
-    'get_case_docs' => 'acadre_esdh_get_case_docs',
-    'get_case_data' => 'acadre_esdh_get_case_data',
-    'lookup_doc' => 'acadre_esdh_lookup_doc',
-    'lookup_case' => 'acadre_esdh_lookup_case',
+  'description' => t('Acadre ESDH CM Backend'),
+  'version' => 1,
+  'test' => 'acadre_esdh_test',
+  'get_document' => 'acadre_esdh_get_document',
+  'get_document_file' => 'acadre_esdh_get_document_file',
+  'get_case_docs' => 'acadre_esdh_get_case_docs',
+  'get_case_data' => 'acadre_esdh_get_case_data',
+  'lookup_doc' => 'acadre_esdh_lookup_doc',
+  'lookup_case' => 'acadre_esdh_lookup_case',
 );
 
 /**
@@ -44,13 +51,13 @@ function acadre_esdh_get_document($doc_id) {
     return FALSE;
   }
   $doc = array(
-      'id' => $doc_id,
-      'case_reference' => $doc_data->Record->CaseFileReference,
-      'title' => $doc_data->Document->DocumentTitleText,
-      'last_update' => $doc_data->Record->RecordLatestUpdateDate,
-      'access_code' => $doc_data->Record->AccessCode,
-      'publication_indicator' => $doc_data->Record->PublicationIndicator,
-      'lock_status' => $pws->getDocLock($doc_id),
+    'id' => $doc_id,
+    'case_reference' => $doc_data->Record->CaseFileReference,
+    'title' => $doc_data->Document->DocumentTitleText,
+    'last_update' => $doc_data->Record->RecordLatestUpdateDate,
+    'access_code' => $doc_data->Record->AccessCode,
+    'publication_indicator' => $doc_data->Record->PublicationIndicator,
+    'lock_status' => $pws->getDocLock($doc_id),
   );
   $doc += os2web_esdh_provider_default_document();
   return $doc;
@@ -72,7 +79,8 @@ function acadre_esdh_get_document_file($doc_id) {
   if ($doc_id > 0) {
     $file = $pws->getDocData($doc_id);
     return $file;
-  } else {
+  }
+  else {
     return (object) NULL;
   }
 }
@@ -113,12 +121,12 @@ function acadre_esdh_get_case_data($case_id) {
 
   $case_data = $pws->fetchCase($case_id);
   if ($case_data === FALSE) {
-    return false;
+    return FALSE;
   }
   $case = array(
-      'id' => $case_id,
-      'access_code' => $case_data->AccessCode,
-      'restricted_from_public' => $case_data->RestrictedFromPublicText,
+    'id' => $case_id,
+    'access_code' => $case_data->AccessCode,
+    'restricted_from_public' => $case_data->RestrictedFromPublicText,
   );
   $case += os2web_esdh_provider_default_case();
   return $case;
