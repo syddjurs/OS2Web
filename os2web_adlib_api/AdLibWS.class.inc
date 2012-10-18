@@ -2,7 +2,8 @@
 
 define('ADLIB_JOBTYPE_PDF', 0);
 define('ADLIB_JOBTYPE_HTML', 1);
-define('ADLIB_DISABLED', FALSE);
+define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
+
 /*
  *
  * @author Jesper Mathiassen <jm@bellcom.dk>
@@ -17,13 +18,15 @@ define('ADLIB_DISABLED', FALSE);
 class AdLibWS {
 
   private $client;
-  //private static $base_path = 'd:\\wwwroot\\';
+  //private static $base_path = 'd:\\wwwroot\\';V
   private static $base_path = 'C:\\InetPub\\wwwroot\\';
   private static $base_url = 'http://10.1.1.180/';
 
   public function __construct() {
-    if (ADLIB_DISABLED)
+    if (ADLIB_DISABLED) {
+      error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - AdLib presently disabled.');
       return;
+      }
     if (!isset($this->client)) {
       $options = array(
           'soapversion' => SOAP_1_2,

@@ -5,9 +5,11 @@
  */
 
 jQuery(document).ready(function($) {
-  $('td.status').each(function() {
-    update(this)
-  });
+  setInterval(function(){
+    $('td.status').each(function() {
+      update(this)
+    });
+  },3000);
   $('td.status').click(function() {
     $(this).html('Looking up..');
     update(this);

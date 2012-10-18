@@ -352,7 +352,6 @@ class AcadrePWS extends CaseService {
       try {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetFileName', SOAP_1_1);
         if (is_object($result = simplexml_load_string($result))) {
-          error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $request = ' . print_r($request, 1));
           $result = (string) array_shift($result->xpath('//soap:Body'))->FileName1;
           // Use md5sum to avoid long  and guessable filenames
           $info = pathinfo($result);
