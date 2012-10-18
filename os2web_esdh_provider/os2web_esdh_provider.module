@@ -149,7 +149,7 @@ function os2web_esdh_provider_cron() {
   $queue = DrupalQueue::get('acadre_mm_import');
   if ($queue->numberOfItems() == 0) {
     foreach ($meetings as $meeting) {
-      $queue->createItem(array('meeting' => $meeting, 'force' => $force));
+      $queue->createItem(array('meeting' => $meeting, 'force' => FALSE));
     }
     $queue->createItem(false);
   }
