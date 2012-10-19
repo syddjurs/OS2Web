@@ -275,7 +275,7 @@ class AcadrePWS {
           }
           else {
             $result = $result->xpath('//soap:Body');
-            $result = ('TRUE' === (string) $result[0]->DocumentLockStatus) ? TRUE : FALSE;
+            $result = ('true' === (string) $result[0]->DocumentLockStatus) ? TRUE : FALSE;
             //        $result = (string)array_pop($result->xpath('//soap:Fault/faultcode')); // This will indicate fault
           }
         }
