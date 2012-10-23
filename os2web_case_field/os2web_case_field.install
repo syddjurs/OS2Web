@@ -1,22 +1,31 @@
 <?php
+/**
+ * @file
+ * Installe the case field module
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
 
 function os2web_case_field_field_schema($field) {
   return array(
-      'columns' => array(
-          'case_ident' => array(
-              'type' => 'varchar',
-              'length' => 255,
-              'not null' => TRUE,
-              'default' => '',
-          )
+    'columns' => array(
+      'case_ident' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
       )
+    )
   );
 }
 
 function os2web_case_field_install() {
+
 }
 
 function os2web_case_field_uninstall() {
+
 }
 
 /**
@@ -27,7 +36,7 @@ function os2web_case_field_update_7002(&$sandbox) {
   $field = $field['columns']['case_ident'];
   error_log("Var: \$field = " . print_r($field, 1));
   $ret = array();
-  $ret[]= db_change_field('field_data_field_case','field_case_case_ident','field_case_case_ident',$field);
-  $ret[]= db_change_field('field_revision_field_case','field_case_case_ident','field_case_case_ident',$field);
+  $ret[] = db_change_field('field_data_field_case', 'field_case_case_ident', 'field_case_case_ident', $field);
+  $ret[] = db_change_field('field_revision_field_case', 'field_case_case_ident', 'field_case_case_ident', $field);
   return $ret;
 }

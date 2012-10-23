@@ -69,8 +69,8 @@ function balk_custom_form_user_admin_account_alter(&$form, &$form_state, $form_i
  */
 function balk_custom_entity_info_alter(&$entity_info) {
   $entity_info['node']['view modes']['related_block'] = array(
-      'label' => t('Related block'),
-      'custom settings' => '1',
+    'label' => t('Related block'),
+    'custom settings' => '1',
   );
 }
 
@@ -79,16 +79,16 @@ function balk_custom_entity_info_alter(&$entity_info) {
  */
 function balk_custom_field_formatter_info() {
   return array(
-      'balk_custom_iframe' => array(
-          'label' => t('iFrame content'),
-          'field types' => array('text'),
-          'settings' => array('width' => 460, 'height' => 400),
-      ),
-      'balk_custom_node_reference_nid' => array(
-          'label' => t('Nid'),
-          'description' => t('Display the nid of the referenced node.'),
-          'field types' => array('node_reference'),
-      ),
+    'balk_custom_iframe' => array(
+      'label' => t('iFrame content'),
+      'field types' => array('text'),
+      'settings' => array('width' => 460, 'height' => 400),
+    ),
+    'balk_custom_node_reference_nid' => array(
+      'label' => t('Nid'),
+      'description' => t('Display the nid of the referenced node.'),
+      'field types' => array('node_reference'),
+    ),
   );
 }
 
@@ -103,20 +103,20 @@ function balk_custom_field_formatter_settings_form($field, $instance, $view_mode
 
   if ($display['type'] == 'balk_custom_iframe') {
     $element['width'] = array(
-        '#title' => t('Width'),
-        '#type' => 'textfield',
-        '#size' => 3,
-        '#default_value' => $settings['width'],
-        '#element_validate' => array('element_validate_integer_positive'),
-        '#required' => TRUE,
+      '#title' => t('Width'),
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#default_value' => $settings['width'],
+      '#element_validate' => array('element_validate_integer_positive'),
+      '#required' => TRUE,
     );
     $element['height'] = array(
-        '#title' => t('Height'),
-        '#type' => 'textfield',
-        '#size' => 3,
-        '#default_value' => $settings['height'],
-        '#element_validate' => array('element_validate_integer_positive'),
-        '#required' => TRUE,
+      '#title' => t('Height'),
+      '#type' => 'textfield',
+      '#size' => 3,
+      '#default_value' => $settings['height'],
+      '#element_validate' => array('element_validate_integer_positive'),
+      '#required' => TRUE,
     );
   }
 
@@ -152,7 +152,8 @@ function balk_custom_field_formatter_view($entity_type, $entity, $field, $instan
 
       $element[$delta] = array('#markup' => $output);
     }
-  } elseif ($display['type'] == 'balk_custom_node_reference_nid') {
+  }
+  elseif ($display['type'] == 'balk_custom_node_reference_nid') {
     foreach ($items as $delta => $item) {
       $output = $item['nid'];
 
@@ -168,9 +169,9 @@ function balk_custom_field_formatter_view($entity_type, $entity, $field, $instan
  */
 function balk_custom_filter_info() {
   $filters['balk_custom_migrate'] = array(
-      'title' => t('Rewrite URLs for migrated content'),
-      'process callback' => '_filter_balk_custom_migrate',
-      'weight' => -20,
+    'title' => t('Rewrite URLs for migrated content'),
+    'process callback' => '_filter_balk_custom_migrate',
+    'weight' => -20,
   );
 
   return $filters;
@@ -197,7 +198,7 @@ function _filter_balk_custom_migrate_parse_urls($match) {
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'node')
-          ->fieldCondition('field_source_id', 'value', $source_id, '=');
+      ->fieldCondition('field_source_id', 'value', $source_id, '=');
   $result = $query->execute();
 
   if (!empty($result)) {
@@ -221,18 +222,18 @@ function _filter_balk_custom_migrate_parse_files($match) {
  */
 function balk_custom_action_info() {
   return array(
-      'balk_custom_node_assign_term_action' => array(
-          'type' => 'node',
-          'label' => t('Assign site structure to content'),
-          'configurable' => TRUE,
-          'triggers' => array('node_presave', 'comment_insert', 'comment_update', 'comment_delete'),
-      ),
-      'balk_custom_node_empty_lead_image_action' => array(
-          'type' => 'node',
-          'label' => t('Remove all lead images'),
-          'configurable' => FALSE,
-          'triggers' => array('node_presave', 'comment_insert', 'comment_update', 'comment_delete'),
-      ),
+    'balk_custom_node_assign_term_action' => array(
+      'type' => 'node',
+      'label' => t('Assign site structure to content'),
+      'configurable' => TRUE,
+      'triggers' => array('node_presave', 'comment_insert', 'comment_update', 'comment_delete'),
+    ),
+    'balk_custom_node_empty_lead_image_action' => array(
+      'type' => 'node',
+      'label' => t('Remove all lead images'),
+      'configurable' => FALSE,
+      'triggers' => array('node_presave', 'comment_insert', 'comment_update', 'comment_delete'),
+    ),
   );
 }
 
@@ -268,9 +269,9 @@ function balk_custom_node_assign_term_action(&$node, $context) {
 
     // Fix $node->changed value.
     db_update('node')
-            ->fields(array('changed' => $changed))
-            ->condition('nid', $node->nid)
-            ->execute();
+        ->fields(array('changed' => $changed))
+        ->condition('nid', $node->nid)
+        ->execute();
     $node->changed = $changed;
   }
 }
@@ -294,9 +295,9 @@ function balk_custom_node_empty_lead_image_action(&$node, $context) {
 
   // Fix $node->changed value.
   db_update('node')
-          ->fields(array('changed' => $changed))
-          ->condition('nid', $node->nid)
-          ->execute();
+      ->fields(array('changed' => $changed))
+      ->condition('nid', $node->nid)
+      ->execute();
   $node->changed = $changed;
 }
 
@@ -314,12 +315,12 @@ function balk_custom_node_assign_term_action_form($context) {
   }
 
   $form['tids'] = array(
-      '#type' => 'select',
-      '#title' => t('Taxonomy terms'),
-      '#default_value' => $tids,
-      '#options' => $options,
-      '#multiple' => TRUE,
-      '#size' => 15,
+    '#type' => 'select',
+    '#title' => t('Taxonomy terms'),
+    '#default_value' => $tids,
+    '#options' => $options,
+    '#multiple' => TRUE,
+    '#size' => 15,
   );
 
   return $form;
@@ -330,7 +331,7 @@ function balk_custom_node_assign_term_action_form($context) {
  */
 function balk_custom_node_assign_term_action_submit($form, $form_state) {
   return array(
-      'tids' => $form_state['values']['tids']
+    'tids' => $form_state['values']['tids']
   );
 }
 
@@ -344,22 +345,24 @@ function balk_custom_views_pre_render(&$view) {
     foreach ($view->result as $key => &$result) {
       if (!empty($result->field_field_external_link)) {
         $result->field_field_lead_image[0]['rendered']['#path']['path'] = $result->field_field_external_link[0]['raw']['value'];
-      } elseif (!empty($result->field_field_attached_node)) {
+      }
+      elseif (!empty($result->field_field_attached_node)) {
         $result->field_field_lead_image[0]['rendered']['#path']['path'] = 'node/' . $result->field_field_attached_node[0]['raw']['nid'];
       }
     }
-  } elseif ($view->name == 'campaigns' && $view->current_display == 'block_1') {
+  }
+  elseif ($view->name == 'campaigns' && $view->current_display == 'block_1') {
     foreach ($view->result as $key => &$result) {
-     if (!empty($result->field_field_external_link)) {
+      if (!empty($result->field_field_external_link)) {
         $result->field_field_lead_image_1[0]['rendered']['#path']['path'] = $result->field_field_external_link[0]['raw']['value'];
         $result->field_field_lead_image[0]['rendered']['#path']['path'] = $result->field_field_external_link[0]['raw']['value'];
-        $result->field_field_lead_image[0]['rendered']['#path']['options']=array();
-        $result->field_field_lead_image_1[0]['rendered']['#path']['options'] = array();  
-        }
-      else if($result->field_field_attached_node[0]['raw']['nid']){
-        $result->field_field_lead_image_1[0]['rendered']['#path']['path'] = 'node/'.$result->field_field_attached_node[0]['raw']['nid'];
-        $result->field_field_lead_image[0]['rendered']['#path']['path'] = 'node/'.$result->field_field_attached_node[0]['raw']['nid'];
-        $result->field_field_lead_image[0]['rendered']['#path']['options']=array();
+        $result->field_field_lead_image[0]['rendered']['#path']['options'] = array();
+        $result->field_field_lead_image_1[0]['rendered']['#path']['options'] = array();
+      }
+      elseif ($result->field_field_attached_node[0]['raw']['nid']) {
+        $result->field_field_lead_image_1[0]['rendered']['#path']['path'] = 'node/' . $result->field_field_attached_node[0]['raw']['nid'];
+        $result->field_field_lead_image[0]['rendered']['#path']['path'] = 'node/' . $result->field_field_attached_node[0]['raw']['nid'];
+        $result->field_field_lead_image[0]['rendered']['#path']['options'] = array();
         $result->field_field_lead_image_1[0]['rendered']['#path']['options'] = array();
       }
     }
@@ -415,18 +418,18 @@ function balk_custom_form_node_form_alter(&$form, $form_state) {
 
 function balk_custom_menu() {
   $items['admin/config/media/julekort'] = array(
-      'title' => t('Christmas card '),
-      'page callback' => 'drupal_get_form',
-      'page arguments' => array('balk_custom_settings_form'),
-      'access arguments' => array('access administration pages'),
-      'type' => MENU_NORMAL_ITEM,
+    'title' => t('Christmas card '),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('balk_custom_settings_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
   );
   $items['julekort/%'] = array(
-      'title' => '',
-      'page callback' => 'balk_custom_view_christmas_card',
-      'page arguments' => array(1),
-      'access callback' => TRUE,
-      'type' => MENU_CALLBACK,
+    'title' => '',
+    'page callback' => 'balk_custom_view_christmas_card',
+    'page arguments' => array(1),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
   );
 
   return $items;
@@ -437,19 +440,19 @@ function balk_custom_settings_form() {
   $form = array();
   $form['#attributes'] = array('enctype' => "multipart/form-data");
   $form['christmas_settings'] = array(
-      '#type' => 'fieldset',
-      '#collapsible' => true,
-      '#collapsed' => false,
-      '#title' => t('Christmas card message')
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+    '#title' => t('Christmas card message')
   );
 
 
   $form['christmas_settings']['julekort_message'] = array(
-      '#title' => t('Custom message'),
-      '#default_value' => custom_balk_get_julekort_message(),
-      '#description' => t("Available tokens:[julekort:greeting_text],[julekort:to_email],[julekort:from_email],[julekort:to_name],[julekort:from_name]"),
-      '#type' => 'text_format',
-      '#format' => 'full_html'
+    '#title' => t('Custom message'),
+    '#default_value' => custom_balk_get_julekort_message(),
+    '#description' => t("Available tokens:[julekort:greeting_text],[julekort:to_email],[julekort:from_email],[julekort:to_name],[julekort:from_name]"),
+    '#type' => 'text_format',
+    '#format' => 'full_html'
   );
 
 
@@ -459,17 +462,16 @@ function balk_custom_settings_form() {
 function custom_balk_get_julekort_message() {
   $message = variable_get('julekort_message', '');
   if (is_array($message))
-    return($message['value']);
+    return $message['value'];
   else
     return "";
 }
-
 
 function balk_custom_view_christmas_card($sid) {
   $output = "";
   $wfid = 34129;
   if (!empty($sid)) {
-    $result = db_query("select cid,data from webform_submitted_data where nid= :d and md5(sid) = :s Order by cid asc", array(':d' => $wfid, ':s' => $sid))->fetchAll();
+    $result = db_query("select cid,data from {webform_submitted_data} where nid= :d and md5(sid) = :s Order by cid asc", array(':d' => $wfid, ':s' => $sid))->fetchAll();
     ;
   }
 
@@ -486,10 +488,8 @@ function balk_custom_view_christmas_card($sid) {
 
     $options['julekort'] = $data;
     $message = variable_get("julekort_message");
-    $output.= nl2br( token_replace($message['value'], $options) );
+    $output .= nl2br(token_replace($message['value'], $options));
   }
   return $output;
 }
-
-
 

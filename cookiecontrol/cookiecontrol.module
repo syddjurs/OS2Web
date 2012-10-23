@@ -60,7 +60,7 @@ function cookiecontrol_preprocess_html(&$variables) {
   // don't render on admin pages
   if (strpos(current_path(), 'admin') === FALSE) {
   
-    drupal_add_js('http://www3.geoplugin.net/javascript.gp', array('defer' => true, 'type' => 'external'));
+    drupal_add_js('http://www3.geoplugin.net/javascript.gp', array('defer' => TRUE, 'type' => 'external'));
     $cookiecontrol_text = addslashes(t(variable_get('cookiecontrol_text', COOKIECONTROL_TEXT)));
     $cookiecontrol_fulltext = addslashes(t(variable_get('cookiecontrol_fulltext', COOKIECONTROL_FULLTEXT)));
   

@@ -1,5 +1,13 @@
 <?php
 /**
+ * @file
+ * This is an imported file for use against NTLM based authenticated webservices.
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
+
+/**
  *    SoapClientAuth for accessing Web Services protected by HTTP authentication
  *    Author: tc
  *    Last Modified: 04/08/2011
@@ -72,16 +80,16 @@ class SoapClientAuth extends SoapClient {
 
   function __doRequest($request, $location, $action, $version) {
     $headers = array(
-        'User-Agent: PHP-SOAP',
-        'Content-Type: text/xml; charset=utf-8',
-        'SOAPAction: "' . $action . '"',
-        'Content-Length: ' . strlen($request),
-        'Connection: Keep-Alive'
+      'User-Agent: PHP-SOAP',
+      'Content-Type: text/xml; charset=utf-8',
+      'SOAPAction: "' . $action . '"',
+      'Content-Length: ' . strlen($request),
+      'Connection: Keep-Alive'
     );
 
     $this->__last_request_headers = $headers;
     $ch = curl_init($location);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 
     curl_setopt($ch, CURLOPT_POST, TRUE);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
@@ -105,11 +113,12 @@ class SoapClientAuth extends SoapClient {
 
     if (($info = curl_getinfo($ch)) && $info['http_code'] == 200)
       return $response;
-    else if ($info['http_code'] == 401)
+    elseif ($info['http_code'] == 401)
       throw new Exception('Access Denied', 401);
-    else if (curl_errno($ch) != 0) {
+    elseif (curl_errno($ch) != 0) {
       throw new Exception(curl_error($ch), curl_errno($ch));
-    }else
+    }
+    else
       throw new Exception('Error', $info['http_code']);
   }
 
@@ -211,22 +220,25 @@ class streamWrapperHttpAuth {
     if (($info = curl_getinfo($this->curlHandle)) && $info['http_code'] == 200) {
       if (curl_errno($this->curlHandle) == 0) {
         return $response;
-      }else
+      }
+      else
         throw new Exception(curl_error($this->curlHandle), curl_errno($this->curlHandle));
-    }else if ($info['http_code'] == 401) { // Attempt NTLM Auth only, CURLAUTH_ANY does not work with NTML
+    }
+    elseif ($info['http_code'] == 401) { // Attempt NTLM Auth only, CURLAUTH_ANY does not work with NTML
       if ($authType != CURLAUTH_NTLM) {
         return $this->postRequest($path, CURLAUTH_NTLM);
-      } else {
+      }
+      else {
         throw new Exception('Access Denied', 401);
       }
-    } else if (curl_errno($this->curlHandle) != 0) {
+    }
+    elseif (curl_errno($this->curlHandle) != 0) {
       throw new Exception(curl_error($this->curlHandle), curl_errno($this->curlHandle));
-    }else
+    }
+    else
       throw new Exception('Error', $info['http_code']);
 
     return FALSE;
   }
 
 }
-
-?>

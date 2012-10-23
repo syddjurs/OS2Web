@@ -477,7 +477,17 @@ function os2web_acadre_arp_views_default_views() {
   /* Display: Documents */
   $handler = $view->new_display('attachment', 'Documents', 'attachment_3');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'doklist';
   $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_options']['hide_empty'] = 0;
+  $handler->display->display_options['row_options']['default_field_elements'] = 0;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Forbindelse: Indhold: Documents (field_documents) */
   $handler->display->display_options['relationships']['field_documents_nid']['id'] = 'field_documents_nid';
@@ -492,6 +502,7 @@ function os2web_acadre_arp_views_default_views() {
   $handler->display->display_options['fields']['field_main_document']['field'] = 'field_main_document';
   $handler->display->display_options['fields']['field_main_document']['relationship'] = 'field_documents_nid';
   $handler->display->display_options['fields']['field_main_document']['label'] = 'Dokumenter';
+  $handler->display->display_options['fields']['field_main_document']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_main_document']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_main_document']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_main_document']['alter']['absolute'] = 0;
@@ -516,7 +527,7 @@ function os2web_acadre_arp_views_default_views() {
   $handler->display->display_options['fields']['field_case']['id'] = 'field_case';
   $handler->display->display_options['fields']['field_case']['table'] = 'field_data_field_case';
   $handler->display->display_options['fields']['field_case']['field'] = 'field_case';
-  $handler->display->display_options['fields']['field_case']['label'] = '';
+  $handler->display->display_options['fields']['field_case']['label'] = 'Dokumenter';
   $handler->display->display_options['fields']['field_case']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['field_case']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_case']['alter']['absolute'] = 0;
@@ -530,8 +541,8 @@ function os2web_acadre_arp_views_default_views() {
   $handler->display->display_options['fields']['field_case']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_case']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_case']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_case']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_case']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_case']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_case']['element_default_classes'] = 0;
   $handler->display->display_options['fields']['field_case']['empty'] = 'Der er ingen dokumenter til denne sag';
   $handler->display->display_options['fields']['field_case']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_case']['empty_zero'] = 0;

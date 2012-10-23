@@ -32,12 +32,12 @@ function os2web_planer_i_h_ring_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'hoering',
-        'expire' => '-1',
+        'content_type' => 'arp_case',
+        'expire' => -1,
         'author' => 0,
         'mappings' => array(),
-        'update_existing' => '1',
-        'input_format' => 'plain_text',
+        'update_existing' => 0,
+        'input_format' => NULL,
       ),
     ),
     'content_type' => '',

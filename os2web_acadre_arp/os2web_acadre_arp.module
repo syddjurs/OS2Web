@@ -10,16 +10,10 @@ include_once 'os2web_acadre_arp.features.inc';
  * Implementation of hook_menu().
  */
 function os2web_acadre_arp_menu() {
-  $items['os2web/test/arp'] = array(
-      'type' => MENU_CALLBACK,
-      'page callback' => '_os2web_acadre_arp_test_page',
-      'access callback' => array('administer os2web'),
-      'access callback' => TRUE,
-  );
   $items['os2web/ws/arp'] = array(
-      'type' => MENU_CALLBACK,
-      'page callback' => '_os2web_acadre_arp_soap_server',
-      'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'page callback' => '_os2web_acadre_arp_soap_server',
+    'access callback' => TRUE,
   );
   return $items;
 }
@@ -28,13 +22,13 @@ function _os2web_acadre_arp_test_page() {
   module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
 
   $options = array(
-      'login' => 'acadre',
-      'password' => 'PernoD=38%',
+    'login' => 'acadre',
+    'password' => 'PernoD=38%',
 //      'proxy_host' => 'localhost',
 //      'proxy_port' => 8080,
-      'cache_wsdl' => WSDL_CACHE_BOTH,
-      'exceptions' => true,
-      'trace' => true,
+    'cache_wsdl' => WSDL_CACHE_BOTH,
+    'exceptions' => TRUE,
+    'trace' => TRUE,
   );
   $xdebug = function_exists('xdebug_enable');
   if ($xdebug)
@@ -48,10 +42,10 @@ function _os2web_acadre_arp_test_page() {
   if ($xdebug)
     xdebug_enable();
   $args = array(
-      'itemId' => '06d6f520-2fe6-41a0-b72a-d16f415e9bc8',
-      'locationId' => 'default',
-      'fileReference' => 1635233,
-      'version' => 1,
+    'itemId' => '06d6f520-2fe6-41a0-b72a-d16f415e9bc8',
+    'locationId' => 'default',
+    'fileReference' => 1635233,
+    'version' => 1,
   );
   try {
     $call = $client->getPhysicalFile($args);
@@ -74,13 +68,13 @@ function _os2web_acadre_arp_soap_server() {
   if (isset($_GET['wsdl'])) {
     _os2web_acadre_arp_get_wsdl();
   }
-  global $HTTP_RAW_POST_DATA;
+//  global $HTTP_RAW_POST_DATA;
 
   ini_set("soap.wsdl_cache_enabled", "0");
   $server = new SoapServer(drupal_get_path('module', 'os2web_acadre_arp') . '/os2web_acadre_arp_publishing_handler.wsdl');
-  $count = variable_get('os2web_acadre_arp_soap_count', 0);
-  file_unmanaged_save_data($HTTP_RAW_POST_DATA, 'public://soap/request-' . $count++ . '.soap.xml');
-  variable_set('os2web_acadre_arp_soap_count', $count);
+//  $count = variable_get('os2web_acadre_arp_soap_count', 0);
+//  file_unmanaged_save_data($HTTP_RAW_POST_DATA, 'public://soap/request-' . $count++ . '.soap.xml');
+//  variable_set('os2web_acadre_arp_soap_count', $count);
 
   $server->AddFunction('publish');
   $server->AddFunction('unpublish');
@@ -150,7 +144,8 @@ function _os2web_acadre_arp_soap_server() {
     $nids = _os2web_acadre_arp_find_item($item_id);
     if (empty($nids)) {
       return 'Success. No nodes removed.';
-    } else {
+    }
+    else {
       foreach ($nids as $nid) {
         node_delete($nid);
       }
@@ -189,7 +184,7 @@ function _os2web_acadre_arp_process_case($info) {
   $node->field_arp_case_type[LANGUAGE_NONE][]['value'] = (string) $meta->CaseType;
 
   $tid = db_query('SELECT tid FROM  `taxonomy_term_data` WHERE  `name` LIKE  :term', array(
-      ':term' => $meta->JournalizingCode[0]->FieldValue . '%'
+    ':term' => $meta->JournalizingCode[0]->FieldValue . '%'
       ))->fetchField();
   if (is_numeric($tid)) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
@@ -211,7 +206,8 @@ function _os2web_acadre_arp_process_case($info) {
 
   if (is_numeric($node->nid)) {
     return "Success: Node-id = " . $node->nid;
-  } else {
+  }
+  else {
     soap_error(3);
   }
 }
@@ -264,7 +260,8 @@ function _os2web_acadre_arp_process_document($info, $parent_item_id) {
     $parent_node->field_documents[LANGUAGE_NONE][]['nid'] = $node->nid;
     node_submit($parent_node);
     node_save($parent_node);
-  } else {
+  }
+  else {
     node_delete($node->nid);
     soap_error(5);
   }
@@ -292,7 +289,8 @@ function _os2web_acadre_arp_process_memo($info, $parent_item_id) {
       $file->display = 1; // To avoid contraint violation.
       if ($existing_file_key === -1) {
         $parent_node->field_additional_docs[LANGUAGE_NONE][] = (array) $file;
-      } else {
+      }
+      else {
         $parent_node->field_additional_docs[LANGUAGE_NONE][$existing_file_key] = (array) $file;
       }
       node_save($parent_node);
@@ -322,7 +320,8 @@ function _os2web_acadre_arp_process_supplement($info, $parent_item_id) {
       $file->display = 1; // To avoid contraint violation.
       if ($existing_file_key === -1) {
         $parent_node->field_arp_supplement[LANGUAGE_NONE][] = (array) $file;
-      } else {
+      }
+      else {
         $parent_node->field_arp_supplement[LANGUAGE_NONE][$existing_file_key] = (array) $file;
       }
       node_save($parent_node);
@@ -373,7 +372,7 @@ function _os2web_acadre_arp_get_wsdl() {
   drupal_add_http_header('Date', date('r'), TRUE);
 
   $replacements = array(
-      '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . str_replace('?wsdl', '', $_SERVER['REQUEST_URI']),
+    '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . str_replace('?wsdl', '', $_SERVER['REQUEST_URI']),
   );
   echo format_string($contents, $replacements);
   exit;
@@ -388,11 +387,11 @@ function _os2web_acadre_arp_get_wsdl() {
  */
 function soap_error($code) {
   $code_msg = array(
-      1 => 'Test error, please ignore.',
-      2 => 'Malformed XML.',
-      3 => 'Unable to create content.',
-      4 => 'Usupported document type.',
-      5 => 'Parent node not located.',
+    1 => 'Test error, please ignore.',
+    2 => 'Malformed XML.',
+    3 => 'Unable to create content.',
+    4 => 'Usupported document type.',
+    5 => 'Parent node not located.',
   );
   throw new SoapFault((string) $code, isset($code_msg[$code]) ? $code_msg[$code] : 'Unknown error');
 }
@@ -430,12 +429,12 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
   if (!$client) {
     module_load_include('class.inc', 'os2web_acadre_arp', 'SoapClientAuth');
     $options = array(
-        'login' => 'acadre',
-        'password' => 'PernoD=38%',
+      'login' => 'acadre',
+      'password' => 'PernoD=38%',
 //      'proxy_host' => 'localhost',
 //      'proxy_port' => 8080,
-        'cache_wsdl' => WSDL_CACHE_BOTH,
-        'exceptions' => true,
+      'cache_wsdl' => WSDL_CACHE_BOTH,
+      'exceptions' => TRUE,
     );
     $xdebug = function_exists('xdebug_enable');
     if ($xdebug)
@@ -446,24 +445,24 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
       error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc->getTraceAsString(), 1));
       if ($xdebug)
         xdebug_enable();
-      return false;
+      return FALSE;
     }
     if ($xdebug)
       xdebug_enable();
   }
 
   $args = array(
-      'itemId' => $item_id,
-      'locationId' => $location_id,
-      'fileReference' => $file_ref,
-      'version' => $version,
+    'itemId' => $item_id,
+    'locationId' => $location_id,
+    'fileReference' => $file_ref,
+    'version' => $version,
   );
   try {
     $call = $client->getPhysicalFile($args);
   } catch (Exception $exc) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $client = ' . print_r($client, 1));
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $exc->getTraceAsString() = ' . print_r($exc, 1));
-    return false;
+    return FALSE;
   }
   $data = $call->GetPhysicalFileResult;
 
@@ -475,12 +474,14 @@ function _os2web_acadre_arp_get_file($filename, $file_ref, $item_id, $location_i
           ->condition('uri', $uri)
           ->execute()->fetchField();
   if ($fid) {
-    return file_unmanaged_save_data($data, $uri, FILE_EXISTS_REPLACE) ? file_load($fid) : false;
-  } elseif ($file = file_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
+    return file_unmanaged_save_data($data, $uri, FILE_EXISTS_REPLACE) ? file_load($fid) : FALSE;
+  }
+  elseif ($file = file_save_data($data, $uri, FILE_EXISTS_REPLACE)) {
     return $file;
-  } else {
+  }
+  else {
     error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File save failed.");
-    return false;
+    return FALSE;
   }
 }

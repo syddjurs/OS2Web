@@ -50,7 +50,7 @@ class AcadrePWS extends CaseService {
         $options['location'] = $url;
         $options['uri'] = 'http://www.traen.com/2007/09/06/';
         try {
-          $this->client = new SoapClient(null, $options);
+          $this->client = new SoapClient(NULL, $options);
         } catch (Exception $e) {
           drupal_set_message('Error connecting to PWSv4 endpoint', 'error');
           return false;
@@ -92,7 +92,7 @@ class AcadrePWS extends CaseService {
         $options = $this->_get_ws_base_setup();
         try {
           $this->client_search = new SoapClient($url . '?WSDL', $options);
-          return true;
+          return TRUE;
         } catch (SoapFault $sf) {
           drupal_set_message('Error connecting to PWS document search service endpoint', 'error');
           return false;
@@ -252,7 +252,7 @@ class AcadrePWS extends CaseService {
             $result = false;
           } else {
             $result = $result->xpath('//soap:Body');
-            $result = ('true' === (string) $result[0]->DocumentLockStatus) ? true : false;
+            $result = ('TRUE' === (string) $result[0]->DocumentLockStatus) ? TRUE : false;
             //        $result = (string)array_pop($result->xpath('//soap:Fault/faultcode')); // This will indicate fault
           }
         }
@@ -377,7 +377,7 @@ class AcadrePWS extends CaseService {
     // Clean up failed files
     if (is_object($result) && !is_file(drupal_realpath($result->uri))) {
       error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' Failed file ' . $result->filename);
-      file_delete($result, true);
+      file_delete($result, TRUE);
     }
 
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS. Ref: $ref");
@@ -411,7 +411,7 @@ class AcadrePWS extends CaseService {
         }
 //        $result = $result[0];
       } catch (SoapFault $sf) {
-        watchdog('acadre_pws', 'Error during SOAP call in ' . __FUNCTION__, null, WATCHDOG_WARNING);
+        watchdog('acadre_pws', 'Error during SOAP call in ' . __FUNCTION__, NULL, WATCHDOG_WARNING);
       }
     }
     return $result;

@@ -1,7 +1,7 @@
 <?php
-
-// $Id$
-/*
+/**
+ * @file
+ * This file describes the Content pushing plugin as implemented by Acadre
  * 
  * @author Jesper Mathiassen <jm@bellcom.dk>
  * @copyright Bellcom Open Source aps.
@@ -11,10 +11,10 @@
  * Plugin definition with callbacks
  */
 $plugin = array(
-    'description' => t('Acadre ESDH Case Pushing backend'),
-    'version' => 1,
-    'test' => 'acadre_esdh_cp_test',
-    'handle_request' => 'acadre_esdh_cp_handle_request',
+  'description' => t('Acadre ESDH Case Pushing backend'),
+  'version' => 1,
+  'test' => 'acadre_esdh_cp_test',
+  'handle_request' => 'acadre_esdh_cp_handle_request',
 );
 
 /**
@@ -38,7 +38,7 @@ function acadre_esdh_cp_handle_request() {
     lock_wait(__FUNCTION__);
     return acadre_esdh_cp_handle_request();
   }
-  
+
   /**
    * Published a given input type. Delegates actual node creation to worker functions
    *
@@ -47,9 +47,7 @@ function acadre_esdh_cp_handle_request() {
    * @access public
    * @return void
    */
-  function publish($info, $parentItemId) {
-    $item_id = $info->ItemId;
-
+  function publish($info, $parent_item_id) {
     $meta = $info->Metadata;
 // File was decoded to utf-8 data, so charset will break.
     $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
@@ -79,13 +77,15 @@ function acadre_esdh_cp_handle_request() {
     $nids = _os2web_acadre_arp_find_item($item_id);
     if (empty($nids)) {
       return 'Success. No nodes removed.';
-    } else {
+    }
+    else {
       foreach ($nids as $nid) {
         node_delete($nid);
       }
       return 'Success. Removed node-id(s): ' . implode(',', $nids);
     }
   }
+
   ini_set("soap.wsdl_cache_enabled", "0");
   $server = new SoapServer(drupal_get_path('module', 'acadre_esdh') . '/soap_server.wsdl');
   $server->AddFunction('publish');
@@ -120,7 +120,7 @@ function _acadre_esdh_cp_process_case($info) {
   $node->field_arp_case_type[LANGUAGE_NONE][]['value'] = (string) $meta->CaseType;
 
   $tid = db_query('SELECT tid FROM  `taxonomy_term_data` WHERE  `name` LIKE  :term', array(
-      ':term' => $meta->JournalizingCode[0]->FieldValue . '%'
+    ':term' => $meta->JournalizingCode[0]->FieldValue . '%'
       ))->fetchField();
   if (is_numeric($tid)) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
@@ -138,7 +138,8 @@ function _acadre_esdh_cp_process_case($info) {
   node_save($node);
   if (is_numeric($node->nid)) {
     return "Success: Node-id = " . $node->nid;
-  } else {
+  }
+  else {
     soap_error(3);
   }
 }
@@ -180,7 +181,7 @@ function _acadre_esdh_cp_get_wsdl() {
   drupal_add_http_header('Date', date('r'), TRUE);
 
   $replacements = array(
-      '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . str_replace('?wsdl', '', $_SERVER['REQUEST_URI']),
+    '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . str_replace('?wsdl', '', request_uri()),
   );
   echo format_string($contents, $replacements);
   exit;
