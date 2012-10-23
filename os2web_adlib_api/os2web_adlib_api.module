@@ -383,8 +383,8 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   }
   if (!file_exists(drupal_realpath($file->uri))) {
     watchdog('adlib_api', 'Cannot queue file %file (fid: %fid). File does not exist. File record removed.', array('%fid' => $fid, '%file' => $file->filename), WATCHDOG_WARNING);
-    file_delete($file);
-    return FALSE;
+    //file_delete($file);
+    return false;
   }
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
     if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid AND jobtype = :jobtype', array(':fid' => $fid, ':jobtype' => 0))->rowCount()) {
@@ -512,7 +512,6 @@ function _os2web_adlib_api_process_file($file) {
       $fdata = file_load($file->fid);
       if (!file_exists(drupal_realpath($fdata->uri)) || file_uri_scheme($fdata->uri) == '' || $fdata->filemime == 'application/pdf') {
         if ($fdata->filemime == 'application/pdf') {
-          error_log("Var: \$fdata = " . print_r($fdata, 1));
           $record = array(
             'fid' => $fdata->fid,
             'jobtype' => $fdata->jobtype,
@@ -586,9 +585,8 @@ function _os2web_adlib_api_process_file($file) {
             drupal_write_record('file_managed', $upd_file, array('fid'));
             field_cache_clear();
             watchdog('adlib_api', 'File (fid: %fid) was converted successfully to pdf.', array('%fid' => $file->fid), WATCHDOG_INFO);
-            error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated.");
-          }
-          else {
+            error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated. New URI: ".$uri);
+          } else {
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Filesize was 0. Aborting update.");
           }
           break;

@@ -272,7 +272,7 @@ function _acadre_esdh_similar_file_exists($filename) {
  * This function will set up the addenum connections for meetings.
  * @TODO: Rid this of drupal specific code.
  */
-function _acadre_esdh_mm_order_addenums() {
+function _acadre_esdh_mm_order_addenums($drush = FALSE) {
   $rev_meetings = array(1458);
   // Find all meetings and gather meeting and agenda_ids
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
@@ -308,11 +308,14 @@ function _acadre_esdh_mm_order_addenums() {
       node_save($node);
       unset($nids[$node->nid]);
 //      watchdog('os2web_meetings', 'Updated %nid1 as addenum to %nid2 .', array('%nid1' => $node->nid, '%nid2' => $primary), WATCHDOG_INFO);
+      if ($drush) 
+        drush_log("Updated meeting $m_id..", 'ok');
     }
   }
   foreach ($nids as $nid) {
     $node = node_load($nid);
     $node->field_addenum_to = array();
     node_save($node);
+    if ($drush) drush_log("Resetting $nid..",'ok');
   }
 }

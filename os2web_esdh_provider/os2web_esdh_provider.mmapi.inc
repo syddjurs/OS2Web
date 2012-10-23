@@ -16,6 +16,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   if (!lock_acquire(__FUNCTION__ . $meeting_id['id'])) {
     return;
   }
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Importing file: '.$meeting_id['uri']);
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
   $nids = array();
   foreach ($meetings as $meeting) {
@@ -37,9 +38,9 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         continue;
       }
       if ($force) {
-//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Republish nid: ' . $nid);
+        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Republish nid: ' . $nid);
         node_delete($nid);
-//        watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
+        watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
         $node = new stdClass(); // We create a new node object
       }
       else {
@@ -109,8 +110,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     watchdog('ESDH', 'Imported agenda id: %aid (Meeting: %mid) into node %nid .', array('%aid' => $meeting['system_id'], '%mid' => $meeting['meeting_id'], '%nid' => $node->nid), WATCHDOG_DEBUG);
     $nids[] = $node->nid;
   }
-  if ($context)
-    $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
+//  if ($context)
+//    $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
   lock_release(__FUNCTION__ . $meeting_id['id']);
   return $nids;
 }
@@ -274,7 +275,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
-    watchdog('acadre MM', 'File , %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
+    watchdog('acadre MM', 'File %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
   }
 
 //  watchdog('acadre MM', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);

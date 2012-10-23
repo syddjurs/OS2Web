@@ -10,6 +10,7 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = fontyourface
 dependencies[] = media_internet
+dependencies[] = media_youtube
 dependencies[] = print
 dependencies[] = strongarm
 dependencies[] = wysiwyg

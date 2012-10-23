@@ -37,6 +37,11 @@ function acadre_esdh_drush_command() {
     ),
     'aliases' => array('esdh-cm-docs-load'),
   );
+  $items['acadre-addenum-fix'] = array(
+    'description' => 'Reorders addenums',
+    'arguments' => array(),
+    'aliases' => array('esdh-af'),
+  );
   return $items;
 }
 
@@ -109,5 +114,13 @@ function drush_acadre_esdh_acadre_case_docs_load($caseid = NULL) {
   }
   else {
     drush_log('Api load', 'fail');
+  }
+}
+
+function drush_acadre_esdh_acadre_addenum_fix() {
+  if (os2web_esdh_provider_has_api('mm')) {
+    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+      os2web_esdh_provider_invoke('mm','post_import_process');
+    }
   }
 }
