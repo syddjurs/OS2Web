@@ -16,33 +16,71 @@ function os2web_planer_i_h_ring_feeds_importer_default() {
   $feeds_importer->id = 'hoering';
   $feeds_importer->config = array(
     'name' => 'Planer i høring',
-    'description' => '',
+    'description' => 'Importerer planer i høring fra GIS',
     'fetcher' => array(
       'plugin_key' => 'FeedsHTTPFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
+        'auto_detect_feeds' => 1,
+        'use_pubsubhubbub' => 0,
         'designated_hub' => '',
       ),
     ),
     'parser' => array(
-      'plugin_key' => 'FeedsSyndicationParser',
-      'config' => array(),
+      'plugin_key' => 'FeedsXPathParserXML',
+      'config' => array(
+        'sources' => array(
+          'xpathparser:0' => 'col[@name=\'id\']/text()',
+          'xpathparser:1' => 'col[@name=\'plannavn\']/text()',
+          'xpathparser:2' => 'col[@name=\'doklink\']/text()',
+        ),
+        'rawXML' => array(
+          'xpathparser:0' => 0,
+          'xpathparser:1' => 0,
+          'xpathparser:2' => 0,
+        ),
+        'context' => '/pcollection/pcomposite/rowlist/row',
+        'exp' => array(
+          'errors' => 0,
+          'debug' => array(
+            'context' => 0,
+            'xpathparser:0' => 0,
+            'xpathparser:1' => 0,
+            'xpathparser:2' => 0,
+          ),
+        ),
+        'allow_override' => 0,
+      ),
     ),
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'arp_case',
-        'expire' => -1,
+        'content_type' => 'hoering',
+        'expire' => '-1',
         'author' => 0,
-        'mappings' => array(),
-        'update_existing' => 0,
-        'input_format' => NULL,
+        'mappings' => array(
+          0 => array(
+            'source' => 'xpathparser:0',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+          1 => array(
+            'source' => 'xpathparser:1',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'xpathparser:2',
+            'target' => 'field_url',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '1',
+        'input_format' => 'plain_text',
       ),
     ),
     'content_type' => '',
     'update' => 0,
-    'import_period' => '1800',
+    'import_period' => '43200',
     'expire_period' => 3600,
     'import_on_create' => 1,
     'process_in_background' => 0,
