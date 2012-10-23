@@ -24,3 +24,21 @@ function os2web_planer_i_h_ring_ctools_plugin_api() {
 function os2web_planer_i_h_ring_views_api() {
   return array("version" => "3.0");
 }
+
+
+/**
+ * Implements hook_node_info().
+ */
+function os2web_planer_i_h_ring_node_info() {
+  $items = array(
+    'hoering' => array(
+      'name' => t('Planer i høring'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Titel'),
+      'help' => '',
+    ),
+  );
+  return $items;
+}
