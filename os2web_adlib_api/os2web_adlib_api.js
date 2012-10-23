@@ -1,13 +1,14 @@
-/* 
- * 
+/*
+ *
  * @author Jesper Mathiassen <jm@bellcom.dk>
  * @copyright Bellcom Open Source aps.
  */
 
 jQuery(document).ready(function($) {
+  "use strict";
   setInterval(function(){
     $('td.status').each(function() {
-      update(this)
+      update(this);
     });
   },3000);
   $('td.status').click(function() {
@@ -26,4 +27,3 @@ jQuery(document).ready(function($) {
   }
 
 });
-

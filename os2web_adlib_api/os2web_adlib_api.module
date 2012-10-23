@@ -584,6 +584,7 @@ function _os2web_adlib_api_process_file($file) {
             );
             drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
             drupal_write_record('file_managed', $upd_file, array('fid'));
+            field_cache_clear();
             watchdog('adlib_api', 'File (fid: %fid) was converted successfully to pdf.', array('%fid' => $file->fid), WATCHDOG_INFO);
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated.");
           }
