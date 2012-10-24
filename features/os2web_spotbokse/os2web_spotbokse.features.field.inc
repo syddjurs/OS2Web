@@ -236,6 +236,7 @@ function os2web_spotbokse_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -243,6 +244,7 @@ function os2web_spotbokse_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '230x158',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -326,6 +328,7 @@ function os2web_spotbokse_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -333,6 +336,7 @@ function os2web_spotbokse_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '230x115',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -734,6 +738,7 @@ function os2web_spotbokse_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -741,6 +746,7 @@ function os2web_spotbokse_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '230x337',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -824,6 +830,7 @@ function os2web_spotbokse_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -831,6 +838,7 @@ function os2web_spotbokse_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -924,6 +932,7 @@ function os2web_spotbokse_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 0,
+        'alt_field_required' => 0,
         'default_image' => 0,
         'file_directory' => '',
         'file_extensions' => 'png gif jpg jpeg',
@@ -931,6 +940,7 @@ function os2web_spotbokse_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '300x261',
         'title_field' => 0,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
