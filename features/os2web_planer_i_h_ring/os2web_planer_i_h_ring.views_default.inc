@@ -43,7 +43,39 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 0;
-  /* Felt: Indhold: URL */
+  /* Felt: Indhold: Slutdato */
+  $handler->display->display_options['fields']['field_slutdato']['id'] = 'field_slutdato';
+  $handler->display->display_options['fields']['field_slutdato']['table'] = 'field_data_field_slutdato';
+  $handler->display->display_options['fields']['field_slutdato']['field'] = 'field_slutdato';
+  $handler->display->display_options['fields']['field_slutdato']['label'] = '';
+  $handler->display->display_options['fields']['field_slutdato']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_slutdato']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_slutdato']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_slutdato']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_slutdato']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['fields']['field_slutdato']['field_api_classes'] = 0;
+  /* Felt: Indhold: Hjemmeside */
   $handler->display->display_options['fields']['field_url']['id'] = 'field_url';
   $handler->display->display_options['fields']['field_url']['table'] = 'field_data_field_url';
   $handler->display->display_options['fields']['field_url']['field'] = 'field_url';
@@ -74,17 +106,29 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title]  ([field_slutdato])';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['path'] = '[field_url]';
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['alt'] = '[title] - [field_slutdato] ';
+  $handler->display->display_options['fields']['title']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -123,8 +167,8 @@ function os2web_planer_i_h_ring_views_default_views() {
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -143,6 +187,10 @@ function os2web_planer_i_h_ring_views_default_views() {
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
+    t('[title]  ([field_slutdato])'),
+    t('[field_url]'),
+    t('[title] - [field_slutdato] '),
+    t('_blank'),
     t('Page'),
     t('Feed'),
     t('Block'),
