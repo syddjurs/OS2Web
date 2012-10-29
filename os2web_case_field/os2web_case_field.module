@@ -126,6 +126,7 @@ function theme_esdh_case($vars) {
   if (!is_array($ids)) {
     $ids = array($ids);
   }
+  $docids = array();
   foreach ($ids as $id) {
     $case = os2web_esdh_provider_invoke('cm', 'get_case_data', $id);
 //    error_log("Var: \$case = " . print_r($case, 1));
@@ -138,7 +139,7 @@ function theme_esdh_case($vars) {
       //  return $html;
       continue; // Ignore hidden cases
     }
-    $docids = os2web_esdh_provider_invoke('cm', 'get_case_docs', $id);
+    $docids = array_merge($docids,os2web_esdh_provider_invoke('cm', 'get_case_docs', $id));
   }
   $html = theme('esdh_document', array('id' => $docids, 'iscase' => TRUE));
   return $html;
