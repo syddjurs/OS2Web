@@ -54,6 +54,15 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = '<h3>Planer i høring</h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
+  /* Sidefod: Global: Tekstområde */
+  $handler->display->display_options['footer']['area']['id'] = 'area';
+  $handler->display->display_options['footer']['area']['table'] = 'views';
+  $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['label'] = 'Sidefod';
+  $handler->display->display_options['footer']['area']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area']['content'] = '<span class="foroffase"><a href="#">I foroffentlighedsfase</a></span><span class="vedtagne"><a href="#">Vedtagne</a></span><span class="alle"><a href="#">Se alle</a></span>';
+  $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['footer']['area']['tokenize'] = 0;
   /* Felt: Indhold: Slutdato */
   $handler->display->display_options['fields']['field_slutdato']['id'] = 'field_slutdato';
   $handler->display->display_options['fields']['field_slutdato']['table'] = 'field_data_field_slutdato';
@@ -346,6 +355,8 @@ function os2web_planer_i_h_ring_views_default_views() {
     t('Forskydning'),
     t('Overskrift: Planer i Høring'),
     t('<h3>Planer i høring</h3>'),
+    t('Sidefod'),
+    t('<span class="foroffase"><a href="#">I foroffentlighedsfase</a></span><span class="vedtagne"><a href="#">Vedtagne</a></span><span class="alle"><a href="#">Se alle</a></span>'),
     t('Titel'),
     t('[field_url]'),
     t('[title] - [field_slutdato] '),
