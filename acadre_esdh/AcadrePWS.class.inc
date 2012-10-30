@@ -137,7 +137,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client_search()) {
@@ -168,7 +168,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client_search()) {
@@ -199,7 +199,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client6()) {
@@ -220,7 +220,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get(__FUNCTION__ . $id, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get(__FUNCTION__ . $id, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     else {
@@ -256,7 +256,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client()) {
@@ -293,7 +293,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client_search()) {
@@ -314,7 +314,7 @@ class AcadrePWS {
     if ($result != FALSE) {
       return $result;
     }
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client6()) {
@@ -349,7 +349,7 @@ class AcadrePWS {
       $ver = $info['ver'];
     }
     $cid = __FUNCTION__ . $ref . $ver;
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client()) {
@@ -461,7 +461,7 @@ class AcadrePWS {
       $ver = $info['ver'];
     }
     $cid = __FUNCTION__ . $ref . $ver;
-    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data)) {
+    if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
     elseif ($this->get_client()) {
