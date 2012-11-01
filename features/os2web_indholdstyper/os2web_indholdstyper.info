@@ -14,7 +14,6 @@ dependencies[] = field_group
 dependencies[] = field_slideshow
 dependencies[] = fieldable_panels_panes
 dependencies[] = file
-dependencies[] = filefield_sources_plupload
 dependencies[] = image
 dependencies[] = imagefield_crop
 dependencies[] = list
