@@ -60,7 +60,7 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['label'] = 'Sidefod';
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area']['content'] = '<span class="foroffase"><a href="#">> I foroffentlighedsfase</a></span><span class="vedtagne"><a href="#">> Vedtagne</a></span><span class="alle"><a href="#">> Se alle</a></span>';
+  $handler->display->display_options['footer']['area']['content'] = '<span class="foroffase"><a href="/foroffentlighed">> I foroffentlighedsfase</a></span><span class="vedtagne"><a href="/lokalplaner">> Vedtagne</a></span><span class="alle"><a href="/planforslag">> Se alle</a></span>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['footer']['area']['tokenize'] = 0;
   /* Felt: Indhold: Slutdato */
@@ -356,7 +356,7 @@ function os2web_planer_i_h_ring_views_default_views() {
     t('Overskrift: Planer i Høring'),
     t('<h3>Planer i høring</h3>'),
     t('Sidefod'),
-    t('<span class="foroffase"><a href="#">> I foroffentlighedsfase</a></span><span class="vedtagne"><a href="#">> Vedtagne</a></span><span class="alle"><a href="#">> Se alle</a></span>'),
+    t('<span class="foroffase"><a href="/foroffentlighed">> I foroffentlighedsfase</a></span><span class="vedtagne"><a href="/lokalplaner">> Vedtagne</a></span><span class="alle"><a href="/planforslag">> Se alle</a></span>'),
     t('Titel'),
     t('[field_url]'),
     t('[title] - [field_slutdato] '),
