@@ -2156,32 +2156,6 @@ return TRUE;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['identifier'] = 'field_meeting_search_advanced_meta_date_value';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['multiple'] = FALSE;
-  /* Filterkriterie: Indhold: Date -  startdato (field_date) */
-  $handler->display->display_options['filters']['field_date_value']['id'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['table'] = 'field_data_field_date';
-  $handler->display->display_options['filters']['field_date_value']['field'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_date_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_date_value']['expose']['operator_id'] = 'field_date_value_op';
-  $handler->display->display_options['filters']['field_date_value']['expose']['operator'] = 'field_date_value_op';
-  $handler->display->display_options['filters']['field_date_value']['expose']['identifier'] = 'from_date';
-  $handler->display->display_options['filters']['field_date_value']['expose']['multiple'] = FALSE;
-  $handler->display->display_options['filters']['field_date_value']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_date_value']['default_date'] = 'now -30 days';
-  $handler->display->display_options['filters']['field_date_value']['year_range'] = '-5:+5';
-  /* Filterkriterie: Indhold: Date - slutdato (field_date:value2) */
-  $handler->display->display_options['filters']['field_date_value2']['id'] = 'field_date_value2';
-  $handler->display->display_options['filters']['field_date_value2']['table'] = 'field_data_field_date';
-  $handler->display->display_options['filters']['field_date_value2']['field'] = 'field_date_value2';
-  $handler->display->display_options['filters']['field_date_value2']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_date_value2']['group'] = 1;
-  $handler->display->display_options['filters']['field_date_value2']['expose']['operator_id'] = 'field_date_value2_op';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['label'] = 'Til';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['operator'] = 'field_date_value2_op';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['identifier'] = 'to_date';
-  $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_date_value2']['default_date'] = 'now +7 day';
-  $handler->display->display_options['filters']['field_date_value2']['year_range'] = '-5:+5';
   /* Filterkriterie: Indhold: Committee (field_committee) */
   $handler->display->display_options['filters']['field_committee_tid']['id'] = 'field_committee_tid';
   $handler->display->display_options['filters']['field_committee_tid']['table'] = 'field_data_field_committee';
