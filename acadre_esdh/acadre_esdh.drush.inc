@@ -37,6 +37,11 @@ function acadre_esdh_drush_command() {
     ),
     'aliases' => array('esdh-cm-docs-load'),
   );
+  $items['acadre-cm-status'] = array(
+    'description' => 'Check the status of the required webservices for CM',
+    'arguments' => array(),
+    'aliases' => array('esdh-st'),
+  );
   $items['acadre-addenum-fix'] = array(
     'description' => 'Reorders addenums',
     'arguments' => array(),
@@ -114,6 +119,16 @@ function drush_acadre_esdh_acadre_case_docs_load($caseid = NULL) {
   }
   else {
     drush_log('Api load', 'fail');
+  }
+}
+
+function drush_acadre_esdh_acadre_cm_status() {
+  if (os2web_esdh_provider_has_api('cm')) {
+    drush_log('API load', 'ok');
+    $avail = os2web_esdh_provider_invoke('cm', 'available');
+    drush_log('CM availability check..',$avail?'ok':'error');
+    $avail = os2web_esdh_provider_invoke('cm', 'available');
+    drush_log('CM availability check..',$avail?'ok':'error');
   }
 }
 

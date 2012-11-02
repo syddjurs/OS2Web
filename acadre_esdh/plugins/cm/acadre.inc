@@ -20,6 +20,7 @@ $plugin = array(
   'get_case_data' => 'acadre_esdh_get_case_data',
   'lookup_doc' => 'acadre_esdh_lookup_doc',
   'lookup_case' => 'acadre_esdh_lookup_case',
+  'available' => 'acadre_esdh_available',
 );
 
 /**
@@ -30,6 +31,30 @@ $plugin = array(
  */
 function acadre_esdh_test($stuff) {
   return 'Test successful. Recieved: ' . $stuff;
+}
+
+/**
+ * This opreation check for proper operation. Called often, so static cache is acceptable. 
+ * 
+ * @access public
+ * @return bool
+ */
+function acadre_esdh_available() {
+  $drush = function_exists('drush_log');
+  $ws = &drupal_static(__FUNCTION__,FALSE);
+  if ($ws===FALSE) {
+    $pws = _acadre_esdh_get_pws_instance();
+    $ws['v4'] = $pws->get_client();
+    $ws['v6'] = $pws->get_client6();
+    $ws['ss'] = $pws->get_client_search();
+  }
+  if($drush) {
+    drush_log('Acadre PWS v4 endpoint available: ',$ws['v4']?'ok':'error');
+    drush_log('Acadre PWS v6 endpoint available: ',$ws['v6']?'ok':'error');
+    drush_log('SOFD search service available: ',$ws['ss']?'ok':'error');
+  }
+
+  return $ws['v4'] && $ws['v6'] && $ws['ss'];
 }
 
 /**

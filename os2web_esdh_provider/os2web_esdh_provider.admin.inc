@@ -29,7 +29,7 @@ function _os2web_esdh_provider_status() {
   }
   return '<h2>' . t('ESDH Provider API plugin status') . '</h2>' .
       theme('table', array('header' => $head, 'rows' => $rows)) .
-      '<h2>' . t('Import of MM Based ESDH documents.') . '</h2>' .
+      '<h2>' . t('Import of MM Based ESDH documents. (Last import was run at %time)',array( '%time' => format_date(variable_get('os2web_esdh_provider_last_import',0)))) . '</h2>' .
       drupal_render(drupal_get_form('os2web_esdh_provider_import_form'));
 }
 
@@ -84,5 +84,4 @@ function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
     $batch['operations'][] = array('os2web_esdh_provider_invoke', array('mm', 'post_import_process'));
   }
   batch_set($batch);
-//  _os2web_esdh_provider_import_meeting(array_pop($meetings), $force);
 }
