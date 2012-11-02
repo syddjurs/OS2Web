@@ -1,0 +1,28 @@
+<?php
+
+/*
+ *
+ * @author Jesper Mathiassen <jm@bellcom.dk>
+ * @copyright Bellcom Open Source aps.
+ */
+
+function os2web_bedstpaanettet_init() {
+  drupal_add_css('https://popin.survey-xact.dk/popin/popin.css', 'external');
+  drupal_add_js('https://popin.survey-xact.dk/popin/popin.js', 'external');
+  drupal_add_js('https://popin.survey-xact.dk/dynjs/N355FQSF1PCK/popin.js', 'external');
+  drupal_add_js('https://popin.survey-xact.dk/cookies.js', 'external');
+
+  $script = <<< EOS
+   window.xact_width=400;
+   window.xact_height=400;
+   window.xact_surveyURL='https://www.survey-xact.dk/LinkCollector?key=N355FQSF1PCK';
+   window.xact_surveyKey='N355FQSF1PCK';
+   window.xact_probability = 1;
+   window.xact_baseURL = 'https://www.survey-xact.dk';
+   window.xact_language = "da";
+   xact_startPopIn();  
+EOS;
+
+  drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer', 'every_page' => TRUE)
+  );
+}
