@@ -169,3 +169,9 @@ features[views_view][] = meeting_details
 features[views_view][] = meetings_search
 features[views_view][] = seneste_8_m_der_i_de_st_ende_politiske_udvalg_
 timestamp = 1350990827
+
+;Added by OS2Web 2012-11-05
+project=OS2Web
+version=7.x-1.7
+timestamp=1352123374
+

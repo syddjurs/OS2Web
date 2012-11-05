@@ -35,3 +35,9 @@ project=OS2Web
 version=7.x-1.6
 timestamp=1350990827
 
+
+;Added by OS2Web 2012-11-05
+project=OS2Web
+version=7.x-1.7
+timestamp=1352123374
+
