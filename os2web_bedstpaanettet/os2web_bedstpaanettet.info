@@ -14,3 +14,9 @@ core = 7.x
 ; Additional infomation
 version = "7.x-dev"
 project = ""
+
+;Added by OS2Web 2012-11-05
+project=OS2Web
+version=7.x-1.7
+timestamp=1352123374
+
