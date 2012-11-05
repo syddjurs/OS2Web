@@ -119,6 +119,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'hoering',
+      'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
       'display' => array(
@@ -170,7 +171,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
           'text_parts' => array(),
           'year_range' => '-3:+3',
         ),
-        'type' => 'date_popup',
+        'type' => 'date_select',
         'weight' => '2',
       ),
     ),

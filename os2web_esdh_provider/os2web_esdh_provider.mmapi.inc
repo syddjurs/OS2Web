@@ -112,6 +112,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   }
 //  if ($context)
 //    $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
+  variable_set('os2web_esdh_provider_last_import',time());
   lock_release(__FUNCTION__ . $meeting_id['id']);
   return $nids;
 }

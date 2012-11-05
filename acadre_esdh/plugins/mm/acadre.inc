@@ -308,7 +308,7 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       node_save($node);
       unset($nids[$node->nid]);
 //      watchdog('os2web_meetings', 'Updated %nid1 as addenum to %nid2 .', array('%nid1' => $node->nid, '%nid2' => $primary), WATCHDOG_INFO);
-      if ($drush) 
+      if ($drush===TRUE) 
         drush_log("Updated meeting $m_id..", 'ok');
     }
   }
@@ -316,6 +316,6 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
     $node = node_load($nid);
     $node->field_addenum_to = array();
     node_save($node);
-    if ($drush) drush_log("Resetting $nid..",'ok');
+    if ($drush===TRUE) drush_log("Resetting $nid..",'ok');
   }
 }

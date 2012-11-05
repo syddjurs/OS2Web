@@ -36,7 +36,7 @@ class AcadrePWS {
     return $options;
   }
 
-  private function get_client() {
+  public function get_client() {
     //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
     $this->client = &drupal_static('os2web_acadre_pws_client');
     if (!$this->client) {
@@ -65,7 +65,7 @@ class AcadrePWS {
     return isset($this->client);
   }
 
-  private function get_client6() {
+  public function get_client6() {
     //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
     $this->client6 = &drupal_static('os2web_acadre_pws_client6');
     if (!$this->client6) {
@@ -91,7 +91,7 @@ class AcadrePWS {
     return isset($this->client6);
   }
 
-  private function get_client_search() {
+  public function get_client_search() {
     //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
     $this->client_search = &drupal_static('os2web_acadre_pws_client_search');
     if (!$this->client_search) {

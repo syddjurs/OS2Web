@@ -1269,6 +1269,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Søg i dagsordener og referater';
   $handler->display->display_options['use_more_text'] = 'mere';
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -1395,6 +1396,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'Der var desværre ingen resultater til din søgning.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Felt: Indhold: Nid */
@@ -2093,30 +2095,6 @@ return TRUE;
   $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['field_location']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
-  /* Felt: Indhold: Search meta data */
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['id'] = 'field_meeting_search_meta_date';
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['table'] = 'field_data_field_meeting_search_meta_date';
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['field'] = 'field_meeting_search_meta_date';
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['label'] = '';
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['more_link'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['field_meeting_search_meta_date']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Global: PHP */
   $handler->display->display_options['filters']['php']['id'] = 'php';
@@ -2148,40 +2126,15 @@ return TRUE;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['id'] = 'field_meeting_search_meta_date_value';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['table'] = 'field_data_field_meeting_search_meta_date';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['field'] = 'field_meeting_search_meta_date_value';
-  $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['operator'] = 'allwords';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['operator_id'] = 'field_meeting_search_meta_date_value_op';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['operator'] = 'field_meeting_search_meta_date_value_op';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['identifier'] = 'field_meeting_search_advanced_meta_date_value';
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_meeting_search_meta_date_value']['expose']['multiple'] = FALSE;
-  /* Filterkriterie: Indhold: Date -  startdato (field_date) */
-  $handler->display->display_options['filters']['field_date_value']['id'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['table'] = 'field_data_field_date';
-  $handler->display->display_options['filters']['field_date_value']['field'] = 'field_date_value';
-  $handler->display->display_options['filters']['field_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_date_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_date_value']['expose']['operator_id'] = 'field_date_value_op';
-  $handler->display->display_options['filters']['field_date_value']['expose']['operator'] = 'field_date_value_op';
-  $handler->display->display_options['filters']['field_date_value']['expose']['identifier'] = 'from_date';
-  $handler->display->display_options['filters']['field_date_value']['expose']['multiple'] = FALSE;
-  $handler->display->display_options['filters']['field_date_value']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_date_value']['default_date'] = 'now -30 days';
-  $handler->display->display_options['filters']['field_date_value']['year_range'] = '-5:+5';
-  /* Filterkriterie: Indhold: Date - slutdato (field_date:value2) */
-  $handler->display->display_options['filters']['field_date_value2']['id'] = 'field_date_value2';
-  $handler->display->display_options['filters']['field_date_value2']['table'] = 'field_data_field_date';
-  $handler->display->display_options['filters']['field_date_value2']['field'] = 'field_date_value2';
-  $handler->display->display_options['filters']['field_date_value2']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_date_value2']['group'] = 1;
-  $handler->display->display_options['filters']['field_date_value2']['expose']['operator_id'] = 'field_date_value2_op';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['label'] = 'Til';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['operator'] = 'field_date_value2_op';
-  $handler->display->display_options['filters']['field_date_value2']['expose']['identifier'] = 'to_date';
-  $handler->display->display_options['filters']['field_date_value2']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_date_value2']['default_date'] = 'now +7 day';
-  $handler->display->display_options['filters']['field_date_value2']['year_range'] = '-5:+5';
   /* Filterkriterie: Indhold: Committee (field_committee) */
   $handler->display->display_options['filters']['field_committee_tid']['id'] = 'field_committee_tid';
   $handler->display->display_options['filters']['field_committee_tid']['table'] = 'field_data_field_committee';
@@ -2232,6 +2185,7 @@ return TRUE;
     t('- Alle -'),
     t('Forskydning'),
     t('<div class="help-button" title="Help text goes here"></div>'),
+    t('Der var desværre ingen resultater til din søgning.'),
     t('Titel'),
     t('meeting/[nid]'),
     t('Søgeresultater'),

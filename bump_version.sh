@@ -4,7 +4,7 @@ PROJECT=OS2Web
 VERSION=$1
 DATE=`date "+%s"`
 
-MSG=";Added by OS2Web `date "+%Y-%m-%d"`\nproject=$PROJECT\nversion=$VERSION\ntimestamp=$DATE\n"
+MSG="\n;Added by OS2Web `date "+%Y-%m-%d"`\nproject=$PROJECT\nversion=$VERSION\ntimestamp=$DATE\n"
 
 echo $MSG
 

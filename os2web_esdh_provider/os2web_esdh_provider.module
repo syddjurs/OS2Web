@@ -89,6 +89,9 @@ function os2web_esdh_provider_ctools_plugin_type() {
       'get_case_data',
       'lookup_doc',
       'lookup_case',
+    ),
+    'optional methods' => array(
+      'available',
     )
   );
   $plugins['mm'] = array(
@@ -99,6 +102,7 @@ function os2web_esdh_provider_ctools_plugin_type() {
     ),
     'optional methods' => array(
       'post_import_process',
+      'available',
     )
   );
   $plugins['cp'] = array(
@@ -106,6 +110,9 @@ function os2web_esdh_provider_ctools_plugin_type() {
     'required methods' => array(
       'handle_request',
     ),
+    'optional methods' => array(
+      'available',
+    )
   );
   return $plugins;
 }
@@ -147,17 +154,16 @@ function os2web_esdh_provider_node_delete($node) {
  * Will run import on every cron.
  */
 function os2web_esdh_provider_cron() {
-  $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
-  $queue = DrupalQueue::get('acadre_mm_import');
-  if ($queue->numberOfItems() == 0) {
-    foreach ($meetings as $meeting) {
-      $queue->createItem(array('meeting' => $meeting, 'force' => FALSE));
-    }
-    $queue->createItem(FALSE);
-  }
   if (os2web_esdh_provider_has_api('mm')) {
-    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-      os2web_esdh_provider_invoke('mm','post_import_process');
+    $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
+    $queue = DrupalQueue::get('acadre_mm_import');
+    if ($queue->numberOfItems() == 0) {
+      foreach ($meetings as $meeting) {
+        $queue->createItem(array('meeting' => $meeting, 'force' => FALSE));
+      }
+      if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+        os2web_esdh_provider_invoke('mm','post_import_process');
+      }
     }
   }
 }
@@ -171,15 +177,8 @@ function os2web_esdh_provider_cron_queue_info() {
 }
 
 function _os2web_esdh_provider_cron_queue_worker($args) {
-  if ($args === FALSE) {
-    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-      os2web_esdh_provider_invoke('mm', 'post_import_process');
-    }
-  }
-  else {
-    module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
-    _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
-  }
+  module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
+  _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
 }
 
 /**
@@ -202,6 +201,11 @@ function os2web_esdh_provider_has_api($api) {
           watchdog('esdh provider', 'Incomplete API found during check: %api', array('%api' => $api), WATCHDOG_ERROR);
           return FALSE;
         }
+      }
+    }
+    if (os2web_esdh_provider_supports($api, 'available')) {
+      if (!os2web_esdh_provider_invoke($api, 'available')) {
+        return FALSE;
       }
     }
   }

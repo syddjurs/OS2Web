@@ -1,0 +1,16 @@
+name = OS2Web Vis kontaktblok generelt
+description = Visning af bla. kontaktblok i højre sidebar på udvalgte sider
+core = 7.x
+package = OS2Web
+dependencies[] = block
+dependencies[] = context
+dependencies[] = ctools
+features[context][] = os2web_generel_hoejre
+features[ctools][] = context:context:3
+features[features_api][] = api:1
+
+;Added by OS2Web 2012-11-05
+project=OS2Web
+version=7.x-1.7
+timestamp=1352123374
+

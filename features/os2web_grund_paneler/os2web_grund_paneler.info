@@ -3,7 +3,7 @@ description = Forside og Portalforside Paneler
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.5
+version = 7.x-1.6
 project = os2web_grund_paneler
 dependencies[] = ctools
 dependencies[] = delta
@@ -31,12 +31,7 @@ features[page_manager_handlers][] = term_view_panel_context_4
 features[page_manager_handlers][] = term_view_panel_context_5
 features[page_manager_handlers][] = term_view_panel_context_6
 features[page_manager_handlers][] = term_view_panel_context_7
-features[page_manager_handlers][] = term_view_panel_context_8
-features[page_manager_pages][] = borger
-features[page_manager_pages][] = erhverv
-features[page_manager_pages][] = forside
 features[page_manager_pages][] = frontpage
-features[page_manager_pages][] = politik_planer
 features[panels_layout][] = forside
 features[panels_layout][] = sektionsforside
 features[panels_mini][] = andre_kommunale_websites
@@ -73,9 +68,10 @@ features[views_view][] = redaktoer_info
 features[views_view][] = rotating_image_view
 features[views_view][] = selvbetjening
 features[views_view][] = sitestuktur
-timestamp = 1350300162
-;Added by OS2Web 2012-10-23
+timestamp = 1350990827
+
+;Added by OS2Web 2012-11-05
 project=OS2Web
-version=7.x-1.6
-timestamp=1350990827
+version=7.x-1.7
+timestamp=1352123374
 

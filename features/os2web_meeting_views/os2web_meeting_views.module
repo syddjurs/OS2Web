@@ -89,3 +89,43 @@ function os2web_meeting_views_preprocess_page(&$vars) {
 JS;
   drupal_add_js($js, array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 }
+
+/**
+ * Helper function for the meetings_search view 
+ * 
+ * @param stdObject $entity 
+ * @access protected
+ * @return void
+ */
+function _os2web_meeting_views_generate_search_data($entity) {
+  $title = $entity->title;
+  $entity_type = 'node';
+
+//  $abbr = '';
+//  if (is_array(field_get_items($entity_type, $entity, 'field_meeting_abbr')))
+//    $abbr = ' '.array_pop(array_pop(field_get_items($entity_type, $entity, 'field_meeting_abbr')));
+
+  $location = field_get_items($entity_type, $entity, 'field_location');
+  if (is_array($location)){
+    $location_id = array_pop($location);
+    $location = ' '.$location_id['name'];
+  }
+
+  $committee = field_get_items($entity_type, $entity, 'field_committee');
+  if (is_array($committee)){
+    $committee_id = array_pop($committee);
+    $committee = ' '.$committee_id['name'];
+  }
+
+  $bps = '';
+  $bpoints = field_get_items($entity_type, $entity, 'field_ref_bullet_points');
+  if (is_array($bpoints)){
+    while ($node = node_load(array_pop(array_pop($bpoints)))) {
+      $text = strip_tags(check_markup($node->title,'plain_text'));
+      $bps .= ' '.$text;
+    }
+  }
+
+  $result = $title.$location.$committee.$bps;
+  return $result;
+}

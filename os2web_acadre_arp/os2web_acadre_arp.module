@@ -76,9 +76,6 @@ function _os2web_acadre_arp_soap_server() {
 //  file_unmanaged_save_data($HTTP_RAW_POST_DATA, 'public://soap/request-' . $count++ . '.soap.xml');
 //  variable_set('os2web_acadre_arp_soap_count', $count);
 
-  $server->AddFunction('publish');
-  $server->AddFunction('unpublish');
-  $server->handle();
 
   /**
    * Published a given input type. Delegates actual node creation to worker functions 
@@ -152,6 +149,10 @@ function _os2web_acadre_arp_soap_server() {
       return 'Success. Removed node-id(s): ' . implode(',', $nids);
     }
   }
+  
+  $server->AddFunction('publish');
+  $server->AddFunction('unpublish');
+  $server->handle();
 
 }
 
