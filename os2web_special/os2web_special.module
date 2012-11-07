@@ -43,6 +43,7 @@ function os2web_special_menu_minipanels_style($menu_config) {
 //  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/search.js', array('scope' => 'header', 'weight' => 100));
   drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.yaselect.min.js', array('scope' => 'header', 'weight' => 102));
   drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.sbselect.js', array('scope' => 'footer', 'weight' => 102));
+  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.tabindex.js', array('scope' => 'footer', 'weight' => 102));
 }
 
 /**
