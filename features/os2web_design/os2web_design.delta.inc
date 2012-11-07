@@ -507,7 +507,7 @@ function os2web_design_delta_default_templates() {
         'global-blue.css' => 0,
       ),
       'alpha_exclude' => array(
-        'profiles/os2web/modules/contrib/calendar/css/calendar_multiday.css' => 0,
+        'sites/all/modules/calendar/css/calendar_multiday.css' => 0,
         'profiles/os2web/modules/contrib/date/date_api/date.css' => 0,
         'profiles/os2web/modules/contrib/date/date_popup/themes/datepicker.1.7.css' => 0,
         'modules/field/theme/field.css' => 0,
@@ -719,7 +719,7 @@ function os2web_design_delta_default_templates() {
       'alpha_zone_content_weight' => '2',
       'alpha_zone_content_columns' => '12',
       'alpha_zone_content_primary' => NULL,
-      'alpha_zone_content_css' => '',
+      'alpha_zone_content_css' => 'no-second-sidebar',
       'alpha_zone_content_wrapper_css' => '',
       'alpha_zone_content_equal_height_container' => 0,
       'alpha_region_sidebar_first_force' => 0,
