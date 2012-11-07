@@ -20,15 +20,16 @@ function os2web_vis_kontaktblok_generelt_context_default_contexts() {
     'path' => array(
       'values' => array(
         'selvbetjening' => 'selvbetjening',
+        'nyheder' => 'nyheder',
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'block-6' => array(
-          'module' => 'block',
-          'delta' => 6,
+        'panels_mini-hoejre_blokke_generel' => array(
+          'module' => 'panels_mini',
+          'delta' => 'hoejre_blokke_generel',
           'region' => 'sidebar_second',
           'weight' => '-10',
         ),
