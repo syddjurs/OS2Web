@@ -1,13 +1,3 @@
-/**
- * @author Thomas Thune Hansen <tth@bellcom.dk>
- * Bellcom Udvikling ApS
- **/
-
-
-/**
- * function used to create a <select> element from an <ul>
- * <option> are populated with values corresponding to <li><a href />
- **/
 (function($) {
   $('ul.sb-list').each(function(){
   var list=$(this),
@@ -22,13 +12,6 @@
     list.remove();
   });
 })(jQuery);
-
-/**
- * function redirects the user to the url specified in <option> value
- * triggers on 
- *    keydown - 'enter'
- *    option.click
- **/
 (function($) {
   $('.sb-select').keydown(function(e) {
     if (e.keyCode == 13) {
@@ -41,10 +24,6 @@
   });
 
 })(jQuery);
-
-/**
- * add yaselect stuff to <selects>
- * */
 (function($) {
   jQuery('#edit-committee').yaselect();
   jQuery('.sb-select').yaselect();
