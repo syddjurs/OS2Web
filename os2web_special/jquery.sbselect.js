@@ -1,32 +1,39 @@
-(function($) {
+jQuery(document).ready(function($) {
   $('ul.sb-list').each(function(){
-  var list=$(this),
-  select=$(document.createElement('select')).addClass('sb-select').insertBefore($(this).hide());
-  $('>li a', this).each(function(){
-        var target=$(this).attr('target'),
-        option=$(document.createElement('option'))
+    
+    var list=$(this),
+        select=$(document.createElement('select')).addClass('sb-select').insertBefore($(this).hide());
+
+    $('>li a', this).each(function(){
+      //var target=$(this).attr('target'),
+      var option=$(document.createElement('option'))
           .appendTo(select)
           .val(this.href)
-          .html($(this).html())
+          .addClass('sb-option')
+          .html($(this).html());
     });
+
     list.remove();
   });
-})(jQuery);
-(function($) {
-  $('.sb-select').keydown(function(e) {
-    if (e.keyCode == 13) {
-      window.location.href = $(this).val();
+
+  $('select').yaselect();
+  
+  var $select = $('.sb-select');
+
+  var onChange = function () {
+    window.location.href = $(this).parent().find('option:selected').val();
+  };
+
+  var onKeyDown = function (e) {
+    $select.off('change');
+    var keyCode = e.keyCode || e.which;
+
+    if(keyCode === 13 || keyCode === 9) {
+      $select.on('change', onChange).change();
     }
-  });
+  };
 
-  $('.sb-select option').click(function(e) {
-    window.location.href = $(this).val();
-  });
+  $select.on('change', onChange)
+  .on('keydown', onKeyDown);
 
-})(jQuery);
-(function($) {
-  jQuery('#edit-committee').yaselect();
-  jQuery('.sb-select').yaselect();
-})(jQuery);
-
-
+});
