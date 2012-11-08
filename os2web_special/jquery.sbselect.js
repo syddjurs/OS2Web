@@ -16,7 +16,8 @@ jQuery(document).ready(function($) {
     list.remove();
   });
 
-  $('select').yaselect();
+  $('.sb-select').yaselect();
+  $('#edit-committee').yaselect();
   
   var $select = $('.sb-select');
 
