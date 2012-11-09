@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$j(document).ready(function($) {
   $('ul.sb-list').each(function(){
     
     var list=$(this),
@@ -16,8 +16,6 @@ jQuery(document).ready(function($) {
     list.remove();
   });
 
-  $('.sb-select').yaselect();
-  $('#edit-committee').yaselect();
   
   var $select = $('.sb-select');
 
@@ -37,4 +35,7 @@ jQuery(document).ready(function($) {
   $select.on('change', onChange)
   .on('keydown', onKeyDown);
 
+  jQuery('.sb-select').yaselect();
+  jQuery('#edit-committee').yaselect();
 });
+
