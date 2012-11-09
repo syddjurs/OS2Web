@@ -32,11 +32,15 @@ function os2web_planer_i_h_ring_feeds_importer_default() {
           'xpathparser:0' => 'col[@name=\'id\']/text()',
           'xpathparser:1' => 'col[@name=\'plannavn\']/text()',
           'xpathparser:2' => 'col[@name=\'doklink\']/text()',
+          'xpathparser:3' => 'concat(substring(col[@name=\'datoslut\']/text(),1,4),\'-\',substring(col[@name=\'datoslut\']/text(),5,2),\'-\',substring(col[@name=\'datoslut\']/text(),7,2),\' 00:00:00\')',
+          'xpathparser:4' => 'concat(substring(col[@name=\'datostart\']/text(),1,4),\'-\',substring(col[@name=\'datostart\']/text(),5,2),\'-\',substring(col[@name=\'datostart\']/text(),7,2),\' 00:00:00\')',
         ),
         'rawXML' => array(
           'xpathparser:0' => 0,
           'xpathparser:1' => 0,
           'xpathparser:2' => 0,
+          'xpathparser:3' => 0,
+          'xpathparser:4' => 0,
         ),
         'context' => '/pcollection/pcomposite/rowlist/row',
         'exp' => array(
@@ -46,6 +50,8 @@ function os2web_planer_i_h_ring_feeds_importer_default() {
             'xpathparser:0' => 0,
             'xpathparser:1' => 0,
             'xpathparser:2' => 0,
+            'xpathparser:3' => 0,
+            'xpathparser:4' => 0,
           ),
         ),
         'allow_override' => 0,
@@ -71,6 +77,16 @@ function os2web_planer_i_h_ring_feeds_importer_default() {
           2 => array(
             'source' => 'xpathparser:2',
             'target' => 'field_url',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'xpathparser:3',
+            'target' => 'field_slutdato:start',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'xpathparser:4',
+            'target' => 'field_startdato:start',
             'unique' => FALSE,
           ),
         ),
