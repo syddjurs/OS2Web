@@ -78,18 +78,13 @@ function os2web_spotbokse_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'version' => '3',
     'theme' => 'light',
     'width' => '310',
     'height' => '177',
-    'fullscreen' => 0,
     'autoplay' => 0,
     'related' => 0,
-    'hd' => 0,
-    'showsearch' => 0,
     'modestbranding' => 1,
     'showinfo' => 0,
-    'chromeless' => 0,
   );
   $export['video__default__media_youtube_video'] = $file_display;
 
