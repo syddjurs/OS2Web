@@ -27,7 +27,7 @@ $j(document).ready(function($) {
     $select.off('change');
     var keyCode = e.keyCode || e.which;
 
-    if(keyCode === 13 || keyCode === 9) {
+    if(keyCode === 13) {
       $select.on('change', onChange).change();
     }
   };
