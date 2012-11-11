@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * This file describes the CM plugin as implemented by Acadre
@@ -25,49 +26,53 @@ $plugin = array(
 
 /**
  * Test method to verify plugin operationability.
- *
- * @param any $stuff
- * @return string
  */
 function acadre_esdh_test($stuff) {
   return 'Test successful. Recieved: ' . $stuff;
 }
 
 /**
- * This opreation check for proper operation. Called often, so static cache is acceptable. 
- * 
+ * This opreation check for proper operation.
+ *
+ * Called often, so static cache is acceptable.
+ *
  * @access public
  * @return bool
+ *   True if the service is available.
  */
 function acadre_esdh_available() {
   $drush = function_exists('drush_log');
-  $ws = &drupal_static(__FUNCTION__,FALSE);
-  if ($ws===FALSE) {
+  $ws = &drupal_static(__FUNCTION__, FALSE);
+  if ($ws === FALSE) {
     $pws = _acadre_esdh_get_pws_instance();
-    $ws['v4'] = $pws->get_client();
-    $ws['v6'] = $pws->get_client6();
-    $ws['ss'] = $pws->get_client_search();
+    $ws['v4'] = $pws->getClient();
+    $ws['v6'] = $pws->getClient6();
+    $ws['ss'] = $pws->getClientSearch();
   }
-  if($drush) {
-    drush_log('Acadre PWS v4 endpoint available: ',$ws['v4']?'ok':'error');
-    drush_log('Acadre PWS v6 endpoint available: ',$ws['v6']?'ok':'error');
-    drush_log('SOFD search service available: ',$ws['ss']?'ok':'error');
+  if ($drush) {
+    drush_log('Acadre PWS v4 endpoint available: ', $ws['v4'] ? 'ok' : 'error');
+    drush_log('Acadre PWS v6 endpoint available: ', $ws['v6'] ? 'ok' : 'error');
+    drush_log('SOFD search service available: ', $ws['ss'] ? 'ok' : 'error');
   }
 
   return $ws['v4'] && $ws['v6'] && $ws['ss'];
 }
 
 /**
- * Return data relating to a given Document
+ * Return data relating to a given Document.
  *
- * @param int or string $doc_id
- * @return array - Document structure
+ * @param mixed $doc_id
+ *   Docuement ID og string with query.
+ *
+ * @return array
+ *   Document structure
+ *
  * @TODO: Rework into generic datatypes for return value
  */
 function acadre_esdh_get_document($doc_id) {
   $pws = _acadre_esdh_get_pws_instance();
   $doc_id = trim($doc_id);
-  // Translate the SSSSSS/YY serial into database identifier
+  // Translate the SSSSSS/YY serial into database identifier.
   if (!is_numeric($doc_id)) {
     $doc_id = acadre_esdh_lookup_doc($doc_id);
   }
@@ -89,15 +94,18 @@ function acadre_esdh_get_document($doc_id) {
 }
 
 /**
- * Return the actual file object for a given document
+ * Return the actual file object for a given document.
  *
- * @param int or string $doc_id
- * @return object - Drupal file structure
+ * @param mixed $doc_id
+ *   Docuement ID og string with query.
+ *
+ * @return object
+ *   Drupal file structure
  */
 function acadre_esdh_get_document_file($doc_id) {
   $pws = _acadre_esdh_get_pws_instance();
   $doc_id = trim($doc_id);
-  // Translate the SSSSSS/YY serial into database identifier
+  // Translate the SSSSSS/YY serial into database identifier.
   if (!is_numeric($doc_id)) {
     $doc_id = acadre_esdh_lookup_doc($doc_id);
   }
@@ -111,15 +119,18 @@ function acadre_esdh_get_document_file($doc_id) {
 }
 
 /**
- * Returns a list of documents for a given case
+ * Returns a list of documents for a given case.
  *
- * @param int or string $case_id
- * @return list of database ids of the documents related to the case.
+ * @param mixed $case_id
+ *   Case ID og string with query.
+ *
+ * @return array
+ *   List of database ids of the documents related to the case.
  */
 function acadre_esdh_get_case_docs($case_id) {
   $pws = _acadre_esdh_get_pws_instance();
   $case_id = trim($case_id);
-  // Translate the SSSSSS/YY serial into database identifier
+  // Translate the SSSSSS/YY serial into database identifier.
   if (!is_numeric($case_id)) {
     $case_id = acadre_esdh_lookup_case($case_id);
   }
@@ -133,13 +144,16 @@ function acadre_esdh_get_case_docs($case_id) {
 /**
  * Looks up a case if neccesary and return the metadata related to this case.
  *
- * @param int or string $case_id - either database identifier or year/serial to look up
- * @return array - Case data structure
+ * @param mixed $case_id
+ *   Case ID og string with query.
+ *
+ * @return array
+ *   Case data structure
  */
 function acadre_esdh_get_case_data($case_id) {
   $pws = _acadre_esdh_get_pws_instance();
   $case_id = trim($case_id);
-  // Translate the SSSSSS/YY serial into database identifier
+  // Translate the SSSSSS/YY serial into database identifier.
   if (!is_numeric($case_id)) {
     $case_id = acadre_esdh_lookup_case($case_id);
   }
@@ -157,20 +171,45 @@ function acadre_esdh_get_case_data($case_id) {
   return $case;
 }
 
+/**
+ * Looks up a document query string.
+ *
+ * @param string $search_id
+ *   Query string
+ *
+ * @return int
+ *   Document ID
+ */
 function acadre_esdh_lookup_doc($search_id) {
   $pws = _acadre_esdh_get_pws_instance();
   return $pws->lookupDoc(trim($search_id));
 }
 
+/**
+ * Looks up a case query string.
+ *
+ * @param string $search_id
+ *   Query string
+ *
+ * @return int
+ *   Case ID
+ */
 function acadre_esdh_lookup_case($search_id) {
   $pws = _acadre_esdh_get_pws_instance();
   return $pws->lookupCase(trim($search_id));
 }
 
+/**
+ * Gets the current instance of the WS class.
+ *
+ * @return AcadrePWS
+ *   Facade object for the webservices.
+ */
 function _acadre_esdh_get_pws_instance() {
   $obj = &drupal_static(__FUNCTION__);
-  if (is_object($obj))
+  if (is_object($obj)) {
     return $obj;
+  }
   module_load_include('inc', 'acadre_esdh', 'AcadrePWS.class');
   return $obj = new AcadrePWS();
 }

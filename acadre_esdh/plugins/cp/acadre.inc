@@ -1,8 +1,9 @@
 <?php
+
 /**
  * @file
  * This file describes the Content pushing plugin as implemented by Acadre
- * 
+ *
  * @author Jesper Mathiassen <jm@bellcom.dk>
  * @copyright Bellcom Open Source aps.
  */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * This file implements a facade class for the PWS webservices
@@ -7,6 +8,7 @@
  * @copyright Bellcom Open Source aps.
  */
 
+
 define('PWS_CACHE_TIMEOUT', 3600 * 4);
 define('ACADRE_CM_DEFAULT_DOC_CACHE_PATH', 'public://pws_documents/');
 
@@ -14,16 +16,19 @@ class AcadrePWS {
 
   private $client;
   private $client6;
-  private $client_search;
+  private $clientSearch;
 
-  private function _get_ws_base_setup() {
+  /**
+   * Basic setup for SOAP connections.
+   */
+  private function getBaseWSSetup() {
     $user = variable_get('os2web_pws_user');
     $password = variable_get('os2web_pws_password');
 
     $proxy = variable_get('os2web_pws_proxy', FALSE);
     $proxy_host = variable_get('os2web_pws_proxy_host');
     $proxy_port = variable_get('os2web_pws_proxy_port');
-    $options['trace'] = FALSE; // For debugging purposes. Remove on prod.
+    $options['trace'] = FALSE;
     $options['exceptions'] = TRUE;
     $options['login'] = $user;
     $options['cache_wsdl'] = WSDL_CACHE_BOTH;
@@ -36,8 +41,10 @@ class AcadrePWS {
     return $options;
   }
 
-  public function get_client() {
-    //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+  /**
+   * Initializes the v4 client interface.
+   */
+  public function getClient() {
     $this->client = &drupal_static('os2web_acadre_pws_client');
     if (!$this->client) {
       $url = variable_get('os2web_pws_url');
@@ -46,27 +53,31 @@ class AcadrePWS {
         drupal_set_message(t('Error, no endpoint url set for v4soap.'), 'error');
       }
       else {
-        //FIXME: Use a wellformed WSDL for V4 services.
-        $options = $this->_get_ws_base_setup();
+        // FIXME: Use a wellformed WSDL for V4 services.
+        $options = $this->getBaseWSSetup();
         $options['location'] = $url;
         $options['uri'] = 'http://www.traen.com/2007/09/06/';
-        if (function_exists('xdebug_disable'))
+        if (function_exists('xdebug_disable')) {
           xdebug_disable();
+        }
         try {
           $this->client = new SoapClient(NULL, $options);
         } catch (Exception $e) {
           drupal_set_message('Error connecting to PWSv4 endpoint', 'error');
           return FALSE;
         }
-        if (function_exists('xdebug_enable'))
+        if (function_exists('xdebug_enable')) {
           xdebug_enable();
+        }
       }
     }
     return isset($this->client);
   }
 
-  public function get_client6() {
-    //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+  /**
+   * Initializes the v5 client.
+   */
+  public function getClient6() {
     $this->client6 = &drupal_static('os2web_acadre_pws_client6');
     if (!$this->client6) {
       $url = variable_get('os2web_pws_url_v6');
@@ -75,61 +86,62 @@ class AcadrePWS {
         drupal_set_message(t('Error, no endpoint url set for v6.'), 'error');
       }
       else {
-        $options = $this->_get_ws_base_setup();
-        if (function_exists('xdebug_disable'))
+        $options = $this->getBaseWSSetup();
+        if (function_exists('xdebug_disable')) {
           xdebug_disable();
+        }
         try {
           $this->client6 = new SoapClient($url . '?WSDL', $options);
         } catch (Exception $sf) {
           drupal_set_message('Error connecting to PWSv6 endpoint', 'error');
           return FALSE;
         }
-        if (function_exists('xdebug_enable'))
+        if (function_exists('xdebug_enable')) {
           xdebug_enable();
+        }
       }
     }
     return isset($this->client6);
   }
 
-  public function get_client_search() {
-    //error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-    $this->client_search = &drupal_static('os2web_acadre_pws_client_search');
-    if (!$this->client_search) {
+  /**
+   * Initializes the case lookup service.
+   */
+  public function getClientSearch() {
+    $this->clientSearch = &drupal_static('os2web_acadre_pws_client_search');
+    if (!$this->clientSearch) {
       $url = variable_get('os2web_pws_url_search');
       $url = trim($url);
       if ($url == '') {
         drupal_set_message(t('Error, no endpoint url set for document search searvice.'), 'error');
       }
       else {
-        $options = $this->_get_ws_base_setup();
-        if (function_exists('xdebug_disable'))
+        $options = $this->getBaseWSSetup();
+        if (function_exists('xdebug_disable')) {
           xdebug_disable();
+        }
         try {
-          $this->client_search = new SoapClient($url . '?WSDL', $options);
+          $this->clientSearch = new SoapClient($url . '?WSDL', $options);
           return TRUE;
         } catch (SoapFault $sf) {
           drupal_set_message('Error connecting to PWS document search service endpoint', 'error');
           return FALSE;
         }
-        if (function_exists('xdebug_enable'))
+        if (function_exists('xdebug_enable')) {
           xdebug_enable();
+        }
       }
     }
-    return isset($this->client_search);
-  }
-
-  /**
-   * Initial service setup.
-   */
-  function __construct() {
-    // Using a static allows singleton use of the connector class 
+    return isset($this->clientSearch);
   }
 
   /**
    * Looks up a journaling entry and returns the id of a case.
+   *
    * FIXME: Make this a TRUE call to webservice.
    *
-   * @param string $query A case journaling number, ie. 11/14293
+   * @param string $query
+   *   A case journaling number, ie. 11/14293
    */
   public function lookupCase($query) {
     $cid = __FUNCTION__ . $query;
@@ -140,15 +152,15 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client_search()) {
+    elseif ($this->getClientSearch()) {
       $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
-          $result = (int) $this->client_search->getCaseSystemIdByYearAndSerial(array('year' => $query[0], 'serial' => $query[1]))->GetCaseSystemIdByYearAndSerialResult;
+          $result = (int) $this->clientSearch->getCaseSystemIdByYearAndSerial(array('year' => $query[0], 'serial' => $query[1]))->GetCaseSystemIdByYearAndSerialResult;
           cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
         } catch (SoapFault $sf) {
-          $trace = $this->client_search->__getLastRequest();
+          $trace = $this->clientSearch->__getLastRequest();
           error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $trace = ' . print_r($trace, 1));
           $result = $sf;
         }
@@ -160,7 +172,8 @@ class AcadrePWS {
   /**
    * Looks up a journaling entry and returns the id of a document.
    *
-   * @param string $query A case journaling number, ie. 14293/11
+   * @param string $query
+   *   A case journaling number, ie. 14293/11
    */
   public function lookupDoc($query) {
     $cid = __FUNCTION__ . $query;
@@ -171,12 +184,12 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client_search()) {
+    elseif ($this->getClientSearch()) {
       $query = str_replace('-', '/', $query);
       $query = explode('/', $query);
       if (is_numeric($query[0]) && is_numeric($query[1])) {
         try {
-          $result = (int) $this->client_search->getDocumentSystemIdByYearAndSerial(array('year' => $query[1], 'serial' => $query[0]))->GetDocumentSystemIdByYearAndSerialResult;
+          $result = (int) $this->clientSearch->getDocumentSystemIdByYearAndSerial(array('year' => $query[1], 'serial' => $query[0]))->GetDocumentSystemIdByYearAndSerialResult;
           $result = $result != -1 ? $result : FALSE;
           cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
         } catch (SoapFault $sf) {
@@ -190,8 +203,11 @@ class AcadrePWS {
   /**
    * Get metadata for a case by id.
    *
-   * @param type $id
-   * @return mixed array with info on success, FALSE otherwise
+   * @param int $id
+   *   Case identifier
+   *
+   * @return mixed
+   *   array with info on success, FALSE otherwise
    */
   public function fetchCase($id) {
     $cid = __FUNCTION__ . $id;
@@ -202,12 +218,12 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client6()) {
+    elseif ($this->getClient6()) {
       try {
         $result = $this->client6->getCase($id);
         cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $exc) {
-        //TODO: Handle exception better...
+        // TODO: Handle exception better...
         error_log("Var: \$exc = " . print_r($exc, 1));
         return FALSE;
       }
@@ -215,6 +231,15 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Returns the document id's for a given case.
+   *
+   * @param int $id
+   *   Case ID
+   *
+   * @return mixed
+   *   Return FALSE on error, else array of documents
+   */
   public function getCaseDocs($id) {
     $result = &drupal_static(__FUNCTION__ . $id, FALSE);
     if ($result != FALSE) {
@@ -224,7 +249,7 @@ class AcadrePWS {
       $result = $cache->data;
     }
     else {
-      if ($this->get_client()) {
+      if ($this->getClient()) {
         $request = '<?xml version="1.0" encoding="utf-8"?>
           <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -250,6 +275,15 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Returns the lock status for a document.
+   *
+   * @param int $id
+   *   Document ID
+   *
+   * @return boolean
+   *   True is case is locked, else false.
+   */
   public function getDocLock($id) {
     $cid = __FUNCTION__ . $id;
     $result = &drupal_static($cid, FALSE);
@@ -259,7 +293,7 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client()) {
+    elseif ($this->getClient()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -270,13 +304,13 @@ class AcadrePWS {
         $result = $this->client->__doRequest(t($request, array('[DocID]' => $id)), $this->client->location, $this->client->uri . 'GetLockStatus', SOAP_1_1);
         $result = simplexml_load_string($result);
         if (is_object($result)) {
-          if ('' !== (string) array_pop($result->xpath('//soap:Fault/faultcode'))) { // This will indicate fault
+          if ('' !== (string) array_pop($result->xpath('//soap:Fault/faultcode'))) {
+            // This will indicate fault.
             $result = FALSE;
           }
           else {
             $result = $result->xpath('//soap:Body');
             $result = ('true' === (string) $result[0]->DocumentLockStatus) ? TRUE : FALSE;
-            //        $result = (string)array_pop($result->xpath('//soap:Fault/faultcode')); // This will indicate fault
           }
         }
       } catch (SoapFault $sf) {
@@ -287,6 +321,15 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Returns an info block for a document.
+   *
+   * @param int $id
+   *   Document ID
+   *
+   * @return mixed
+   *   False on error, otherwise a valid document structure.
+   */
   public function getDocInfo($id) {
     $cid = __FUNCTION__ . $id;
     $result = &drupal_static($cid, FALSE);
@@ -296,9 +339,9 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client_search()) {
+    elseif ($this->getClientSearch()) {
       try {
-        $result = $this->client_search->getDocumentById(array('id' => $id));
+        $result = $this->clientSearch->getDocumentById(array('id' => $id));
         $result = $result->GetDocumentByIdResult;
         cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
       } catch (SoapFault $sf) {
@@ -308,6 +351,15 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Returns document meta-data.
+   *
+   * @param int $id
+   *   Document ID
+   *
+   * @return boolean
+   *   False on error, otherwise a document XML block.
+   */
   public function getDocument($id) {
     $cid = __FUNCTION__ . $id;
     $result = &drupal_static($cid, FALSE);
@@ -317,7 +369,7 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client6()) {
+    elseif ($this->getClient6()) {
       try {
         $result = $this->client6->getMainDocument($id);
         cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
@@ -328,6 +380,15 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Returns the document reference and version.
+   *
+   * @param int $id
+   *   Document ID
+   *
+   * @return boolean
+   *   False on error, otherwise an array with reference and version.
+   */
   public function getDocRef($id) {
     $doc = $this->getDocument($id);
     if (isset($doc->DocumentVersion->DocumentFileReference) && isset($doc->DocumentVersion->VersionNumber)) {
@@ -341,6 +402,17 @@ class AcadrePWS {
     }
   }
 
+  /**
+   * Gets the filename for a document.
+   *
+   * @param int $ref
+   *   Document reference, or document ID
+   * @param int $ver
+   *   Document version, if $ref is reference, otherwise ommited.
+   *
+   * @return string
+   *   Document filename
+   */
   public function getDocFileName($ref, $ver = FALSE) {
     $result = FALSE;
     if (!is_numeric($ver)) {
@@ -352,7 +424,7 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client()) {
+    elseif ($this->getClient()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -366,7 +438,7 @@ class AcadrePWS {
         $result = $this->client->__doRequest(t($request, array('@FileRef' => $ref, '@Version' => $ver)), $this->client->location, $this->client->uri . 'GetFileName', SOAP_1_1);
         if (is_object($result = simplexml_load_string($result))) {
           $result = (string) array_shift($result->xpath('//soap:Body'))->FileName1;
-          // Use md5sum to avoid long  and guessable filenames
+          // Use md5sum to avoid long  and guessable filenames.
           $info = pathinfo($result);
           $result = md5('adlibsalt' . $info['basename']) . '.' . $info['extension'];
           cache_set($cid, $result, 'cache_os2web_pws', time() + PWS_CACHE_TIMEOUT);
@@ -378,6 +450,17 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Gets a document as an actual file.
+   *
+   * @param int $id
+   *   Document reference, or document ID
+   * @param int $ver
+   *   Document version, if $ref is reference, otherwise ommited.
+   *
+   * @return object
+   *   Drupal file object.
+   */
   public function getDocData($id, $ver = FALSE) {
     $dest = ACADRE_CM_DEFAULT_DOC_CACHE_PATH;
     $result = FALSE;
@@ -388,7 +471,7 @@ class AcadrePWS {
     }
     drupal_load('module', 'os2web_adlib_api');
 
-    // Cache files unless there is a newer version available
+    // Cache files unless there is a newer version available.
     $fid = os2web_adlib_api_get_fid($ref);
     if ($fid > 0 && ($result = file_load($fid)) && is_file(drupal_realpath($result->uri))) {
       // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File cached.");
@@ -403,14 +486,14 @@ class AcadrePWS {
       }
     }
 
-    // Clean up failed files
+    // Clean up failed files.
     if (is_object($result) && !is_file(drupal_realpath($result->uri))) {
       error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' Failed file ' . $result->filename);
       file_delete($result, TRUE);
     }
 
     error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Fetching file from WS. Ref: $ref");
-    if ($this->get_client()) {
+    if ($this->getClient()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -445,7 +528,6 @@ class AcadrePWS {
           error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Error parse output from WS.');
           return FALSE;
         }
-//        $result = $result[0];
       } catch (SoapFault $sf) {
         watchdog('acadre_pws', 'Error during SOAP call in ' . __FUNCTION__, NULL, WATCHDOG_WARNING);
       }
@@ -453,6 +535,17 @@ class AcadrePWS {
     return $result;
   }
 
+  /**
+   * Gets the binary data for a document.
+   *
+   * @param int $ref
+   *   Document reference, or document ID
+   * @param int $ver
+   *   Document version, if $ref is reference, otherwise ommited.
+   *
+   * @return string
+   *   Document contents
+   */
   public function getDocDataRaw($ref, $ver = FALSE) {
     $result = FALSE;
     if (!is_numeric($ver)) {
@@ -464,7 +557,7 @@ class AcadrePWS {
     if (($cache = cache_get($cid, 'cache_os2web_pws')) && !empty($cache->data) && (time() < $cache->expire)) {
       $result = $cache->data;
     }
-    elseif ($this->get_client()) {
+    elseif ($this->getClient()) {
       $request = '<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
