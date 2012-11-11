@@ -55,6 +55,83 @@ function os2web_settings_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_countries';
+  $strongarm->value = '';
+  $export['cookiecontrol_countries'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_fulltext';
+  $strongarm->value = '<p>Nogle cookies på hjemmsiden er vigtige for at sitet fungerer som forventet. De bruges for eksempel når du indsender en formular eller på anden måde får en personlig respons fra hjemmesiden.</p><p>Vi bruger også ikke essentielle cookies til, anonymt, at spore brugen af hjemmesiden. Hvis du ikke er interesseret i at vi bruger disse kan vi undlade at gemme nogen former for cookies. Men vi kan så ikke garantere at sitet fungerer fuldt ud.</p>';
+  $export['cookiecontrol_fulltext'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_hideonaccept';
+  $strongarm->value = 1;
+  $export['cookiecontrol_hideonaccept'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_onaccept';
+  $strongarm->value = '';
+  $export['cookiecontrol_onaccept'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_position';
+  $strongarm->value = 'left';
+  $export['cookiecontrol_position'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_privacynode';
+  $strongarm->value = '2942';
+  $export['cookiecontrol_privacynode'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_shape';
+  $strongarm->value = 'triangle';
+  $export['cookiecontrol_shape'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_startopen';
+  $strongarm->value = 0;
+  $export['cookiecontrol_startopen'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_text';
+  $strongarm->value = '<p>Syddjurs gemmer informationer i cookies på din komputer.</p>';
+  $export['cookiecontrol_text'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_theme';
+  $strongarm->value = 'light';
+  $export['cookiecontrol_theme'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'cookiecontrol_timeout';
+  $strongarm->value = '15';
+  $export['cookiecontrol_timeout'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'date_default_timezone';
   $strongarm->value = 'Europe/Berlin';
   $export['date_default_timezone'] = $strongarm;
