@@ -54,15 +54,6 @@ function os2web_settings_user_default_permissions() {
     'module' => 'fontyourface',
   );
 
-  // Exported permission: administer media.
-  $permissions['administer media'] = array(
-    'name' => 'administer media',
-    'roles' => array(
-      0 => 'Administrator',
-    ),
-    'module' => 'media',
-  );
-
   // Exported permission: administer nodes.
   $permissions['administer nodes'] = array(
     'name' => 'administer nodes',
@@ -276,17 +267,6 @@ function os2web_settings_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: edit media.
-  $permissions['edit media'] = array(
-    'name' => 'edit media',
-    'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Webmaster',
-    ),
-    'module' => 'media',
-  );
-
   // Exported permission: edit own contentpage content.
   $permissions['edit own contentpage content'] = array(
     'name' => 'edit own contentpage content',
@@ -434,17 +414,6 @@ function os2web_settings_user_default_permissions() {
       1 => 'Webmaster',
     ),
     'module' => 'better_formats',
-  );
-
-  // Exported permission: view media.
-  $permissions['view media'] = array(
-    'name' => 'view media',
-    'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Webmaster',
-    ),
-    'module' => 'media',
   );
 
   // Exported permission: view own unpublished content.
