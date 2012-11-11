@@ -133,7 +133,7 @@ function os2web_indholdstyper_field_default_fields() {
           'label' => 'hidden',
           'module' => 'field_slideshow',
           'settings' => array(
-            'slideshow_caption' => '',
+            'slideshow_caption' => 'alt',
             'slideshow_caption_link' => '',
             'slideshow_carousel_circular' => 0,
             'slideshow_carousel_image_style' => '',
@@ -199,6 +199,7 @@ function os2web_indholdstyper_field_default_fields() {
             'image' => 'image',
             'video' => 0,
           ),
+          'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
@@ -616,6 +617,7 @@ function os2web_indholdstyper_field_default_fields() {
             'image' => 'image',
             'video' => 'video',
           ),
+          'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
@@ -4237,6 +4239,7 @@ function os2web_indholdstyper_field_default_fields() {
           'allowed_types' => array(
             0 => 'image',
           ),
+          'browser_plugins' => array(),
           'collapsible' => '2',
           'croparea' => '500x500',
           'enforce_minimum' => 1,
