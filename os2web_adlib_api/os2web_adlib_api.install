@@ -1,10 +1,13 @@
 <?php
+
 /**
  * @file
  * Install file for the AdLib API implementation module
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+ */
+
+
+/**
+ * Implements hook_schema().
  */
 function os2web_adlib_api_schema() {
   $schema['os2web_adlib_api_doc_files'] = array(
@@ -45,7 +48,7 @@ function os2web_adlib_api_schema() {
 }
 
 /**
- * Adds job_type field if missing 
+ * Adds job_type field if missing.
  */
 function os2web_adlib_api_update_7002(&$sandbox) {
   $ret = array();

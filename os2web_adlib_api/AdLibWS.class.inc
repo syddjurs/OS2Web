@@ -1,11 +1,10 @@
 <?php
+
 /**
  * @file
  * This file implements a facade class for using the AdLib webservice
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
+
 define('ADLIB_JOBTYPE_PDF', 0);
 define('ADLIB_JOBTYPE_HTML', 1);
 define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
@@ -17,14 +16,17 @@ define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
  */
 class AdLibWS {
 
-  private $client;
-  //private static $base_path = 'd:\\wwwroot\\';V
-  private static $base_path = 'C:\\InetPub\\wwwroot\\';
-  private static $base_url = 'http://10.1.1.180/';
+  protected $client;
+  // Private static $base_path = 'd:\\wwwroot\\';
+  protected static $basePath = 'C:\\InetPub\\wwwroot\\';
+  protected static $baseUrl = 'http://10.1.1.180/';
 
+  /**
+   * Initializes connector.
+   */
   public function __construct() {
     if (ADLIB_DISABLED) {
-//      error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - AdLib presently disabled.');
+      // error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - AdLib presently disabled.');
       return;
     }
     if (!isset($this->client)) {
@@ -37,49 +39,54 @@ class AdLibWS {
         $options['proxy_port'] = variable_get('os2web_pws_proxy_port');
       }
       $url = variable_get('os2web_adlib_url', 'http://706CAR01/ExponentWSA/ExponentWSA.asmx?wsdl');
-//      $url = preg_replace('/([fhtps]{3,5}):\/\/(.+?)\//', self::$base_url, $url);
-//      preg_match('%http://.+?/%', $url, $matches);
-//      self::$base_url = array_shift($matches);
-      if (function_exists('xdebug_disable'))
+      // $url = preg_replace('/([fhtps]{3,5}):\/\/(.+?)\//', self::$base_url, $url);
+      // preg_match('%http://.+?/%', $url, $matches);
+      // self::$base_url = array_shift($matches);
+      if (function_exists('xdebug_disable')) {
         xdebug_disable();
+      }
       try {
         $this->client = new SoapClient($url, $options);
-        //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
+        // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Created SOAP client.");
       } catch (Exception $exc) {
         watchdog('adlib_api', 'Error creating AdLib client, message: %var', array('%var' => $exc->getMessage()), WATCHDOG_ERROR);
+      }
+      if (function_exists('xdebug_enable')) {
+        xdebug_enable();
       }
     }
   }
 
   /**
-   * Starts a job on the adlib server
+   * Starts a job on the adlib server.
    *
-   * @param array $fileInfo - fileinfo structure
-   * @return type
+   * @param array $file_info
+   *   Fileinfo structure
    */
-  public function addJob($fileInfo, $type = ADLIB_JOBTYPE_PDF, $priority = 3) {
-    if (ADLIB_DISABLED)
+  public function addJob($file_info, $type = ADLIB_JOBTYPE_PDF, $priority = 3) {
+    if (ADLIB_DISABLED) {
       return FALSE;
+    }
     if (!isset($this->client)) {
       return FALSE;
     }
-    $jobInfo = '<JobInfo>
+    $job_info = '<JobInfo>
         <JobSettings JobID="" UserJobID="" JobPriority="' . $priority . '" AdlibServer="" AdlibServerGroup=""/>
         <JobFileMsg Count=""/>
         <JobFileList>
           <JobFile Filename="" Folder=""/>
         </JobFileList>
       </JobInfo>';
-    $jobTicket = '<?xml version="1.0" encoding="UTF-8"?>
+    $job_ticket = '<?xml version="1.0" encoding="UTF-8"?>
         <?AdlibExpress applanguage="USA" appversion="2.5" dtdversion="1.0" ?>
         <!DOCTYPE JOBS SYSTEM "C:\Adlib Express\DTD\AdlibExpress.dtd">
         <JOBS xmlns:JOBS="http://www.Adlibsoftware.com" xmlns:JOB="http://www.Adlibsoftware.com">
           <JOB>
             <JOB:DOCINPUTS>
-              <JOB:DOCINPUT FILENAME="' . $this->safeFilename($fileInfo['filename']) . '" FOLDER="' . self::$base_path . $fileInfo['in_folder'] . '" />
+              <JOB:DOCINPUT FILENAME="' . $this->safeFilename($file_info['filename']) . '" FOLDER="' . self::$basePath . $file_info['in_folder'] . '" />
             </JOB:DOCINPUTS>
             <JOB:DOCOUTPUTS>
-              <JOB:DOCOUTPUT FILENAME="' . $this->safeFilename($fileInfo['out_filename']) . '" FOLDER="' . self::$base_path . $fileInfo['out_folder'] . '" DOCTYPE="' . ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF') . '" />
+              <JOB:DOCOUTPUT FILENAME="' . $this->safeFilename($file_info['out_filename']) . '" FOLDER="' . self::$basePath . $file_info['out_folder'] . '" DOCTYPE="' . ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF') . '" />
             </JOB:DOCOUTPUTS>
             <JOB:SETTINGS>
               <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
@@ -89,7 +96,7 @@ class AdLibWS {
             </JOB:SETTINGS>
           </JOB>
         </JOBS>';
-    $result = simplexml_load_string($this->client->addJob(array('jobInfo' => $jobInfo, 'jobTicket' => $jobTicket))->AddJobResult);
+    $result = simplexml_load_string($this->client->addJob(array('job_info' => $job_info, 'job_ticket' => $job_ticket))->AddJobResult);
     if (is_object($result) && isset($result->JobSettings['JobID'])) {
       return $result;
     }
@@ -98,6 +105,15 @@ class AdLibWS {
     }
   }
 
+  /**
+   * Invokes deleteJob.
+   *
+   * @param string $id
+   *   Job id
+   *
+   * @return object
+   *   Result and status
+   */
   public function deleteJob($id) {
     if (ADLIB_DISABLED) {
       $return->status = 'Disabled';
@@ -112,6 +128,15 @@ class AdLibWS {
     }
   }
 
+  /**
+   * Invokes deleteFolder.
+   *
+   * @param string $id
+   *   Folder id
+   *
+   * @return object
+   *   False on error
+   */
   public function deleteJobFolder($id) {
     if (ADLIB_DISABLED) {
       return FALSE;
@@ -122,6 +147,12 @@ class AdLibWS {
     }
   }
 
+  /**
+   * Gets a list of connectors and their status.
+   *
+   * @return string
+   *   Connector status message
+   */
   public function getConnectorStatusList() {
     if (ADLIB_DISABLED) {
       return 'Adblib connection disabled.';
@@ -139,6 +170,15 @@ class AdLibWS {
     return 'AdLib connection failed.';
   }
 
+  /**
+   * Invokes getJobStatus.
+   *
+   * @param string $id
+   *   Job id
+   *
+   * @return object
+   *   Result and status
+   */
   public function getJobStatus($id) {
     if (ADLIB_DISABLED) {
       $return->status = 'Disabled';
@@ -169,17 +209,24 @@ class AdLibWS {
       $return->status = 'Not Available';
     }
     elseif ($return->status === 'Pending') {
-      //error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus']);
+      // error_log("ConnectorStatus is " . $return->result->CurrentJobStatus['ConnectorStatus']);
     }
     else {
-      //error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
+      // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Looked up status for job: " . $id . " Status: " . $return->status);
     }
     return $return;
   }
 
+  /**
+   * Invokes addJobFolder.
+   *
+   * @return string
+   *   Adlib folder
+   */
   public function addJobFolder() {
-    if (ADLIB_DISABLED)
+    if (ADLIB_DISABLED) {
       return FALSE;
+    }
     if ($this->client) {
       $reply = simplexml_load_string($this->client->addJobFolder()->AddJobFolderResult);
       $folder_info = $reply;
@@ -190,16 +237,22 @@ class AdLibWS {
   }
 
   /**
-   * This method uploads a file to AdLib server
+   * This method uploads a file to AdLib server.
    *
-   * @param string $filename - Filename
-   * @param mixed $data - Binary contents of data
-   * @param string $folder - Optional
-   * @return mixed - False if call failed, otherwise a fileinfo structure
+   * @param string $filename
+   *   Filename
+   * @param mixed $data
+   *   Binary contents of data
+   * @param string $folder
+   *   Optional. Adlib folder, if ommited, new folder is created.
+   *
+   * @return mixed
+   *   False if call failed, otherwise a fileinfo structure
    */
   public function uploadData($filename, $data, $type = ADLIB_JOBTYPE_PDF, $folder = NULL) {
-    if (ADLIB_DISABLED)
+    if (ADLIB_DISABLED) {
       return FALSE;
+    }
     if (!isset($this->client)) {
       return FALSE;
     }
@@ -208,10 +261,12 @@ class AdLibWS {
         $jobtype = 'HTML';
         $jobext = 'htm';
         break;
+
       default:
         $jobtype = 'PDF';
         $jobext = 'pdf';
         break;
+
     }
     if (!isset($folder)) {
       $folder = $this->addJobFolder();
@@ -235,7 +290,7 @@ class AdLibWS {
         'basefolder' => $folder,
         'in_folder' => $folder . '\\Input',
         'out_folder' => $folder . '\\Output',
-        'out_url' => self::$base_url . str_replace('\\', '/', $folder . '/Output/') . rawurlencode($this->safeFilename(pathinfo($filename, PATHINFO_FILENAME) . '.' . $jobext)),
+        'out_url' => self::$baseUrl . str_replace('\\', '/', $folder . '/Output/') . rawurlencode($this->safeFilename(pathinfo($filename, PATHINFO_FILENAME) . '.' . $jobext)),
         'filename' => $filename,
         'job_type' => $jobtype,
         'out_filename' => pathinfo($filename, PATHINFO_FILENAME) . '.' . $jobext,
@@ -250,20 +305,22 @@ class AdLibWS {
     }
   }
 
-  public function getTrace() {
-    return array(
-      'request' => $this->client->__getLastRequest(),
-      'response' => $this->client->__getLastResponse(),
-    );
-  }
-
-  private function safeFilename($fname) {
+  /**
+   * Encrypts filename, making is safe for use on AdLib.
+   *
+   * @param string $fname
+   *   File name
+   *
+   * @return string
+   *   Encrypted file name
+   */
+  protected function safeFilename($fname) {
     $pi = pathinfo($fname);
     $safe_name = md5($pi['filename']);
-    if (isset($pi['extension']))
+    if (isset($pi['extension'])) {
       $safe_name .= '.' . $pi['extension'];
+    }
     return $safe_name;
   }
 
 }
-

@@ -1,7 +1,6 @@
-/*
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+/**
+ * @file
+ * Javascript for ajax updates of job status
  */
 
 jQuery(document).ready(function($) {
@@ -18,7 +17,7 @@ jQuery(document).ready(function($) {
 
   function update(e) {
     $.ajax({
-      url:"/os2web/adlib/ajax/status/"+e.id,
+      url:"/os2web/adlib/ajax/status/" + e.id,
       context:e,
       success:function(data) {
         $(this).html(data);

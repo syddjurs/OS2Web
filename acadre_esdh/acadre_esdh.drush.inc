@@ -3,9 +3,6 @@
 /**
  * @file
  * This file implements various debugging methods available from drush
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
 /**

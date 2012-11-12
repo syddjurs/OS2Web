@@ -3,9 +3,6 @@
 /**
  * @file
  * This file describes the CM plugin as implemented by Acadre
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
 /**

@@ -1,10 +1,13 @@
 <?php
-/*
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+
+/**
+ * @file
+ * Injects the Bedt på nettet code.
  */
 
+/**
+ * Implements hook_init().
+ */
 function os2web_bedstpaanettet_init() {
   drupal_add_css('https://popin.survey-xact.dk/popin/popin.css', 'external');
   drupal_add_js('https://popin.survey-xact.dk/popin/popin.js', 'external');
@@ -22,5 +25,9 @@ function os2web_bedstpaanettet_init() {
    xact_startPopIn();  
 EOS;
 
-  drupal_add_js($script, array('type' => 'inline', 'scope' => 'footer', 'every_page' => TRUE));
+  drupal_add_js($script, array(
+    'type' => 'inline',
+    'scope' =>
+    'footer',
+    'every_page' => TRUE));
 }

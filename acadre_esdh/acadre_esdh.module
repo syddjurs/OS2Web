@@ -3,9 +3,6 @@
 /**
  * @file
  * This module implements Acadre ESDH backend for use in os2web
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
 define('ACADRE_MM_IMPORT_DIR', 'public://acadre');

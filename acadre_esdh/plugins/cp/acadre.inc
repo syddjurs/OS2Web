@@ -3,9 +3,6 @@
 /**
  * @file
  * This file describes the Content pushing plugin as implemented by Acadre
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
 /**
@@ -20,9 +17,6 @@ $plugin = array(
 
 /**
  * For plugin testing purposes.
- *
- * @param any $stuff
- * @return string
  */
 function acadre_esdh_cp_test($stuff) {
   return 'Test successful. Recieved: ' . $stuff;
@@ -41,16 +35,18 @@ function acadre_esdh_cp_handle_request() {
   }
 
   /**
-   * Published a given input type. Delegates actual node creation to worker functions
+   * Published a given input type.
+   *
+   * Delegates actual node creation to worker functions.
    *
    * @param mixed $info
-   * @param mixed $parentItemId
-   * @access public
-   * @return void
+   *   Info block from request.
+   * @param mixed $parent_item_id
+   *   Parent ID from request.
    */
   function publish($info, $parent_item_id) {
     $meta = $info->Metadata;
-// File was decoded to utf-8 data, so charset will break.
+    // File was decoded to utf-8 data, so charset will break.
     $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
     $meta = simplexml_load_string($meta) or soap_error(2);
     $info->Metadata = (object) $meta;
@@ -59,6 +55,7 @@ function acadre_esdh_cp_handle_request() {
     switch (strtolower($type)) {
       case 'publishedcase':
         return _acadre_esdh_cp_process_case($info);
+
       default:
         error_log("Unhandled request: \$type = " . print_r($type, 1));
         soap_error(4);
@@ -67,12 +64,12 @@ function acadre_esdh_cp_handle_request() {
   }
 
   /**
-   * Unpublishes a given ItemId
+   * Unpublishes a given ItemId.
    *
    * @param mixed $item_id
+   *   Item ID from request
    * @param mixed $location_id
-   * @access public
-   * @return void
+   *   Location ID from request. Currently unused.
    */
   function unpublish($item_id, $location_id) {
     $nids = _os2web_acadre_arp_find_item($item_id);
@@ -95,10 +92,10 @@ function acadre_esdh_cp_handle_request() {
 }
 
 /**
- * _os2web_acadre_arp_process_case
+ * Process case info and generate API arrays.
  *
- * @access protected
- * @return void
+ * @param array $info
+ *   Info block from request.
  */
 function _acadre_esdh_cp_process_case($info) {
   $item_id = $info->ItemId;
@@ -121,7 +118,7 @@ function _acadre_esdh_cp_process_case($info) {
   $node->field_arp_case_type[LANGUAGE_NONE][]['value'] = (string) $meta->CaseType;
 
   $tid = db_query('SELECT tid FROM  `taxonomy_term_data` WHERE  `name` LIKE  :term', array(
-    ':term' => $meta->JournalizingCode[0]->FieldValue . '%'
+    ':term' => $meta->JournalizingCode[0]->FieldValue . '%',
       ))->fetchField();
   if (is_numeric($tid)) {
     $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
@@ -146,14 +143,16 @@ function _acadre_esdh_cp_process_case($info) {
 }
 
 /**
- * Locates nids with a given ItemId
+ * Locates nids with a given ItemId.
  *
  * @param string $item_id
- * @access protected
- * @return array of nids
+ *   Item ID to locate.
+ *
+ * @return array
+ *   List of nids
  */
 function _acadre_esdh_cp_find_item($item_id) {
-  $query = new EntityFieldQuery;
+  $query = new EntityFieldQuery();
   $result = $query
       ->entityCondition('entity_type', 'node')
       ->propertyCondition('type', array('arp_case', 'arp_document'))
@@ -165,10 +164,7 @@ function _acadre_esdh_cp_find_item($item_id) {
 }
 
 /**
- * Dumps the wsdl for the serivce
- *
- * @access protected
- * @return void
+ * Dumps the wsdl for the serivce.
  */
 function _acadre_esdh_cp_get_wsdl() {
   $filename = drupal_get_path('module', 'acadre_esdh') . '/soap_server.wsdl';
@@ -187,21 +183,3 @@ function _acadre_esdh_cp_get_wsdl() {
   echo format_string($contents, $replacements);
   exit;
 }
-
-/**
- * Throws a soap exception with a message.
- *
- * @param mixed $code
- * @access public
- * @return void
- */
-//function soap_error($code) {
-//  $code_msg = array(
-//      1 => 'Test error, please ignore.',
-//      2 => 'Malformed XML.',
-//      3 => 'Unable to create content.',
-//      4 => 'Usupported document type.',
-//      5 => 'Parent node not located.',
-//  );
-//  throw new SoapFault((string) $code, isset($code_msg[$code]) ? $code_msg[$code] : 'Unknown error');
-//}

@@ -3,9 +3,6 @@
 /**
  * @file
  * This file implements a facade class for the PWS webservices
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
 
