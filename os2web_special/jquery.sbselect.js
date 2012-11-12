@@ -1,22 +1,22 @@
 $j(document).ready(function($) {
   $('ul.sb-list').each(function(){
-    
-    var list=$(this),
-        select=$(document.createElement('select')).addClass('sb-select').insertBefore($(this).hide());
+
+    var list = $(this),
+    select = $(document.createElement('select')).addClass('sb-select').insertBefore($(this).hide());
 
     $('>li a', this).each(function(){
       //var target=$(this).attr('target'),
-      var option=$(document.createElement('option'))
-          .appendTo(select)
-          .val(this.href)
-          .addClass('sb-option')
-          .html($(this).html());
+      var option = $(document.createElement('option'))
+      .appendTo(select)
+      .val(this.href)
+      .addClass('sb-option')
+      .html($(this).html());
     });
 
     list.remove();
   });
 
-  
+
   var $select = $('.sb-select');
 
   var onChange = function () {
@@ -38,4 +38,3 @@ $j(document).ready(function($) {
   jQuery('.sb-select').yaselect();
   jQuery('#edit-committee').yaselect();
 });
-
