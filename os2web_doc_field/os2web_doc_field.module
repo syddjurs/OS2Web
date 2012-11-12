@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Implements a field for displaying ESDH documents directly.
+ */
+
 define('ACADRE_CM_ACCESS_OPEN_DOCUMENT', '3');
 
 /* Field information hooks */
 
+/**
+ * Implements hook_field_info().
+ */
 function os2web_doc_field_field_info() {
   return array(
     'doc_ident' => array(
@@ -15,28 +23,32 @@ function os2web_doc_field_field_info() {
   );
 }
 
+/**
+ * Implements hook_field_formatter_info().
+ */
 function os2web_doc_field_field_formatter_info() {
   return array(
     'doc_ident_formatter' => array(
       'label' => t('ESDH Document includer'),
       'field types' => array('doc_ident'),
-    )
-  );
-}
-
-function os2web_doc_field_field_widget_info() {
-
-  return array(
-    'doc_ident_widget' => array(
-      'label' => t('Document Identifier'),
-      'field types' => array('doc_ident'),
-    )
+    ),
   );
 }
 
 /**
- * Field widget form hook
- *
+ * Implements hook_field_widget_info().
+ */
+function os2web_doc_field_field_widget_info() {
+  return array(
+    'doc_ident_widget' => array(
+      'label' => t('Document Identifier'),
+      'field types' => array('doc_ident'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
  */
 function os2web_doc_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $field_name = $field['field_name'];
@@ -47,7 +59,6 @@ function os2web_doc_field_field_widget_form(&$form, &$form_state, $field, $insta
   }
   switch ($instance['widget']['type']) {
     case 'doc_ident_widget':
-
       $element['doc_ident'] = array(
         '#type' => 'textfield',
         '#title' => check_plain($element['#title']),
@@ -62,18 +73,25 @@ function os2web_doc_field_field_widget_form(&$form, &$form_state, $field, $insta
   return $element;
 }
 
+/**
+ * Implments hook_field_is_empty().
+ */
 function os2web_doc_field_field_is_empty($item, $field) {
   if (empty($item['doc_ident'])) {
     return TRUE;
   }
 }
 
+/**
+ * Implements hook_field_validate().
+ */
 function os2web_doc_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
   foreach ($items as $delta => $item) {
     $docids = explode(',', $item['doc_ident']);
     foreach ($docids as $docid) {
       $docid = trim($docid);
-      $valid = preg_match('/^\d{1,20}[-,\/]\d{2}$/', $docid); // Adopt this for further testing
+      // Adopt this for further testing.
+      $valid = preg_match('/^\d{1,20}[-,\/]\d{2}$/', $docid);
       if (!$valid && ($docid != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
           'error' => 'Ugyldig fremstilling af dokument-id. Dokument-id skal være på formen nummer/år eller nummer-år. Flere dokumenter skal være adskildt af , (komma).',
@@ -85,8 +103,7 @@ function os2web_doc_field_field_validate($entity_type, $entity, $field, $instanc
 }
 
 /**
- * Field formatter hook
- *
+ * Implements hook_field_formatter_view().
  */
 function os2web_doc_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
@@ -107,6 +124,9 @@ function os2web_doc_field_field_formatter_view($entity_type, $entity, $field, $i
   return $element;
 }
 
+/**
+ * Implements hook_theme().
+ */
 function os2web_doc_field_theme() {
   return array(
     'esdh_document' => array(
@@ -115,6 +135,9 @@ function os2web_doc_field_theme() {
   );
 }
 
+/**
+ * Implements theme_IDENTIFIER().
+ */
 function theme_esdh_document($vars) {
   // Check for correct api and required functions are implemented.
   if (!os2web_esdh_provider_has_api('cm')) {
@@ -130,7 +153,8 @@ function theme_esdh_document($vars) {
   $rows = array();
   foreach ($id as $docid) {
     $doc = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
-    if (_os2web_doc_field_doc_access($docid)) { // Only show public documents
+    if (_os2web_doc_field_doc_access($docid)) {
+      // Only show public documents.
       if (($doc !== FALSE) && _os2web_case_field_case_access($doc['case_reference'])) {
         $rows[] = array(
           l($doc['title'], os2web_esdh_provider_invoke('cm', 'get_document_file', $docid)) . '<span class="documentdate">' . format_date(strtotime($doc['last_update']), 'custom', 'd/m/Y') . '</span>',
@@ -144,15 +168,19 @@ function theme_esdh_document($vars) {
     }
     return $html;
   }
-  /* Hack and slash
-    if (isset($vars['iscase'])&&$vars['iscase']) {
-    $html .= '<p>' . t('This case contains @docs public documents', array('@docs' => count($rows))) . '</p>';
-    }
-    $html .= theme('table', array('header' => $header, 'rows' => $rows)); */
   $html .= theme('table', array('rows' => $rows));
   return $html;
 }
 
+/**
+ * Checks access conditions for a document.
+ *
+ * @param int $docid
+ *   Document id
+ *
+ * @return boolean
+ *   True on access granted
+ */
 function _os2web_doc_field_doc_access($docid) {
   $doc = os2web_esdh_provider_invoke('cm', 'get_document', $docid);
   $access_grant = array(
@@ -168,6 +196,18 @@ function _os2web_doc_field_doc_access($docid) {
   return _os2web_doc_field_array_compare($access, $access_grant);
 }
 
+/**
+ * Helper function that compares two arrays.
+ * @access protected
+ *
+ * @param array $a1
+ *   First array
+ * @param array $a2
+ *   Second array
+ *
+ * @return boolean
+ *   True if all keys in $a1 is equivilent in $a2
+ */
 function _os2web_doc_field_array_compare(array $a1, array $a2) {
   $result = TRUE;
   foreach ($a1 as $key => $value) {
