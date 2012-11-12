@@ -1,12 +1,12 @@
 <?php
 /**
  * @file
- * Installe the case field module
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+ * Install the case field module
  */
 
+/**
+ * Implements hook_schema().
+ */
 function os2web_case_field_field_schema($field) {
   return array(
     'columns' => array(
@@ -20,16 +20,22 @@ function os2web_case_field_field_schema($field) {
   );
 }
 
+/**
+ * Implements hook_install().
+ */
 function os2web_case_field_install() {
-
-}
-
-function os2web_case_field_uninstall() {
-
+  // Placeholder.
 }
 
 /**
- * Extends the case identifier field column to support multiple cases 
+ * Implements hook_uninstall().
+ */
+function os2web_case_field_uninstall() {
+  // Placeholder.
+}
+
+/**
+ * Extends the case identifier field column to support multiple cases.
  */
 function os2web_case_field_update_7002(&$sandbox) {
   $field = os2web_case_field_field_schema();

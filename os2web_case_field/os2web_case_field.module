@@ -1,9 +1,17 @@
 <?php
 
+/**
+ * @file
+ * Implements a field for displaying ESDH Cases directly.
+ */
+
 define('ACADRE_CM_ACCESS_OPEN_CASE', '3');
 
 /* Field information hooks */
 
+/**
+ * Implements hook_field_info().
+ */
 function os2web_case_field_field_info() {
   return array(
     'case_ident' => array(
@@ -15,28 +23,33 @@ function os2web_case_field_field_info() {
   );
 }
 
+/**
+ * Implements hook_field_formatter_info().
+ */
 function os2web_case_field_field_formatter_info() {
   return array(
     'case_ident_formatter' => array(
       'label' => t('ESDH Case includer'),
       'field types' => array('case_ident'),
-    )
+    ),
   );
 }
 
+/**
+ * Implements hook_field_widget_info().
+ */
 function os2web_case_field_field_widget_info() {
 
   return array(
     'case_ident_widget' => array(
       'label' => t('Case Identifier'),
       'field types' => array('case_ident'),
-    )
+    ),
   );
 }
 
 /**
- * Field widget form hook
- *
+ * Implements hook_field_widget_form().
  */
 function os2web_case_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   $field_name = $field['field_name'];
@@ -47,7 +60,6 @@ function os2web_case_field_field_widget_form(&$form, &$form_state, $field, $inst
   }
   switch ($instance['widget']['type']) {
     case 'case_ident_widget':
-
       $element['case_ident'] = array(
         '#type' => 'textfield',
         '#title' => check_plain($element['#title']),
@@ -58,22 +70,30 @@ function os2web_case_field_field_widget_form(&$form, &$form_state, $field, $inst
         '#delta' => $delta,
       );
       break;
+
   }
   return $element;
 }
 
+/**
+ * Implements hook_field_is_empty().
+ */
 function os2web_case_field_field_is_empty($item, $field) {
   if (empty($item['case_ident'])) {
     return TRUE;
   }
 }
 
+/**
+ * Implements hook_field_validate().
+ */
 function os2web_case_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
   foreach ($items as $delta => $item) {
     $cases = explode(',', $item['case_ident']);
     foreach ($cases as $value) {
       $value = trim($value);
-      $valid = preg_match('/^\d{2,4}[-,\/]\d{1,20}$/', $value); // Adopt this for further testing
+      // Adopt this for further testing.
+      $valid = preg_match('/^\d{2,4}[-,\/]\d{1,20}$/', $value);
       if (!$valid && ($value != '')) {
         $errors[$field['field_name']][$langcode][$delta][] = array(
           'error' => 'Ugyldig fremstilling af sags-id. Sags-id skal være på formen år/nummer eller år-nummer. Flere sager skal være adskilt af , (komma).',
@@ -85,8 +105,7 @@ function os2web_case_field_field_validate($entity_type, $entity, $field, $instan
 }
 
 /**
- * Field formatter hook
- *
+ * Implements hook_field_formatter_view().
  */
 function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
@@ -96,7 +115,7 @@ function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $
         if ($item['case_ident']) {
           $cases = array();
           $ids = explode(',', $item['case_ident']);
-          //error_log("Var: \$ids = " . print_r($ids, 1));
+          // error_log("Var: \$ids = " . print_r($ids, 1));
           foreach ($ids as $id) {
             $cases[] = trim($id);
           }
@@ -108,6 +127,9 @@ function os2web_case_field_field_formatter_view($entity_type, $entity, $field, $
   return $element;
 }
 
+/**
+ * Implements hook_theme().
+ */
 function os2web_case_field_theme() {
   return array(
     'esdh_case' => array(
@@ -116,6 +138,9 @@ function os2web_case_field_theme() {
   );
 }
 
+/**
+ * Implements theme_IDENTIFIER().
+ */
 function theme_esdh_case($vars) {
   // Check for correct api and required functions are implemented.
   if (!os2web_esdh_provider_has_api('cm')) {
@@ -129,22 +154,31 @@ function theme_esdh_case($vars) {
   $docids = array();
   foreach ($ids as $id) {
     $case = os2web_esdh_provider_invoke('cm', 'get_case_data', $id);
-//    error_log("Var: \$case = " . print_r($case, 1));
+    // error_log("Var: \$case = " . print_r($case, 1));
     if (FALSE === $case) {
-      continue; // Ignore failed case lookups
+      // Ignore failed case lookups.
+      continue;
     }
     $valid = _os2web_case_field_case_access($id);
     if (!$valid) {
-      //  $html .= '<p id="casenotpublic">This case is not publicly available.</p>';
-      //  return $html;
-      continue; // Ignore hidden cases
+      // Ignore hidden cases.
+      continue;
     }
-    $docids = array_merge($docids,os2web_esdh_provider_invoke('cm', 'get_case_docs', $id));
+    $docids = array_merge($docids, os2web_esdh_provider_invoke('cm', 'get_case_docs', $id));
   }
   $html = theme('esdh_document', array('id' => $docids, 'iscase' => TRUE));
   return $html;
 }
 
+/**
+ * Checks access conditions for a case.
+ *
+ * @param int $caseid
+ *   Case id
+ *
+ * @return boolean
+ *   True on access granted
+ */
 function _os2web_case_field_case_access($caseid) {
   $case = os2web_esdh_provider_invoke('cm', 'get_case_data', $caseid);
   if (FALSE === $case) {
@@ -161,6 +195,18 @@ function _os2web_case_field_case_access($caseid) {
   return _os2web_case_field_array_compare($access, $access_grant);
 }
 
+/**
+ * Helper function that compares two arrays.
+ * @access protected
+ *
+ * @param array $a1
+ *   First array
+ * @param array $a2
+ *   Second array
+ *
+ * @return boolean
+ *   True if all keys in $a1 is equivilent in $a2
+ */
 function _os2web_case_field_array_compare(array $a1, array $a2) {
   $result = TRUE;
   foreach ($a1 as $key => $value) {
