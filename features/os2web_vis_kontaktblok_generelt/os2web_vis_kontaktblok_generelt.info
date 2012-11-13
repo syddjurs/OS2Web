@@ -15,3 +15,9 @@ features[ctools][] = panels_mini:panels_default:1
 features[features_api][] = api:1
 features[panels_mini][] = hoejre_blokke_generel
 timestamp = 1352123374
+
+;Added by OS2Web 2012-11-13
+project=OS2Web
+version=7.x-1.8
+timestamp=1352802164
+
