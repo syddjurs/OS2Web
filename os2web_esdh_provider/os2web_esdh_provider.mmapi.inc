@@ -1,27 +1,30 @@
 <?php
+
 /**
  * @file
  * This file implements the importing functions of the MM functionality and depends on a
  * plugin to do the actual filereads
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
+
 /**
- * Imports meeting metadata into a node
- * @param any $meeting_id
- * @return int node-id
+ * Imports meeting metadata into a node.
+ *
+ * @param string $meeting_id
+ *   Meeting id
+ *
+ * @return int
+ *   Node id
  */
 function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$context = NULL) {
   if (!lock_acquire(__FUNCTION__ . $meeting_id['id'])) {
     return;
   }
-  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Importing file: '.$meeting_id['uri']);
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Importing file: ' . $meeting_id['uri']);
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
   $nids = array();
   foreach ($meetings as $meeting) {
 
-    // Run check to see if meeting is already imported
+    // Run check to see if meeting is already imported.
     $query = new EntityFieldQuery();
     $published = $meeting['publish'] ? 'Published' : 'Unpublished';
     $result = $query->entityCondition('entity_type', 'node')
@@ -31,8 +34,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     if (isset($result['node'])) {
       $nid = array_shift($result['node'])->nid;
       if (!$meeting['publish']) {
-        // Meeting needs to be unpublished
-//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
+        // Meeting needs to be unpublished.
+        // error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
         node_delete($nid);
         watchdog('ESDH', 'Unpublished %nid .', array('%nid' => $nid), WATCHDOG_INFO);
         continue;
@@ -41,11 +44,12 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Republish nid: ' . $nid);
         node_delete($nid);
         watchdog('ESDH', 'Removed %nid prior to import.', array('%nid' => $nid), WATCHDOG_DEBUG);
-        $node = new stdClass(); // We create a new node object
+        // We create a new node object.
+        $node = new stdClass();
       }
       else {
-//        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
-//        watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
+        // error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
+        // watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
         continue;
       }
     }
@@ -53,26 +57,32 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       if (!$meeting['publish']) {
         continue;
       }
-      $node = new stdClass(); // We create a new node object
+      // We create a new node object.
+      $node = new stdClass();
     }
 
-    $node->type = "meeting"; // Or any other content type you want
-    $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
-    $node->uid = 1; // Or any id you wish
-    node_object_prepare($node); // Set some default values.
+    // Or any other content type you want.
+    $node->type = "meeting";
+    // Or any language code if Locale module is enabled. More on this below.
+    $node->language = LANGUAGE_NONE;
+    // Or any id you wish.
+    $node->uid = 1;
+    // Set some default values.
+    node_object_prepare($node);
     // Set field values:
     $node->title = $meeting['title'];
     $node->field_meeting_abbr[LANGUAGE_NONE][0]['value'] = substr($meeting['description'], 0, 49);
-    $node->field_meeting_abbr[LANGUAGE_NONE][0]['format'] = 'filtered_html'; // If field has a format, you need to define it. Here we define a default filtered_html format for a body field
-    // The date
+    // If field has a format, you need to define it. Here we define a default filtered_html format for a body field.
+    $node->field_meeting_abbr[LANGUAGE_NONE][0]['format'] = 'filtered_html';
+    // The date.
     $node->field_date[LANGUAGE_NONE][0]['value'] = $meeting['meeting_date_start'];
     $node->field_date[LANGUAGE_NONE][0]['value2'] = $meeting['meeting_date_finish'];
     $node->field_date[LANGUAGE_NONE][0]['timezone'] = 'Europe/Berlin';
     $node->field_date[LANGUAGE_NONE][0]['date_type'] = 'datetime';
-    // Proper id tagging
+    // Proper id tagging.
     $node->field_meeting_id[LANGUAGE_NONE][0]['value'] = $meeting['meeting_id'];
     $node->field_system_id[LANGUAGE_NONE][0]['value'] = $meeting['system_id'];
-    // Type import
+    // Type import.
     $node->field_meeting_type[LANGUAGE_NONE][0]['value'] = $meeting['type'];
 
     // Make sure the committee term is created and get the term.
@@ -91,10 +101,11 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         $node->field_qbrick_ref = array();
       }
     }
-    // Add full document
-    if (FALSE !== ($file = _os2web_esdh_provider_import_file($meeting['full_doc'])))
+    // Add full document.
+    if (FALSE !== ($file = _os2web_esdh_provider_import_file($meeting['full_doc']))) {
       $node->field_full_doc[LANGUAGE_NONE][] = (array) $file;
-    // Import items
+    }
+    // Import items.
     if (is_array($meeting['items'])) {
       $item_nids = _os2web_esdh_provider_import_items($meeting['items']);
       foreach ($item_nids as $nid) {
@@ -107,30 +118,37 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     $node->created = $meeting['creation_date'];
     node_save($node);
     error_log("MARK - Created: \$node->nid = " . print_r($node->nid, 1));
-    watchdog('ESDH', 'Imported agenda id: %aid (Meeting: %mid) into node %nid .', array('%aid' => $meeting['system_id'], '%mid' => $meeting['meeting_id'], '%nid' => $node->nid), WATCHDOG_DEBUG);
+    watchdog('ESDH', 'Imported agenda id: %aid (Meeting: %mid) into node %nid .', array(
+      '%aid' => $meeting['system_id'],
+      '%mid' => $meeting['meeting_id'],
+      '%nid' => $node->nid), WATCHDOG_DEBUG);
     $nids[] = $node->nid;
   }
-//  if ($context)
-//    $context['message'] = 'Imported meeting id: ' . $meeting['meeting_id'] . ' - ' . $node->title . ' - ' . $meeting_id['uri'];
-  variable_set('os2web_esdh_provider_last_import',time());
+  variable_set('os2web_esdh_provider_last_import', time());
   lock_release(__FUNCTION__ . $meeting_id['id']);
   return $nids;
 }
 
 /**
- * Imports item metadata into nodes
+ * Imports item metadata into nodes.
+ * @access protected
+ *
  * @param array $items
- * @return array of nids
+ *   List of items to import.
+ *
+ * @return array
+ *   List of imported node ids
  */
 function _os2web_esdh_provider_import_items($items) {
   $nids = array();
   foreach ($items as $item) {
     $node = new stdClass();
-    $node->type = "bullet_point"; // Or any other content type you want
-    $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
-    $node->uid = 1; // Or any id you wish
+    $node->type = "bullet_point";
+    $node->language = LANGUAGE_NONE;
+    $node->uid = 1;
     $node->title = $item['title'];
-    node_object_prepare($node); // Set some default values.
+    // Set some default values.
+    node_object_prepare($node);
     if ($item['access'] === 'Lukket') {
       $node->field_bul_point_closed[LANGUAGE_NONE][]['value'] = 0;
       node_submit($node);
@@ -143,7 +161,7 @@ function _os2web_esdh_provider_import_items($items) {
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $meeting['movie_id'];
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = $meeting['movie_chapters'][$meeting[$id]];
       }
-      // Gather the bullets for the item
+      // Gather the bullets for the item.
       if (isset($item['bullets']) && is_array($item['bullets'])) {
         $bullet_nids = _os2web_esdh_provider_import_bullets($item['bullets']);
         foreach ($bullet_nids as $nid) {
@@ -153,7 +171,7 @@ function _os2web_esdh_provider_import_items($items) {
       else {
         $node->field_ref_attachment[LANGUAGE_NONE] = array();
       }
-      // Gather enclosures
+      // Gather enclosures.
       foreach ($item['enclosures'] as $enclosure) {
         if ($file = _os2web_esdh_provider_import_file($enclosure)) {
           $node->field_enclosures[LANGUAGE_NONE][] = (array) $file;
@@ -165,28 +183,35 @@ function _os2web_esdh_provider_import_items($items) {
       node_submit($node);
       node_save($node);
       $nids[] = $node->nid;
-    } // If
-  } // Foreach
+    }
+  }
   return $nids;
 }
 
 /**
- * Imports bullet metadata into nodes
+ * Imports bullet metadata into nodes.
+ * @access protected
+ *
  * @param array $bullets
- * @return array of nids
+ *   List of bullets
+ *
+ * @return array
+ *   List of imported node ids
  */
 function _os2web_esdh_provider_import_bullets($bullets) {
   $nids = array();
   foreach ($bullets as $bullet) {
     $node = new stdClass();
-    $node->type = "bullet_point_attachment"; // Or any other content type you want
-    $node->language = LANGUAGE_NONE; // Or any language code if Locale module is enabled. More on this below *
-    $node->uid = 1; // Or any id you wish
+    $node->type = "bullet_point_attachment";
+    $node->language = LANGUAGE_NONE;
+    $node->uid = 1;
     $node->title = $bullet['title'];
-    node_object_prepare($node); // Set some default values.
-    // Let's add standard body field
+    // Set some default values.
+    node_object_prepare($node);
+    // Let's add body field.
     $node->field_bpa_body[$node->language][0]['value'] = $bullet['body'];
-    $node->field_bpa_body[$node->language][0]['format'] = 'filtered_html'; // If field has a format, you need to define it. Here we define a default filtered_html format for a body field
+    // If field has a format, you need to define it. Here we define a default filtered_html format for a body field.
+    $node->field_bpa_body[$node->language][0]['format'] = 'filtered_html';
     node_submit($node);
     node_save($node);
     $nids[] = $node->nid;
@@ -195,9 +220,14 @@ function _os2web_esdh_provider_import_bullets($bullets) {
 }
 
 /**
- * Imports a file metadata into a managed drupal file
+ * Imports a file metadata into a managed drupal file.
+ * @access protected
+ *
  * @param array $file_meta
+ *   File metadata
+ *
  * @return object
+ *   Drupal standard file object
  */
 function _os2web_esdh_provider_import_file($file_meta) {
   $uri_in = $file_meta['uri'];
@@ -215,22 +245,25 @@ function _os2web_esdh_provider_import_file($file_meta) {
 
   $uri = FALSE;
   if ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_pdf))) {
-    // we have an already converted pdf file
+    // We have an already converted pdf file.
     $uri = $uri_pdf;
     $convert = FALSE;
   }
   elseif ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_out))) {
-    $uri_out = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $folder, basename($uri_tmp)));
-    // File already copied
+    $uri_out = implode('/', array(
+      variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
+      $folder,
+      basename($uri_tmp)));
+    // File already copied.
     $convert = TRUE;
     $uri = $uri_out;
   }
   else {
-    // Completely unprocessed file
+    // Completely unprocessed file.
     $uri_old = $uri_in;
     $uri_in = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_in));
     if ($uri_in === FALSE || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
-      // Bummed out on copy
+      // Bummed out on copy.
       watchdog('acadre MM', 'File copy failed for %infile -> %outfile. Check folder permissions.', array('%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
       return FALSE;
     }
@@ -272,26 +305,31 @@ function _os2web_esdh_provider_import_file($file_meta) {
   $file = file_save($file);
 
   // Schedule for PDF conversion
-//  $convert = FALSE; // DEBUG
+  // $convert = FALSE; // DEBUG.
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
     watchdog('acadre MM', 'File %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
   }
 
-//  watchdog('acadre MM', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);
+  // watchdog('acadre MM', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);
   return $file;
 }
 
 /**
- * Imports a termname into a vacabulary. Does dupe check
+ * Imports a termname into a vacabulary. Does dupe check.
+ *
  * @param string $term_name
+ *   Term machine name
  * @param string $vocab
+ *   Vocabulary machine name
+ *
  * @return object
+ *   Drupal standard Term object
  */
 function _acadre_esdh_import_term($term_name, $vocab) {
-  //TODO: Process members of the committee.
-  //FIXME: MAke vocab name configurable.
+  // TODO: Process members of the committee.
+  // FIXME: MAke vocab name configurable.
   $vid = db_select('taxonomy_vocabulary', 'tv')
       ->fields('tv', array('vid'))
       ->condition('machine_name', $vocab)
@@ -316,6 +354,9 @@ function _acadre_esdh_import_term($term_name, $vocab) {
   return $term;
 }
 
+/**
+ * Page callback. Displays a technical overview of an imported meeting.
+ */
 function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
   $html = "";
   $node = node_load($nid);
@@ -330,8 +371,9 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
       if ($meeting_id == $xml_mid) {
         $filename = $file->filename;
         $agenda = $xml->xpath("//table[@name='producedAgenda']/fields/field[@sysid='$system_id']/../field");
-        if (!empty($agenda))
+        if (!empty($agenda)) {
           break;
+        }
       }
     }
   }
@@ -340,9 +382,11 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
     switch ($op) {
       case 'reimport':
         break;
+
       default:
         drupal_set_message($op . ' not yet implemented.', 'error');
         break;
+
     }
     drupal_goto('node/' . $nid . '/control');
   }
@@ -366,25 +410,33 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
   }
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
 
-  $html .= l('Re-import', 'node/' . $node->nid . '/control/reimport');
+  $html .= l(t('Re-import'), 'node/' . $node->nid . '/control/reimport');
 
   return $html;
 }
 
+/**
+ * Sanetizes filename, removing illegal characters.
+ *
+ * @param string $filename
+ *   Filename
+ *
+ * @return string
+ *   Sanetized filename with same extension.
+ */
 function _os2web_esdh_provider_sanetize_filename($filename) {
   // Replace whitespace.
-//  $filename = str_replace(' ', '_', $filename);
+  // $filename = str_replace(' ', '_', $filename);
   // Remove remaining unsafe characters.
-  //$filename = preg_replace('![^0-9A-Za-z_.- ]!', '', $filename);
+  // $filename = preg_replace('![^0-9A-Za-z_.- ]!', '', $filename);
   $filename = preg_replace('![/"]!', '-', $filename);
   // Remove multiple consecutive non-alphabetical characters.
   $filename = preg_replace('/(_)_+|(\.)\.+|(-)-+/', '\\1\\2\\3', $filename);
   // Force lowercase to prevent issues on case-insensitive file systems.
-  //$filename = strtolower($filename);
+  // $filename = strtolower($filename);
   $pi = pathinfo($filename);
   if (isset($pi['extension'])) {
     return substr(trim($pi['filename']), 0, 160) . '.' . $pi['extension'];
-    ;
   }
   else {
     return substr(trim($pi['filename']), 0, 160);
@@ -392,14 +444,17 @@ function _os2web_esdh_provider_sanetize_filename($filename) {
 }
 
 /**
- * Case insensitive fileexists(). Code from comments on php.net
+ * Case insensitive fileexists(). Code from comments on php.net.
  *
  * @param string $filename
- * @return mixed Flase if file not found, case corrected filename if found.
+ *   Filename
+ *
+ * @return mixed
+ *   False if file not found, case corrected filename if found.
  */
 function _os2web_esdh_provider_similar_file_exists($filename) {
   if (file_exists($filename)) {
-//    error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
+    // error_log(basename(__FILE__) . ':' . __LINE__ . ' _os2web_meetings_similar_file_exists FILE EXISTS = ' . $filename);
     return $filename;
   }
 

@@ -1,12 +1,13 @@
 <?php
+
 /**
  * @file
  * This file install the doc field module
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
+/**
+ * Implements hook_schema().
+ */
 function os2web_doc_field_field_schema($field) {
   return array(
     'columns' => array(
@@ -15,21 +16,27 @@ function os2web_doc_field_field_schema($field) {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      )
-    )
+      ),
+    ),
   );
 }
 
+/**
+ * Implements hook_install().
+ */
 function os2web_doc_field_install() {
-//  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
-}
-
-function os2web_doc_field_uninstall() {
-
+  // Placeholder.
 }
 
 /**
- * Add more room for documents in the DB
+ * Implements hook_uninstall().
+ */
+function os2web_doc_field_uninstall() {
+  // Placeholder.
+}
+
+/**
+ * Add more room for documents in the DB.
  */
 function os2web_doc_field_update_7002(&$sandbox) {
   foreach (field_info_fields() as $field_name => $field) {

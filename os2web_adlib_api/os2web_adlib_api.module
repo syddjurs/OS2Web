@@ -1,24 +1,21 @@
 <?php
 
+/**
+ * @file
+ * Implements API to convert files to PDF or HTML through AdLib.
+ */
+
 define('ADLIB_TEST_FID', FALSE);
 define('ADLIB_HTML_IMG_FOLDER', 'public://bpimg/');
 
-//error_log("Var: \$_SERVER = " . print_r($_SERVER, 1));
-/*
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
- */
-
 /**
- * Implementation of hook_menu()
- *
+ * Implements hook_menu().
  */
 function os2web_adlib_api_menu() {
-  // Added fan for requeueing Adlib jobs
+  // Added fan for requeueing Adlib jobs.
   $items['admin/config/os2web/reprocess'] = array(
-    'title' => t('AdLib requeue'),
-    'description' => t('Requeue AdLib jobs.'),
+    'title' => 'AdLib requeue',
+    'description' => 'Requeue AdLib jobs.',
     'access arguments' => array('administer os2web'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('os2web_adlib_api_reprocess_form'),
@@ -26,8 +23,8 @@ function os2web_adlib_api_menu() {
     'access callback' => TRUE,
   );
   $items['admin/config/os2web/adlibstatus'] = array(
-    'title' => t('AdLib Status'),
-    'description' => t('Provides an overview of known AdLib jobs.'),
+    'title' => 'AdLib Status',
+    'description' => 'Provides an overview of known AdLib jobs.',
     'access arguments' => array('administer os2web'),
     'page callback' => 'os2web_adlib_api_status',
     'type' => MENU_LOCAL_TASK,
@@ -39,8 +36,7 @@ function os2web_adlib_api_menu() {
     'access arguments' => array('administer os2web'),
   );
   $items['os2web/adlib/test'] = array(
-    'title' => t('AdLib test page'),
-//    'description' => t('Your description goes here.'),
+    'title' => 'AdLib test page',
     'access arguments' => array('administer os2web'),
     'page callback' => 'os2web_adlib_api_page',
     'type' => MENU_CALLBACK,
@@ -48,6 +44,12 @@ function os2web_adlib_api_menu() {
   return $items;
 }
 
+/**
+ * Ajax callback to update job status.
+ *
+ * @param int $fid
+ *   File identifier.
+ */
 function os2web_adlib_api_status_ajax($fid) {
   $file = db_select('os2web_adlib_api_doc_files', 'df')
       ->fields('df')
@@ -70,11 +72,9 @@ function os2web_adlib_api_status_ajax($fid) {
 }
 
 /**
- * Provides form for user to start reprocessing
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ * Implements hook_form().
  *
- * @access public
- * @return array
+ * Provides form for user to start reprocessing.
  */
 function os2web_adlib_api_reprocess_form() {
   $form['submit'] = array(
@@ -86,20 +86,16 @@ function os2web_adlib_api_reprocess_form() {
 }
 
 /**
+ * Implements hook_form_submit().
+ *
  * Starts reprocessing on submit
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
- * 
- * @access public
  */
 function os2web_adlib_api_reprocess_form_submit() {
   os2web_adlib_api_reprocess();
 }
 
 /**
- * Sets up and starts batchjob
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
- *
- * @access public
+ * Sets up and starts batchjob.
  */
 function os2web_adlib_api_reprocess() {
   $ids = _os2web_adlib_api_bulletpoint_nid();
@@ -120,7 +116,7 @@ function os2web_adlib_api_reprocess() {
 }
 
 /**
- * Provides userfeedback when batchjob is finished
+ * Provides userfeedback when batchjob is finished.
  * @author Thomas Thune Hansen <tth@bellcom.dk>
  */
 function _os2web_adlib_api_bulletpoint_finished($success, $results, $operations) {
@@ -129,10 +125,11 @@ function _os2web_adlib_api_bulletpoint_finished($success, $results, $operations)
 }
 
 /**
- * Fetch all nid's for bulletspoints
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ * Fetch all nid's for bulletspoints.
+ * @author Thomas Thune Hansen <tth@bellcom.dk>
  *
- * @return array with bulletpoint nids
+ * @return array
+ *   List of bulletpoint nids
  */
 function _os2web_adlib_api_bulletpoint_nid() {
   $query = new EntityFieldQuery();
@@ -152,10 +149,13 @@ function _os2web_adlib_api_bulletpoint_nid() {
 }
 
 /**
- * Worker function, adds fid's attached to nid's to adlib queue
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
+ * Worker function, adds fid's attached to nid's to adlib queue.
+ * @author Thomas Thune Hansen <tth@bellcom.dk>
  *
- * @param array containing bulletpoint nids, context information
+ * @param array $nid
+ *   List of bulletpoint nids
+ * @param array $context
+ *   Context information
  */
 function _os2web_adlib_api_reprocess_nid($nid, &$context = array()) {
   if (is_array($nid)) {
@@ -179,12 +179,9 @@ function _os2web_adlib_api_reprocess_nid($nid, &$context = array()) {
 
 /**
  * Provides an overview of known AdLib jobs.
- * 
- * @access public
- * @return void
  */
 function os2web_adlib_api_status() {
-  if (isset($_GET['delete'])) { // Disabled for safety reasons
+  if (isset($_GET['delete'])) {
     if (is_numeric($_GET['delete'])) {
       $query = db_delete('os2web_adlib_api_doc_files');
       $query = $query->condition('fid', $_GET['delete']);
@@ -200,9 +197,9 @@ function os2web_adlib_api_status() {
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['process'])) {
-    //_os2web_adlib_api_do_processing();
-    //drupal_goto('admin/config/os2web/adlibstatus');
-    //Add set up queue for adlib processing
+    // _os2web_adlib_api_do_processing();
+    // drupal_goto('admin/config/os2web/adlibstatus');
+    // Add set up queue for adlib processing.
     $batch = array(
       'operations' => array(),
       'title' => 'Konvertere dokumenter via. AdLib',
@@ -227,7 +224,7 @@ function os2web_adlib_api_status() {
   $head = array('Connector Name', 'status', 'Jobs');
   $statuslist = $adlib->getConnectorStatusList();
   $rows = array();
-  if (is_array($statuslist))
+  if (is_array($statuslist)) {
     foreach ($statuslist as $status) {
       $rows[] = array(
         $status->ServerDetail['ServerName'],
@@ -235,6 +232,7 @@ function os2web_adlib_api_status() {
         $status->ServerInfo['JobCount'],
       );
     }
+  }
   drupal_add_js(drupal_get_path('module', 'os2web_adlib_api') . '/os2web_adlib_api.js', 'file');
   $html = '<h2>Connector information</h2>';
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
@@ -248,64 +246,59 @@ function os2web_adlib_api_status() {
       l($fdata->uri, file_create_url($fdata->uri)),
       $file->job_id,
       array('data' => 'Looking up..', 'class' => 'status', 'id' => $file->fid),
-      l('delete', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => $file->fid))) . ' ' . l('reset', 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))),
+      l(t('delete'), 'admin/config/os2web/adlibstatus', array('query' => array('delete' => $file->fid))) . ' ' . l(t('reset'), 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))),
     );
   }
   $html .= '<h2>Active jobs (first 50)</h2>';
   $html .= 'jobs total: ' . $count->count;
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
-//  $html .= l('Delete all', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => 'all')));
-  $html .= ' - ' . l('Run processing', 'admin/config/os2web/adlibstatus', array('query' => array('process' => TRUE)));
+  // $html .= l('Delete all', 'admin/config/os2web/adlibstatus', array('query' => array('delete' => 'all')));
+  $html .= ' - ' . l(t('Run processing'), 'admin/config/os2web/adlibstatus', array('query' => array('process' => TRUE)));
   return $html;
 }
 
 /**
- * Test page for abitrary test usage
- * 
- * @access public
- * @return void
+ * Test page for abitrary test usage.
  */
 function os2web_adlib_api_page() {
   error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
   $fid = 236605;
   $nid = 840980;
-//  os2web_adlib_api_file_delete($fid);
-//  db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
-//  os2web_adlib_api_convert_to_pdf($fid);
-//  os2web_adlib_api_convert_to_html($fid, $nid);
-//  _os2web_adlib_api_process_pdf();
-//  sleep(5);
-//  _os2web_adlib_api_process_pdf();
-//  $file = db_select('os2web_adlib_api_doc_files', 'df')->fields('df')->condition('fid', $fid)->execute()->fetchObject();
-//  $adlib = _os2web_adlib_api_get_instance();
-//  $call = array();
-//  $call[] = explode('\\',$adlib->addJobFolder());
-//  $call[] = $adlib->deleteJobFolder($call[0][1]);
-//  $call = $adlib->getJobStatus($file->job_id);
+  // os2web_adlib_api_file_delete($fid);
+  // db_delete('os2web_adlib_api_doc_files')->condition('fid', $fid)->execute();
+  // os2web_adlib_api_convert_to_pdf($fid);
+  // os2web_adlib_api_convert_to_html($fid, $nid);
+  // _os2web_adlib_api_process_pdf();
+  // sleep(5);
+  // _os2web_adlib_api_process_pdf();
+  // $file = db_select('os2web_adlib_api_doc_files', 'df')->fields('df')->condition('fid', $fid)->execute()->fetchObject();
+  // $adlib = _os2web_adlib_api_get_instance();
+  // $call = array();
+  // $call[] = explode('\\',$adlib->addJobFolder());
+  // $call[] = $adlib->deleteJobFolder($call[0][1]);
+  // $call = $adlib->getJobStatus($file->job_id);
   // $call= file_load(ADLIB_TEST_FID);
-// $call = node_load($nid,NULL,TRUE);
-
+  // $call = node_load($nid,NULL,TRUE);
   $files = db_select('file_managed', 'fm')->fields('fm')->execute();
   $rows = array();
   foreach ($files as $file) {
     if (file_exists(drupal_realpath($file->uri))) {
-      $rows[] = array(l($file->fid, 'admin/config/os2web/adlibstatus', array('query' => array('reset' => $file->fid))), $file->filename);
+      $rows[] = array(l($file->fid, 'admin/config/os2web/adlibstatus', array(
+        'query' => array('reset' => $file->fid))),
+        $file->filename);
     }
   }
   return theme('table', array('rows' => $rows));
-
-//  return '<textarea cols=100 rows=50>' . print_r($call, 1) . '</textarea>';
-  return '';
 }
 
 /**
- * Implementation of hook_cron()
+ * Implements hook_cron().
  */
 function os2web_adlib_api_cron() {
-  //Add set up queue for adlib processing
+  // Add set up queue for adlib processing.
   _os2web_adlib_api_do_processing();
 
-  //Add set up queue for adlib requeueing
+  // Add set up queue for adlib requeueing.
   $queue = DrupalQueue::get('os2web_adlib_reprocess');
   if ($queue->numberOfItems() == 0) {
     $items = _os2web_adlib_api_bulletpoint_nid();
@@ -318,10 +311,8 @@ function os2web_adlib_api_cron() {
 }
 
 /**
- * Implements hook_cron_queue_info()
- * @author Thomas Thune Hansen <tth@bellcom.dk> 
- *
- * @return array with queue info
+ * Implements hook_cron_queue_info().
+ * @author Thomas Thune Hansen <tth@bellcom.dk>
  */
 function os2web_adlib_api_cron_queue_info() {
   $queues['os2web_adlib_reprocess'] = array(
@@ -336,19 +327,19 @@ function os2web_adlib_api_cron_queue_info() {
 }
 
 /**
- * Implementation of hook_init()
+ * Implements hook_init().
  */
 function os2web_adlib_api_init() {
   // _os2web_adlib_api_process_pdf(1);
 }
 
 /**
- * Converts a fid to html and injects into nid body field
- * 
- * @param int $fid 
- * @param int $nid 
- * @access public
- * @return void
+ * Converts a fid to html and injects into nid body field.
+ *
+ * @param int $fid
+ *   File id
+ * @param int $nid
+ *   Node id
  */
 function os2web_adlib_api_convert_to_html($fid, $nid) {
   if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid AND jobtype = :jobtype', array(':fid' => $fid, ':jobtype' => 1))->rowCount()) {
@@ -361,7 +352,7 @@ function os2web_adlib_api_convert_to_html($fid, $nid) {
     return TRUE;
   }
   else {
-    //      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
+    // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
     return FALSE;
   }
 }
@@ -369,9 +360,13 @@ function os2web_adlib_api_convert_to_html($fid, $nid) {
 /**
  * Main call to queue file for converting.
  *
- * @param int $fid - fid of a managed file
- * @param int $docref - arbitrary identifier for later reference (ie. Doc id)
+ * @param int $fid
+ *   File id of a managed file
+ * @param int $docref
+ *   Arbitrary identifier for later reference (ie. Doc id)
+ *
  * @return boolean
+ *   False if file was not queued.
  */
 function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   $file = file_load($fid);
@@ -383,8 +378,8 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
   }
   if (!file_exists(drupal_realpath($file->uri))) {
     watchdog('adlib_api', 'Cannot queue file %file (fid: %fid). File does not exist. File record removed.', array('%fid' => $fid, '%file' => $file->filename), WATCHDOG_WARNING);
-    //file_delete($file);
-    return false;
+    // file_delete($file);
+    return FALSE;
   }
   if (!_os2web_adlib_api_is_file_pdf($fid)) {
     if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid AND jobtype = :jobtype', array(':fid' => $fid, ':jobtype' => 0))->rowCount()) {
@@ -400,12 +395,12 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
       return TRUE;
     }
     else {
-//      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
+      // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already in queue, aborting.");
       return FALSE;
     }
   }
   else {
-//    error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already PDF.");
+    // error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File already PDF.");
     $record = array(
       'fid' => $fid,
       'did' => $docref,
@@ -417,10 +412,13 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
 }
 
 /**
- * Return the fid of a file saved with a reference
+ * Return the fid of a file saved with a reference.
  *
- * @param int $ref Reference for the file
+ * @param int $ref
+ *   Reference for the file
+ *
  * @return int
+ *   File id
  */
 function os2web_adlib_api_get_fid($ref) {
   return (int) db_query('SELECT fid FROM {os2web_adlib_api_doc_files} WHERE did=:did', array(':did' => $ref))->fetchField();
@@ -428,27 +426,24 @@ function os2web_adlib_api_get_fid($ref) {
 
 /**
  * Factory for class instances. This allows easy changing between api classes.
- * TODO: Make this proper plugin-able.
  *
- * @return AdLibWS object
+ * @return AdLibWS
+ *   AdLib controller object.
  */
 function _os2web_adlib_api_get_instance() {
   $obj = &drupal_static(__FUNCTION__);
-  if (is_object($obj))
+  if (is_object($obj)) {
     return $obj;
+  }
   module_load_include('inc', 'os2web_adlib_api', 'AdLibWS.class');
   return $obj = new AdLibWS();
 }
 
 /**
- * This will run the list of files and call the neccesary workers
- * 
- * @param mixed $limit 
- * @access protected
- * @return void
+ * This will run the list of files and call the neccesary workers.
  */
 function _os2web_adlib_api_do_processing() {
-  //Add set up queue for adlib processing
+  // Add set up queue for adlib processing.
   $queue = DrupalQueue::get('os2web_adlib_process');
   if ($queue->numberOfItems() == 0) {
     $items = db_select('os2web_adlib_api_doc_files', 'f')
@@ -466,6 +461,11 @@ function _os2web_adlib_api_do_processing() {
   }
 }
 
+/**
+ * Worker process for a single file structure.
+ *
+ * @access: protected
+ */
 function _os2web_adlib_api_process_fid($file) {
   if (is_array($file)) {
     foreach ($file as $f) {
@@ -482,10 +482,6 @@ function _os2web_adlib_api_process_fid($file) {
     lock_wait(__FUNCTION__ . $file->fid, 15);
     return _os2web_adlib_api_process_fid($file);
   }
-//  $file = db_select('os2web_adlib_api_doc_files', 'f')
-//    ->fields('f')
-//    ->condition('fid', $fid)
-//    ->execute()->fetchObject();
   if ($file->job_id == NULL || $file->job_id == 'Requeue') {
     _os2web_adlib_api_queue_file($file);
   }
@@ -495,6 +491,11 @@ function _os2web_adlib_api_process_fid($file) {
   lock_release(__FUNCTION__ . $file->fid);
 }
 
+/**
+ * Worker process for an actual file.
+ *
+ * @access: protected
+ */
 function _os2web_adlib_api_process_file($file) {
   if (in_array($file->job_id, array('Complete', 'Requeue'))) {
     // We should not get here, but if we do, these posts would be deleted if we do not return here.
@@ -537,6 +538,7 @@ function _os2web_adlib_api_process_file($file) {
         watchdog('adlib_api', 'Found a failed job for %file. Resetting.', array('%file' => $fdata->filename), WATCHDOG_WARNING);
       }
       break;
+
     case 'Complete':
       $jobfileinfo = unserialize($file->job_info);
 
@@ -562,10 +564,12 @@ function _os2web_adlib_api_process_file($file) {
         drupal_write_record('os2web_adlib_api_doc_files', $record, array('fid', 'jobtype'));
         watchdog('adlib_api', 'Completed file (fid: %fid)could not be found on the server (Code: %code). Job reset.', array('%code' => $info['http_code'], '%fid' => $file->fid), WATCHDOG_WARNING);
         break;
+
       }
 
       switch ($file->jobtype) {
-        case 0: // PDF
+        // PDF.
+        case 0:
           $upd_file = file_load($file->fid);
           $uri = file_unmanaged_save_data($data, str_replace($upd_file->filename, $jobfileinfo['out_filename'], $upd_file->uri), FILE_EXISTS_REPLACE);
           if (filesize(drupal_realpath($uri)) > 0) {
@@ -585,12 +589,15 @@ function _os2web_adlib_api_process_file($file) {
             drupal_write_record('file_managed', $upd_file, array('fid'));
             field_cache_clear();
             watchdog('adlib_api', 'File (fid: %fid) was converted successfully to pdf.', array('%fid' => $file->fid), WATCHDOG_INFO);
-            error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated. New URI: ".$uri);
-          } else {
+            error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: File saved, file record updated. New URI: " . $uri);
+          }
+          else {
             error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Filesize was 0. Aborting update.");
           }
           break;
-        case 1: // HTML
+
+        // HTML.
+        case 1:
           $nid = $file->did;
           if ($node = node_load($nid)) {
             $node->field_bpa_body[LANGUAGE_NONE][0]['value'] = _os2web_adlib_api_process_html($data, $jobfileinfo['out_url']);
@@ -608,24 +615,26 @@ function _os2web_adlib_api_process_file($file) {
             watchdog('adlib_api', 'File (fid: %fid) was converted successfully.', array('%fid' => $file->fid), WATCHDOG_INFO);
           }
           break;
+
         default:
           watchdog('adlib_api', 'Unknown jobtype returned from AdLib.', NULL, WATCHDOG_WARNING);
       }
       break;
+
     case 'Pending':
     case 'InProgress':
       break;
+
     default:
       watchdog('adlib_api', 'Unknown job status: %var', array('%var' => $jobinfo->status), WATCHDOG_WARNING);
       break;
+
   }
 }
 
 /**
- * This function validates html and fixes all image links
- *
- * @param type $data
- * @return processed version of input
+ * This function validates html and fixes all image links.
+ * @access: protected
  */
 function _os2web_adlib_api_process_html($data, $base_url) {
   $base_dir = ADLIB_HTML_IMG_FOLDER;
@@ -650,7 +659,8 @@ function _os2web_adlib_api_process_html($data, $base_url) {
 
     $info = curl_getinfo($download);
     if ($info['http_code'] === 200) {
-      $file_uri = $base_dir . basename(str_replace('\\', '/', $img[$i]->src)); // AdLib uses Windows folder notation
+      // AdLib uses Windows folder notation.
+      $file_uri = $base_dir . basename(str_replace('\\', '/', $img[$i]->src));
       $file = file_save_data($image, $file_uri, FILE_EXISTS_REPLACE);
       $img[$i]->src = file_create_url($file->uri);
     }
@@ -660,13 +670,12 @@ function _os2web_adlib_api_process_html($data, $base_url) {
   }
   $data = (string) $html;
 
-  // Clean up the html, since AdLib sometimes return less-than-valid html and hence can cause PDO exceptions
+  // Clean up the html, since AdLib sometimes return less-than-valid html and hence can cause PDO exceptions.
   if (!function_exists('tidy_repair_string')) {
     watchdog('adlib_api', 'Tidy API not found! Cannot process HTML.', NULL, WATCHDOG_ERROR);
   }
   else {
     $config = array(
-//        'clean' => TRUE,
       'indent' => TRUE,
       'output-xhtml' => TRUE,
       'wrap' => 200,
@@ -679,10 +688,13 @@ function _os2web_adlib_api_process_html($data, $base_url) {
 }
 
 /**
- * Worker function that queues up a single file from a row in the job table
- * 
- * @param object $file Object representing a row from the job table
- * @return boolean true on success
+ * Worker function that queues up a single file from a row in the job table.
+ *
+ * @param object $file
+ *   Object representing a row from the job table
+ *
+ * @return boolean
+ *   True on success
  */
 function _os2web_adlib_api_queue_file($file) {
   $file->file = file_load($file->fid);
@@ -691,9 +703,11 @@ function _os2web_adlib_api_queue_file($file) {
     $adlib = _os2web_adlib_api_get_instance();
     $upload = $adlib->uploadData($file->file->filename, file_get_contents(drupal_realpath($file->file->uri)));
     if ($upload) {
-      $priority = 3; // Normal priority
+      // Normal priority.
+      $priority = 3;
       if ($file->job_id === 'Requeue') {
-        $priority = 5; // Make requeued jobs run on lower priority
+        // Make requeued jobs run on lower priority.
+        $priority = 5;
       }
       $job = $adlib->addJob($upload, $file->jobtype, $priority);
       if ($job !== FALSE) {
@@ -736,30 +750,14 @@ function _os2web_adlib_api_queue_file($file) {
 }
 
 /**
- * _os2web_adlib_api_cleanup_files 
- * 
+ * Helper function, check if file is already PDF.
  * @access protected
- * @return void
- */
-function _os2web_adlib_api_cleanup_files() {
-  $dir = preg_replace('/\/$/', '', DEFAULT_DOC_CACHE_PATH); // Remove trailing /
-  $filelist = file_scan_directory($dir, '/.*/');
-  foreach ($filelist as $uri => $file) {
-    $file = db_select('file_managed', 'f')->fields('f')->condition('uri', $uri)->execute()->fetchAll();
-    if (count($file) === 0) {
-      // File is not linked in the drupal database
-//        file_unmanaged_delete($uri);
-//        error_log(basename(__FILE__) . ':' . __LINE__ . ' Deleted: ' . print_r($uri, 1));
-    }
-  }
-}
-
-/**
- * _os2web_adlib_api_is_file_pdf 
- * 
- * @param mixed $fid 
- * @access protected
- * @return void
+ *
+ * @param int $fid
+ *   File id
+ *
+ * @return boolean
+ *   True if file is pdf.
  */
 function _os2web_adlib_api_is_file_pdf($fid) {
   if (is_array($fid)) {
@@ -776,6 +774,12 @@ function _os2web_adlib_api_is_file_pdf($fid) {
   }
 }
 
+/**
+ * Deletes a job related to a file.
+ *
+ * @param object $file
+ *   Drupal file object
+ */
 function os2web_adlib_api_file_delete($file) {
   if (is_numeric($file)) {
     $file = db_select('os2web_adlib_api_doc_files', 'f')
@@ -785,13 +789,20 @@ function os2web_adlib_api_file_delete($file) {
         ->fetchObject();
   }
   if (is_object($file)) {
-    if (isset($file->job_id))
+    if (isset($file->job_id)) {
       os2web_adlib_api_destroy_job($file->job_id);
+    }
     db_delete('os2web_adlib_api_doc_files')->condition('fid', $file->fid)->execute();
     watchdog('adlib_api', 'File %file has been cleaned up from adlib conversion table.', array('%file' => $file->uri), WATCHDOG_DEBUG);
   }
 }
 
+/**
+ * Removes the job and related folders from the AdLib server.
+ *
+ * @param string $job_id
+ *   Job id
+ */
 function os2web_adlib_api_destroy_job($job_id) {
   $file = db_select('os2web_adlib_api_doc_files', 'f')
       ->fields('f')
@@ -809,4 +820,3 @@ function os2web_adlib_api_destroy_job($job_id) {
     watchdog('adlib_api', 'Deleted job for %fid', array('%fid' => $job_id));
   }
 }
-

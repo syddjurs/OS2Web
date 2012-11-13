@@ -2,7 +2,7 @@ name = OS2Web Kontaktblok
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.3
+version = 7.x-1.7
 project = os2web_kontaktblok
 dependencies[] = context
 dependencies[] = ctools
@@ -60,20 +60,10 @@ features[variable][] = node_options_kontaktblok
 features[variable][] = node_preview_kontaktblok
 features[variable][] = node_submitted_kontaktblok
 features[views_view][] = kontaktblok
-timestamp = 1349771943
-;Added by OS2Web 2012-10-15
-project=OS2Web
-version=7.x-1.5
-timestamp=1350300162
+timestamp = 1352123374
 
-;Added by OS2Web 2012-10-23
+;Added by OS2Web 2012-11-13
 project=OS2Web
-version=7.x-1.6
-timestamp=1350990827
-
-
-;Added by OS2Web 2012-11-05
-project=OS2Web
-version=7.x-1.7
-timestamp=1352123374
+version=7.x-1.8
+timestamp=1352802164
 

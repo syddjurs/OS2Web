@@ -199,12 +199,43 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['fields']['imported']['empty_zero'] = 1;
   $handler->display->display_options['fields']['imported']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['imported']['date_format'] = 'kun_dato';
+  /* Felt: Indhold: Startdato */
+  $handler->display->display_options['fields']['field_startdato']['id'] = 'field_startdato';
+  $handler->display->display_options['fields']['field_startdato']['table'] = 'field_data_field_startdato';
+  $handler->display->display_options['fields']['field_startdato']['field'] = 'field_startdato';
+  $handler->display->display_options['fields']['field_startdato']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_startdato']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_startdato']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_startdato']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_startdato']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_startdato']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_startdato']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_startdato']['settings'] = array(
+    'format_type' => 'kun_dato',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['fields']['field_startdato']['field_api_classes'] = 0;
   /* Felt: Global: Tilpasset tekst */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Dato fra-til';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[imported] -<br />
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_startdato] -<br />
 [field_slutdato]';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
@@ -250,6 +281,22 @@ function os2web_planer_i_h_ring_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
+  /* Felt: Global: Kontekstuelle links */
+  $handler->display->display_options['fields']['contextual_links']['id'] = 'contextual_links';
+  $handler->display->display_options['fields']['contextual_links']['table'] = 'views';
+  $handler->display->display_options['fields']['contextual_links']['field'] = 'contextual_links';
+  $handler->display->display_options['fields']['contextual_links']['label'] = '';
+  $handler->display->display_options['fields']['contextual_links']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['contextual_links']['fields'] = array(
+    'field_slutdato' => 'field_slutdato',
+    'field_url' => 'field_url',
+    'created' => 'created',
+    'imported' => 'imported',
+    'title' => 0,
+    'nothing' => 0,
+    'nothing_1' => 0,
+  );
+  $handler->display->display_options['fields']['contextual_links']['destination'] = '1';
   /* Sorteringskriterie: Indhold: Oprettelsesdato */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -362,8 +409,9 @@ function os2web_planer_i_h_ring_views_default_views() {
     t('[title] - [field_slutdato] '),
     t('_blank'),
     t('[created]'),
+    t('Startdato'),
     t('Dato fra-til'),
-    t('[imported] -<br />
+    t('[field_startdato] -<br />
 [field_slutdato]'),
     t('I høring'),
     t('Page'),

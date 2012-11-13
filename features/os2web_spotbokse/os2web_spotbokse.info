@@ -2,12 +2,13 @@ name = OS2Web Spotbokse
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.5
+version = 7.x-1.8
 project = os2web_spotbokse
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = file_entity
 dependencies[] = image
 dependencies[] = media
 dependencies[] = os2web_indholdstyper
@@ -74,10 +75,10 @@ features[variable][] = scheduler_unpublish_required_spotbox
 features[variable][] = scheduler_unpublish_revision_spotbox
 features[views_view][] = spot_view
 features[views_view][] = spotboxe
-timestamp = 1350990827
+timestamp = 1352123374
 
-;Added by OS2Web 2012-11-05
+;Added by OS2Web 2012-11-13
 project=OS2Web
-version=7.x-1.7
-timestamp=1352123374
+version=7.x-1.8
+timestamp=1352802164
 

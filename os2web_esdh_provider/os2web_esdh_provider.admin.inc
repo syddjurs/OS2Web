@@ -1,10 +1,13 @@
 <?php
+
 /**
  * @file
- * This file implements administration menus and functionality for the provider module
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+ * This file implements administration menus and functionality for
+ * the provider module.
+ */
+
+/**
+ * Page callback. Displays status page.
  */
 function _os2web_esdh_provider_status() {
   $apis = array_keys(os2web_esdh_provider_ctools_plugin_type());
@@ -29,12 +32,12 @@ function _os2web_esdh_provider_status() {
   }
   return '<h2>' . t('ESDH Provider API plugin status') . '</h2>' .
       theme('table', array('header' => $head, 'rows' => $rows)) .
-      '<h2>' . t('Import of MM Based ESDH documents. (Last import was run at %time)',array( '%time' => format_date(variable_get('os2web_esdh_provider_last_import',0)))) . '</h2>' .
+      '<h2>' . t('Import of MM Based ESDH documents. (Last import was run at %time)', array('%time' => format_date(variable_get('os2web_esdh_provider_last_import', 0)))) . '</h2>' .
       drupal_render(drupal_get_form('os2web_esdh_provider_import_form'));
 }
 
 /**
- * Import form
+ * Import form.
  */
 function os2web_esdh_provider_import_form() {
   $form = array();
@@ -62,6 +65,9 @@ function os2web_esdh_provider_import_form() {
   return $form;
 }
 
+/**
+ * Implements hook_FORM_submit().
+ */
 function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
   if (!os2web_esdh_provider_has_api('mm')) {
     drupal_set_message(t('ERROR: No valid MM importer plugin active!'), 'error');
@@ -77,11 +83,16 @@ function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
   );
   $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
   foreach ($meetings as $meeting) {
-    if ($focus === 0 || $focus === $meeting['id'])
-      $batch['operations'][] = array('_os2web_esdh_provider_import_meeting', array($meeting, $force));
+    if ($focus === 0 || $focus === $meeting['id']) {
+      $batch['operations'][] = array(
+        '_os2web_esdh_provider_import_meeting',
+        array($meeting, $force));
+    }
   }
   if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-    $batch['operations'][] = array('os2web_esdh_provider_invoke', array('mm', 'post_import_process'));
+    $batch['operations'][] = array(
+      'os2web_esdh_provider_invoke',
+      array('mm', 'post_import_process'));
   }
   batch_set($batch);
 }

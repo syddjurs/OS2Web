@@ -1,10 +1,13 @@
 <?php
+/**
+ * @file
+ * Miscelaneous functions for helping out with theme and search.
+ */
 
 /**
- * Inject additional Javascripts 
- * 
- * @access public
- * @return void
+ * Implements hook_init().
+ *
+ * Inject additional Javascripts.
  */
 function os2web_special_init() {
   $script = <<<EOS
@@ -23,7 +26,8 @@ EOS;
 }
 
 /**
- * Implements hook_menu_minipanels_styles();
+ * Implements hook_menu_minipanels_styles().
+ *
  * Adds extra style selection for minipanel
  */
 function os2web_special_menu_minipanels_styles() {
@@ -34,16 +38,15 @@ function os2web_special_menu_minipanels_styles() {
 }
 
 /**
- * Implements javascript
+ * Implements hook_menu_minipanels_style().
  */
 function os2web_special_menu_minipanels_style($menu_config) {
-  // 
   drupal_add_js(drupal_get_path('module', 'os2web_special') . '/menu_style.js', array('scope' => 'footer', 'weight' => 100));
   /* Ekstra til søge-felt */
-//  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/search.js', array('scope' => 'header', 'weight' => 100));
-  /* Styling af select's bruges måske senere */
+  // drupal_add_js(drupal_get_path('module', 'os2web_special') . '/search.js', array('scope' => 'header', 'weight' => 100));
   drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.yaselect.min.js', array('scope' => 'header', 'weight' => 102));
-  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/yaselect.js', array('scope' => 'footer', 'weight' => 102));
+  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.sbselect.js', array('scope' => 'footer', 'weight' => 102));
+  drupal_add_js(drupal_get_path('module', 'os2web_special') . '/jquery.tabindex.js', array('scope' => 'footer', 'weight' => 102));
 }
 
 /**
@@ -51,20 +54,20 @@ function os2web_special_menu_minipanels_style($menu_config) {
  */
 function os2web_special_search_api_ajax_settings() {
   $settings = array(
-    // required: CSS ID for the main content (search results html)
+    // required: CSS ID for the main content (search results html).
     'content' => '#content .content',
-    // required: array of regions with search-related blocks => CSS ID's
+    // required: array of regions with search-related blocks => CSS ID's.
     'regions' => array(
       'my_region' => '#my-css-id',
       'sidebar_first' => '#sidebar-first',
       'sidebar_second' => '#sidebar-second',
     ),
-    // optional: if you want to show a spinner image on AJAX
+    // optional: if you want to show a spinner image on AJAX.
     'spinner' => drupal_get_path('module', 'search_api_ajax') . '/spinner.gif',
-    // optional: if you want to scroll-back-to-top on paging search results
+    // optional: if you want to scroll-back-to-top on paging search results.
     'scrolltarget' => '#main-content',
     'scrollspeed' => 1000,
-    // optional: fade main content on AJAX (fade=1 for true)
+    // optional: fade main content on AJAX (fade=1 for true).
     'fade' => 1,
     'opacity' => 0.3,
   );

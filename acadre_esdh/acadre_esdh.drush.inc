@@ -1,12 +1,13 @@
 <?php
+
 /**
  * @file
  * This file implements various debugging methods available from drush
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
 
+/**
+ * Implements hook_drush_command().
+ */
 function acadre_esdh_drush_command() {
   $items = array();
   $items['acadre-case-docs'] = array(
@@ -50,6 +51,9 @@ function acadre_esdh_drush_command() {
   return $items;
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_doc($docid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
     drush_log('API load', 'ok');
@@ -67,6 +71,9 @@ function drush_acadre_esdh_acadre_doc($docid = NULL) {
   }
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_case($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
     $data = os2web_esdh_provider_invoke('cm', 'get_case_data', $caseid);
@@ -84,6 +91,9 @@ function drush_acadre_esdh_acadre_case($caseid = NULL) {
   }
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_case_docs($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
     drush_log('API load', 'ok');
@@ -101,6 +111,9 @@ function drush_acadre_esdh_acadre_case_docs($caseid = NULL) {
   }
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_case_docs_load($caseid = NULL) {
   if (os2web_esdh_provider_has_api('cm')) {
     drush_log('API load', 'ok');
@@ -122,20 +135,26 @@ function drush_acadre_esdh_acadre_case_docs_load($caseid = NULL) {
   }
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_cm_status() {
   if (os2web_esdh_provider_has_api('cm')) {
     drush_log('API load', 'ok');
     $avail = os2web_esdh_provider_invoke('cm', 'available');
-    drush_log('CM availability check..',$avail?'ok':'error');
+    drush_log('CM availability check..', $avail ? 'ok' : 'error');
     $avail = os2web_esdh_provider_invoke('cm', 'available');
-    drush_log('CM availability check..',$avail?'ok':'error');
+    drush_log('CM availability check..', $avail ? 'ok' : 'error');
   }
 }
 
+/**
+ * Implements drush_COMMAND().
+ */
 function drush_acadre_esdh_acadre_addenum_fix() {
   if (os2web_esdh_provider_has_api('mm')) {
     if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-      os2web_esdh_provider_invoke('mm','post_import_process');
+      os2web_esdh_provider_invoke('mm', 'post_import_process');
     }
   }
 }

@@ -1,18 +1,19 @@
 <?php
 
-/*
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
+/**
+ * @file
+ * Implements pluginable interface for accessing ESDH systems.
+ * All plugins should be implemented in a seperate provider module
+ * which implements the ctools api.
+ * Look to acadre_esdh for example.
  */
 
 /**
- * Implementation of hook_menu()
- *
+ * Implements hook_menu().
  */
 function os2web_esdh_provider_menu() {
   $items['admin/config/os2web/esdh_provider'] = array(
-    'title' => t('ESDH status'),
+    'title' => 'ESDH status',
     'access arguments' => array('administer os2web'),
     'page callback' => '_os2web_esdh_provider_status',
     'type' => MENU_LOCAL_TASK,
@@ -36,48 +37,8 @@ function os2web_esdh_provider_menu() {
   return $items;
 }
 
-function os2web_esdh_provider_requirements($phase) {
-  if ($phase !== 'runtime') {
-    return array();
-  }
-  $t = get_t();
-  $plugins = os2web_esdh_provider_ctools_plugin_type();
-  $status = $count = count(array_keys($plugins));
-  foreach (array_keys($plugins) as $plugin) {
-    if (os2web_esdh_provider_has_api($plugin)) {
-      $status--;
-    }
-  }
-  if ($status == 0) {
-    $value = $t('Fully supported.');
-    $severity = REQUIREMENT_OK;
-    $desc = $t('All ESDH plugins seems to be working as intended. <a href="admin/config/os2web/esdh_provider">Status</a>');
-  }
-  elseif ($status < $count) {
-    $value = $t('Partial support.');
-    $severity = REQUIREMENT_WARNING;
-    $desc = $t('Some ESDH plugins not activated! This can lead to not-working or misleading behavior on the site! <a href="admin/config/os2web/esdh_provider">Check status</a>');
-  }
-  else {
-    $value = $t('Not support.');
-    $severity = REQUIREMENT_ERROR;
-    $desc = $t('No ESDH plugins activated! This can lead to not-working or misleading behavior on the site! <a href="admin/config/os2web/esdh_provider">Check status</a>');
-  }
-
-
-  $requirements['os2web_esdh_provider_plugins'] = array(
-    'title' => $t('OS2Web ESDH integration.'),
-    'value' => $value,
-    'severity' => $severity,
-    'description' => $desc,
-  );
-  return $requirements;
-}
-
 /**
- * Descripes the plugins needed for the api's
- *
- * @return array
+ * Implements hook_ctools_plugin_type().
  */
 function os2web_esdh_provider_ctools_plugin_type() {
   $plugins['cm'] = array(
@@ -118,39 +79,44 @@ function os2web_esdh_provider_ctools_plugin_type() {
 }
 
 /**
- * Show tab only on meeting pages, and if user has access
- * @param int $nid
- * @return boolean
+ * Access callback. Show tab only on meeting pages, and if user has access.
  */
 function _os2web_esdh_provider_node_tab_access($nid) {
   $node = node_load($nid);
-  if ($node->type != 'meeting')
+  if ($node->type != 'meeting') {
     return FALSE;
+  }
   return user_access('administer os2web');
 }
 
+/**
+ * Implements hook_node_delete().
+ */
 function os2web_esdh_provider_node_delete($node) {
   if ($node->type === 'meeting') {
     db_delete('os2web_meetings_imported')->condition('nid', $node->nid)->execute();
-    //TODO: Delete bullets from meeting.
+    // TODO: Delete bullets from meeting.
     $items = array_shift($node->field_ref_bullet_points);
-    if (is_array($items))
+    if (is_array($items)) {
       foreach ($items as $nids) {
         node_delete($nids['target_id']);
       }
+    }
   }
   if ($node->type === 'bullet_point') {
-    //TODO: Delete bullet attachments from meeting.
+    // TODO: Delete bullet attachments from meeting.
     $bullets = array_shift($node->field_ref_attachment);
-    if (is_array($bullets))
+    if (is_array($bullets)) {
       foreach ($bullets as $nids) {
         node_delete($nids['target_id']);
       }
+    }
   }
 }
 
 /**
- * Implemetation of hook_cron()
+ * Implemets hook_cron().
+ *
  * Will run import on every cron.
  */
 function os2web_esdh_provider_cron() {
@@ -162,12 +128,15 @@ function os2web_esdh_provider_cron() {
         $queue->createItem(array('meeting' => $meeting, 'force' => FALSE));
       }
       if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-        os2web_esdh_provider_invoke('mm','post_import_process');
+        os2web_esdh_provider_invoke('mm', 'post_import_process');
       }
     }
   }
 }
 
+/**
+ * Implements hook_cron_queue_info().
+ */
 function os2web_esdh_provider_cron_queue_info() {
   $queues['acadre_mm_import'] = array(
     'worker callback' => '_os2web_esdh_provider_cron_queue_worker',
@@ -176,16 +145,28 @@ function os2web_esdh_provider_cron_queue_info() {
   return $queues;
 }
 
+/**
+ * Worker function for a single import.
+ *
+ * @param array $args
+ *   Meeting data for the import.
+ */
 function _os2web_esdh_provider_cron_queue_worker($args) {
   module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
   _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
 }
 
 /**
- * Validate an API implementation for use. This function validates all required methods are available, and that only 1 implementation exists.
+ * Validate an API implementation for use.
+ *
+ * This function validates all required methods are available,
+ * and that only 1 implementation exists.
  *
  * @param string $api
+ *   API Id
+ *
  * @return boolean
+ *   True is API is implmemented and available.
  */
 function os2web_esdh_provider_has_api($api) {
   $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
@@ -220,8 +201,12 @@ function os2web_esdh_provider_has_api($api) {
  * Check if the api supports a given method.
  *
  * @param string $api
+ *   API identifier
  * @param string $method
- * @return bool - true if method is available
+ *   Method to invoke
+ *
+ * @return bool
+ *   True if method is available
  */
 function os2web_esdh_provider_supports($api, $method) {
   ctools_include('plugins');
@@ -234,14 +219,17 @@ function os2web_esdh_provider_supports($api, $method) {
 }
 
 /**
- * Invokes a method from an api
+ * Invokes a method from an api.
  *
- * @param string $api
- * @param string $method
- * @param any $args... additional arguments passed to the method
- * @return fowarded return value from method
+ * @return any
+ *   Fowarded return value from method
  */
 function os2web_esdh_provider_invoke() {
+  /* Expects:
+   * $arg[0] $api
+   * $arg[1] $method
+   * $ars[2:] additional arguments passed to the method
+   */
   $args = func_get_args();
   $api = array_shift($args);
   $method = array_shift($args);
@@ -262,73 +250,103 @@ function os2web_esdh_provider_invoke() {
 /* * *************** API METHODS BELOW HERE ************************************ */
 
 /**
- * builds an array with required content for a case structure
+ * Builds an array with required content for a case structure.
  */
 function os2web_esdh_provider_default_case() {
   return array(
-    'id' => NULL, // Int - CaseId
-    'access_code' => NULL, // String
-    'restricted_from_public' => NULL, // Int
+    // Int - CaseId.
+    'id' => NULL,
+    // String.
+    'access_code' => NULL,
+    // Int.
+    'restricted_from_public' => NULL,
   );
 }
 
 /**
- * builds an array with required content for a document structure
+ * Builds an array with required content for a document structure.
  */
 function os2web_esdh_provider_default_document() {
   return array(
-    'id' => NULL, // Int - DocId
-    'case_reference' => NULL, // Int - CaseId
-    'title' => NULL, // String
-    'last_update' => NULL, // String
-    'access_code' => NULL, // String
-    'publication_indicator' => NULL, // Int
-    'lock_status' => NULL, // Bool
+    // Int - DocId.
+    'id' => NULL,
+    // Int - CaseId.
+    'case_reference' => NULL,
+    // String.
+    'title' => NULL,
+    // String.
+    'last_update' => NULL,
+    // String.
+    'access_code' => NULL,
+    // Int.
+    'publication_indicator' => NULL,
+    // Bool.
+    'lock_status' => NULL,
   );
 }
 
 /**
- * builds an array with required content for a meeting structure
+ * Builds an array with required content for a meeting structure.
  */
 function os2web_esdh_provider_default_meeting() {
   return array(
-    'title' => NULL, // String
-    'meeting_id' => NULL, // Int
-    'system_id' => NULL, // Int
-    'publish' => NULL, // Boolean
-    'publication_id' => NULL, // Int - optional
-    'creation_date' => NULL, // Date
-    'description' => NULL, // String
-    'meeting_date_start' => NULL, // Datetime
-    'meeting_date_finish' => NULL, // Datetime
-    'type' => NULL, // String
-    'committee' => NULL, // String
-    'location' => NULL, // String
-    'full_doc' => NULL, // File
-    'items' => NULL, // item_struct
+    // String.
+    'title' => NULL,
+    // Int.
+    'meeting_id' => NULL,
+    // Int.
+    'system_id' => NULL,
+    // Boolean.
+    'publish' => NULL,
+    // Int - optional.
+    'publication_id' => NULL,
+    // Date.
+    'creation_date' => NULL,
+    // String.
+    'description' => NULL,
+    // Datetime.
+    'meeting_date_start' => NULL,
+    // Datetime.
+    'meeting_date_finish' => NULL,
+    // String.
+    'type' => NULL,
+    // String.
+    'committee' => NULL,
+    // String.
+    'location' => NULL,
+    // File.
+    'full_doc' => NULL,
+    // item_struct.
+    'items' => NULL,
   );
 }
 
 /**
- * builds an array with required content for a meeting-item structure
+ * Builds an array with required content for a meeting-item structure.
  */
 function os2web_esdh_provider_default_item() {
   return array(
-    'id' => NULL, // Int
-    'title' => NULL, // String
-    'access' => NULL, // String
-    'enclosures' => NULL, // File[]
-    'bullets' => NULL, // bullet_struct
+    // Int.
+    'id' => NULL,
+    // String.
+    'title' => NULL,
+    // String.
+    'access' => NULL,
+    // File[].
+    'enclosures' => NULL,
+    // bullet_struct.
+    'bullets' => NULL,
   );
 }
 
 /**
- * builds an array with required content for a meeting-bullet structure
+ * Builds an array with required content for a meeting-bullet structure.
  */
 function os2web_esdh_provider_default_bullet() {
   return array(
-    'title' => NULL, // String
-    'body' => NULL, // string
+    // String.
+    'title' => NULL,
+    // String.
+    'body' => NULL,
   );
 }
-

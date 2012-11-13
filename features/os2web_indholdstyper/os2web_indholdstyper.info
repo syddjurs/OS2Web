@@ -3,8 +3,8 @@ description = Frit overtaget fra Ballerup
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.6
-project = os2web_indholdstyper
+version = 7.x-1.7
+project = OS2Web
 dependencies[] = balk_custom
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
@@ -221,10 +221,10 @@ features[variable][] = node_submitted_media
 features[variable][] = node_submitted_news
 features[variable][] = node_submitted_rotating_image
 features[variable][] = node_submitted_selvbetjeningslinks
-timestamp = 1350990827
+timestamp = 1352123374
 
-;Added by OS2Web 2012-11-05
+;Added by OS2Web 2012-11-13
 project=OS2Web
-version=7.x-1.7
-timestamp=1352123374
+version=7.x-1.8
+timestamp=1352802164
 

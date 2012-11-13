@@ -1,12 +1,12 @@
 <?php
+
 /**
  * @file
  * This file describes the MM plugin as implemented by Acadre
- *
- * @author Jesper Mathiassen <jm@bellcom.dk>
- * @copyright Bellcom Open Source aps.
  */
-define('ACADRE_MM_PUB_FOCUS', FALSE); // Set this to the publication-id ie. 1577 for file XML_1577.
+
+// Set this to the publication-id ie. 1577 for file XML_1577.
+define('ACADRE_MM_PUB_FOCUS', FALSE);
 
 /**
  * Plugin definition with callbacks
@@ -22,9 +22,6 @@ $plugin = array(
 
 /**
  * For plugin testing purposes.
- * 
- * @param any $stuff
- * @return string
  */
 function acadre_esdh_mm_test($stuff) {
   return 'Test successful. Recieved: ' . $stuff;
@@ -33,7 +30,8 @@ function acadre_esdh_mm_test($stuff) {
 /**
  * Returns a list of meeting_ids for import. In our case a list of uri's of xml files.
  *
- * @return array of any
+ * @return array
+ *   List of URIs
  */
 function acadre_esdh_mm_get_import_list() {
   /*
@@ -51,7 +49,7 @@ function acadre_esdh_mm_get_import_list() {
     }
   }
   if (ACADRE_MM_PUB_FOCUS !== FALSE) {
-// We wish to only handle a single publication, så we return only that
+    // We wish to only handle a single publication, så we return only that.
     if (isset($uris[ACADRE_MM_PUB_FOCUS])) {
       $uris = array(
         ACADRE_MM_PUB_FOCUS => $uris[ACADRE_MM_PUB_FOCUS],
@@ -64,11 +62,13 @@ function acadre_esdh_mm_get_import_list() {
 /**
  * Imports a meeting, and return the import as a structured array.
  *
- * @param any $meeting
- * @return array of meeting_structures to save
+ * @param object $meeting
+ *   Meeting XML object.
+ *
+ * @return array
+ *   List of meeting_structures to save
  */
 function acadre_esdh_mm_import_meeting($meeting) {
-//  error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $meeting = ' . print_r($meeting, 1));
   $file = $meeting['uri'];
   if ($file === FALSE) {
     os2web_meetings_order_addenums();
@@ -94,7 +94,10 @@ function acadre_esdh_mm_import_meeting($meeting) {
         if ($agendainfo['publish'] === 1 &&
             $agendainfo['access'] !== 'Lukket' &&
             $agendainfo['filesfolder'] != '') {
-          $agenda_uri = implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $agendainfo['filesfolder'], $agendainfo['xmlfilename']));
+          $agenda_uri = implode('/', array(
+            variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
+            $agendainfo['filesfolder'],
+            $agendainfo['xmlfilename']));
           $agendainfo['agenda_uri'] = $agenda_uri;
           $imported = _acadre_esdh_import_meeting($agendainfo);
           if (is_array($imported)) {
@@ -103,12 +106,11 @@ function acadre_esdh_mm_import_meeting($meeting) {
           }
         }
         else {
-// Publication not published or public.
-//          _os2web_meetings_unpublish_meeting($meeting);
+          // Publication not published or public.
           $meetings[] = array(
             'system_id' => $agendainfo['sysid'],
             'publish' => FALSE,
-              ) + os2web_esdh_provider_default_meeting();
+          ) + os2web_esdh_provider_default_meeting();
         }
       }
     }
@@ -123,7 +125,10 @@ function acadre_esdh_mm_import_meeting($meeting) {
  * Imports a meeting from filesystem.
  *
  * @param array $info
- * @return mixed - meeting_struct array for an accepted import
+ *   Meeting info block derived from XML.
+ *
+ * @return mixed
+ *   Meeting_struct array for an accepted import, else FALSE
  */
 function _acadre_esdh_import_meeting($info) {
   if (($real_path = _acadre_esdh_similar_file_exists(drupal_realpath($info['agenda_uri']))) !== FALSE) {
@@ -138,7 +143,7 @@ function _acadre_esdh_import_meeting($info) {
       'meeting_date_start' => (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='date']")),
       'meeting_date_finish' => (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='finish']")),
       'committee' => (string) array_shift($xml->xpath("//table[@name='committee']/fields/field[@name='name']")),
-      'committee_id' => (string) array_shift($xml->xpath("//table[@name='committee']/fields/field[@name='sysid']")), // Optional
+      'committee_id' => (string) array_shift($xml->xpath("//table[@name='committee']/fields/field[@name='sysid']")),
       'location' => (string) array_shift($xml->xpath("//table[@name='location']/fields/field[@name='name']")),
       'items' => array(),
     );
@@ -148,7 +153,7 @@ function _acadre_esdh_import_meeting($info) {
       return FALSE;
     }
 
-// Fix dates:
+    // Fix dates:
     $date_obj = date_create($meeting['meeting_date_start']);
     date_timezone_set($date_obj, timezone_open('UTC'));
     $meeting['meeting_date_start'] = date_format($date_obj, 'Y-m-d H:i');
@@ -156,18 +161,25 @@ function _acadre_esdh_import_meeting($info) {
     date_timezone_set($date_obj, timezone_open('UTC'));
     $meeting['meeting_date_finish'] = date_format($date_obj, 'Y-m-d H:i');
 
-// Full Doc:
+    // Full Doc:
     $meeting['full_doc'] = array(
-      'uri' => implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $info['filesfolder'], $info['docfilename'])),
+      'uri' => implode('/', array(
+        variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
+        $info['filesfolder'],
+        $info['docfilename'])),
       'title' => $meeting['title'],
     );
 
-// Type:
+    // Type:
     switch ($info['type']) {
-      case 1: $meeting['type'] = 'Dagsorden';
+      case 1:
+        $meeting['type'] = 'Dagsorden';
         break;
-      case 2: $meeting['type'] = 'Referat';
+
+      case 2:
+        $meeting['type'] = 'Referat';
         break;
+
       default:
         $meeting['type'] = 'Anden';
         watchdog('acadre MM', 'Unknown meeting type value: %type', array('%type' => $meeting['type']), WATCHDOG_WARNING);
@@ -179,11 +191,12 @@ function _acadre_esdh_import_meeting($info) {
         $meeting['items'][] = $item;
       }
     }
-    $meeting += os2web_esdh_provider_default_meeting(); // Apply defaults, just in case we missed something.
+    // Apply defaults, just in case we missed something.
+    $meeting += os2web_esdh_provider_default_meeting();
     return $meeting;
   }
   else {
-// Requested file not found
+    // Requested file not found.
     watchdog('acadre MM', 'Failed to read agenda manifest file %uri', array('%uri' => $agenda_uri), WATCHDOG_WARNING);
   }
   return FALSE;
@@ -192,10 +205,13 @@ function _acadre_esdh_import_meeting($info) {
 /**
  * Imports a single item for an agenda.
  *
- * @param array $info - Import info array
- * @param SimpleXMLElement $xml - Xml segment containing the item
- * @param int $id - Item id.
- * @return array - the imported item.
+ * @param array $info
+ *   Import info array
+ * @param SimpleXMLElement $xml
+ *   Xml segment containing the item
+ *
+ * @return array
+ *   The imported item.
  */
 function _acadre_esdh_import_item($info, $xml) {
   $id = (int) array_shift($xml->xpath("../fields/field[@name='sort']"));
@@ -207,25 +223,28 @@ function _acadre_esdh_import_item($info, $xml) {
     'bullets' => array(),
     'enclosures' => array(),
   );
-// Deny closed content
+  // Deny closed content.
   if ($item['access'] !== 'Lukket') {
-// Process attachments
+    // Process attachments.
     foreach ($xml->xpath("table[@name='bullet']") as $bullet_xml) {
       if (($bullet = _acadre_esdh_import_bullet($info, $bullet_xml)) !== FALSE) {
         $item['bullets'][] = $bullet;
       }
     }
-// Process enclosures
+    // Process enclosures.
     foreach ($xml->xpath("table[@name='enclosure']") as $enclosure) {
       $filename_in = (string) array_shift($enclosure->xpath("fields/field[@name='filename']"));
       if (strlen($filename_in) > 0) {
         $item['enclosures'][] = array(
-          'uri' => implode('/', array(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), $info['filesfolder'], $filename_in)),
+          'uri' => implode('/', array(
+            variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
+            $info['filesfolder'],
+            $filename_in)),
           'title' => trim((string) array_shift($enclosure->xpath("fields/field[@name='name']"))),
         );
       }
     }
-  } // if
+  }
   $item += os2web_esdh_provider_default_item();
   return $item;
 }
@@ -233,27 +252,34 @@ function _acadre_esdh_import_item($info, $xml) {
 /**
  * Imports a single bullet for an agenda item.
  *
- * @param array $info - Import info array
- * @param SimpleXMLElement $xml - Xml segment containing the bullet
- * @return array - the imported bullet.
+ * @param array $info
+ *   Import info array
+ * @param SimpleXMLElement $bullet_xml
+ *   Xml segment containing the bullet
+ *
+ * @return array
+ *   The imported bullet.
  */
 function _acadre_esdh_import_bullet($info, $bullet_xml) {
   $bullet = array(
     'title' => (string) array_shift($bullet_xml->xpath("fields/field[@name='bulletname']")),
     'body' => (string) array_shift($bullet_xml->xpath("fields/field[@name='bulletcontent']")),
-//      'body' => 'test',
   );
-  if ($bullet['body'] === '')
+  if ($bullet['body'] === '') {
     return FALSE;
+  }
   $bullet += os2web_esdh_provider_default_bullet();
   return $bullet;
 }
 
 /**
- * Case insensitive fileexists(). Code from comments on php.net
+ * Case insensitive fileexists(). Code from comments on php.net.
  *
  * @param string $filename
- * @return mixed False if file not found, case corrected filename if found.
+ *   File name to check.
+ *
+ * @return mixed
+ *   False if file not found, case corrected filename if found.
  */
 function _acadre_esdh_similar_file_exists($filename) {
   if (file_exists($filename)) {
@@ -274,10 +300,10 @@ function _acadre_esdh_similar_file_exists($filename) {
  */
 function _acadre_esdh_mm_order_addenums($drush = FALSE) {
   $rev_meetings = array(1458);
-  // Find all meetings and gather meeting and agenda_ids
+  // Find all meetings and gather meeting and agenda_ids.
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
-  // meetings as: $meetings[<meeting_id>][<system_id>][<node_id>]
+  // Meetings as: $meetings[<meeting_id>][<system_id>][<node_id>] .
   $nids = array();
   foreach ($nodes as $node) {
     $addenum_to = field_get_items('node', $node, 'field_addenum_to');
@@ -296,26 +322,30 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
     }
   }
   foreach ($meetings as $m_id => $meeting) {
-    ksort($meeting); // Lowest system id first
+    // Lowest system id first.
+    ksort($meeting);
     if (in_array($m_id, $rev_meetings)) {
       $meeting = array_reverse($meeting);
     }
-    $primary = array_shift($meeting); // Lowest system id is primary
+    // Lowest system id is primary.
+    $primary = array_shift($meeting);
     while ($next = array_shift($meeting)) {
-      // Set up references for addenum agendas
+      // Set up references for addenum agendas.
       $node = $nodes[$next];
       $node->field_addenum_to[$node->language][0]['nid'] = $primary;
       node_save($node);
       unset($nids[$node->nid]);
-//      watchdog('os2web_meetings', 'Updated %nid1 as addenum to %nid2 .', array('%nid1' => $node->nid, '%nid2' => $primary), WATCHDOG_INFO);
-      if ($drush===TRUE) 
+      if ($drush === TRUE) {
         drush_log("Updated meeting $m_id..", 'ok');
+      }
     }
   }
   foreach ($nids as $nid) {
     $node = node_load($nid);
     $node->field_addenum_to = array();
     node_save($node);
-    if ($drush===TRUE) drush_log("Resetting $nid..",'ok');
+    if ($drush === TRUE) {
+      drush_log("Resetting $nid..", 'ok');
+    }
   }
 }

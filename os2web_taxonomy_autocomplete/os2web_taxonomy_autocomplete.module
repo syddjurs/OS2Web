@@ -1,20 +1,14 @@
 <?php
-
 /**
- * Implement hook_enable()
- *
- * Make sure this modules hooks are called after taxonomy and i18ntaxonomy.
+ * @file
+ * Extends Drupals autocomplete functionality by changing the auto tagger
+ * to only allow existing tags to be added.
  */
-function os2web_taxonomy_autocomplete_enable() {
-  $weight = db_query("SELECT weight FROM {system} WHERE name IN (:tax, :i18n) ORDER by weight DESC", array(':tax' => 'taxonomy', ':i18n' => 'i18ntaxonomy'))->fetchField();
-  $weight++;
-  db_query("UPDATE {system} SET weight = :weight WHERE name  = :settings", array(':weight' => $weight, ':settings' => 'os2web_taxonomy_autocomplete'));
-}
 
 /**
- * Implementation of hook_menu_alter().
+ * Implements hook_menu_alter().
  *
- * alter taxonomy autocompletion
+ * Alter taxonomy autocompletion
  */
 function os2web_taxonomy_autocomplete_menu_alter(&$items) {
   $items['taxonomy/autocomplete'] = array(
@@ -47,9 +41,9 @@ function os2web_taxonomy_autocomplete_menu_alter(&$items) {
  *   };
  * @endcode
  *
- * @param $field_name
+ * @param string $field_name
  *   The name of the term reference field.
- * @param $tags_typed
+ * @param string $tags_typed
  *   (optional) A comma-separated list of term names entered in the
  *   autocomplete form element. Only the last term is used for autocompletion.
  *   Defaults to '' (an empty string).
@@ -78,11 +72,11 @@ function os2web_taxonomy_autocomplete_taxonomy_autocomplete($field_name, $tags_t
     $query->addTag('translatable');
     $query->addTag('term_access');
 
-    // Do not return terms that are discontinued
+    // Do not return terms that are discontinued.
     $query->leftJoin('field_data_field_discontinued', 'd', 't.tid = d.entity_id');
     $query->where('(d.field_discontinued_value IS NULL OR d.field_discontinued_value = 0)');
 
-    // Only return KLE terms in third level of the hierarchy
+    // Only return KLE terms in third level of the hierarchy.
     if (in_array($vocabularies['kle']->vid, $vids)) {
       $query->leftJoin('taxonomy_term_hierarchy', 'p1', 'p1.tid = t.tid');
       $query->leftJoin('taxonomy_term_hierarchy', 'p2', 'p2.tid = p1.parent');
@@ -96,7 +90,8 @@ function os2web_taxonomy_autocomplete_taxonomy_autocomplete($field_name, $tags_t
     // Select rows that match by term name.
     $tags_return = $query
         ->fields('t', array('tid', 'name'))
-        ->orderBy("LEFT(name,Length('$tag_last')-1)='$tag_last'", 'DESC')// Order by entered tag at beginning of term name
+        // Order by entered tag at beginning of term name.
+        ->orderBy("LEFT(name,Length('$tag_last')-1)='$tag_last'", 'DESC')
         ->orderBy('name', 'asc')
         ->condition('t.vid', $vids)
         ->condition('t.name', '%' . db_like($tag_last) . '%', 'LIKE')

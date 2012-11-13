@@ -132,16 +132,15 @@ function kulturnaut_events_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '<div class=""><div class="">[imported]</div>
-<div class="">[imported_1]</div>
-<div class="">[title]</div>';
-  $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '<a href=[field_homepage] title=[title]>[title]</a>';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['path'] = '[field_homepage]';
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['title']['alter']['external'] = 1;
   $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['alt'] = '[title]';
   $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
@@ -218,10 +217,9 @@ function kulturnaut_events_views_default_views() {
 </div>
 '),
     t('Hjemmeside'),
-    t('<div class=""><div class="">[imported]</div>
-<div class="">[imported_1]</div>
-<div class="">[title]</div>'),
+    t('<a href=[field_homepage] title=[title]>[title]</a>'),
     t('[field_homepage]'),
+    t('[title]'),
     t('Page'),
     t('Blok - indholdsside'),
     t('Blok - forside'),

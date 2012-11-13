@@ -2,7 +2,7 @@ name = OS2Web Design
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.3
+version = 7.x-1.7
 project = os2web_design
 dependencies[] = bg_image
 dependencies[] = bg_image_ui
@@ -54,20 +54,10 @@ features[variable][] = scheduler_unpublish_enable_baggrund
 features[variable][] = scheduler_unpublish_required_baggrund
 features[variable][] = scheduler_unpublish_revision_baggrund
 features[variable][] = typekit_api_token
-timestamp = 1349771943
-;Added by OS2Web 2012-10-15
-project=OS2Web
-version=7.x-1.5
-timestamp=1350300162
+timestamp = 1352123374
 
-;Added by OS2Web 2012-10-23
+;Added by OS2Web 2012-11-13
 project=OS2Web
-version=7.x-1.6
-timestamp=1350990827
-
-
-;Added by OS2Web 2012-11-05
-project=OS2Web
-version=7.x-1.7
-timestamp=1352123374
+version=7.x-1.8
+timestamp=1352802164
 
