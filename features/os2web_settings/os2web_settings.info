@@ -162,3 +162,9 @@ features[variable][] = nice_menus_type_1
 features[variable][] = site_frontpage
 features[variable][] = theme_default
 timestamp = 1352123374
+
+;Added by OS2Web 2012-11-13
+project=OS2Web
+version=7.x-1.8
+timestamp=1352802164
+

@@ -119,3 +119,9 @@ features[variable][] = node_submitted_esdh_sag
 features[variable][] = node_submitted_local_plan
 features[variable][] = node_submitted_referat
 timestamp = 1352123374
+
+;Added by OS2Web 2012-11-13
+project=OS2Web
+version=7.x-1.8
+timestamp=1352802164
+

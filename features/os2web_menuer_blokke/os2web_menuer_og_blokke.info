@@ -53,3 +53,9 @@ features[menu_links][] = user-menu:user
 features[menu_links][] = user-menu:user/logout
 features[views_view][] = os2web_diverse
 timestamp = 1352123374
+
+;Added by OS2Web 2012-11-13
+project=OS2Web
+version=7.x-1.8
+timestamp=1352802164
+
