@@ -19,6 +19,16 @@ $j(document).ready(function($) {
 
   var $select = $('.sb-select');
 
+  if ($.browser.msie) {
+    $select.prepend("<option value=''></option>").val('');
+  }
+
+  var onClick = function(e) {
+    if (e.target.nodeName == "OPTION") {
+      window.location.href = $(this).parent().find('option:selected').val();
+    }
+  }
+
   var onChange = function () {
     window.location.href = $(this).parent().find('option:selected').val();
   };
@@ -33,7 +43,8 @@ $j(document).ready(function($) {
   };
 
   $select.on('change', onChange)
-  .on('keydown', onKeyDown);
+  .on('keydown', onKeyDown)
+  .on('click', onClick);
 
   jQuery('.sb-select').yaselect();
   jQuery('#edit-committee').yaselect();
