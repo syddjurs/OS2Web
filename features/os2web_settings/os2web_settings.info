@@ -23,7 +23,6 @@ features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[filter][] = filtered_html
 features[filter][] = full_html
-features[language][] = da
 features[user_permission][] = access content
 features[user_permission][] = access content overview
 features[user_permission][] = add media from remote sources
@@ -167,4 +166,10 @@ timestamp = 1352123374
 project=OS2Web
 version=7.x-1.8
 timestamp=1352802164
+
+
+;Added by OS2Web 2012-11-19
+project=OS2Web
+version=7.x-1.10
+timestamp=1353326099
 
