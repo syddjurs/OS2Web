@@ -70,38 +70,52 @@ class AdLibWS {
     if (!isset($this->client)) {
       return FALSE;
     }
-    $job_info = '<JobInfo>
-        <JobSettings JobID="" UserJobID="" JobPriority="' . $priority . '" AdlibServer="" AdlibServerGroup=""/>
-        <JobFileMsg Count=""/>
-        <JobFileList>
-          <JobFile Filename="" Folder=""/>
-        </JobFileList>
-      </JobInfo>';
+    $job_info = '<?xml version="1.0" encoding="UTF-8"?>
+<JobInfo>
+  <JobSettings JobID="" UserJobID="" JobPriority="!priority" AdlibServer="" AdlibServerGroup=""/>
+  <JobFileMsg Count=""/>
+  <JobFileList>
+    <JobFile Filename="" Folder=""/>
+  </JobFileList>
+</JobInfo>';
+    $job_info = format_string($job_info, array('!priority' => $priority));
     $job_ticket = '<?xml version="1.0" encoding="UTF-8"?>
-        <?AdlibExpress applanguage="USA" appversion="2.5" dtdversion="1.0" ?>
-        <!DOCTYPE JOBS SYSTEM "C:\Adlib Express\DTD\AdlibExpress.dtd">
-        <JOBS xmlns:JOBS="http://www.Adlibsoftware.com" xmlns:JOB="http://www.Adlibsoftware.com">
-          <JOB>
-            <JOB:DOCINPUTS>
-              <JOB:DOCINPUT FILENAME="' . $this->safeFilename($file_info['filename']) . '" FOLDER="' . self::$basePath . $file_info['in_folder'] . '" />
-            </JOB:DOCINPUTS>
-            <JOB:DOCOUTPUTS>
-              <JOB:DOCOUTPUT FILENAME="' . $this->safeFilename($file_info['out_filename']) . '" FOLDER="' . self::$basePath . $file_info['out_folder'] . '" DOCTYPE="' . ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF') . '" />
-            </JOB:DOCOUTPUTS>
-            <JOB:SETTINGS>
-              <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
-              <JOB:NATIVEAPPSETTINGS>
-                <JOB:MSOUTLOOK CONVERSIONMODE="IFTS" />  
-              </JOB:NATIVEAPPSETTINGS>
-            </JOB:SETTINGS>
-          </JOB>
-        </JOBS>';
+<?AdlibExpress applanguage="USA" appversion="2.5" dtdversion="1.0" ?>
+<!DOCTYPE JOBS SYSTEM "C:\Adlib Express\DTD\AdlibExpress.dtd">
+<JOBS xmlns:JOBS="http://www.Adlibsoftware.com" xmlns:JOB="http://www.Adlibsoftware.com">
+  <JOB>
+    <JOB:DOCINPUTS>
+      <JOB:DOCINPUT FILENAME="!infile" FOLDER="!infolder" />
+    </JOB:DOCINPUTS>
+    <JOB:DOCOUTPUTS>
+      <JOB:DOCOUTPUT FILENAME="!outfile" FOLDER="!outfolder" DOCTYPE="!jobtype" />
+    </JOB:DOCOUTPUTS>
+    <JOB:SETTINGS>
+      <JOB:HEADER ENABLED="Yes" TEXTRIGHT="&amp;[Page] of &amp;[Pages]" LAYER="Foreground" />
+      <JOB:NATIVEAPPSETTINGS>
+        <JOB:MSOUTLOOK CONVERSIONMODE="IFTS" />
+      </JOB:NATIVEAPPSETTINGS>
+    </JOB:SETTINGS>
+  </JOB>
+</JOBS>';
+    $job_ticket = format_string($job_ticket, array(
+      '!infile' => $this->safeFilename($file_info['filename']),
+      '!infolder' => self::$basePath . $file_info['in_folder'],
+      '!outfile' => $this->safeFilename($file_info['out_filename']),
+      '!outfolder' => self::$basePath . $file_info['out_folder'],
+      '!jobtype' => ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF'),
+    ));
     $result = simplexml_load_string($this->client->addJob(array('job_info' => $job_info, 'job_ticket' => $job_ticket))->AddJobResult);
     if (is_object($result) && isset($result->JobSettings['JobID'])) {
       return $result;
     }
     else {
-      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to add job.");
+      $msg = (string) array_pop($result->xpath('//@Message'));
+      if ($msg == '') {
+        $msg = 'Unknown reason.';
+      }
+      error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to add job. Reason: " . $msg);
+      return FALSE;
     }
   }
 
