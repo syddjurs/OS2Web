@@ -82,14 +82,14 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['filters']['field_period_value2']['id'] = 'field_period_value2';
   $handler->display->display_options['filters']['field_period_value2']['table'] = 'field_data_field_period';
   $handler->display->display_options['filters']['field_period_value2']['field'] = 'field_period_value2';
-  $handler->display->display_options['filters']['field_period_value2']['operator'] = '>';
+  $handler->display->display_options['filters']['field_period_value2']['operator'] = '>=';
   $handler->display->display_options['filters']['field_period_value2']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_period_value2']['default_date'] = 'today';
   /* Filterkriterie: Indhold: Ansøgninsfrist -  startdato (field_period) */
   $handler->display->display_options['filters']['field_period_value']['id'] = 'field_period_value';
   $handler->display->display_options['filters']['field_period_value']['table'] = 'field_data_field_period';
   $handler->display->display_options['filters']['field_period_value']['field'] = 'field_period_value';
-  $handler->display->display_options['filters']['field_period_value']['operator'] = '<';
+  $handler->display->display_options['filters']['field_period_value']['operator'] = '<=';
   $handler->display->display_options['filters']['field_period_value']['form_type'] = 'date_text';
   $handler->display->display_options['filters']['field_period_value']['default_date'] = 'today';
 
