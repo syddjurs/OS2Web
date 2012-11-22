@@ -327,12 +327,7 @@ function os2web_settings_user_default_permissions() {
   // Exported permission: import media.
   $permissions['import media'] = array(
     'name' => 'import media',
-    'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
-    ),
+    'roles' => array(),
     'module' => 'media',
   );
 
