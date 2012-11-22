@@ -2,8 +2,8 @@ name = OS2Web Spotbokse
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.8
-project = os2web_spotbokse
+version = 7.x-1.10
+project = OS2Web
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = features
@@ -60,6 +60,7 @@ features[user_permission][] = delete own spotbox content
 features[user_permission][] = edit any spotbox content
 features[user_permission][] = edit own spotbox content
 features[variable][] = additional_settings__active_tab_spotbox
+features[variable][] = field_bundle_settings_node__spotbox
 features[variable][] = language_content_type_spotbox
 features[variable][] = menu_options_spotbox
 features[variable][] = menu_parent_spotbox
@@ -75,16 +76,4 @@ features[variable][] = scheduler_unpublish_required_spotbox
 features[variable][] = scheduler_unpublish_revision_spotbox
 features[views_view][] = spot_view
 features[views_view][] = spotboxe
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099

@@ -10,7 +10,7 @@
 function borger_dk_integration_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-borger_dk_permalink-body'
+  // Exported field: 'node-borger_dk_permalink-body'.
   $fields['node-borger_dk_permalink-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -89,7 +90,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-borger_dk_permalink-field_borger_permalink'
+  // Exported field: 'node-borger_dk_permalink-field_borger_permalink'.
   $fields['node-borger_dk_permalink-field_borger_permalink'] = array(
     'field_config' => array(
       'active' => '1',
@@ -110,6 +111,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '600',
@@ -163,7 +165,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-borger_dk_permalink-field_related_tema'
+  // Exported field: 'node-borger_dk_permalink-field_related_tema'.
   $fields['node-borger_dk_permalink-field_related_tema'] = array(
     'field_config' => array(
       'active' => '1',
@@ -184,6 +186,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -259,7 +262,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-borger_dk_permalink-field_site_structure'
+  // Exported field: 'node-borger_dk_permalink-field_site_structure'.
   $fields['node-borger_dk_permalink-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -280,6 +283,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -336,7 +340,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_is_subsite'
+  // Exported field: 'taxonomy_term-site_struktur-field_is_subsite'.
   $fields['taxonomy_term-site_struktur-field_is_subsite'] = array(
     'field_config' => array(
       'active' => '1',
@@ -350,6 +354,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -397,7 +402,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_subsite_banner'
+  // Exported field: 'taxonomy_term-site_struktur-field_subsite_banner'.
   $fields['taxonomy_term-site_struktur-field_subsite_banner'] = array(
     'field_config' => array(
       'active' => '1',
@@ -418,6 +423,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -479,7 +485,7 @@ function borger_dk_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_subsite_logo'
+  // Exported field: 'taxonomy_term-site_struktur-field_subsite_logo'.
   $fields['taxonomy_term-site_struktur-field_subsite_logo'] = array(
     'field_config' => array(
       'active' => '1',
@@ -500,6 +506,7 @@ function borger_dk_integration_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,

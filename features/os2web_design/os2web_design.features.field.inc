@@ -10,7 +10,7 @@
 function os2web_design_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-baggrund-field_side_baggrungsbillede'
+  // Exported field: 'node-baggrund-field_side_baggrungsbillede'.
   $fields['node-baggrund-field_side_baggrungsbillede'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function os2web_design_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,

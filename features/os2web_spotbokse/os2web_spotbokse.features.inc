@@ -35,7 +35,7 @@ function os2web_spotbokse_views_api() {
 function os2web_spotbokse_image_default_styles() {
   $styles = array();
 
-  // Exported image style: spotbox-300
+  // Exported image style: spotbox-300.
   $styles['spotbox-300'] = array(
     'name' => 'spotbox-300',
     'effects' => array(
@@ -57,7 +57,7 @@ function os2web_spotbokse_image_default_styles() {
     ),
   );
 
-  // Exported image style: spotbox-tall
+  // Exported image style: spotbox-tall.
   $styles['spotbox-tall'] = array(
     'name' => 'spotbox-tall',
     'effects' => array(
@@ -80,7 +80,7 @@ function os2web_spotbokse_image_default_styles() {
     ),
   );
 
-  // Exported image style: spotbox5
+  // Exported image style: spotbox5.
   $styles['spotbox5'] = array(
     'name' => 'spotbox5',
     'effects' => array(
@@ -102,7 +102,7 @@ function os2web_spotbokse_image_default_styles() {
     ),
   );
 
-  // Exported image style: spotbox_right
+  // Exported image style: spotbox_right.
   $styles['spotbox_right'] = array(
     'name' => 'spotbox_right',
     'effects' => array(
@@ -141,7 +141,7 @@ function os2web_spotbokse_image_default_styles() {
     ),
   );
 
-  // Exported image style: video_forside
+  // Exported image style: video_forside.
   $styles['video_forside'] = array(
     'name' => 'video_forside',
     'effects' => array(

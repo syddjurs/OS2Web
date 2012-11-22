@@ -3,7 +3,7 @@ description = Includes content types and views regarding Agenda import and prese
 core = 7.x
 package = OS2Web - AcadreMM
 php = 5.2.4
-version = 7.x-1.8
+version = 7.x-1.10
 project = os2web_meeting_views
 dependencies[] = autocomplete_deluxe
 dependencies[] = better_exposed_filters
@@ -91,6 +91,9 @@ features[variable][] = comment_subject_field_bullet_point_attachment
 features[variable][] = comment_subject_field_meeting
 features[variable][] = custom_search_advanced_type_bullet_point_attachment_display
 features[variable][] = custom_search_advanced_type_bullet_point_display
+features[variable][] = field_bundle_settings_node__bullet_point
+features[variable][] = field_bundle_settings_node__bullet_point_attachment
+features[variable][] = field_bundle_settings_node__meeting
 features[variable][] = language_content_type_bullet_point
 features[variable][] = language_content_type_bullet_point_attachment
 features[variable][] = language_content_type_meeting
@@ -150,10 +153,8 @@ features[variable][] = print_pdf_node_link_pages
 features[variable][] = print_pdf_node_link_visibility
 features[variable][] = print_pdf_page_orientation
 features[variable][] = print_pdf_paper_size
-features[variable][] = print_pdf_pdf_tool
 features[variable][] = print_pdf_show_link
 features[variable][] = print_pdf_sys_link_pages
-features[variable][] = print_pdf_sys_link_visibility
 features[variable][] = print_pdf_wkhtmltopdf_options
 features[variable][] = print_robots_noarchive
 features[variable][] = print_robots_nofollow
@@ -168,16 +169,4 @@ features[views_view][] = meeting_bullet_points
 features[views_view][] = meeting_details
 features[views_view][] = meetings_search
 features[views_view][] = seneste_8_m_der_i_de_st_ende_politiske_udvalg_
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099
