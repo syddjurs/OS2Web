@@ -22,7 +22,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -438,7 +438,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -850,7 +850,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -1266,7 +1266,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
