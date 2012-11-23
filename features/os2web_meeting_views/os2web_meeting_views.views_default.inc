@@ -554,7 +554,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_full_doc']['field'] = 'field_full_doc';
   $handler->display->display_options['fields']['field_full_doc']['label'] = 'Hent';
   $handler->display->display_options['fields']['field_full_doc']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet dokument';
+  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet dokument uden bilag';
   $handler->display->display_options['fields']['field_full_doc']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_full_doc']['alter']['path'] = '[field_full_doc]';
   $handler->display->display_options['fields']['field_full_doc']['alter']['external'] = TRUE;
@@ -710,6 +710,13 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Overskrift: Global: Tekstområde */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<h2 class="pane-title">Klik på de enkelte punkter herunder for at finde bilag og sagsfremstilling. Under samlet dokument til højre kan du finde en samlet dagsorden/referat uden bilag.</h2>
+';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Forbindelse: Entity Reference: Refereret entity */
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['id'] = 'field_ref_bullet_points_target_id';
@@ -731,15 +738,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['nid_1']['label'] = '';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
-  /* Felt: Bullet point id - hidden */
-  $handler->display->display_options['fields']['nid']['id'] = 'nid';
-  $handler->display->display_options['fields']['nid']['table'] = 'node';
-  $handler->display->display_options['fields']['nid']['field'] = 'nid';
-  $handler->display->display_options['fields']['nid']['relationship'] = 'field_ref_bullet_points_target_id';
-  $handler->display->display_options['fields']['nid']['ui_name'] = 'Bullet point id - hidden';
-  $handler->display->display_options['fields']['nid']['label'] = '';
-  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Felt: Indhold: Enclosures */
   $handler->display->display_options['fields']['field_enclosures']['id'] = 'field_enclosures';
   $handler->display->display_options['fields']['field_enclosures']['table'] = 'field_data_field_enclosures';
@@ -753,6 +751,15 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_enclosures']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_enclosures']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_enclosures']['field_api_classes'] = TRUE;
+  /* Felt: Bullet point id - hidden */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['fields']['nid']['ui_name'] = 'Bullet point id - hidden';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Felt: Bullet points */
   $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
   $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
@@ -881,7 +888,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_date']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_date']['settings'] = array(
     'format_type' => 'short',
-    'fromto' => 'both',
+    'fromto' => 'value',
     'multiple_number' => '',
     'multiple_from' => '',
     'multiple_to' => '',
@@ -945,12 +952,14 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Lokationen'),
     t('Type'),
     t('Hent'),
-    t('Samlet dokument'),
+    t('Samlet dokument uden bilag'),
     t('Download hele referatet som samlet dokument'),
     t('Video'),
     t('QBrick video for mødet'),
     t('<h2 class="pane-title">Video fra mødet</h2>'),
     t('Bullet points'),
+    t('<h2 class="pane-title">Klik på de enkelte punkter herunder for at finde bilag og sagsfremstilling. Under samlet dokument til højre kan du finde en samlet dagsorden/referat uden bilag.</h2>
+'),
     t('Indhold entity refereret fra field_ref_bullet_points'),
     t('bullet point speaking paper'),
     t('Bilag: [field_enclosures]'),
