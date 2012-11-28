@@ -1236,11 +1236,22 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['nothing_1']['alter']['alt'] = 'Feed med dagsordner';
   $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
   /* Felt: Global: Tilpasset tekst */
+  $handler->display->display_options['fields']['nothing_3']['id'] = 'nothing_3';
+  $handler->display->display_options['fields']['nothing_3']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_3']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_3']['label'] = '';
+  $handler->display->display_options['fields']['nothing_3']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nothing_3']['alter']['text'] = 'Alle';
+  $handler->display->display_options['fields']['nothing_3']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_3']['alter']['path'] = 'meetings-feed/[tid]';
+  $handler->display->display_options['fields']['nothing_3']['alter']['absolute'] = TRUE;
+  $handler->display->display_options['fields']['nothing_3']['element_label_colon'] = FALSE;
+  /* Felt: Global: Tilpasset tekst */
   $handler->display->display_options['fields']['nothing_2']['id'] = 'nothing_2';
   $handler->display->display_options['fields']['nothing_2']['table'] = 'views';
   $handler->display->display_options['fields']['nothing_2']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing_2']['label'] = 'Feeds';
-  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[nothing] / [nothing_1]';
+  $handler->display->display_options['fields']['nothing_2']['alter']['text'] = '[nothing] / [nothing_1] / [nothing_3]';
   /* Sorteringskriterie: Ord i ordforråd: Navn */
   $handler->display->display_options['sorts']['name']['id'] = 'name';
   $handler->display->display_options['sorts']['name']['table'] = 'taxonomy_term_data';
@@ -1273,8 +1284,9 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Referat feed'),
     t('Dagordner'),
     t('Feed med dagsordner'),
+    t('Alle'),
     t('Feeds'),
-    t('[nothing] / [nothing_1]'),
+    t('[nothing] / [nothing_1] / [nothing_3]'),
     t('Page'),
   );
   $export['meeting_feeds_list'] = $view;
