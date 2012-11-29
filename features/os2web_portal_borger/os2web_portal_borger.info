@@ -1,0 +1,6 @@
+name = OS2Web Portal - Borger
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = os2web_portal_borger
+features[features_api][] = api:1
