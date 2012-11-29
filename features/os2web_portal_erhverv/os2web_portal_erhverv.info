@@ -1,0 +1,6 @@
+name = OS2Web Portal - Erhverv
+core = 7.x
+package = OS2Web - Portaler
+version = 7.x-1.0
+project = os2web_portal_erhverv
+features[features_api][] = api:1
