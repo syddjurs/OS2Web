@@ -482,6 +482,19 @@ function _os2web_esdh_provider_import($id = FALSE) {
   if ($meeting_id === FALSE) {
     drupal_json_output(array('status' => 'error', 'message' => 'Meeting not found.'));
   }
-  _os2web_esdh_provider_import_meeting($meeting_id, TRUE);
-  drupal_json_output(array('status' => 'ok', 'message' => 'Meeting ' . $id . ' imported.'));
+  else {
+    $nids = _os2web_esdh_provider_import_meeting($meeting_id, TRUE);
+    if (count($nids) > 0) {
+      drupal_json_output(array(
+        'status' => 'ok',
+        'message' => 'Meeting ' . $id . ' imported to nodes: ' . implode(',', $nids),
+      ));
+    }
+    else {
+      drupal_json_output(array(
+        'status' => 'ok',
+        'message' => 'Meeting ' . $id . ' imported, but no nodes created',
+      ));
+    }
+  }
 }
