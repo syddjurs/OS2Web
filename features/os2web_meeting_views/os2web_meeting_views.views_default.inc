@@ -764,19 +764,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['nid']['label'] = '';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Enclosures */
-  $handler->display->display_options['fields']['field_enclosures']['id'] = 'field_enclosures';
-  $handler->display->display_options['fields']['field_enclosures']['table'] = 'field_data_field_enclosures';
-  $handler->display->display_options['fields']['field_enclosures']['field'] = 'field_enclosures';
-  $handler->display->display_options['fields']['field_enclosures']['relationship'] = 'field_ref_bullet_points_target_id';
-  $handler->display->display_options['fields']['field_enclosures']['label'] = '';
-  $handler->display->display_options['fields']['field_enclosures']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_enclosures']['alter']['text'] = 'Bilag: [field_enclosures]';
-  $handler->display->display_options['fields']['field_enclosures']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_enclosures']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_enclosures']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_enclosures']['multi_type'] = 'ul';
-  $handler->display->display_options['fields']['field_enclosures']['field_api_classes'] = TRUE;
   /* Felt: Bullet points */
   $handler->display->display_options['fields']['field_ref_attachment']['id'] = 'field_ref_attachment';
   $handler->display->display_options['fields']['field_ref_attachment']['table'] = 'field_data_field_ref_attachment';
@@ -796,6 +783,19 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_ref_attachment']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_ref_attachment']['multi_type'] = 'ul';
   $handler->display->display_options['fields']['field_ref_attachment']['separator'] = '<br/>';
+  /* Felt: Indhold: Enclosures */
+  $handler->display->display_options['fields']['field_enclosures']['id'] = 'field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['table'] = 'field_data_field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['field'] = 'field_enclosures';
+  $handler->display->display_options['fields']['field_enclosures']['relationship'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['fields']['field_enclosures']['label'] = '';
+  $handler->display->display_options['fields']['field_enclosures']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_enclosures']['alter']['text'] = 'Bilag: [field_enclosures]';
+  $handler->display->display_options['fields']['field_enclosures']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_enclosures']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_enclosures']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_enclosures']['multi_type'] = 'ul';
+  $handler->display->display_options['fields']['field_enclosures']['field_api_classes'] = TRUE;
   /* Felt: Indhold: Closed */
   $handler->display->display_options['fields']['field_bul_point_closed']['id'] = 'field_bul_point_closed';
   $handler->display->display_options['fields']['field_bul_point_closed']['table'] = 'field_data_field_bul_point_closed';
@@ -819,7 +819,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['title']['alter']['link_class'] = 'agenda-bullet-list';
-  $handler->display->display_options['fields']['title']['alter']['suffix'] = '<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>';
+  $handler->display->display_options['fields']['title']['alter']['suffix'] = '<div class="agenda-item">[field_enclosures][field_ref_attachment] </div>';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
@@ -1187,18 +1187,19 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('Bullet points'),
     t('Indhold entity refereret fra field_ref_bullet_points'),
     t('bullet point speaking paper'),
-    t('Bilag: [field_enclosures]'),
     t('[field_ref_attachment-target_id]'),
     t('Intet indhold til dette punkt.'),
+    t('Bilag: [field_enclosures]'),
     t('<strong style="float: right;margin-left:1em">([field_bul_point_closed])</strong>'),
     t('[title] [field_bul_point_closed]'),
-    t('<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>'),
+    t('<div class="agenda-item">[field_enclosures][field_ref_attachment] </div>'),
     t('Tillæg'),
     t('<h2 class="pane-title">Tillæg</h2>'),
     t('field_addenum_to'),
     t('_blank'),
     t('Lokation'),
     t('Bullet points - Tillæg'),
+    t('<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>'),
   );
   $export['meeting_details'] = $view;
 
