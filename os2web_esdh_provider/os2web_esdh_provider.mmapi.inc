@@ -26,7 +26,6 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
 
     // Run check to see if meeting is already imported.
     $query = new EntityFieldQuery();
-    $published = $meeting['publish'] ? 'Published' : 'Unpublished';
     $result = $query->entityCondition('entity_type', 'node')
         ->propertyCondition('type', 'meeting')
         ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
@@ -35,7 +34,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       $nid = array_shift($result['node'])->nid;
       if (!$meeting['publish']) {
         // Meeting needs to be unpublished.
-        // error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
+        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
         node_delete($nid);
         watchdog('ESDH', 'Unpublished %nid .', array('%nid' => $nid), WATCHDOG_INFO);
         continue;
@@ -48,7 +47,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         $node = new stdClass();
       }
       else {
-        // error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
+        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping nid: ' . $nid);
         // watchdog('ESDH', 'Meeting already imported in %nid. Skiping.', array('%nid' => $nid), WATCHDOG_DEBUG);
         continue;
       }
@@ -386,7 +385,6 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
       default:
         drupal_set_message($op . ' not yet implemented.', 'error');
         break;
-
     }
     drupal_goto('node/' . $nid . '/control');
   }
@@ -409,9 +407,6 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
     }
   }
   $html .= theme('table', array('header' => $head, 'rows' => $rows));
-
-  $html .= l(t('Re-import'), 'node/' . $node->nid . '/control/reimport');
-
   return $html;
 }
 
@@ -467,4 +462,26 @@ function _os2web_esdh_provider_similar_file_exists($filename) {
     }
   }
   return FALSE;
+}
+
+/**
+ * Page callback for the import service call.
+ */
+function _os2web_esdh_provider_import($id = FALSE) {
+  if (!os2web_esdh_provider_has_api('mm')) {
+    drupal_json_output(array('status' => 'error', 'message' => 'Not available.'));
+  }
+  $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
+  $meeting_id = FALSE;
+  foreach ($meetings as $meeting) {
+    if ($meeting['id'] == $id) {
+      $meeting_id = $meeting;
+      break;
+    }
+  }
+  if ($meeting_id === FALSE) {
+    drupal_json_output(array('status' => 'error', 'message' => 'Meeting not found.'));
+  }
+  _os2web_esdh_provider_import_meeting($meeting_id, TRUE);
+  drupal_json_output(array('status' => 'ok', 'message' => 'Meeting ' . $id . ' imported.'));
 }
