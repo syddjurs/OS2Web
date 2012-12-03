@@ -123,7 +123,6 @@ function _os2web_esdh_provider_import_access() {
  */
 function os2web_esdh_provider_node_delete($node) {
   if ($node->type === 'meeting') {
-    db_delete('os2web_meetings_imported')->condition('nid', $node->nid)->execute();
     // TODO: Delete bullets from meeting.
     $items = array_shift($node->field_ref_bullet_points);
     if (is_array($items)) {
