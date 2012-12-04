@@ -484,6 +484,9 @@ function _os2web_esdh_provider_import($id = FALSE) {
   }
   else {
     $nids = _os2web_esdh_provider_import_meeting($meeting_id, TRUE);
+    if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
+      os2web_esdh_provider_invoke('mm', 'post_import_process');
+    }
     if (count($nids) > 0) {
       drupal_json_output(array(
         'status' => 'ok',
