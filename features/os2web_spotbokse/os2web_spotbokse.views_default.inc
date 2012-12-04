@@ -10,7 +10,7 @@
 function os2web_spotbokse_views_default_views() {
   $export = array();
 
-  $view = new view();
+  $view = new view;
   $view->name = 'spot_view';
   $view->description = '';
   $view->tag = 'default';
@@ -23,14 +23,12 @@ function os2web_spotbokse_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['css_class'] = 'spotbox-indhold';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -117,7 +115,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -143,7 +140,6 @@ function os2web_spotbokse_views_default_views() {
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox-2-vertical';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Indhold: Redigér-link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
@@ -234,7 +230,6 @@ function os2web_spotbokse_views_default_views() {
 
   /* Display: Spotbox */
   $handler = $view->new_display('block', 'Spotbox', 'block_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Indhold: Indhold */
   $handler->display->display_options['fields']['body']['id'] = 'body';
@@ -337,6 +332,7 @@ function os2web_spotbokse_views_default_views() {
     t('field_indholdsside_spotboxe'),
     t('<img src="[field_lead_image]" alt="[title]" />
 <span class="zoom-icon"></span>'),
+    t('[field_url]'),
     t('[field_lead_image]<br />
 [title]'),
     t('<div class="spotImage">[field_lead_image]</div>
@@ -357,7 +353,7 @@ function os2web_spotbokse_views_default_views() {
   );
   $export['spot_view'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'spotboxe';
   $view->description = '';
   $view->tag = 'default';
@@ -371,7 +367,6 @@ function os2web_spotbokse_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Spotboxe';
   $handler->display->display_options['css_class'] = 'spotbox spotbox-normal';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'time';
@@ -381,7 +376,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -391,10 +385,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['style_options']['row_class'] = 'grid-3 omega';
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -520,7 +510,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -539,7 +528,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -571,13 +559,11 @@ function os2web_spotbokse_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['path'] = 'spotboxe';
 
   /* Display: Spotbox på node */
   $handler = $view->new_display('panel_pane', 'Spotbox på node', 'panel_pane_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -701,7 +687,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-normal spotbox-2-vertical';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
@@ -851,7 +836,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -864,7 +848,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -920,14 +903,13 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-horisontal';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
   $handler->display->display_options['pager']['options']['offset'] = '2';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['row_class'] = 'spotbox-row grid-3 alpha omega';
+  $handler->display->display_options['style_options']['row_class'] = 'spotbox-row';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -1092,7 +1074,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -1105,7 +1086,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1161,14 +1141,13 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-tall';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
-  $handler->display->display_options['style_options']['row_class'] = 'spotbox-row-tall grid-3 omega alpha';
+  $handler->display->display_options['style_options']['row_class'] = 'spotbox-row-tall';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -1336,7 +1315,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -1349,7 +1327,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1410,7 +1387,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-video';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -1601,7 +1577,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -1614,7 +1589,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1672,7 +1646,6 @@ function os2web_spotbokse_views_default_views() {
 
   /* Display: Blok - Spotbox node */
   $handler = $view->new_display('block', 'Blok - Spotbox node', 'block_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Indhold: Hjemmeside */
   $handler->display->display_options['fields']['field_url']['id'] = 'field_url';
@@ -1793,7 +1766,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -1812,7 +1784,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -1831,7 +1802,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-horisontal-3';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -1981,7 +1951,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['nid']['default_argument_options']['term_page'] = FALSE;
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
@@ -1998,7 +1967,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['id'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -2012,7 +1980,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['vocabularies'] = array(
     'site_struktur' => 'site_struktur',
   );
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2052,7 +2019,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-horisontal';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '4';
@@ -2199,7 +2165,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -2217,7 +2182,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -2230,7 +2194,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2263,7 +2226,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-horisontal-3';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -2412,7 +2374,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -2431,7 +2392,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -2442,7 +2402,6 @@ function os2web_spotbokse_views_default_views() {
     'spotbox' => 'spotbox',
   );
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2464,7 +2423,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-sektion-1';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -2626,7 +2584,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -2645,7 +2602,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -2656,7 +2612,6 @@ function os2web_spotbokse_views_default_views() {
     'spotbox' => 'spotbox',
   );
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2678,7 +2633,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox-subsite-frontpage';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';
@@ -2808,7 +2762,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -2821,7 +2774,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2873,7 +2825,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'spotbox spotbox5';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '1';
@@ -3075,7 +3026,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -3088,7 +3038,6 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['arguments']['nid']['validate_options']['nid_type'] = 'nids';
   $handler->display->display_options['arguments']['nid']['validate']['fail'] = 'ignore';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -3150,11 +3099,8 @@ function os2web_spotbokse_views_default_views() {
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
-    t('« første'),
-    t('‹ forrige'),
-    t('næste ›'),
-    t('sidste »'),
     t('<img src="[field_lead_image]" alt="[title_1]" />'),
+    t('[field_url]'),
     t('Egenavne / stednavne'),
     t('Forfrem til'),
     t('KL Emneord'),
