@@ -10,7 +10,7 @@
 function os2web_context_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-esdh_dokument-body'
+  // Exported field: 'node-esdh_dokument-body'.
   $fields['node-esdh_dokument-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -89,7 +90,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_doc'
+  // Exported field: 'node-esdh_dokument-field_doc'.
   $fields['node-esdh_dokument-field_doc'] = array(
     'field_config' => array(
       'active' => '1',
@@ -103,6 +104,7 @@ function os2web_context_field_default_fields() {
           0 => 'doc_ident',
         ),
       ),
+      'locked' => '0',
       'module' => 'os2web_doc_field',
       'settings' => array(),
       'translatable' => '0',
@@ -151,7 +153,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_editortags'
+  // Exported field: 'node-esdh_dokument-field_editortags'.
   $fields['node-esdh_dokument-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -172,6 +174,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -231,7 +234,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_organization'
+  // Exported field: 'node-esdh_dokument-field_organization'.
   $fields['node-esdh_dokument-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -252,6 +255,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -311,7 +315,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_politics'
+  // Exported field: 'node-esdh_dokument-field_politics'.
   $fields['node-esdh_dokument-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -332,6 +336,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -392,7 +397,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_site_structure'
+  // Exported field: 'node-esdh_dokument-field_site_structure'.
   $fields['node-esdh_dokument-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -413,6 +418,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -469,7 +475,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_termref_kle'
+  // Exported field: 'node-esdh_dokument-field_termref_kle'.
   $fields['node-esdh_dokument-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -490,6 +496,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -549,7 +556,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_dokument-field_termref_sted'
+  // Exported field: 'node-esdh_dokument-field_termref_sted'.
   $fields['node-esdh_dokument-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -570,6 +577,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -629,7 +637,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_case'
+  // Exported field: 'node-esdh_sag-field_case'.
   $fields['node-esdh_sag-field_case'] = array(
     'field_config' => array(
       'active' => '1',
@@ -639,6 +647,7 @@ function os2web_context_field_default_fields() {
       'field_name' => 'field_case',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'os2web_case_field',
       'settings' => array(),
       'translatable' => '0',
@@ -687,7 +696,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_editortags'
+  // Exported field: 'node-esdh_sag-field_editortags'.
   $fields['node-esdh_sag-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -708,6 +717,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -767,7 +777,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_organization'
+  // Exported field: 'node-esdh_sag-field_organization'.
   $fields['node-esdh_sag-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -788,6 +798,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -847,7 +858,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_politics'
+  // Exported field: 'node-esdh_sag-field_politics'.
   $fields['node-esdh_sag-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -868,6 +879,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -928,7 +940,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_site_structure'
+  // Exported field: 'node-esdh_sag-field_site_structure'.
   $fields['node-esdh_sag-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -949,6 +961,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1009,7 +1022,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_termref_kle'
+  // Exported field: 'node-esdh_sag-field_termref_kle'.
   $fields['node-esdh_sag-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1030,6 +1043,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1089,7 +1103,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-esdh_sag-field_termref_sted'
+  // Exported field: 'node-esdh_sag-field_termref_sted'.
   $fields['node-esdh_sag-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1110,6 +1124,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1169,7 +1184,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-body'
+  // Exported field: 'node-local_plan-body'.
   $fields['node-local_plan-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1192,6 +1207,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1248,7 +1264,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_area'
+  // Exported field: 'node-local_plan-field_area'.
   $fields['node-local_plan-field_area'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1269,6 +1285,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1325,7 +1342,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_file'
+  // Exported field: 'node-local_plan-field_file'.
   $fields['node-local_plan-field_file'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1346,6 +1363,7 @@ function os2web_context_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 1,
@@ -1419,7 +1437,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_inherit_right_column'
+  // Exported field: 'node-local_plan-field_inherit_right_column'.
   $fields['node-local_plan-field_inherit_right_column'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1433,6 +1451,7 @@ function os2web_context_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1492,7 +1511,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_lead_image'
+  // Exported field: 'node-local_plan-field_lead_image'.
   $fields['node-local_plan-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1513,6 +1532,7 @@ function os2web_context_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -1594,7 +1614,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_parent_node'
+  // Exported field: 'node-local_plan-field_parent_node'.
   $fields['node-local_plan-field_parent_node'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1615,6 +1635,7 @@ function os2web_context_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -1696,7 +1717,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_plan_id'
+  // Exported field: 'node-local_plan-field_plan_id'.
   $fields['node-local_plan-field_plan_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1706,6 +1727,7 @@ function os2web_context_field_default_fields() {
       'field_name' => 'field_plan_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -1763,7 +1785,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_related_tema'
+  // Exported field: 'node-local_plan-field_related_tema'.
   $fields['node-local_plan-field_related_tema'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1784,6 +1806,7 @@ function os2web_context_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -1859,7 +1882,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_resume_long'
+  // Exported field: 'node-local_plan-field_resume_long'.
   $fields['node-local_plan-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1880,6 +1903,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1932,7 +1956,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_site_structure'
+  // Exported field: 'node-local_plan-field_site_structure'.
   $fields['node-local_plan-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1953,6 +1977,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2009,7 +2034,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-local_plan-field_source_id'
+  // Exported field: 'node-local_plan-field_source_id'.
   $fields['node-local_plan-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2019,6 +2044,7 @@ function os2web_context_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -2070,7 +2096,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-body'
+  // Exported field: 'node-referat-body'.
   $fields['node-referat-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2093,6 +2119,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -2149,7 +2176,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_agenda'
+  // Exported field: 'node-referat-field_agenda'.
   $fields['node-referat-field_agenda'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2170,6 +2197,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -2221,7 +2249,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_file'
+  // Exported field: 'node-referat-field_file'.
   $fields['node-referat-field_file'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2242,6 +2270,7 @@ function os2web_context_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 1,
@@ -2315,7 +2344,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_meeting_date'
+  // Exported field: 'node-referat-field_meeting_date'.
   $fields['node-referat-field_meeting_date'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2325,6 +2354,7 @@ function os2web_context_field_default_fields() {
       'field_name' => 'field_meeting_date',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'enddate' => 0,
@@ -2409,7 +2439,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_meetingtype1'
+  // Exported field: 'node-referat-field_meetingtype1'.
   $fields['node-referat-field_meetingtype1'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2430,6 +2460,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2486,7 +2517,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_meetingtype2'
+  // Exported field: 'node-referat-field_meetingtype2'.
   $fields['node-referat-field_meetingtype2'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2507,6 +2538,7 @@ function os2web_context_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2563,7 +2595,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_related_person'
+  // Exported field: 'node-referat-field_related_person'.
   $fields['node-referat-field_related_person'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2584,6 +2616,7 @@ function os2web_context_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -2659,7 +2692,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_related_tema'
+  // Exported field: 'node-referat-field_related_tema'.
   $fields['node-referat-field_related_tema'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2680,6 +2713,7 @@ function os2web_context_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -2755,7 +2789,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_resume_long'
+  // Exported field: 'node-referat-field_resume_long'.
   $fields['node-referat-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2776,6 +2810,7 @@ function os2web_context_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -2828,7 +2863,7 @@ function os2web_context_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-referat-field_source_id'
+  // Exported field: 'node-referat-field_source_id'.
   $fields['node-referat-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2838,6 +2873,7 @@ function os2web_context_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',

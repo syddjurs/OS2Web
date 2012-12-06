@@ -3,7 +3,7 @@ description = Alle contexts for sitet
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.7
+version = 7.x-1.10
 project = OS2Web
 dependencies[] = block
 dependencies[] = context
@@ -94,6 +94,8 @@ features[variable][] = comment_preview_referat
 features[variable][] = comment_referat
 features[variable][] = comment_subject_field_local_plan
 features[variable][] = comment_subject_field_referat
+features[variable][] = field_bundle_settings_node__esdh_dokument
+features[variable][] = field_bundle_settings_node__esdh_sag
 features[variable][] = language_content_type_esdh_dokument
 features[variable][] = language_content_type_esdh_sag
 features[variable][] = language_content_type_local_plan
@@ -118,16 +120,4 @@ features[variable][] = node_submitted_esdh_dokument
 features[variable][] = node_submitted_esdh_sag
 features[variable][] = node_submitted_local_plan
 features[variable][] = node_submitted_referat
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099

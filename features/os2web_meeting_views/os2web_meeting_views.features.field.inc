@@ -10,7 +10,7 @@
 function os2web_meeting_views_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-bullet_point-body'
+  // Exported field: 'node-bullet_point-body'.
   $fields['node-bullet_point-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -95,7 +96,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point-field_bul_point_closed'
+  // Exported field: 'node-bullet_point-field_bul_point_closed'.
   $fields['node-bullet_point-field_bul_point_closed'] = array(
     'field_config' => array(
       'active' => '1',
@@ -112,6 +113,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -178,7 +180,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point-field_enclosures'
+  // Exported field: 'node-bullet_point-field_enclosures'.
   $fields['node-bullet_point-field_enclosures'] = array(
     'field_config' => array(
       'active' => '1',
@@ -199,6 +201,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 1,
@@ -279,7 +282,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point-field_qbrick_ref'
+  // Exported field: 'node-bullet_point-field_qbrick_ref'.
   $fields['node-bullet_point-field_qbrick_ref'] = array(
     'field_config' => array(
       'active' => '1',
@@ -289,6 +292,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_qbrick_ref',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'os2web_qbrick',
       'settings' => array(),
       'translatable' => '0',
@@ -349,7 +353,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point-field_ref_attachment'
+  // Exported field: 'node-bullet_point-field_ref_attachment'.
   $fields['node-bullet_point-field_ref_attachment'] = array(
     'field_config' => array(
       'active' => '1',
@@ -370,6 +374,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'target_id',
         ),
       ),
+      'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
         'handler' => 'base',
@@ -405,6 +410,7 @@ function os2web_meeting_views_field_default_fields() {
           'label' => 'hidden',
           'module' => 'entityreference',
           'settings' => array(
+            'links' => TRUE,
             'view_mode' => 'full',
           ),
           'type' => 'entityreference_entity_view',
@@ -414,6 +420,7 @@ function os2web_meeting_views_field_default_fields() {
           'label' => 'hidden',
           'module' => 'entityreference',
           'settings' => array(
+            'links' => TRUE,
             'view_mode' => 'meeting_detail_view',
           ),
           'type' => 'entityreference_entity_view',
@@ -453,7 +460,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point_attachment-field_bpa_body'
+  // Exported field: 'node-bullet_point_attachment-field_bpa_body'.
   $fields['node-bullet_point_attachment-field_bpa_body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -474,6 +481,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -532,7 +540,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point_attachment-field_bpa_file'
+  // Exported field: 'node-bullet_point_attachment-field_bpa_file'.
   $fields['node-bullet_point_attachment-field_bpa_file'] = array(
     'field_config' => array(
       'active' => '1',
@@ -553,6 +561,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 1,
@@ -627,7 +636,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-bullet_point_attachment-field_bpa_id'
+  // Exported field: 'node-bullet_point_attachment-field_bpa_id'.
   $fields['node-bullet_point_attachment-field_bpa_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -637,6 +646,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_bpa_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -700,7 +710,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_addenum_to'
+  // Exported field: 'node-meeting-field_addenum_to'.
   $fields['node-meeting-field_addenum_to'] = array(
     'field_config' => array(
       'active' => '1',
@@ -721,6 +731,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -816,7 +827,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_committee'
+  // Exported field: 'node-meeting-field_committee'.
   $fields['node-meeting-field_committee'] = array(
     'field_config' => array(
       'active' => '1',
@@ -837,6 +848,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -903,7 +915,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_date'
+  // Exported field: 'node-meeting-field_date'.
   $fields['node-meeting-field_date'] = array(
     'field_config' => array(
       'active' => '1',
@@ -913,6 +925,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_date',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -1004,7 +1017,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_full_doc'
+  // Exported field: 'node-meeting-field_full_doc'.
   $fields['node-meeting-field_full_doc'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1025,6 +1038,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -1092,7 +1106,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_hex'
+  // Exported field: 'node-meeting-field_hex'.
   $fields['node-meeting-field_hex'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1113,6 +1127,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -1171,7 +1186,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_location'
+  // Exported field: 'node-meeting-field_location'.
   $fields['node-meeting-field_location'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1192,6 +1207,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1258,7 +1274,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_abbr'
+  // Exported field: 'node-meeting-field_meeting_abbr'.
   $fields['node-meeting-field_meeting_abbr'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1279,6 +1295,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '50',
@@ -1343,7 +1360,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_id'
+  // Exported field: 'node-meeting-field_meeting_id'.
   $fields['node-meeting-field_meeting_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1353,6 +1370,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_meeting_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -1416,7 +1434,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_is_regular'
+  // Exported field: 'node-meeting-field_meeting_is_regular'.
   $fields['node-meeting-field_meeting_is_regular'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1430,6 +1448,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1495,7 +1514,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_search_meta_date'
+  // Exported field: 'node-meeting-field_meeting_search_meta_date'.
   $fields['node-meeting-field_meeting_search_meta_date'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1505,6 +1524,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_meeting_search_meta_date',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'computed_field',
       'settings' => array(
         'code' => 'if (function_exists(\'_os2web_meeting_views_generate_search_data\')) {
@@ -1582,7 +1602,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_status'
+  // Exported field: 'node-meeting-field_meeting_status'.
   $fields['node-meeting-field_meeting_status'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1603,6 +1623,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1670,7 +1691,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_meeting_type'
+  // Exported field: 'node-meeting-field_meeting_type'.
   $fields['node-meeting-field_meeting_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1684,6 +1705,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1738,7 +1760,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_qbrick_ref'
+  // Exported field: 'node-meeting-field_qbrick_ref'.
   $fields['node-meeting-field_qbrick_ref'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1748,6 +1770,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_qbrick_ref',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'os2web_qbrick',
       'settings' => array(),
       'translatable' => '0',
@@ -1802,7 +1825,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_ref_bullet_points'
+  // Exported field: 'node-meeting-field_ref_bullet_points'.
   $fields['node-meeting-field_ref_bullet_points'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1823,6 +1846,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'target_id',
         ),
       ),
+      'locked' => '0',
       'module' => 'entityreference',
       'settings' => array(
         'handler' => 'base',
@@ -1873,6 +1897,7 @@ function os2web_meeting_views_field_default_fields() {
           'label' => 'hidden',
           'module' => 'entityreference',
           'settings' => array(
+            'links' => TRUE,
             'view_mode' => '',
           ),
           'type' => 'entityreference_entity_view',
@@ -1912,7 +1937,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-meeting-field_system_id'
+  // Exported field: 'node-meeting-field_system_id'.
   $fields['node-meeting-field_system_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1922,6 +1947,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_system_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -1980,7 +2006,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-committee-field_acadre_name'
+  // Exported field: 'taxonomy_term-committee-field_acadre_name'.
   $fields['taxonomy_term-committee-field_acadre_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2001,6 +2027,7 @@ function os2web_meeting_views_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '50',
@@ -2042,7 +2069,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-committee-field_date_valid'
+  // Exported field: 'taxonomy_term-committee-field_date_valid'.
   $fields['taxonomy_term-committee-field_date_valid'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2052,6 +2079,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_date_valid',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -2118,7 +2146,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-committee-field_external_url'
+  // Exported field: 'taxonomy_term-committee-field_external_url'.
   $fields['taxonomy_term-committee-field_external_url'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2128,6 +2156,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_external_url',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'link',
       'settings' => array(
         'attributes' => array(
@@ -2198,7 +2227,7 @@ function os2web_meeting_views_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-committee-field_id'
+  // Exported field: 'taxonomy_term-committee-field_id'.
   $fields['taxonomy_term-committee-field_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2208,6 +2237,7 @@ function os2web_meeting_views_field_default_fields() {
       'field_name' => 'field_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',

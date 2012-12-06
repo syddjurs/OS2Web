@@ -10,7 +10,7 @@
 function os2web_webform_downloads_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-webform-body'
+  // Exported field: 'node-webform-body'.
   $fields['node-webform-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -86,7 +87,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_editortags'
+  // Exported field: 'node-webform-field_editortags'.
   $fields['node-webform-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -107,6 +108,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -166,7 +168,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_organization'
+  // Exported field: 'node-webform-field_organization'.
   $fields['node-webform-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -187,6 +189,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -246,7 +249,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_resume_long'
+  // Exported field: 'node-webform-field_resume_long'.
   $fields['node-webform-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -267,6 +270,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -319,7 +323,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_site_structure'
+  // Exported field: 'node-webform-field_site_structure'.
   $fields['node-webform-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -340,6 +344,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -396,7 +401,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_termref_kle'
+  // Exported field: 'node-webform-field_termref_kle'.
   $fields['node-webform-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -417,6 +422,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -476,7 +482,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_termref_sofd'
+  // Exported field: 'node-webform-field_termref_sofd'.
   $fields['node-webform-field_termref_sofd'] = array(
     'field_config' => array(
       'active' => '1',
@@ -497,6 +503,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -556,7 +563,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_termref_sted'
+  // Exported field: 'node-webform-field_termref_sted'.
   $fields['node-webform-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -577,6 +584,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -636,7 +644,7 @@ function os2web_webform_downloads_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-webform-field_webform_attachment'
+  // Exported field: 'node-webform-field_webform_attachment'.
   $fields['node-webform-field_webform_attachment'] = array(
     'field_config' => array(
       'active' => '1',
@@ -657,6 +665,7 @@ function os2web_webform_downloads_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,

@@ -10,7 +10,7 @@
 function os2web_indholdstyper_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-contentpage-body'
+  // Exported field: 'node-contentpage-body'.
   $fields['node-contentpage-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -95,7 +96,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_billede'
+  // Exported field: 'node-contentpage-field_billede'.
   $fields['node-contentpage-field_billede'] = array(
     'field_config' => array(
       'active' => '1',
@@ -116,6 +117,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -182,7 +184,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '470x230',
         'title_field' => 0,
-        'title_field_required' => 0,
+        'title_field_required' => 1,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -191,10 +193,10 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
+            'youtube' => 0,
           ),
           'allowed_types' => array(
             'audio' => 0,
-            0 => 0,
             'default' => 0,
             'image' => 'image',
             'video' => 0,
@@ -208,7 +210,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_case'
+  // Exported field: 'node-contentpage-field_case'.
   $fields['node-contentpage-field_case'] = array(
     'field_config' => array(
       'active' => '1',
@@ -218,6 +220,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_case',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'os2web_case_field',
       'settings' => array(),
       'translatable' => '0',
@@ -266,7 +269,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_doc'
+  // Exported field: 'node-contentpage-field_doc'.
   $fields['node-contentpage-field_doc'] = array(
     'field_config' => array(
       'active' => '1',
@@ -280,6 +283,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'doc_ident',
         ),
       ),
+      'locked' => '0',
       'module' => 'os2web_doc_field',
       'settings' => array(),
       'translatable' => '0',
@@ -328,7 +332,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_editortags'
+  // Exported field: 'node-contentpage-field_editortags'.
   $fields['node-contentpage-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -349,6 +353,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -404,7 +409,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_indholdsside_spotboxe'
+  // Exported field: 'node-contentpage-field_indholdsside_spotboxe'.
   $fields['node-contentpage-field_indholdsside_spotboxe'] = array(
     'field_config' => array(
       'active' => '1',
@@ -425,6 +430,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -502,7 +508,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_lead_image'
+  // Exported field: 'node-contentpage-field_lead_image'.
   $fields['node-contentpage-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -523,6 +529,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -611,11 +618,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 0,
-            0 => 0,
             'image' => 'image',
             'video' => 'video',
+            0 => 0,
+            'audio' => 0,
+            'default' => 0,
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -626,7 +633,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_mediafile'
+  // Exported field: 'node-contentpage-field_mediafile'.
   $fields['node-contentpage-field_mediafile'] = array(
     'field_config' => array(
       'active' => '1',
@@ -647,6 +654,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -700,11 +708,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 'default',
-            0 => 0,
             'image' => 0,
             'video' => 0,
+            0 => 0,
+            'audio' => 0,
+            'default' => 'default',
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -715,7 +723,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_node_reference_kontaktblok'
+  // Exported field: 'node-contentpage-field_node_reference_kontaktblok'.
   $fields['node-contentpage-field_node_reference_kontaktblok'] = array(
     'field_config' => array(
       'active' => '1',
@@ -736,6 +744,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -814,7 +823,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_noderef_selvbtjn'
+  // Exported field: 'node-contentpage-field_noderef_selvbtjn'.
   $fields['node-contentpage-field_noderef_selvbtjn'] = array(
     'field_config' => array(
       'active' => '1',
@@ -835,6 +844,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -913,7 +923,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_organization'
+  // Exported field: 'node-contentpage-field_organization'.
   $fields['node-contentpage-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -934,6 +944,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -989,7 +1000,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_politics'
+  // Exported field: 'node-contentpage-field_politics'.
   $fields['node-contentpage-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1010,6 +1021,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1065,7 +1077,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_resume_long'
+  // Exported field: 'node-contentpage-field_resume_long'.
   $fields['node-contentpage-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1086,6 +1098,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1139,7 +1152,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_rotate_publish'
+  // Exported field: 'node-contentpage-field_rotate_publish'.
   $fields['node-contentpage-field_rotate_publish'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1149,6 +1162,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_rotate_publish',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -1214,7 +1228,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_site_structure'
+  // Exported field: 'node-contentpage-field_site_structure'.
   $fields['node-contentpage-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1235,6 +1249,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1285,7 +1300,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_skjul_relaterede_links'
+  // Exported field: 'node-contentpage-field_skjul_relaterede_links'.
   $fields['node-contentpage-field_skjul_relaterede_links'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1299,6 +1314,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1352,7 +1368,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_source_id'
+  // Exported field: 'node-contentpage-field_source_id'.
   $fields['node-contentpage-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1362,6 +1378,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -1413,7 +1430,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_termref_kle'
+  // Exported field: 'node-contentpage-field_termref_kle'.
   $fields['node-contentpage-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1434,6 +1451,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1489,7 +1507,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-contentpage-field_termref_sted'
+  // Exported field: 'node-contentpage-field_termref_sted'.
   $fields['node-contentpage-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1510,6 +1528,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1565,7 +1584,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-body'
+  // Exported field: 'node-galleri-body'.
   $fields['node-galleri-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1588,6 +1607,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1647,7 +1667,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_editortags'
+  // Exported field: 'node-galleri-field_editortags'.
   $fields['node-galleri-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1668,6 +1688,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1729,7 +1750,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_foto'
+  // Exported field: 'node-galleri-field_foto'.
   $fields['node-galleri-field_foto'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1750,6 +1771,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -1854,7 +1876,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_inherit_right_column'
+  // Exported field: 'node-galleri-field_inherit_right_column'.
   $fields['node-galleri-field_inherit_right_column'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1868,6 +1890,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1927,7 +1950,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_lead_image'
+  // Exported field: 'node-galleri-field_lead_image'.
   $fields['node-galleri-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1948,6 +1971,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -2024,7 +2048,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_organization'
+  // Exported field: 'node-galleri-field_organization'.
   $fields['node-galleri-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2045,6 +2069,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2106,7 +2131,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_parent_node'
+  // Exported field: 'node-galleri-field_parent_node'.
   $fields['node-galleri-field_parent_node'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2127,6 +2152,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -2208,7 +2234,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_politics'
+  // Exported field: 'node-galleri-field_politics'.
   $fields['node-galleri-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2229,6 +2255,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2291,7 +2318,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_site_structure'
+  // Exported field: 'node-galleri-field_site_structure'.
   $fields['node-galleri-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2312,6 +2339,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2368,7 +2396,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_termref_kle'
+  // Exported field: 'node-galleri-field_termref_kle'.
   $fields['node-galleri-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2389,6 +2417,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2450,7 +2479,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-galleri-field_termref_sted'
+  // Exported field: 'node-galleri-field_termref_sted'.
   $fields['node-galleri-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2471,6 +2500,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2532,7 +2562,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-body'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-body'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2555,6 +2585,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -2617,7 +2648,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_editortags'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_editortags'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2638,6 +2669,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2699,7 +2731,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_iframe_url'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_iframe_url'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_iframe_url'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2720,6 +2752,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -2776,7 +2809,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_organization'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_organization'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2797,6 +2830,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2858,7 +2892,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_politics'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_politics'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2879,6 +2913,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -2940,7 +2975,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_source_id'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_source_id'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -2950,6 +2985,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -3001,7 +3037,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_termref_kle'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_termref_kle'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3022,6 +3058,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -3083,7 +3120,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_termref_sted'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_termref_sted'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3104,6 +3141,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -3166,7 +3204,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_text'
+  // Exported field: 'node-iframe_selvbetjeningsl_sning_mm-field_text'.
   $fields['node-iframe_selvbetjeningsl_sning_mm-field_text'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3187,6 +3225,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -3238,7 +3277,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-body'
+  // Exported field: 'node-media-body'.
   $fields['node-media-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3261,6 +3300,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -3317,7 +3357,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_inherit_right_column'
+  // Exported field: 'node-media-field_inherit_right_column'.
   $fields['node-media-field_inherit_right_column'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3331,6 +3371,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -3390,7 +3431,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_lead_image'
+  // Exported field: 'node-media-field_lead_image'.
   $fields['node-media-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3411,6 +3452,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -3492,7 +3534,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_mediafile'
+  // Exported field: 'node-media-field_mediafile'.
   $fields['node-media-field_mediafile'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3513,6 +3555,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -3586,7 +3629,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_parent_node'
+  // Exported field: 'node-media-field_parent_node'.
   $fields['node-media-field_parent_node'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3607,6 +3650,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -3688,7 +3732,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_resume_long'
+  // Exported field: 'node-media-field_resume_long'.
   $fields['node-media-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3709,6 +3753,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -3761,7 +3806,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_site_structure'
+  // Exported field: 'node-media-field_site_structure'.
   $fields['node-media-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3782,6 +3827,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -3838,7 +3884,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-media-field_source_id'
+  // Exported field: 'node-media-field_source_id'.
   $fields['node-media-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3848,6 +3894,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -3899,7 +3946,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-body'
+  // Exported field: 'node-news-body'.
   $fields['node-news-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3922,6 +3969,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -3987,7 +4035,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_additional_info'
+  // Exported field: 'node-news-field_additional_info'.
   $fields['node-news-field_additional_info'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4008,6 +4056,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -4064,7 +4113,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_editortags'
+  // Exported field: 'node-news-field_editortags'.
   $fields['node-news-field_editortags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4085,6 +4134,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -4144,7 +4194,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_lead_image'
+  // Exported field: 'node-news-field_lead_image'.
   $fields['node-news-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4165,6 +4215,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -4265,7 +4316,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_organization'
+  // Exported field: 'node-news-field_organization'.
   $fields['node-news-field_organization'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4286,6 +4337,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -4345,7 +4397,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_politics'
+  // Exported field: 'node-news-field_politics'.
   $fields['node-news-field_politics'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4366,6 +4418,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -4426,7 +4479,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_promoteto'
+  // Exported field: 'node-news-field_promoteto'.
   $fields['node-news-field_promoteto'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4447,6 +4500,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -4503,7 +4557,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_related'
+  // Exported field: 'node-news-field_related'.
   $fields['node-news-field_related'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4524,6 +4578,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -4605,7 +4660,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_related_tema'
+  // Exported field: 'node-news-field_related_tema'.
   $fields['node-news-field_related_tema'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4626,6 +4681,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -4707,7 +4763,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_resume_long'
+  // Exported field: 'node-news-field_resume_long'.
   $fields['node-news-field_resume_long'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4728,6 +4784,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -4792,7 +4849,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_site_structure'
+  // Exported field: 'node-news-field_site_structure'.
   $fields['node-news-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4813,6 +4870,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -4869,7 +4927,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_source_id'
+  // Exported field: 'node-news-field_source_id'.
   $fields['node-news-field_source_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4879,6 +4937,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_source_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -4936,7 +4995,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_termref_kle'
+  // Exported field: 'node-news-field_termref_kle'.
   $fields['node-news-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -4957,6 +5016,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -5016,7 +5076,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-news-field_termref_sted'
+  // Exported field: 'node-news-field_termref_sted'.
   $fields['node-news-field_termref_sted'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5037,6 +5097,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -5096,7 +5157,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-body'
+  // Exported field: 'node-rotating_image-body'.
   $fields['node-rotating_image-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5119,6 +5180,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -5175,7 +5237,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-field_promoteto'
+  // Exported field: 'node-rotating_image-field_promoteto'.
   $fields['node-rotating_image-field_promoteto'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5196,6 +5258,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -5253,7 +5316,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-field_rotate_image'
+  // Exported field: 'node-rotating_image-field_rotate_image'.
   $fields['node-rotating_image-field_rotate_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5274,6 +5337,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -5352,7 +5416,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-field_rotate_publish'
+  // Exported field: 'node-rotating_image-field_rotate_publish'.
   $fields['node-rotating_image-field_rotate_publish'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5362,6 +5426,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_rotate_publish',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -5440,7 +5505,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-field_rotating_link'
+  // Exported field: 'node-rotating_image-field_rotating_link'.
   $fields['node-rotating_image-field_rotating_link'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5450,6 +5515,7 @@ function os2web_indholdstyper_field_default_fields() {
       'field_name' => 'field_rotating_link',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'link',
       'settings' => array(
         'attributes' => array(
@@ -5528,7 +5594,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-rotating_image-field_site_structure'
+  // Exported field: 'node-rotating_image-field_site_structure'.
   $fields['node-rotating_image-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5549,6 +5615,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -5606,7 +5673,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_attached_node'
+  // Exported field: 'node-selvbetjeningslinks-field_attached_node'.
   $fields['node-selvbetjeningslinks-field_attached_node'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5627,6 +5694,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -5711,7 +5779,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_gruppe_id'
+  // Exported field: 'node-selvbetjeningslinks-field_gruppe_id'.
   $fields['node-selvbetjeningslinks-field_gruppe_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5732,6 +5800,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -5784,7 +5853,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_kilde'
+  // Exported field: 'node-selvbetjeningslinks-field_kilde'.
   $fields['node-selvbetjeningslinks-field_kilde'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5805,6 +5874,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -5862,7 +5932,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_selvbetjening_direkte'
+  // Exported field: 'node-selvbetjeningslinks-field_selvbetjening_direkte'.
   $fields['node-selvbetjeningslinks-field_selvbetjening_direkte'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5883,6 +5953,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '254',
@@ -5936,7 +6007,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_selvbetjeningslink_type'
+  // Exported field: 'node-selvbetjeningslinks-field_selvbetjeningslink_type'.
   $fields['node-selvbetjeningslinks-field_selvbetjeningslink_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -5950,6 +6021,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -6010,7 +6082,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_site_structure'
+  // Exported field: 'node-selvbetjeningslinks-field_site_structure'.
   $fields['node-selvbetjeningslinks-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -6031,6 +6103,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -6088,7 +6161,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-selvbetjeningslinks-field_termref_kle'
+  // Exported field: 'node-selvbetjeningslinks-field_termref_kle'.
   $fields['node-selvbetjeningslinks-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -6109,6 +6182,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -6169,7 +6243,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_attached_node'
+  // Exported field: 'taxonomy_term-site_struktur-field_attached_node'.
   $fields['taxonomy_term-site_struktur-field_attached_node'] = array(
     'field_config' => array(
       'active' => '1',
@@ -6190,6 +6264,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -6262,7 +6337,7 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_attached_node_fokus'
+  // Exported field: 'taxonomy_term-site_struktur-field_attached_node_fokus'.
   $fields['taxonomy_term-site_struktur-field_attached_node_fokus'] = array(
     'field_config' => array(
       'active' => '1',
@@ -6283,6 +6358,7 @@ function os2web_indholdstyper_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(

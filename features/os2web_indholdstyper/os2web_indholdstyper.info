@@ -3,7 +3,7 @@ description = Frit overtaget fra Ballerup
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.7
+version = 7.x-1.10
 project = OS2Web
 dependencies[] = balk_custom
 dependencies[] = borger_dk_integration
@@ -175,6 +175,12 @@ features[variable][] = comment_subject_field_galleri
 features[variable][] = comment_subject_field_iframe_selvbetjeningsl_sning_mm
 features[variable][] = comment_subject_field_media
 features[variable][] = comment_subject_field_news
+features[variable][] = field_bundle_settings_node__contentpage
+features[variable][] = field_bundle_settings_node__galleri
+features[variable][] = field_bundle_settings_node__iframe_selvbetjeningsl_sning_mm
+features[variable][] = field_bundle_settings_node__news
+features[variable][] = field_bundle_settings_node__rotating_image
+features[variable][] = field_bundle_settings_node__selvbetjeningslinks
 features[variable][] = language_content_type_contentpage
 features[variable][] = language_content_type_galleri
 features[variable][] = language_content_type_iframe_selvbetjeningsl_sning_mm
@@ -221,16 +227,4 @@ features[variable][] = node_submitted_media
 features[variable][] = node_submitted_news
 features[variable][] = node_submitted_rotating_image
 features[variable][] = node_submitted_selvbetjeningslinks
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099
