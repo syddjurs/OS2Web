@@ -123,7 +123,18 @@ function _os2web_esdh_provider_import_access() {
  */
 function os2web_esdh_provider_node_delete($node) {
   if ($node->type === 'meeting') {
-    // TODO: Delete bullets from meeting.
+    // Remove any addenums relating to this node.
+    $query = new EntityFieldQuery();
+    $result = array_keys(array_shift($query->entityCondition('entity_type', 'node')
+        ->propertyCondition('type', 'meeting')
+        ->fieldCondition('field_addenum_to', 'nid', $node->nid, '=')
+        ->execute()));
+    if (is_array($results)) {
+      foreach ($result as $add_node) {
+        node_delete($add_node->nid);
+      }
+    }
+    // Delete bullets from meeting.
     $items = array_shift($node->field_ref_bullet_points);
     if (is_array($items)) {
       foreach ($items as $nids) {
@@ -132,7 +143,7 @@ function os2web_esdh_provider_node_delete($node) {
     }
   }
   if ($node->type === 'bullet_point') {
-    // TODO: Delete bullet attachments from meeting.
+    // Delete bullet attachments from meeting.
     $bullets = array_shift($node->field_ref_attachment);
     if (is_array($bullets)) {
       foreach ($bullets as $nids) {
