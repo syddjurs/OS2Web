@@ -10,31 +10,31 @@
 function os2web_menuer_og_blokke_menu_default_menu_custom() {
   $menus = array();
 
-  // Exported menu: main-menu
+  // Exported menu: main-menu.
   $menus['main-menu'] = array(
     'menu_name' => 'main-menu',
     'title' => 'Main menu',
     'description' => 'The <em>Main</em> menu is used on many sites to show the major sections of the site, often in a top navigation bar.',
   );
-  // Exported menu: menu-andre-netsteder
+  // Exported menu: menu-andre-netsteder.
   $menus['menu-andre-netsteder'] = array(
     'menu_name' => 'menu-andre-netsteder',
     'title' => 'Andre netsteder',
     'description' => '',
   );
-  // Exported menu: menu-erhverv-genveje
+  // Exported menu: menu-erhverv-genveje.
   $menus['menu-erhverv-genveje'] = array(
     'menu_name' => 'menu-erhverv-genveje',
     'title' => 'Din kommune',
     'description' => 'Spørgsmål om din kommune',
   );
-  // Exported menu: menu-indholdsmenu
+  // Exported menu: menu-indholdsmenu.
   $menus['menu-indholdsmenu'] = array(
     'menu_name' => 'menu-indholdsmenu',
     'title' => 'Indholdsmenu',
     'description' => '',
   );
-  // Exported menu: user-menu
+  // Exported menu: user-menu.
   $menus['user-menu'] = array(
     'menu_name' => 'user-menu',
     'title' => 'User menu',

@@ -2,23 +2,11 @@ name = OS2Web Selvbetjeningslinks
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.7
+version = 7.x-1.10
 project = OS2Web
 dependencies[] = ctools
 dependencies[] = feeds
 features[ctools][] = feeds:feeds_importer_default:1
 features[features_api][] = api:1
 features[feeds_importer][] = borger_online
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099

@@ -10,7 +10,7 @@
 function ofir_job_index_integration_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-ofir_job-field_logo'
+  // Exported field: 'node-ofir_job-field_logo'.
   $fields['node-ofir_job-field_logo'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function ofir_job_index_integration_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -112,7 +113,7 @@ function ofir_job_index_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-ofir_job-field_period'
+  // Exported field: 'node-ofir_job-field_period'.
   $fields['node-ofir_job-field_period'] = array(
     'field_config' => array(
       'active' => '1',
@@ -122,6 +123,7 @@ function ofir_job_index_integration_field_default_fields() {
       'field_name' => 'field_period',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -207,7 +209,7 @@ function ofir_job_index_integration_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-ofir_job-field_text'
+  // Exported field: 'node-ofir_job-field_text'.
   $fields['node-ofir_job-field_text'] = array(
     'field_config' => array(
       'active' => '1',
@@ -228,6 +230,7 @@ function ofir_job_index_integration_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',

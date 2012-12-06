@@ -10,7 +10,7 @@
 function os2web_kontaktblok_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-kontaktblok-field_afdeling'
+  // Exported field: 'node-kontaktblok-field_afdeling'.
   $fields['node-kontaktblok-field_afdeling'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -88,7 +89,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_email'
+  // Exported field: 'node-kontaktblok-field_email'.
   $fields['node-kontaktblok-field_email'] = array(
     'field_config' => array(
       'active' => '1',
@@ -109,6 +110,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '100',
@@ -162,7 +164,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_freaa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_freaa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_freaa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -183,6 +185,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -240,7 +243,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_frelk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_frelk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_frelk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -261,6 +264,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '5',
@@ -318,7 +322,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_loeaa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_loeaa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_loeaa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -339,6 +343,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -391,7 +396,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_loelk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_loelk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_loelk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -412,6 +417,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -465,7 +471,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manaa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manaa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_manaa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -486,6 +492,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -543,7 +550,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manlk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manlk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_manlk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -564,6 +571,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '5',
@@ -621,7 +629,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manolk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manolk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_manolk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -642,6 +650,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -699,7 +708,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manons'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_manons'.
   $fields['node-kontaktblok-field_kontaktblok_aa_manons'] = array(
     'field_config' => array(
       'active' => '1',
@@ -720,6 +729,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -777,7 +787,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_onsaa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_onsaa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_onsaa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -798,6 +808,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -855,7 +866,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_onslk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_onslk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_onslk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -876,6 +887,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '5',
@@ -933,7 +945,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_soeaa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_soeaa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_soeaa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -954,6 +966,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -1007,7 +1020,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_soelk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_soelk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_soelk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1028,6 +1041,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -1081,7 +1095,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_tiraa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_tiraa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_tiraa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1102,6 +1116,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -1159,7 +1174,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_tirlk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_tirlk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_tirlk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1180,6 +1195,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '5',
@@ -1237,7 +1253,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_toraa'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_toraa'.
   $fields['node-kontaktblok-field_kontaktblok_aa_toraa'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1258,6 +1274,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '6',
@@ -1315,7 +1332,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_torlk'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_aa_torlk'.
   $fields['node-kontaktblok-field_kontaktblok_aa_torlk'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1336,6 +1353,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '5',
@@ -1393,7 +1411,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_callcenter'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_callcenter'.
   $fields['node-kontaktblok-field_kontaktblok_callcenter'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1407,6 +1425,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1467,7 +1486,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_egetindhold'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_egetindhold'.
   $fields['node-kontaktblok-field_kontaktblok_egetindhold'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1488,6 +1507,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -1548,7 +1568,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_kontaktblok_vis_aabnen'
+  // Exported field: 'node-kontaktblok-field_kontaktblok_vis_aabnen'.
   $fields['node-kontaktblok-field_kontaktblok_vis_aabnen'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1562,6 +1582,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'value',
         ),
       ),
+      'locked' => '0',
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
@@ -1622,7 +1643,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_phone1'
+  // Exported field: 'node-kontaktblok-field_phone1'.
   $fields['node-kontaktblok-field_phone1'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1632,6 +1653,7 @@ function os2web_kontaktblok_field_default_fields() {
       'field_name' => 'field_phone1',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -1689,7 +1711,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_stedadresse'
+  // Exported field: 'node-kontaktblok-field_stedadresse'.
   $fields['node-kontaktblok-field_stedadresse'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1710,6 +1732,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1763,7 +1786,7 @@ function os2web_kontaktblok_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-kontaktblok-field_stedpostnr'
+  // Exported field: 'node-kontaktblok-field_stedpostnr'.
   $fields['node-kontaktblok-field_stedpostnr'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1784,6 +1807,7 @@ function os2web_kontaktblok_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',

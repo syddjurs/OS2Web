@@ -2,7 +2,7 @@ name = OS2Web Design
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.7
+version = 7.x-1.10
 project = os2web_design
 dependencies[] = bg_image
 dependencies[] = bg_image_ui
@@ -10,12 +10,10 @@ dependencies[] = ctools
 dependencies[] = delta
 dependencies[] = delta_ui
 dependencies[] = features
-dependencies[] = fontyourface
 dependencies[] = image
 dependencies[] = media
 dependencies[] = scheduler
 dependencies[] = strongarm
-dependencies[] = typekit_api
 datestamp = 1338117520
 features[ctools][] = delta:delta:3
 features[ctools][] = strongarm:strongarm:1
@@ -27,9 +25,6 @@ features[delta][] = portalforside
 features[delta][] = standard
 features[features_api][] = api:1
 features[field][] = node-baggrund-field_side_baggrungsbillede
-features[fontyourface][] = Myriad Pro Bold
-features[fontyourface][] = Myriad Pro Light
-features[fontyourface][] = Myriad Pro Regular
 features[node][] = baggrund
 features[user_permission][] = administer background image
 features[user_permission][] = administer delta
@@ -53,17 +48,4 @@ features[variable][] = scheduler_publish_touch_baggrund
 features[variable][] = scheduler_unpublish_enable_baggrund
 features[variable][] = scheduler_unpublish_required_baggrund
 features[variable][] = scheduler_unpublish_revision_baggrund
-features[variable][] = typekit_api_token
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099
