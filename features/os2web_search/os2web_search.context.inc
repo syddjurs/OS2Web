@@ -46,9 +46,6 @@ function os2web_search_context_default_contexts() {
         ),
       ),
     ),
-    'delta' => array(
-      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
-    ),
   );
   $context->condition_mode = 0;
 

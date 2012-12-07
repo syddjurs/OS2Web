@@ -152,60 +152,19 @@ function os2web_context_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'forside';
-  $context->description = 'Forside blokke';
-  $context->tag = '';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '<front>' => '<front>',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'delta' => array(
-      'delta_template' => 'os2web_cmstheme_forside',
-    ),
-    'theme_html' => array(
-      'class' => 'os2web-forside',
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Forside blokke');
-  $export['forside'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'global';
-  $context->description = 'Globale højre blokke';
-  $context->tag = '';
+  $context->description = 'Globale blokke';
+  $context->tag = 'OS2Web - Generelt';
   $context->conditions = array(
-    'node' => array(
+    'sitewide' => array(
       'values' => array(
-        'contentpage' => 'contentpage',
-        'galleri' => 'galleri',
-        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
-        'news' => 'news',
-        'sektionsside' => 'sektionsside',
-      ),
-      'options' => array(
-        'node_form' => '1',
+        1 => 1,
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-redaktoer_info-block' => array(
-          'module' => 'views',
-          'delta' => 'redaktoer_info-block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'menu-menu-top-menu' => array(
           'module' => 'menu',
           'delta' => 'menu-top-menu',
@@ -217,42 +176,6 @@ function os2web_context_context_default_contexts() {
           'delta' => 'action-links',
           'region' => 'user_second',
           'weight' => '-10',
-        ),
-        'search-form' => array(
-          'module' => 'search',
-          'delta' => 'form',
-          'region' => 'menu',
-          'weight' => '-10',
-        ),
-        'menu_block-12' => array(
-          'module' => 'menu_block',
-          'delta' => '12',
-          'region' => 'sidebar_first',
-          'weight' => '-7',
-        ),
-        'views-selvbetjening-block_6' => array(
-          'module' => 'views',
-          'delta' => 'selvbetjening-block_6',
-          'region' => 'sidebar_second',
-          'weight' => '-69',
-        ),
-        'views-kontaktblok-block' => array(
-          'module' => 'views',
-          'delta' => 'kontaktblok-block',
-          'region' => 'sidebar_second',
-          'weight' => '-68',
-        ),
-        'views-spot_view-block_1' => array(
-          'module' => 'views',
-          'delta' => 'spot_view-block_1',
-          'region' => 'sidebar_second',
-          'weight' => '-67',
-        ),
-        'views-kle_lonks_boks-kle_links_boks' => array(
-          'module' => 'views',
-          'delta' => 'kle_lonks_boks-kle_links_boks',
-          'region' => 'sidebar_second',
-          'weight' => '-66',
         ),
         'menu-menu-erhverv-genveje' => array(
           'module' => 'menu',
@@ -267,79 +190,9 @@ function os2web_context_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Globale højre blokke');
-  $export['global'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'hide_second_sidebar';
-  $context->description = 'Skjul højre kolonne på iframesider';
-  $context->tag = 'OS2Web - Generelt';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
-        'meeting' => 'meeting',
-        'sektionsside' => 'sektionsside',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-    'path' => array(
-      'values' => array(
-        'node/add/*' => 'node/add/*',
-        'node/*/edit' => 'node/*/edit',
-        'brugers-indhold' => 'brugers-indhold',
-        'meeting*' => 'meeting*',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'delta' => array(
-      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
+  t('Globale blokke');
   t('OS2Web - Generelt');
-  t('Skjul højre kolonne på iframesider');
-  $export['hide_second_sidebar'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'hide_second_sidebar_indholdssider';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'contentpage' => 'contentpage',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-    'node_taxonomy' => array(
-      'values' => array(
-        2 => 2,
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'delta' => array(
-      'delta_template' => 'hide_second_sidebar',
-    ),
-  );
-  $context->condition_mode = 1;
-  $export['hide_second_sidebar_indholdssider'] = $context;
+  $export['global'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -433,89 +286,6 @@ function os2web_context_context_default_contexts() {
   // Included for use with string extractors like potx.
   t('OS2Web - Generelt');
   $export['portalforside'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'sektionsforside';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'sektionsside' => 'sektionsside',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'menu_block-12' => array(
-          'module' => 'menu_block',
-          'delta' => 12,
-          'region' => 'sidebar_first',
-          'weight' => '2',
-        ),
-      ),
-    ),
-    'delta' => array(
-      'delta_template' => 'portalforside',
-    ),
-  );
-  $context->condition_mode = 0;
-  $export['sektionsforside'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'venstre_menu_2';
-  $context->description = '';
-  $context->tag = '';
-  $context->conditions = array(
-    'node' => array(
-      'values' => array(
-        'contentpage' => 'contentpage',
-        'esdh_dokument' => 'esdh_dokument',
-        'esdh_sag' => 'esdh_sag',
-        'galleri' => 'galleri',
-        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
-        'local_plan' => 'local_plan',
-        'referat' => 'referat',
-        'webform' => 'webform',
-      ),
-      'options' => array(
-        'node_form' => '1',
-      ),
-    ),
-    'taxonomy_term' => array(
-      'values' => array(
-        'site_struktur' => 'site_struktur',
-      ),
-      'options' => array(
-        'term_form' => '1',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'menu_block-12' => array(
-          'module' => 'menu_block',
-          'delta' => 12,
-          'region' => 'sidebar_first',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-    'delta' => array(
-      'delta_template' => 'standard',
-    ),
-  );
-  $context->condition_mode = 0;
-  $export['venstre_menu_2'] = $context;
 
   return $export;
 }
