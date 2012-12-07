@@ -116,7 +116,7 @@ function os2web_context_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'footerblokke';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'OS2Web - Generelt';
   $context->conditions = array(
     'sitewide' => array(
       'values' => array(
@@ -135,7 +135,7 @@ function os2web_context_context_default_contexts() {
         ),
         'block-6' => array(
           'module' => 'block',
-          'delta' => 6,
+          'delta' => '6',
           'region' => 'footer_third',
           'weight' => '-10',
         ),
@@ -143,6 +143,10 @@ function os2web_context_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('OS2Web - Generelt');
   $export['footerblokke'] = $context;
 
   $context = new stdClass();
@@ -160,7 +164,10 @@ function os2web_context_context_default_contexts() {
   );
   $context->reactions = array(
     'delta' => array(
-      'delta_template' => 'foside',
+      'delta_template' => 'os2web_cmstheme_forside',
+    ),
+    'theme_html' => array(
+      'class' => 'os2web-forside',
     ),
   );
   $context->condition_mode = 0;
@@ -211,9 +218,15 @@ function os2web_context_context_default_contexts() {
           'region' => 'user_second',
           'weight' => '-10',
         ),
+        'search-form' => array(
+          'module' => 'search',
+          'delta' => 'form',
+          'region' => 'menu',
+          'weight' => '-10',
+        ),
         'menu_block-12' => array(
           'module' => 'menu_block',
-          'delta' => 12,
+          'delta' => '12',
           'region' => 'sidebar_first',
           'weight' => '-7',
         ),
@@ -262,7 +275,7 @@ function os2web_context_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'hide_second_sidebar';
   $context->description = 'Skjul højre kolonne på iframesider';
-  $context->tag = '';
+  $context->tag = 'OS2Web - Generelt';
   $context->conditions = array(
     'node' => array(
       'values' => array(
@@ -285,13 +298,14 @@ function os2web_context_context_default_contexts() {
   );
   $context->reactions = array(
     'delta' => array(
-      'delta_template' => 'hide_second_sidebar',
+      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
     ),
   );
   $context->condition_mode = 0;
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('OS2Web - Generelt');
   t('Skjul højre kolonne på iframesider');
   $export['hide_second_sidebar'] = $context;
 
@@ -382,7 +396,7 @@ function os2web_context_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'portalforside';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'OS2Web - Generelt';
   $context->conditions = array(
     'path' => array(
       'values' => array(
@@ -403,17 +417,21 @@ function os2web_context_context_default_contexts() {
         ),
         'menu_block-11' => array(
           'module' => 'menu_block',
-          'delta' => 11,
+          'delta' => '11',
           'region' => 'sidebar_first',
           'weight' => '-9',
         ),
       ),
     ),
     'delta' => array(
-      'delta_template' => 'portalforside',
+      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
     ),
   );
   $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('OS2Web - Generelt');
   $export['portalforside'] = $context;
 
   $context = new stdClass();
