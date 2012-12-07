@@ -1,0 +1,12 @@
+name = OS2Web CMStheme Delta
+core = 7.x
+package = OS2Web - CMS Theme
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = os2web_indholdstyper
+dependencies[] = os2web_meeting_views
+dependencies[] = os2web_sektionssider
+features[context][] = forside
+features[context][] = hide_second_sidebar
+features[ctools][] = context:context:3
+features[features_api][] = api:1
