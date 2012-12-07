@@ -14,8 +14,8 @@ function os2web_search_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'search';
-  $context->description = '';
-  $context->tag = 'OS2Web - Generelt';
+  $context->description = 'Generelle søgeindstillinger';
+  $context->tag = 'OS2Web - Search';
   $context->conditions = array(
     'path' => array(
       'values' => array(
@@ -54,7 +54,8 @@ function os2web_search_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('OS2Web - Generelt');
+  t('Generelle søgeindstillinger');
+  t('OS2Web - Search');
   $export['search'] = $context;
 
   $context = new stdClass();
@@ -62,7 +63,7 @@ function os2web_search_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'soegefelt';
   $context->description = 'Søgefelt';
-  $context->tag = '';
+  $context->tag = 'OS2Web - Search';
   $context->conditions = array(
     'sitewide' => array(
       'values' => array(
@@ -86,6 +87,7 @@ function os2web_search_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('OS2Web - Search');
   t('Søgefelt');
   $export['soegefelt'] = $context;
 
