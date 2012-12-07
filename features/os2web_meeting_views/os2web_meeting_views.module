@@ -74,22 +74,6 @@ function _os2web_meeting_views_get_exposed_filter() {
   return $he;
 }
 
-function os2web_meeting_views_preprocess_page(&$vars) {
-  $js = <<< JS
-      (function ($) {
-       var is_visible = false;
-       $(".").wrapInner('<a href="#" class="toggleLink">');
-       $(".item-list").wrap('<div class="toggle">');
-       $('.toggle').hide();
-       $('a.toggleLink').click(function() {
-         $(this).parent().next('.toggle').toggle();
-         return false;
-         });
-   }(jQuery));
-JS;
-  drupal_add_js($js, array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
-}
-
 /**
  * Helper function for the meetings_search view 
  * 
