@@ -15,7 +15,7 @@ function os2web_search_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'search';
   $context->description = '';
-  $context->tag = '';
+  $context->tag = 'OS2Web - Generelt';
   $context->conditions = array(
     'path' => array(
       'values' => array(
@@ -47,10 +47,14 @@ function os2web_search_context_default_contexts() {
       ),
     ),
     'delta' => array(
-      'delta_template' => 'hide_second_sidebar',
+      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
     ),
   );
   $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('OS2Web - Generelt');
   $export['search'] = $context;
 
   $context = new stdClass();
