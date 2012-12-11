@@ -43,8 +43,8 @@ function os2web_cmstheme_delta_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'hide_second_sidebar';
-  $context->description = 'Fjerner højre kolonne på udvalgte sider';
-  $context->tag = 'OS2Web - CMSTheme';
+  $context->description = 'Skjul højre kolonne på iframesider';
+  $context->tag = '';
   $context->conditions = array(
     'node' => array(
       'values' => array(
@@ -62,21 +62,19 @@ function os2web_cmstheme_delta_context_default_contexts() {
         'node/*/edit' => 'node/*/edit',
         'brugers-indhold' => 'brugers-indhold',
         'meeting*' => 'meeting*',
-        'search/*' => 'search/*',
       ),
     ),
   );
   $context->reactions = array(
     'delta' => array(
-      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
+      'delta_template' => 'hide_second_sidebar',
     ),
   );
   $context->condition_mode = 0;
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Fjerner højre kolonne på udvalgte sider');
-  t('OS2Web - CMSTheme');
+  t('Skjul højre kolonne på iframesider');
   $export['hide_second_sidebar'] = $context;
 
   return $export;

@@ -620,9 +620,15 @@ return os2web_kontaktblok_get_block();
 <div class="dag">Torsdag:</div><div class="aaben"> 08.30 - 17.00</div>
 <div class="dag">Fredag:</div><div class="aaben> 08.30 - 12.00</div>
 
+
+
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>';
+<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>
+<h3>Aften hotline</h3>
+<div class="telfonnummer"><a href="tel:7020000">70 20 00 00</a></div>
+<P>Hjælp til selvbetjening</P>
+<div class="dag">Søndag-torsdag:</div><div class="aaben">18.30 - 22.00</div>';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_label_type'] = 'div';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_label_class'] = 'kontaktblok-indhold';
   $handler->display->display_options['fields']['field_kontaktblok_callcenter']['element_label_colon'] = FALSE;
@@ -762,9 +768,15 @@ return os2web_kontaktblok_get_block();
 <div class="dag">Torsdag:</div><div class="aaben"> 08.30 - 17.00</div>
 <div class="dag">Fredag:</div><div class="aaben> 08.30 - 12.00</div>
 
+
+
 <p>Borgerservice i Hornslet og Ebeltoft har lukket fredag.</p>
 
-<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>'),
+<p>Du kan få hjælp til selvbetjening på bibliotekerne. Besøg bibliotekets hjemmeside <a href="http://bibliotek.syddjurs.dk">her</a></p>
+<h3>Aften hotline</h3>
+<div class="telfonnummer"><a href="tel:7020000">70 20 00 00</a></div>
+<P>Hjælp til selvbetjening</P>
+<div class="dag">Søndag-torsdag:</div><div class="aaben">18.30 - 22.00</div>'),
     t('Kontaktblok'),
     t('View panes'),
   );

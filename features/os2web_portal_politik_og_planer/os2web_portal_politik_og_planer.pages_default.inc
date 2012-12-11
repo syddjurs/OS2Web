@@ -62,7 +62,7 @@ function os2web_portal_politik_og_planer_default_page_manager_handlers() {
     ),
   );
   $display = new panels_display();
-  $display->layout = 'balk_node';
+  $display->layout = 'os2web_portal';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(

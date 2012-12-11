@@ -719,7 +719,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     'body_classes_to_add' => '',
   );
   $display = new panels_display();
-  $display->layout = 'os2web_forside';
+  $display->layout = 'flexible:forside';
   $display->layout_settings = array();
   $display->panel_settings = array(
     'style_settings' => array(
@@ -742,7 +742,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
   $display->panels = array();
     $pane = new stdClass();
     $pane->pid = 'new-1';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_2';
     $pane->shown = TRUE;
@@ -765,10 +765,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-1'] = $pane;
-    $display->panels['bottom'][0] = 'new-1';
+    $display->panels['center'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_4';
     $pane->shown = TRUE;
@@ -780,23 +780,23 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-3',
+      'css_class' => 'grid-3 alpha omega',
     );
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-2'] = $pane;
-    $display->panels['bottom'][1] = 'new-2';
+    $display->panels['center'][1] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'custom';
     $pane->subtype = 'custom';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
       'admin_title' => 'Video',
-      'title' => 'Bliv social og sundhedsmedhjælper i Syddjurs Kommune',
+      'title' => 'Bliv social og sundhedsmedhjælper',
       'body' => '<iframe width="470" height="180" src="http://www.youtube-nocookie.com/embed/n_InlKwkbUQ" frameborder="0" allowfullscreen></iframe>',
       'format' => 'php_code',
       'substitute' => TRUE,
@@ -813,10 +813,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 2;
     $pane->locks = array();
     $display->content['new-3'] = $pane;
-    $display->panels['bottom'][2] = 'new-3';
+    $display->panels['center'][2] = 'new-3';
     $pane = new stdClass();
     $pane->pid = 'new-4';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_5';
     $pane->shown = FALSE;
@@ -840,10 +840,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 3;
     $pane->locks = array();
     $display->content['new-4'] = $pane;
-    $display->panels['bottom'][3] = 'new-4';
+    $display->panels['center'][3] = 'new-4';
     $pane = new stdClass();
     $pane->pid = 'new-5';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_3';
     $pane->shown = TRUE;
@@ -866,10 +866,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 4;
     $pane->locks = array();
     $display->content['new-5'] = $pane;
-    $display->panels['bottom'][4] = 'new-5';
+    $display->panels['center'][4] = 'new-5';
     $pane = new stdClass();
     $pane->pid = 'new-6';
-    $pane->panel = 'bottom';
+    $pane->panel = 'center';
     $pane->type = 'page_messages';
     $pane->subtype = 'page_messages';
     $pane->shown = TRUE;
@@ -887,10 +887,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 5;
     $pane->locks = array();
     $display->content['new-6'] = $pane;
-    $display->panels['bottom'][5] = 'new-6';
+    $display->panels['center'][5] = 'new-6';
     $pane = new stdClass();
     $pane->pid = 'new-7';
-    $pane->panel = 'top_left';
+    $pane->panel = 'left';
     $pane->type = 'views';
     $pane->subtype = 'rotating_image_view';
     $pane->shown = TRUE;
@@ -923,10 +923,10 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-7'] = $pane;
-    $display->panels['top_left'][0] = 'new-7';
+    $display->panels['left'][0] = 'new-7';
     $pane = new stdClass();
     $pane->pid = 'new-8';
-    $pane->panel = 'top_left';
+    $pane->panel = 'left';
     $pane->type = 'views';
     $pane->subtype = 'newslist';
     $pane->shown = TRUE;
@@ -953,16 +953,16 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-4 alpha',
+      'css_class' => 'grid-4 alpha omega',
     );
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
     $display->content['new-8'] = $pane;
-    $display->panels['top_left'][1] = 'new-8';
+    $display->panels['left'][1] = 'new-8';
     $pane = new stdClass();
     $pane->pid = 'new-9';
-    $pane->panel = 'top_left';
+    $pane->panel = 'left';
     $pane->type = 'views';
     $pane->subtype = 'kulturnaut_events_lister';
     $pane->shown = TRUE;
@@ -989,16 +989,16 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-4 newslist-panel',
+      'css_class' => 'grid-4 omega alpha newslist-panel',
     );
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
     $display->content['new-9'] = $pane;
-    $display->panels['top_left'][2] = 'new-9';
+    $display->panels['left'][2] = 'new-9';
     $pane = new stdClass();
     $pane->pid = 'new-10';
-    $pane->panel = 'top_right';
+    $pane->panel = 'right_';
     $pane->type = 'views';
     $pane->subtype = 'selvbetjening';
     $pane->shown = TRUE;
@@ -1028,7 +1028,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->position = 0;
     $pane->locks = array();
     $display->content['new-10'] = $pane;
-    $display->panels['top_right'][0] = 'new-10';
+    $display->panels['right_'][0] = 'new-10';
   $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = '0';
   $handler->conf['display'] = $display;

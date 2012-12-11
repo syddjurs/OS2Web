@@ -739,7 +739,7 @@ example.org';
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_reduce_ascii';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['pathauto_reduce_ascii'] = $strongarm;
 
   $strongarm = new stdClass();

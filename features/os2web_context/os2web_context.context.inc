@@ -153,18 +153,31 @@ function os2web_context_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'global';
-  $context->description = 'Globale blokke';
-  $context->tag = 'OS2Web - Generelt';
+  $context->description = 'Globale højre blokke';
+  $context->tag = '';
   $context->conditions = array(
-    'sitewide' => array(
+    'node' => array(
       'values' => array(
-        1 => 1,
+        'contentpage' => 'contentpage',
+        'galleri' => 'galleri',
+        'iframe_selvbetjeningsl_sning_mm' => 'iframe_selvbetjeningsl_sning_mm',
+        'news' => 'news',
+        'sektionsside' => 'sektionsside',
+      ),
+      'options' => array(
+        'node_form' => '1',
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-redaktoer_info-block' => array(
+          'module' => 'views',
+          'delta' => 'redaktoer_info-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'menu-menu-top-menu' => array(
           'module' => 'menu',
           'delta' => 'menu-top-menu',
@@ -176,6 +189,36 @@ function os2web_context_context_default_contexts() {
           'delta' => 'action-links',
           'region' => 'user_second',
           'weight' => '-10',
+        ),
+        'menu_block-12' => array(
+          'module' => 'menu_block',
+          'delta' => 12,
+          'region' => 'sidebar_first',
+          'weight' => '-7',
+        ),
+        'views-selvbetjening-block_6' => array(
+          'module' => 'views',
+          'delta' => 'selvbetjening-block_6',
+          'region' => 'sidebar_second',
+          'weight' => '-69',
+        ),
+        'views-kontaktblok-block' => array(
+          'module' => 'views',
+          'delta' => 'kontaktblok-block',
+          'region' => 'sidebar_second',
+          'weight' => '-68',
+        ),
+        'views-spot_view-block_1' => array(
+          'module' => 'views',
+          'delta' => 'spot_view-block_1',
+          'region' => 'sidebar_second',
+          'weight' => '-67',
+        ),
+        'views-kle_lonks_boks-kle_links_boks' => array(
+          'module' => 'views',
+          'delta' => 'kle_lonks_boks-kle_links_boks',
+          'region' => 'sidebar_second',
+          'weight' => '-66',
         ),
         'menu-menu-erhverv-genveje' => array(
           'module' => 'menu',
@@ -190,8 +233,7 @@ function os2web_context_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Globale blokke');
-  t('OS2Web - Generelt');
+  t('Globale højre blokke');
   $export['global'] = $context;
 
   $context = new stdClass();
@@ -249,7 +291,7 @@ function os2web_context_context_default_contexts() {
   $context->api_version = 3;
   $context->name = 'portalforside';
   $context->description = '';
-  $context->tag = 'OS2Web - Generelt';
+  $context->tag = '';
   $context->conditions = array(
     'path' => array(
       'values' => array(
@@ -270,21 +312,17 @@ function os2web_context_context_default_contexts() {
         ),
         'menu_block-11' => array(
           'module' => 'menu_block',
-          'delta' => '11',
+          'delta' => 11,
           'region' => 'sidebar_first',
           'weight' => '-9',
         ),
       ),
     ),
     'delta' => array(
-      'delta_template' => 'os2web_theme_uden_h_jre_sidebar',
+      'delta_template' => 'portalforside',
     ),
   );
   $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('OS2Web - Generelt');
   $export['portalforside'] = $context;
 
   return $export;

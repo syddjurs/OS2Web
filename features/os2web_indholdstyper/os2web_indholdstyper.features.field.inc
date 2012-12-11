@@ -184,7 +184,7 @@ function os2web_indholdstyper_field_default_fields() {
         'max_resolution' => '',
         'min_resolution' => '470x230',
         'title_field' => 0,
-        'title_field_required' => 1,
+        'title_field_required' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -193,11 +193,11 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
-            'youtube' => 0,
           ),
           'allowed_types' => array(
             'audio' => 0,
             'default' => 0,
+            0 => 0,
             'image' => 'image',
             'video' => 0,
           ),
@@ -706,15 +706,21 @@ function os2web_indholdstyper_field_default_fields() {
         'settings' => array(
           'allowed_schemes' => array(
             'public' => 'public',
+            'youtube' => 0,
           ),
           'allowed_types' => array(
+            'audio' => 0,
+            'document' => 0,
             'image' => 0,
             'video' => 0,
-            0 => 0,
-            'audio' => 0,
-            'default' => 'default',
           ),
-          'browser_plugins' => array(),
+          'browser_plugins' => array(
+            'media_default--media_browser_1' => 0,
+            'media_default--media_browser_my_files' => 0,
+            'media_internet' => 0,
+            'upload' => 0,
+            'youtube' => 0,
+          ),
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
