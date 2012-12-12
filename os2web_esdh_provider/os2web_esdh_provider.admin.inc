@@ -72,10 +72,14 @@ function os2web_esdh_provider_import_form_submit($form, &$form_state) {
     'query' => array(
       'id' => $form_state['values']['focus'],
       'force' => $form_state['values']['force'],
-      )));
+    ),
+  ));
   return;
 }
 
+/**
+ * Implements hook_form().
+ */
 function _os2web_esdh_provider_status_confirm($form, &$form_state) {
   $id = $_GET['id'];
   $force = (int) $_GET['force'];
@@ -104,6 +108,9 @@ function _os2web_esdh_provider_status_confirm($form, &$form_state) {
   return confirm_form($form, t('Import meetings'), isset($_GET['destination']) ? $_GET['destination'] : "admin/config/os2web/esdh_provider", $msg, t('Run'), t('Cancel'));
 }
 
+/**
+ * Implements hook_FORM_submit().
+ */
 function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
   if (!os2web_esdh_provider_has_api('mm')) {
     drupal_set_message(t('ERROR: No valid MM importer plugin active!'), 'error');
@@ -131,4 +138,6 @@ function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
       array('mm', 'post_import_process'));
   }
   batch_set($batch);
+  // This isn't entirely neccesary, but needed to make the redirect work.
+  batch_process('admin/config/os2web/esdh_provider');
 }
