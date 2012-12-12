@@ -109,7 +109,7 @@ function os2web_portal_borger_default_page_manager_handlers() {
     );
     $pane->css = array(
       'css_id' => 'pop-borgerservices',
-      'css_class' => 'grid-6',
+      'css_class' => 'grid-6 alpha',
     );
     $pane->extras = array();
     $pane->position = 0;
@@ -148,7 +148,7 @@ function os2web_portal_borger_default_page_manager_handlers() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-3',
+      'css_class' => 'grid-3 omega',
     );
     $pane->extras = array();
     $pane->position = 1;
