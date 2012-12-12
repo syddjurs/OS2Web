@@ -96,7 +96,6 @@ function os2web_design_field_default_fields() {
           'allowed_types' => array(
             0 => 'image',
           ),
-          'browser_plugins' => array(),
           'filefield_sources' => array(
             'filefield_sources' => array(
               'attach' => 0,
