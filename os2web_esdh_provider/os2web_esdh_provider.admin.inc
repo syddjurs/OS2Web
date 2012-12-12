@@ -14,7 +14,6 @@ function _os2web_esdh_provider_status() {
   $head = array('API name', 'Description', 'module', 'status');
   $rows = array();
   foreach ($apis as $api) {
-    $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
     $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
     if (count($plugins) > 0) {
       foreach ($plugins as $plugin) {
@@ -68,13 +67,57 @@ function os2web_esdh_provider_import_form() {
 /**
  * Implements hook_FORM_submit().
  */
-function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
+function os2web_esdh_provider_import_form_submit($form, &$form_state) {
+  drupal_goto('admin/config/os2web/esdh_provider/importconfirm', array(
+    'query' => array(
+      'id' => $form_state['values']['focus'],
+      'force' => $form_state['values']['force'],
+    ),
+  ));
+  return;
+}
+
+/**
+ * Implements hook_form().
+ */
+function _os2web_esdh_provider_status_confirm($form, &$form_state) {
+  $id = $_GET['id'];
+  $force = (int) $_GET['force'];
+  $form['_meeting_id'] = array(
+    '#type' => 'hidden',
+    '#value' => $id,
+  );
+  $form['_meeting_force'] = array(
+    '#type' => 'hidden',
+    '#value' => $force,
+  );
+  $msg = '';
+  if ($id > 0) {
+    $msg = t('<p>Importing meeting with id !focus <br/>', array('!focus' => $id));
+  }
+  else {
+    $msg = t('<p>Importing all meetings.<br/>');
+  }
+  if ($force) {
+    $msg .= t('All imported nodes will be re-imported, detroying existing data and importing new.<br/>');
+  }
+  else {
+    $msg .= t('Only new nodes will be imported, existing data is preserved.</p>');
+  }
+  $msg .= t('<p>Are you sure you want to run this import?</p>');
+  return confirm_form($form, t('Import meetings'), isset($_GET['destination']) ? $_GET['destination'] : "admin/config/os2web/esdh_provider", $msg, t('Run'), t('Cancel'));
+}
+
+/**
+ * Implements hook_FORM_submit().
+ */
+function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
   if (!os2web_esdh_provider_has_api('mm')) {
     drupal_set_message(t('ERROR: No valid MM importer plugin active!'), 'error');
     return;
   }
-  $force = $form['values']['force'] == 1;
-  $focus = (int) $form['values']['focus'];
+  $force = $form_state['values']['_meeting_force'] == 1;
+  $focus = (int) $form_state['values']['_meeting_id'];
 
   $batch = array(
     'title' => 'Dagsorden import',
@@ -95,4 +138,6 @@ function os2web_esdh_provider_import_form_submit(&$form_state, $form) {
       array('mm', 'post_import_process'));
   }
   batch_set($batch);
+  // This isn't entirely neccesary, but needed to make the redirect work.
+  batch_process('admin/config/os2web/esdh_provider');
 }
