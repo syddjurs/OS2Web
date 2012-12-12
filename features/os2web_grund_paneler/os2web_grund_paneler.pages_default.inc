@@ -780,7 +780,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-3 alpha omega',
+      'css_class' => 'grid-3',
     );
     $pane->extras = array();
     $pane->position = 1;
@@ -797,7 +797,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $pane->configuration = array(
       'admin_title' => 'Video',
       'title' => 'Bliv social og sundhedsmedhjælper',
-      'body' => '<iframe width="470" height="180" src="http://www.youtube-nocookie.com/embed/n_InlKwkbUQ" frameborder="0" allowfullscreen></iframe>',
+      'body' => '<iframe src="http://www.youtube-nocookie.com/embed/n_InlKwkbUQ" frameborder="0" allowfullscreen></iframe>',
       'format' => 'php_code',
       'substitute' => TRUE,
     );
@@ -860,7 +860,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-6 omega alpha',
+      'css_class' => 'grid-6 omega',
     );
     $pane->extras = array();
     $pane->position = 4;
