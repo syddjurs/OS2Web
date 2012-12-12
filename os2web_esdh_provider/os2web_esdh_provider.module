@@ -12,6 +12,14 @@
  * Implements hook_menu().
  */
 function os2web_esdh_provider_menu() {
+  $items['admin/config/os2web/esdh_provider/importconfirm'] = array(
+    'title' => 'Confirm reimport',
+    'access arguments' => array('administer os2web'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('_os2web_esdh_provider_status_confirm'),
+    'type' => MENU_CALLBACK,
+    'file' => 'os2web_esdh_provider.admin.inc',
+  );
   $items['admin/config/os2web/esdh_provider'] = array(
     'title' => 'ESDH status',
     'access arguments' => array('administer os2web'),
