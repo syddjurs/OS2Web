@@ -1709,7 +1709,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-3 alpha omega',
+      'css_class' => 'grid-3',
     );
     $pane->extras = array();
     $pane->position = 1;
@@ -1718,6 +1718,33 @@ function os2web_grund_paneler_default_page_manager_pages() {
     $display->panels['center'][1] = 'new-2';
     $pane = new stdClass();
     $pane->pid = 'new-3';
+    $pane->panel = 'center';
+    $pane->type = 'custom';
+    $pane->subtype = 'custom';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'admin_title' => 'Video',
+      'title' => 'Bliv social og sundhedsmedhjælper',
+      'body' => '<iframe src="http://www.youtube-nocookie.com/embed/n_InlKwkbUQ" frameborder="0" allowfullscreen></iframe>',
+      'format' => 'php_code',
+      'substitute' => TRUE,
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'grid-6 omega spotbox-row-video custom-video',
+    );
+    $pane->extras = array();
+    $pane->position = 2;
+    $pane->locks = array();
+    $display->content['new-3'] = $pane;
+    $display->panels['center'][2] = 'new-3';
+    $pane = new stdClass();
+    $pane->pid = 'new-4';
     $pane->panel = 'center';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_5';
@@ -1762,7 +1789,7 @@ function os2web_grund_paneler_default_page_manager_pages() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => 'grid-6 omega alpha',
+      'css_class' => 'grid-6 omega',
     );
     $pane->extras = array();
     $pane->position = 3;
