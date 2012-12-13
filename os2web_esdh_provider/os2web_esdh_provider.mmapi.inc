@@ -93,9 +93,13 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       $movie_id = _os2web_qbrick_get_movie_id($node);
       if ($movie_id != FALSE) {
         $meeting['movie_id'] = $movie_id;
-        $meeting['movie_chapters'] = _os2web_qbrick_get_chapters($movie_id);
+        $chapters = _os2web_qbrick_get_chapters($movie_id);
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $movie_id;
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = 0;
+        foreach ($meeting['items'] as &$item) {
+          $item['chapter'] = isset($chapters[$item['id']])?$chapters[$item['id']]:0;
+          $item['movie_id'] = $movie_id;
+        }
       }
       else {
         $node->field_qbrick_ref = array();
@@ -157,9 +161,9 @@ function _os2web_esdh_provider_import_items($items) {
     }
     else {
       $node->field_bul_point_closed[LANGUAGE_NONE][]['value'] = 1;
-      if (isset($meeting['movie_id']) && is_numeric($meeting['movie_chapters'][$meeting[$id]])) {
-        $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $meeting['movie_id'];
-        $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = $meeting['movie_chapters'][$meeting[$id]];
+      if (isset($item['movie_id']) && is_numeric($item["chapter"])) {
+        $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $item['movie_id'];
+        $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = $item["chapter"];
       }
       // Gather the bullets for the item.
       if (isset($item['bullets']) && is_array($item['bullets'])) {
