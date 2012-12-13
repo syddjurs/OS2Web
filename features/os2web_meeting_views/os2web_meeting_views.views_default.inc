@@ -1027,8 +1027,9 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h2 class="pane-title">Tillæg</h2>';
+  $handler->display->display_options['header']['area']['content'] = '<h2 class="pane-title">Tillægs[field_meeting_type]</h2>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Forbindelse: Indhold: Tillæg til (field_addenum_to) - reverse */
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['id'] = 'reverse_field_addenum_to_node';
@@ -1132,6 +1133,13 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['fields']['field_qbrick_ref']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_qbrick_ref']['click_sort_column'] = 'seek';
   $handler->display->display_options['fields']['field_qbrick_ref']['type'] = 'qbrick_movie_seek';
+  /* Felt: Indhold: Type */
+  $handler->display->display_options['fields']['field_meeting_type']['id'] = 'field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['table'] = 'field_data_field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['field'] = 'field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['label'] = '';
+  $handler->display->display_options['fields']['field_meeting_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_meeting_type']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1199,6 +1207,7 @@ print("<div class=\\"indicator-has-notes\\"></div>");
     t('_blank'),
     t('Lokation'),
     t('Bullet points - Tillæg'),
+    t('<h2 class="pane-title">Tillægs[field_meeting_type]</h2>'),
     t('<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>'),
   );
   $export['meeting_details'] = $view;
