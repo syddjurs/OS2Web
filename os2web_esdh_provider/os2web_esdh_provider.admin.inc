@@ -130,6 +130,7 @@ function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
   $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
   foreach ($meetings as $meeting) {
     if (empty($focus) || in_array($meeting['id'], $focus)) {
+      error_log("Var: \$meeting = " . print_r($meeting, 1));
       $batch['operations'][] = array(
         '_os2web_esdh_provider_import_meeting',
         array($meeting, $force));
