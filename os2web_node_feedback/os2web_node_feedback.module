@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the OS2Web - Node feedback feature.
+ */
+
+include_once 'os2web_node_feedback.features.inc';

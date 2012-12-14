@@ -1,0 +1,11 @@
+name = OS2Web - Node feedback
+description = Aktiver en feedback form på hjemmesiden. 
+core = 7.x
+package = Features
+version = 7.x-1.10
+project = os2web_node_feedback
+dependencies[] = feedback
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:1
+features[variable][] = feedback_excluded_paths
