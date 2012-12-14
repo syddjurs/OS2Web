@@ -117,7 +117,10 @@ function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
     return;
   }
   $force = $form_state['values']['_meeting_force'] == 1;
-  $focus = (int) $form_state['values']['_meeting_id'];
+  $focus = array_map('trim',explode(',',$form_state['values']['_meeting_id']));
+  if (count($focus)===1 && $focus[0]==='') {
+    $focus = array();
+  }
 
   $batch = array(
     'title' => 'Dagsorden import',
@@ -126,7 +129,7 @@ function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
   );
   $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
   foreach ($meetings as $meeting) {
-    if ($focus === 0 || $focus === $meeting['id']) {
+    if (empty($focus) || in_array($meeting['id'], $focus)) {
       $batch['operations'][] = array(
         '_os2web_esdh_provider_import_meeting',
         array($meeting, $force));

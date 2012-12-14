@@ -77,13 +77,15 @@ function acadre_esdh_mm_import_meeting($meeting) {
   if (is_file(drupal_realpath($file))) {
     $manifest = simplexml_load_file(drupal_realpath($file));
     if (is_object($manifest)) {
+      $agenda_id = (int) array_shift($manifest->xpath("/root/table[@name='agenda']/fields/field/@sysid"));
       $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
       if (empty($items_xml)) {
         watchdog('acadre MM', 'Empty list of import items in %file.', array('%file' => $file), WATCHDOG_WARNING);
       }
       foreach ($items_xml as $xml_item) {
         $agendainfo = array(
-          'sysid' => (int) array_shift($xml_item->xpath('field/@sysid')),
+          // 'sysid' => (int) array_shift($xml_item->xpath('field/@sysid')),
+          'sysid' => $agenda_id,
           'publish' => (int) array_shift($xml_item->xpath('field/@publish')),
           'access' => (string) array_shift($xml_item->xpath('field/@access')),
           'filesfolder' => (string) array_shift($xml_item->xpath('field/@filesfolder')),
@@ -299,7 +301,7 @@ function _acadre_esdh_similar_file_exists($filename) {
  * @TODO: Rid this of drupal specific code.
  */
 function _acadre_esdh_mm_order_addenums($drush = FALSE) {
-  $rev_meetings = array(1458, 1519);
+  $rev_meetings = array();
   // Find all meetings and gather meeting and agenda_ids.
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
