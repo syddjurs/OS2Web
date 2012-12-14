@@ -1773,6 +1773,13 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['footer']['view']['table'] = 'views';
   $handler->display->display_options['footer']['view']['field'] = 'view';
   $handler->display->display_options['footer']['view']['view_to_insert'] = 'meetings_search:block_1';
+  /* Sidefod: Global: Unfiltered text */
+  $handler->display->display_options['footer']['area_text_custom']['id'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['table'] = 'views';
+  $handler->display->display_options['footer']['area_text_custom']['field'] = 'area_text_custom';
+  $handler->display->display_options['footer']['area_text_custom']['label'] = 'Advanceret link';
+  $handler->display->display_options['footer']['area_text_custom']['empty'] = TRUE;
+  $handler->display->display_options['footer']['area_text_custom']['content'] = '<a href="/dagsorden-og-referat-avanceret" title="Advanceret søgning">Advanceret søgning</a>';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Global: PHP */
@@ -2285,6 +2292,8 @@ return TRUE;
     t('Søgeresultater'),
     t('Date -  start date (field_date)'),
     t('Page'),
+    t('Advanceret link'),
+    t('<a href="/dagsorden-og-referat-avanceret" title="Advanceret søgning">Advanceret søgning</a>'),
     t('Til'),
     t('Kommende'),
     t('<div class="help-button" title="Seneste møder i alle udvalg med publicerede referater"></div>'),
