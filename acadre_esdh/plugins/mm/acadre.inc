@@ -301,6 +301,10 @@ function _acadre_esdh_similar_file_exists($filename) {
  * @TODO: Rid this of drupal specific code.
  */
 function _acadre_esdh_mm_order_addenums($drush = FALSE) {
+  if (!lock_acquire(__FUNCTION__)) {
+    return;
+  }
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
   $rev_meetings = array();
   // Find all meetings and gather meeting and agenda_ids.
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
@@ -331,6 +335,11 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
     }
     // Lowest system id is primary.
     $primary = node_load(array_shift($meeting));
+    $addenum_to = field_get_items('node', $primary, 'field_addenum_to');
+    if (!empty($addenum_to[0]['nid'])) {
+      $primary->field_addenum_to[LANGUAGE_NONE] = array();
+      node_save($primary);
+    }
     while ($next = array_shift($meeting)) {
       // Set up references for addenum agendas.
       $node = $nodes[$next];
@@ -369,4 +378,5 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       drush_log("Resetting $nid..", 'ok');
     }
   }
+  lock_release(__FUNCTION__);
 }
