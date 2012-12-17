@@ -1,0 +1,12 @@
+html body{
+  min-width: 0px !important;
+}
+
+#region-page-top, #section-header, #breadcrumb, #region-sidebar-first, #region-sidebar-second, #zone-user-wrapper, #zone-menu-wrapper, #section-footer{
+  display: none;
+}
+
+.container-12{
+  width: 300px !important;
+  margin-left: 0px  !important;
+}
