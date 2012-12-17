@@ -861,16 +861,14 @@ function os2web_spotbokse_field_default_fields() {
           ),
           'allowed_types' => array(
             'audio' => 0,
-            'document' => 0,
+            'default' => 0,
             'image' => 0,
             'video' => 'video',
           ),
           'browser_plugins' => array(
-            'media_default--media_browser_1' => 0,
-            'media_default--media_browser_my_files' => 0,
+            'library' => 0,
             'media_internet' => 'media_internet',
             'upload' => 0,
-            'youtube' => 'youtube',
           ),
           'progress_indicator' => 'throbber',
         ),

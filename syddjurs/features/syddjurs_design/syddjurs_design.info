@@ -1,7 +1,6 @@
 name = Syddjurs - Design
 core = 7.x
 package = Features
-php = 5.2.4
 version = 7.x-1.0
 project = syddjurs_design
 dependencies[] = ctools
@@ -14,4 +13,5 @@ features[features_api][] = api:1
 features[fontyourface][] = Myriad Pro Bold
 features[fontyourface][] = Myriad Pro Light
 features[fontyourface][] = Myriad Pro Regular
+features[variable][] = theme_cmstheme_settings
 features[variable][] = typekit_api_token

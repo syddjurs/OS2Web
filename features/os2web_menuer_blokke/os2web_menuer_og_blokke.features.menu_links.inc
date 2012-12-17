@@ -357,7 +357,7 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-47',
+    'weight' => '-49',
   );
   // Exported menu link: menu-top-menu:node/2942
   $menu_links['menu-top-menu:node/2942'] = array(
@@ -376,7 +376,7 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-50',
+    'weight' => '0',
   );
   // Exported menu link: menu-top-menu:user/logout
   $menu_links['menu-top-menu:user/logout'] = array(
@@ -395,7 +395,7 @@ function os2web_menuer_og_blokke_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-48',
+    'weight' => '-50',
   );
   // Exported menu link: user-menu:admin/workbench
   $menu_links['user-menu:admin/workbench'] = array(
