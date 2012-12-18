@@ -28,16 +28,16 @@ admin/reports/feedback
     'extra_fields' => array(
       'form' => array(
         'help' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'message' => array(
-          'weight' => '2',
+          'weight' => '1',
         ),
         'actions' => array(
-          'weight' => '3',
+          'weight' => '2',
         ),
         'submit' => array(
-          'weight' => '0',
+          'weight' => '5',
         ),
       ),
       'display' => array(),
