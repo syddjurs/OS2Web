@@ -1,31 +1,34 @@
-function add_send_to_friend_button_lister(url, id) {	
-  jQuery(document).ready(function() {
-		jQuery(".throbber").hide();
-		jQuery("#btn_send_to_friend").click(function(){
-		  email = jQuery("#field_send_to_friend_email").val();
-		  
-		  //email validation
-		  if (!checkEmail(email)){
-		    jQuery("#field_send_to_friend_email").focus();
-		    jQuery("#field_send_to_friend_email").addClass("error");
-		  }
-		  else {
-		    jQuery(".throbber").show();
-		    jQuery("#field_send_to_friend_email").removeClass("error");
-		    
-		    //sending to the friend
-		    jQuery.get(url + "/dagsorden_punkt/" + id + "/send_to_friend/" + email, function(html) {
-		      jQuery(".throbber").hide();
-		      jQuery("#field_send_to_friend_email").val("");
-		      parent.Lightbox.end()
-		    });
-      
-		  }
-		});
-	});
-}
+jQuery(document).ready(function($) {
+  $(".throbber").hide();
+  $("#send_to_friend_form").submit(function(e){
+    
+    var $form = $(this);
+    serializedData = $form.serialize();
 
-function checkEmail(email) {
-  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-  return regex.test(email);
-}
+    var email = $("#field_send_to_friend_email").val();
+    var id = $("#field_bullet_point_id").val();
+
+    if (!checkEmail(email)){
+      $("#field_send_to_friend_email").focus();
+      $("#field_send_to_friend_email").addClass("error");
+    }
+    else 
+    {
+      $(".throbber").show();
+      $("#field_send_to_friend_email").removeClass("error");
+
+      $.post("/dagsorden_punkt/"+ id +"/send_to_friend_service", serializedData, function(response){
+      });
+      parent.Lightbox.end()
+
+    }
+
+  e.preventDefault;
+  });
+
+  function checkEmail(email) {
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
+  }
+
+});

@@ -17,6 +17,7 @@ function os2web_search_apachesolr_environments() {
   $environment->url = 'http://localhost:8983/solr';
   $environment->service_class = '';
   $environment->conf = array(
+    'apachesolr_read_only' => '1',
     'apachesolr_search_facet_pages' => '',
     'apachesolr_search_show_facets' => 0,
   );
