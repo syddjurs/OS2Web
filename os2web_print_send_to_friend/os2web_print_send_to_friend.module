@@ -81,11 +81,12 @@ function os2web_print_send_to_friend_send_to_friend_form($bullet_point_id){
   drupal_add_css(drupal_get_path('module', 'os2web_print_send_to_friend') . '/css/os2web_print_send_to_friend.css');
   
   drupal_add_js(drupal_get_path('module', 'os2web_print_send_to_friend') . '/js/os2web_print_send_to_friend.js');
-  
+ 
+  $html = t('Fill out the fields below and press "Send", when you want to send the e-mail');
   $html .= '<form id="send_to_friend_form">';
-  $html .= '<label>Dit navn:</label><input type="text" name="name" />';
-  $html .= '<label>Besked:</label><textarea name="message"> </textarea>';
-  $html .= '<label>Modtagers email:</label><input type="text" name="email" id="field_send_to_friend_email" />';
+  $html .= '<label>'.t('Your name').':</label><input type="text" name="name" />';
+  $html .= '<label>'.t('Message').':</label><textarea name="message"> </textarea>';
+  $html .= '<label>'.t('Recipients email').':</label><input type="text" name="email" id="field_send_to_friend_email" />';
   $html .= '<input type="hidden" name="base_url" value="'.$GLOBALS['base_url'].'" />';
   $html .= '<input type="hidden" name="bullet_point_id" id="field_bullet_point_id" value="'.$bullet_point_id.'" />';
   $html .= '<button type="submit" id="btn_send_to_friend">Send</button>';
