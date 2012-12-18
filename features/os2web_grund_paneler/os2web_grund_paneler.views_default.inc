@@ -1997,13 +1997,10 @@ return $field==1?true:false;';
   $handler->display->display_options['fields']['field_attached_node']['field'] = 'field_attached_node';
   $handler->display->display_options['fields']['field_attached_node']['label'] = '';
   $handler->display->display_options['fields']['field_attached_node']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_attached_node']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_attached_node']['alter']['text'] = 'node/[field_attached_node-nid]';
   $handler->display->display_options['fields']['field_attached_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_attached_node']['type'] = 'node_reference_path';
-  $handler->display->display_options['fields']['field_attached_node']['settings'] = array(
-    'alias' => 1,
-    'absolute' => 1,
-  );
+  $handler->display->display_options['fields']['field_attached_node']['type'] = 'balk_custom_node_reference_nid';
   $handler->display->display_options['fields']['field_attached_node']['delta_limit'] = '3';
   $handler->display->display_options['fields']['field_attached_node']['delta_offset'] = '0';
   /* Felt: Indhold: Titel */
@@ -2029,7 +2026,7 @@ return $field==1?true:false;';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['alter']['alt'] = '[title]';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href="[field_attached_node]" title="[title]">[title]</a>';
+  $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href="/[field_attached_node]" title="[title]">[title]</a>';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty_zero'] = TRUE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['type'] = 'text_plain';
@@ -2087,7 +2084,7 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
+  $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
@@ -2985,14 +2982,15 @@ return $field==1?true:false;';
     t('SB-block-forside'),
     t('<h3><a href="/selvbetjening">Selvbetjening</a></h3>'),
     t('selvbetjening-megamenu'),
-    t('<a href="[field_attached_node]" title="[title]">[title]</a>'),
+    t('<a href="/[field_attached_node]" title="[title]">[title]</a>'),
     t('SB-block-forside-att-1'),
-    t('<div class="knapper"><a class="kviksvar" href="http://syddjurs.kc.kmd.dk/display/4/search.aspx?tab=search&c=&cpc=&cid=&r=r">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
+    t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
     t('SB-block-forside-att-2'),
     t('Aktuelle Genvej'),
     t('<div class="aktuel-genvej>Aktuelle Genveje</div>'),
     t('<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk" title="NemID">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706" title="Borger.dk">Borger.dk</a><a class="virkdk" href="http://virk.dk" title="Virk.dk">Virk.dk</a></div>'),
     t('<a href=[field_selvbetjening_direkte] title="[title]">[title]</a>'),
+    t('<a href="[field_attached_node]" title="[title]">[title]</a>'),
     t('Aktuelle genveje'),
     t('SB-block-portal'),
     t('Selvbetjening - footerlinks'),
