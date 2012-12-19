@@ -1681,8 +1681,6 @@ function os2web_design_delta_default_templates() {
   $delta->parent = '';
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
-      'alpha_debug_block_toggle' => 0,
-      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_roles' => array(
         1 => 0,
         2 => 0,
