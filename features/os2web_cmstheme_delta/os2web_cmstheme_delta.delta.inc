@@ -64,8 +64,9 @@ function os2web_cmstheme_delta_delta_default_templates() {
   $delta->parent = '';
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
-      'alpha_region_content_columns' => '9',
       'alpha_region_sidebar_second_zone' => NULL,
+      'alpha_region_sidebar_second_equal_height_element' => FALSE,
+      'alpha_region_content_columns' => '9',
     ),
     'color_cmstheme_files' => NULL,
     'color_cmstheme_logo' => NULL,
