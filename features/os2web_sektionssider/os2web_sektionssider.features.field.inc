@@ -10,7 +10,7 @@
 function os2web_sektionssider_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-sektionsside-field_site_structure'
+  // Exported field: 'node-sektionsside-field_site_structure'.
   $fields['node-sektionsside-field_site_structure'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function os2web_sektionssider_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -88,7 +89,7 @@ function os2web_sektionssider_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-sektionsside-field_termref_kle'
+  // Exported field: 'node-sektionsside-field_termref_kle'.
   $fields['node-sektionsside-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -109,6 +110,7 @@ function os2web_sektionssider_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(

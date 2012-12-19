@@ -88,11 +88,8 @@ function os2web_meeting_views_default_page_manager_handlers() {
       'override_title_text' => '',
     );
     $pane->cache = array(
-      'method' => 'simple',
-      'settings' => array(
-        'lifetime' => '604800',
-        'granularity' => 'args',
-      ),
+      'method' => '0',
+      'settings' => array(),
     );
     $pane->style = array(
       'settings' => NULL,

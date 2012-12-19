@@ -10,7 +10,7 @@
 function kulturnaut_events_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-knactivity-field_beskrivelse'
+  // Exported field: 'node-knactivity-field_beskrivelse'.
   $fields['node-knactivity-field_beskrivelse'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -89,7 +90,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_billeturl'
+  // Exported field: 'node-knactivity-field_billeturl'.
   $fields['node-knactivity-field_billeturl'] = array(
     'field_config' => array(
       'active' => '1',
@@ -110,6 +111,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -163,7 +165,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_dato'
+  // Exported field: 'node-knactivity-field_dato'.
   $fields['node-knactivity-field_dato'] = array(
     'field_config' => array(
       'active' => '1',
@@ -173,6 +175,7 @@ function kulturnaut_events_field_default_fields() {
       'field_name' => 'field_dato',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'granularity' => array(
@@ -252,7 +255,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_genre'
+  // Exported field: 'node-knactivity-field_genre'.
   $fields['node-knactivity-field_genre'] = array(
     'field_config' => array(
       'active' => '1',
@@ -273,6 +276,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -326,7 +330,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_homepage'
+  // Exported field: 'node-knactivity-field_homepage'.
   $fields['node-knactivity-field_homepage'] = array(
     'field_config' => array(
       'active' => '1',
@@ -347,6 +351,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -400,7 +405,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_lang_beskrivelse'
+  // Exported field: 'node-knactivity-field_lang_beskrivelse'.
   $fields['node-knactivity-field_lang_beskrivelse'] = array(
     'field_config' => array(
       'active' => '1',
@@ -423,6 +428,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -479,7 +485,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_maalgruppe'
+  // Exported field: 'node-knactivity-field_maalgruppe'.
   $fields['node-knactivity-field_maalgruppe'] = array(
     'field_config' => array(
       'active' => '1',
@@ -500,6 +506,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -553,7 +560,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_pris'
+  // Exported field: 'node-knactivity-field_pris'.
   $fields['node-knactivity-field_pris'] = array(
     'field_config' => array(
       'active' => '1',
@@ -574,6 +581,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -627,7 +635,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stedadresse'
+  // Exported field: 'node-knactivity-field_stedadresse'.
   $fields['node-knactivity-field_stedadresse'] = array(
     'field_config' => array(
       'active' => '1',
@@ -648,6 +656,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -701,7 +710,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stedarrang'
+  // Exported field: 'node-knactivity-field_stedarrang'.
   $fields['node-knactivity-field_stedarrang'] = array(
     'field_config' => array(
       'active' => '1',
@@ -722,6 +731,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -775,7 +785,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stedhomepage'
+  // Exported field: 'node-knactivity-field_stedhomepage'.
   $fields['node-knactivity-field_stedhomepage'] = array(
     'field_config' => array(
       'active' => '1',
@@ -796,6 +806,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -849,7 +860,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stednavn'
+  // Exported field: 'node-knactivity-field_stednavn'.
   $fields['node-knactivity-field_stednavn'] = array(
     'field_config' => array(
       'active' => '1',
@@ -870,6 +881,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -923,7 +935,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stedpostby'
+  // Exported field: 'node-knactivity-field_stedpostby'.
   $fields['node-knactivity-field_stedpostby'] = array(
     'field_config' => array(
       'active' => '1',
@@ -944,6 +956,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -997,7 +1010,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_stedpostnr'
+  // Exported field: 'node-knactivity-field_stedpostnr'.
   $fields['node-knactivity-field_stedpostnr'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1018,6 +1031,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1071,7 +1085,7 @@ function kulturnaut_events_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-knactivity-field_tid'
+  // Exported field: 'node-knactivity-field_tid'.
   $fields['node-knactivity-field_tid'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1092,6 +1106,7 @@ function kulturnaut_events_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',

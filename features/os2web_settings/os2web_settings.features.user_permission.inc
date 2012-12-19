@@ -37,9 +37,7 @@ function os2web_settings_user_default_permissions() {
     'name' => 'add media from remote sources',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      1 => 'Webmaster',
     ),
     'module' => 'media_internet',
   );
@@ -329,9 +327,7 @@ function os2web_settings_user_default_permissions() {
     'name' => 'import media',
     'roles' => array(
       0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      1 => 'Webmaster',
     ),
     'module' => 'media',
   );

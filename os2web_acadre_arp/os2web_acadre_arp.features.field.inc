@@ -10,7 +10,7 @@
 function os2web_acadre_arp_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-arp_case-body'
+  // Exported field: 'node-arp_case-body'.
   $fields['node-arp_case-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -86,7 +87,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_additional_docs'
+  // Exported field: 'node-arp_case-field_additional_docs'.
   $fields['node-arp_case-field_additional_docs'] = array(
     'field_config' => array(
       'active' => '1',
@@ -107,6 +108,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -181,7 +183,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_case_created'
+  // Exported field: 'node-arp_case-field_arp_case_created'.
   $fields['node-arp_case-field_arp_case_created'] = array(
     'field_config' => array(
       'active' => '1',
@@ -191,6 +193,7 @@ function os2web_acadre_arp_field_default_fields() {
       'field_name' => 'field_arp_case_created',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '1',
@@ -269,7 +272,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_case_handler_ini'
+  // Exported field: 'node-arp_case-field_arp_case_handler_ini'.
   $fields['node-arp_case-field_arp_case_handler_ini'] = array(
     'field_config' => array(
       'active' => '1',
@@ -290,6 +293,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -381,7 +385,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_case_id'
+  // Exported field: 'node-arp_case-field_arp_case_id'.
   $fields['node-arp_case-field_arp_case_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -402,6 +406,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -459,7 +464,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_case_last_modified'
+  // Exported field: 'node-arp_case-field_arp_case_last_modified'.
   $fields['node-arp_case-field_arp_case_last_modified'] = array(
     'field_config' => array(
       'active' => '1',
@@ -469,6 +474,7 @@ function os2web_acadre_arp_field_default_fields() {
       'field_name' => 'field_arp_case_last_modified',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -547,7 +553,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_case_type'
+  // Exported field: 'node-arp_case-field_arp_case_type'.
   $fields['node-arp_case-field_arp_case_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -568,6 +574,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -625,7 +632,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_casehandler_name'
+  // Exported field: 'node-arp_case-field_arp_casehandler_name'.
   $fields['node-arp_case-field_arp_casehandler_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -646,6 +653,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -737,7 +745,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_arp_party'
+  // Exported field: 'node-arp_case-field_arp_party'.
   $fields['node-arp_case-field_arp_party'] = array(
     'field_config' => array(
       'active' => '1',
@@ -758,6 +766,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -815,7 +824,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_case'
+  // Exported field: 'node-arp_case-field_case'.
   $fields['node-arp_case-field_case'] = array(
     'field_config' => array(
       'active' => '1',
@@ -825,6 +834,7 @@ function os2web_acadre_arp_field_default_fields() {
       'field_name' => 'field_case',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'os2web_case_field',
       'settings' => array(),
       'translatable' => '0',
@@ -873,7 +883,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_documents'
+  // Exported field: 'node-arp_case-field_documents'.
   $fields['node-arp_case-field_documents'] = array(
     'field_config' => array(
       'active' => '1',
@@ -894,6 +904,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -988,7 +999,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_itemid'
+  // Exported field: 'node-arp_case-field_itemid'.
   $fields['node-arp_case-field_itemid'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1009,6 +1020,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1066,7 +1078,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_case-field_termref_kle'
+  // Exported field: 'node-arp_case-field_termref_kle'.
   $fields['node-arp_case-field_termref_kle'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1087,6 +1099,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -1147,7 +1160,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_document-field_arp_supplement'
+  // Exported field: 'node-arp_document-field_arp_supplement'.
   $fields['node-arp_document-field_arp_supplement'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1168,6 +1181,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,
@@ -1241,7 +1255,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_document-field_itemid'
+  // Exported field: 'node-arp_document-field_itemid'.
   $fields['node-arp_document-field_itemid'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1262,6 +1276,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1320,7 +1335,7 @@ function os2web_acadre_arp_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-arp_document-field_main_document'
+  // Exported field: 'node-arp_document-field_main_document'.
   $fields['node-arp_document-field_main_document'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1341,6 +1356,7 @@ function os2web_acadre_arp_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'file',
       'settings' => array(
         'display_default' => 0,

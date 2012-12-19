@@ -58,6 +58,14 @@ function os2web_meeting_views_node_info() {
       'title_label' => t('Titel'),
       'help' => '',
     ),
+    'os2web_meeting_search_status' => array(
+      'name' => t('Meeting search status'),
+      'base' => 'node_content',
+      'description' => t('Det nyeste element af dette indhold vises på dagsordens søge siden.'),
+      'has_title' => '1',
+      'title_label' => t('Overskrift'),
+      'help' => '',
+    ),
   );
   return $items;
 }

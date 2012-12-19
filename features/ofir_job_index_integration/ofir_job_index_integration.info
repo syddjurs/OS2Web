@@ -24,6 +24,7 @@ features[field][] = node-ofir_job-field_text
 features[node][] = ofir_job
 features[variable][] = additional_settings__active_tab_ofir_job
 features[variable][] = date_format_ofir_date
+features[variable][] = field_bundle_settings_node__ofir_job
 features[variable][] = language_content_type_ofir_job
 features[variable][] = menu_options_ofir_job
 features[variable][] = menu_parent_ofir_job
