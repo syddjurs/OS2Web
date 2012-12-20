@@ -134,12 +134,12 @@ function os2web_esdh_provider_node_delete($node) {
   if ($node->type === 'meeting') {
     // Remove any addenums relating to this node.
     $query = new EntityFieldQuery();
-    $result = array_shift($query->entityCondition('entity_type', 'node')
+    $result = array_keys(array_shift($query->entityCondition('entity_type', 'node')
                 ->propertyCondition('type', 'meeting')
                 ->fieldCondition('field_addenum_to', 'nid', $node->nid, '=')
-                ->execute());
-    if (is_array($result)) {
-      foreach (array_keys($result) as $add_node) {
+                ->execute()));
+    if (is_array($results)) {
+      foreach ($result as $add_node) {
         node_delete($add_node->nid);
       }
     }
