@@ -1,0 +1,7 @@
+; Module name (human readable)
+name = OS2Web Taxon API Module
+; Module description
+description = Implements calls to taxon
+
+package = OS2Web - Kerne
+core = 7.x

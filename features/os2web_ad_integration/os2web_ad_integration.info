@@ -3,7 +3,7 @@ description = Configures Active Directory authentication and authorization
 core = 7.x
 package = OS2Web - Brugere
 php = 5.2.4
-version = 7.x-1.7
+version = 7.x-1.10
 project = OS2Web
 dependencies[] = ldap_authentication
 dependencies[] = ldap_authorization
@@ -24,16 +24,4 @@ features[variable][] = ldap_profile_conf
 features[variable][] = ldap_servers_encrypt_key
 features[variable][] = ldap_servers_encryption
 features[variable][] = ldap_servers_require_ssl_for_credentails
-timestamp = 1352123374
-
-;Added by OS2Web 2012-11-13
-project=OS2Web
-version=7.x-1.8
-timestamp=1352802164
-
-
-;Added by OS2Web 2012-11-19
-project=OS2Web
-version=7.x-1.10
-timestamp=1353326099
-
+timestamp = 1353326099

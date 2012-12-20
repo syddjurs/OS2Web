@@ -10,7 +10,7 @@
 function os2web_borgerservices_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-borgerservices-field_lead_image'
+  // Exported field: 'node-borgerservices-field_lead_image'.
   $fields['node-borgerservices-field_lead_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -31,6 +31,7 @@ function os2web_borgerservices_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -113,7 +114,7 @@ function os2web_borgerservices_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-borgerservices-field_url'
+  // Exported field: 'node-borgerservices-field_url'.
   $fields['node-borgerservices-field_url'] = array(
     'field_config' => array(
       'active' => '1',
@@ -134,6 +135,7 @@ function os2web_borgerservices_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '100',

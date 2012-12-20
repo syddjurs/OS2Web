@@ -10,7 +10,7 @@
 function os2web_planer_i_h_ring_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-hoering-body'
+  // Exported field: 'node-hoering-body'.
   $fields['node-hoering-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -88,7 +89,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-hoering-field_slutdato'
+  // Exported field: 'node-hoering-field_slutdato'.
   $fields['node-hoering-field_slutdato'] = array(
     'field_config' => array(
       'active' => '1',
@@ -98,6 +99,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
       'field_name' => 'field_slutdato',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -177,7 +179,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-hoering-field_startdato'
+  // Exported field: 'node-hoering-field_startdato'.
   $fields['node-hoering-field_startdato'] = array(
     'field_config' => array(
       'active' => '1',
@@ -187,6 +189,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
       'field_name' => 'field_startdato',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'date',
       'settings' => array(
         'cache_count' => '4',
@@ -265,7 +268,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-hoering-field_url'
+  // Exported field: 'node-hoering-field_url'.
   $fields['node-hoering-field_url'] = array(
     'field_config' => array(
       'active' => '1',
@@ -286,6 +289,7 @@ function os2web_planer_i_h_ring_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '100',

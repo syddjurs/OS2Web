@@ -10,7 +10,7 @@
 function os2web_kontaktblok_filter_default_formats() {
   $formats = array();
 
-  // Exported format: Blokindhold
+  // Exported format: Blokindhold.
   $formats['blokindhold'] = array(
     'format' => 'blokindhold',
     'name' => 'Blokindhold',

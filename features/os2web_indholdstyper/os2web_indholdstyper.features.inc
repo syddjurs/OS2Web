@@ -32,7 +32,7 @@ function os2web_indholdstyper_ctools_plugin_api() {
 function os2web_indholdstyper_image_default_styles() {
   $styles = array();
 
-  // Exported image style: indholdsside
+  // Exported image style: indholdsside.
   $styles['indholdsside'] = array(
     'name' => 'indholdsside',
     'effects' => array(
@@ -54,7 +54,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: medium-content
+  // Exported image style: medium-content.
   $styles['medium-content'] = array(
     'name' => 'medium-content',
     'effects' => array(
@@ -93,7 +93,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: news-cycle-medium
+  // Exported image style: news-cycle-medium.
   $styles['news-cycle-medium'] = array(
     'name' => 'news-cycle-medium',
     'effects' => array(
@@ -115,7 +115,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: news-cycle-small
+  // Exported image style: news-cycle-small.
   $styles['news-cycle-small'] = array(
     'name' => 'news-cycle-small',
     'effects' => array(
@@ -137,7 +137,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: news_big
+  // Exported image style: news_big.
   $styles['news_big'] = array(
     'name' => 'news_big',
     'effects' => array(
@@ -159,7 +159,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: rotating_image
+  // Exported image style: rotating_image.
   $styles['rotating_image'] = array(
     'name' => 'rotating_image',
     'effects' => array(
@@ -181,7 +181,7 @@ function os2web_indholdstyper_image_default_styles() {
     ),
   );
 
-  // Exported image style: rotating_image_small
+  // Exported image style: rotating_image_small.
   $styles['rotating_image_small'] = array(
     'name' => 'rotating_image_small',
     'effects' => array(

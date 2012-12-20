@@ -22,7 +22,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -71,7 +71,7 @@ function os2web_design_delta_default_templates() {
       ),
       'alpha_css' => array(
         'alpha-reset.css' => 'alpha-reset.css',
-        'alpha-mobile.css' => 'alpha-mobile.css',
+        'alpha-mobile.css' => 0,
         'alpha-alpha.css' => 'alpha-alpha.css',
         'omega-text.css' => 'omega-text.css',
         'omega-branding.css' => 'omega-branding.css',
@@ -124,9 +124,9 @@ function os2web_design_delta_default_templates() {
         'modules/tracker/tracker.css' => 0,
         'modules/update/update.css' => 0,
       ),
-      'alpha_debug_block_toggle' => 1,
+      'alpha_debug_block_toggle' => 0,
       'alpha_debug_block_active' => 0,
-      'alpha_debug_grid_toggle' => 1,
+      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_active' => 0,
       'alpha_debug_grid_roles' => array(
         2 => '2',
@@ -299,11 +299,11 @@ function os2web_design_delta_default_templates() {
       'alpha_region_menu_force' => 1,
       'alpha_region_menu_zone' => 'menu',
       'alpha_region_menu_prefix' => '0',
-      'alpha_region_menu_columns' => '12',
+      'alpha_region_menu_columns' => '6',
       'alpha_region_menu_suffix' => '0',
       'alpha_region_menu_weight' => '1',
       'alpha_region_menu_position' => '0',
-      'alpha_region_menu_css' => 'container-24',
+      'alpha_region_menu_css' => '',
       'alpha_region_menu_equal_height_element' => 0,
       'alpha_region_menu_equal_height_container' => 0,
       'alpha_zone_content_wrapper' => 1,
@@ -438,7 +438,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -487,7 +487,7 @@ function os2web_design_delta_default_templates() {
       ),
       'alpha_css' => array(
         'alpha-reset.css' => 'alpha-reset.css',
-        'alpha-mobile.css' => 'alpha-mobile.css',
+        'alpha-mobile.css' => 0,
         'alpha-alpha.css' => 'alpha-alpha.css',
         'omega-text.css' => 'omega-text.css',
         'omega-branding.css' => 'omega-branding.css',
@@ -536,9 +536,9 @@ function os2web_design_delta_default_templates() {
         'modules/tracker/tracker.css' => 0,
         'modules/update/update.css' => 0,
       ),
-      'alpha_debug_block_toggle' => 1,
+      'alpha_debug_block_toggle' => 0,
       'alpha_debug_block_active' => 0,
-      'alpha_debug_grid_toggle' => 1,
+      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_active' => 0,
       'alpha_debug_grid_roles' => array(
         2 => '2',
@@ -701,11 +701,11 @@ function os2web_design_delta_default_templates() {
       'alpha_region_menu_force' => 1,
       'alpha_region_menu_zone' => 'menu',
       'alpha_region_menu_prefix' => '0',
-      'alpha_region_menu_columns' => '12',
+      'alpha_region_menu_columns' => '6',
       'alpha_region_menu_suffix' => '0',
       'alpha_region_menu_weight' => '1',
       'alpha_region_menu_position' => '0',
-      'alpha_region_menu_css' => 'container-24',
+      'alpha_region_menu_css' => '',
       'alpha_region_menu_equal_height_element' => 0,
       'alpha_region_menu_equal_height_container' => 0,
       'alpha_zone_content_wrapper' => 1,
@@ -850,7 +850,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -899,7 +899,7 @@ function os2web_design_delta_default_templates() {
       ),
       'alpha_css' => array(
         'alpha-reset.css' => 'alpha-reset.css',
-        'alpha-mobile.css' => 'alpha-mobile.css',
+        'alpha-mobile.css' => 0,
         'alpha-alpha.css' => 'alpha-alpha.css',
         'omega-text.css' => 'omega-text.css',
         'omega-branding.css' => 'omega-branding.css',
@@ -952,9 +952,9 @@ function os2web_design_delta_default_templates() {
         'modules/tracker/tracker.css' => 0,
         'modules/update/update.css' => 0,
       ),
-      'alpha_debug_block_toggle' => 1,
+      'alpha_debug_block_toggle' => 0,
       'alpha_debug_block_active' => 0,
-      'alpha_debug_grid_toggle' => 1,
+      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_active' => 0,
       'alpha_debug_grid_roles' => array(
         2 => '2',
@@ -1127,11 +1127,11 @@ function os2web_design_delta_default_templates() {
       'alpha_region_menu_force' => 1,
       'alpha_region_menu_zone' => 'menu',
       'alpha_region_menu_prefix' => '0',
-      'alpha_region_menu_columns' => '12',
+      'alpha_region_menu_columns' => '6',
       'alpha_region_menu_suffix' => '0',
       'alpha_region_menu_weight' => '1',
       'alpha_region_menu_position' => '0',
-      'alpha_region_menu_css' => 'container-24',
+      'alpha_region_menu_css' => '',
       'alpha_region_menu_equal_height_element' => 0,
       'alpha_region_menu_equal_height_container' => 0,
       'alpha_zone_content_wrapper' => 1,
@@ -1266,7 +1266,7 @@ function os2web_design_delta_default_templates() {
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
       'toggle_logo' => 1,
-      'toggle_name' => 0,
+      'toggle_name' => 1,
       'toggle_slogan' => 0,
       'toggle_node_user_picture' => '1',
       'toggle_comment_user_picture' => '1',
@@ -1315,7 +1315,7 @@ function os2web_design_delta_default_templates() {
       ),
       'alpha_css' => array(
         'alpha-reset.css' => 'alpha-reset.css',
-        'alpha-mobile.css' => 'alpha-mobile.css',
+        'alpha-mobile.css' => 0,
         'alpha-alpha.css' => 'alpha-alpha.css',
         'omega-text.css' => 'omega-text.css',
         'omega-branding.css' => 'omega-branding.css',
@@ -1368,9 +1368,9 @@ function os2web_design_delta_default_templates() {
         'modules/tracker/tracker.css' => 0,
         'modules/update/update.css' => 0,
       ),
-      'alpha_debug_block_toggle' => 1,
+      'alpha_debug_block_toggle' => 0,
       'alpha_debug_block_active' => 0,
-      'alpha_debug_grid_toggle' => 1,
+      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_active' => 0,
       'alpha_debug_grid_roles' => array(
         2 => '2',
@@ -1533,11 +1533,11 @@ function os2web_design_delta_default_templates() {
       'alpha_region_menu_force' => 1,
       'alpha_region_menu_zone' => 'menu',
       'alpha_region_menu_prefix' => '0',
-      'alpha_region_menu_columns' => '12',
+      'alpha_region_menu_columns' => '6',
       'alpha_region_menu_suffix' => '0',
       'alpha_region_menu_weight' => '1',
       'alpha_region_menu_position' => '0',
-      'alpha_region_menu_css' => 'container-24',
+      'alpha_region_menu_css' => '',
       'alpha_region_menu_equal_height_element' => 0,
       'alpha_region_menu_equal_height_container' => 0,
       'alpha_zone_content_wrapper' => 1,
@@ -1681,8 +1681,6 @@ function os2web_design_delta_default_templates() {
   $delta->parent = '';
   $delta->settings = array(
     'theme_cmstheme_settings' => array(
-      'alpha_debug_block_toggle' => 0,
-      'alpha_debug_grid_toggle' => 0,
       'alpha_debug_grid_roles' => array(
         1 => 0,
         2 => 0,

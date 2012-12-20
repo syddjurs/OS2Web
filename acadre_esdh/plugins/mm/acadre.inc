@@ -77,13 +77,15 @@ function acadre_esdh_mm_import_meeting($meeting) {
   if (is_file(drupal_realpath($file))) {
     $manifest = simplexml_load_file(drupal_realpath($file));
     if (is_object($manifest)) {
+      $agenda_id = (int) array_shift($manifest->xpath("/root/table[@name='agenda']/fields/field/@sysid"));
       $items_xml = $manifest->xpath("//table[@name='producedAgenda']/fields");
       if (empty($items_xml)) {
         watchdog('acadre MM', 'Empty list of import items in %file.', array('%file' => $file), WATCHDOG_WARNING);
       }
       foreach ($items_xml as $xml_item) {
         $agendainfo = array(
-          'sysid' => (int) array_shift($xml_item->xpath('field/@sysid')),
+          // 'sysid' => (int) array_shift($xml_item->xpath('field/@sysid')),
+          'sysid' => $agenda_id,
           'publish' => (int) array_shift($xml_item->xpath('field/@publish')),
           'access' => (string) array_shift($xml_item->xpath('field/@access')),
           'filesfolder' => (string) array_shift($xml_item->xpath('field/@filesfolder')),
@@ -299,7 +301,11 @@ function _acadre_esdh_similar_file_exists($filename) {
  * @TODO: Rid this of drupal specific code.
  */
 function _acadre_esdh_mm_order_addenums($drush = FALSE) {
-  $rev_meetings = array(1458);
+  if (!lock_acquire(__FUNCTION__)) {
+    return;
+  }
+  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+  $rev_meetings = array();
   // Find all meetings and gather meeting and agenda_ids.
   $nodes = entity_load('node', FALSE, array('type' => 'meeting'));
   $meetings = array();
@@ -328,15 +334,39 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       $meeting = array_reverse($meeting);
     }
     // Lowest system id is primary.
-    $primary = array_shift($meeting);
+    $primary = node_load(array_shift($meeting));
+    $addenum_to = field_get_items('node', $primary, 'field_addenum_to');
+    if (!empty($addenum_to[0]['nid'])) {
+      $primary->field_addenum_to[LANGUAGE_NONE] = array();
+      node_save($primary);
+    }
     while ($next = array_shift($meeting)) {
       // Set up references for addenum agendas.
       $node = $nodes[$next];
-      $node->field_addenum_to[$node->language][0]['nid'] = $primary;
-      node_save($node);
+      if ($primary) {
+        $addenum_to = field_get_items('node', $node, 'field_addenum_to');
+        $addenum_to = is_array($addenum_to) ? array_shift(array_shift($addenum_to)) : FALSE;
+        // Save time by only updating what is needed.
+        if ($addenum_to != $primary->nid) {
+          // error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $primary = ' . print_r($primary->nid, 1));
+          // error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $addenum_to = ' . print_r($addenum_to, 1));
+          $node->field_addenum_to[LANGUAGE_NONE][0]['nid'] = $primary->nid;
+          node_save($node);
+        }
+      }
+      else {
+        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . '()');
+        error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: wanted to delete $node->nid");
+        // node_delete($node->nid);
+      }
       unset($nids[$node->nid]);
       if ($drush === TRUE) {
-        drush_log("Updated meeting $m_id..", 'ok');
+        if ($primary) {
+          drush_log("Updated meeting $m_id..", 'ok');
+        }
+        else {
+          drush_log("Removed stale addenum $m_id..", 'ok');
+        }
       }
     }
   }
@@ -348,4 +378,5 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       drush_log("Resetting $nid..", 'ok');
     }
   }
+  lock_release(__FUNCTION__);
 }

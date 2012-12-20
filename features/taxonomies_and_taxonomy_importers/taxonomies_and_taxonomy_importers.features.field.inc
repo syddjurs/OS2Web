@@ -10,7 +10,7 @@
 function taxonomies_and_taxonomy_importers_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'taxonomy_term-acadremmcomittee-field_department_id'
+  // Exported field: 'taxonomy_term-acadremmcomittee-field_department_id'.
   $fields['taxonomy_term-acadremmcomittee-field_department_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -20,6 +20,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_department_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -59,7 +60,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-acadremmcomittee-field_department_name'
+  // Exported field: 'taxonomy_term-acadremmcomittee-field_department_name'.
   $fields['taxonomy_term-acadremmcomittee-field_department_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -80,6 +81,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -121,7 +123,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-acadremmcomittee-field_system_id'
+  // Exported field: 'taxonomy_term-acadremmcomittee-field_system_id'.
   $fields['taxonomy_term-acadremmcomittee-field_system_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -131,6 +133,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_system_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -170,7 +173,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-egennavne_stednavne-field_city'
+  // Exported field: 'taxonomy_term-egennavne_stednavne-field_city'.
   $fields['taxonomy_term-egennavne_stednavne-field_city'] = array(
     'field_config' => array(
       'active' => '1',
@@ -191,6 +194,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -231,7 +235,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-egennavne_stednavne-field_name'
+  // Exported field: 'taxonomy_term-egennavne_stednavne-field_name'.
   $fields['taxonomy_term-egennavne_stednavne-field_name'] = array(
     'field_config' => array(
       'active' => '1',
@@ -252,6 +256,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -292,7 +297,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-egennavne_stednavne-field_system_id'
+  // Exported field: 'taxonomy_term-egennavne_stednavne-field_system_id'.
   $fields['taxonomy_term-egennavne_stednavne-field_system_id'] = array(
     'field_config' => array(
       'active' => '1',
@@ -302,6 +307,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_system_id',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -341,7 +347,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-egennavne_stednavne-field_type'
+  // Exported field: 'taxonomy_term-egennavne_stednavne-field_type'.
   $fields['taxonomy_term-egennavne_stednavne-field_type'] = array(
     'field_config' => array(
       'active' => '1',
@@ -362,6 +368,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -402,7 +409,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-kle-field_cue_word'
+  // Exported field: 'taxonomy_term-kle-field_cue_word'.
   $fields['taxonomy_term-kle-field_cue_word'] = array(
     'field_config' => array(
       'active' => '1',
@@ -423,6 +430,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -464,7 +472,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-kle-field_discontinued'
+  // Exported field: 'taxonomy_term-kle-field_discontinued'.
   $fields['taxonomy_term-kle-field_discontinued'] = array(
     'field_config' => array(
       'active' => '1',
@@ -474,6 +482,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_discontinued',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -517,7 +526,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-kle-field_legislation_reference'
+  // Exported field: 'taxonomy_term-kle-field_legislation_reference'.
   $fields['taxonomy_term-kle-field_legislation_reference'] = array(
     'field_config' => array(
       'active' => '1',
@@ -527,6 +536,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_legislation_reference',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'link',
       'settings' => array(
         'attributes' => array(
@@ -593,7 +603,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-kle-field_search_word'
+  // Exported field: 'taxonomy_term-kle-field_search_word'.
   $fields['taxonomy_term-kle-field_search_word'] = array(
     'field_config' => array(
       'active' => '1',
@@ -614,6 +624,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -654,7 +665,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-organisation-field_discontinued'
+  // Exported field: 'taxonomy_term-organisation-field_discontinued'.
   $fields['taxonomy_term-organisation-field_discontinued'] = array(
     'field_config' => array(
       'active' => '1',
@@ -664,6 +675,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_discontinued',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -707,7 +719,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-organisation-field_search_word'
+  // Exported field: 'taxonomy_term-organisation-field_search_word'.
   $fields['taxonomy_term-organisation-field_search_word'] = array(
     'field_config' => array(
       'active' => '1',
@@ -728,6 +740,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -768,7 +781,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-politik-field_acadrecomittee'
+  // Exported field: 'taxonomy_term-politik-field_acadrecomittee'.
   $fields['taxonomy_term-politik-field_acadrecomittee'] = array(
     'field_config' => array(
       'active' => '1',
@@ -789,6 +802,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(
@@ -835,7 +849,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-politik-field_agendaenabled'
+  // Exported field: 'taxonomy_term-politik-field_agendaenabled'.
   $fields['taxonomy_term-politik-field_agendaenabled'] = array(
     'field_config' => array(
       'active' => '1',
@@ -845,6 +859,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_agendaenabled',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -888,7 +903,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-politik-field_discontinued'
+  // Exported field: 'taxonomy_term-politik-field_discontinued'.
   $fields['taxonomy_term-politik-field_discontinued'] = array(
     'field_config' => array(
       'active' => '1',
@@ -898,6 +913,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_discontinued',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',
@@ -941,7 +957,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-politik-field_search_word'
+  // Exported field: 'taxonomy_term-politik-field_search_word'.
   $fields['taxonomy_term-politik-field_search_word'] = array(
     'field_config' => array(
       'active' => '1',
@@ -962,6 +978,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(
         'max_length' => '255',
@@ -1002,7 +1019,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_struktur-field_node_reference_kontaktblok'
+  // Exported field: 'taxonomy_term-site_struktur-field_node_reference_kontaktblok'.
   $fields['taxonomy_term-site_struktur-field_node_reference_kontaktblok'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1023,6 +1040,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
           0 => 'nid',
         ),
       ),
+      'locked' => '0',
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
@@ -1096,7 +1114,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-user_position-field_priority'
+  // Exported field: 'taxonomy_term-user_position-field_priority'.
   $fields['taxonomy_term-user_position-field_priority'] = array(
     'field_config' => array(
       'active' => '1',
@@ -1106,6 +1124,7 @@ function taxonomies_and_taxonomy_importers_field_default_fields() {
       'field_name' => 'field_priority',
       'foreign keys' => array(),
       'indexes' => array(),
+      'locked' => '0',
       'module' => 'number',
       'settings' => array(),
       'translatable' => '0',

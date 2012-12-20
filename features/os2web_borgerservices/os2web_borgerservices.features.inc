@@ -27,7 +27,7 @@ function os2web_borgerservices_views_api() {
 function os2web_borgerservices_image_default_styles() {
   $styles = array();
 
-  // Exported image style: borgerservices
+  // Exported image style: borgerservices.
   $styles['borgerservices'] = array(
     'name' => 'borgerservices',
     'effects' => array(

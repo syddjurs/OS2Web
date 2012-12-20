@@ -5,7 +5,7 @@
  * This updates the meta data of all meeting nodes 
  * 
  */
-function os2web_meeting_views_update_7003(&$sandbox) {
+function os2web_meeting_views_update_7004(&$sandbox) {
   if (!isset($sandbox['progress'])) {
     $sandbox['#finished'] = 0;
     $sandbox['progress'] = 0;
