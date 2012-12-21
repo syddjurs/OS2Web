@@ -96,7 +96,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['id'] = $movie_id;
         $node->field_qbrick_ref[LANGUAGE_NONE][0]['seek'] = 0;
         foreach ($meeting['items'] as &$item) {
-          $item['chapter'] = isset($chapters[$item['id']])?$chapters[$item['id']]:0;
+          $item['chapter'] = isset($chapters[$item['id']]) ? $chapters[$item['id']] : 0;
           $item['movie_id'] = $movie_id;
         }
       }
@@ -253,10 +253,10 @@ function _os2web_esdh_provider_import_file($file_meta) {
     $convert = FALSE;
   }
   elseif ($uri_tmp = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_out))) {
-    $uri_out = implode('/', array(
-      variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
-      $folder,
-      basename($uri_tmp)));
+//    $uri_out = implode('/', array(
+//      variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR),
+//      $folder,
+//      basename($uri_tmp)));
     // File already copied.
     $convert = TRUE;
     $uri = $uri_out;
@@ -484,7 +484,7 @@ function _os2web_esdh_provider_import($id = FALSE) {
     }
   }
   if ($meeting_id === FALSE) {
-    drupal_json_output(array('status' => 'error', 'message' => 'Meeting not found.'));
+    _os2web_esdh_provider_import_output();
   }
   else {
     $nids = _os2web_esdh_provider_import_meeting($meeting_id, TRUE);
@@ -492,16 +492,31 @@ function _os2web_esdh_provider_import($id = FALSE) {
       os2web_esdh_provider_invoke('mm', 'post_import_process');
     }
     if (count($nids) > 0) {
-      drupal_json_output(array(
-        'status' => 'ok',
-        'message' => 'Meeting ' . $id . ' imported to nodes: ' . implode(',', $nids),
-      ));
+      _os2web_esdh_provider_import_output($id, $nids);
     }
     else {
-      drupal_json_output(array(
-        'status' => 'ok',
-        'message' => 'Meeting ' . $id . ' imported, but no nodes created',
-      ));
+      _os2web_esdh_provider_import_output($id);
     }
   }
+}
+
+/**
+ * Helper function to dump output from REST importer.
+ */
+function _os2web_esdh_provider_import_output($id, $nids) {
+  if (isset($id)) {
+    $msg = 'Meeting not found.';
+  }
+  if (isset($nids) && !empty($nids)) {
+    $msg = 'Meeting ' . $id . ' imported, but no nodes created.';
+  }
+  else {
+    $urls = array();
+    foreach ($nids as $nid) {
+      $urls[] = url('node/' . $nid, array('absolute' => TRUE));
+    }
+    $msg = 'Meeting ' . $id . ' imported to nodes: ' . implode(',', $urls);
+  }
+  drupal_add_http_header('Content-Type', 'application/json');
+  echo $msg;
 }
