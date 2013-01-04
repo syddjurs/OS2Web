@@ -36,14 +36,23 @@ function os2web_vis_kontaktblok_generelt_default_panels_mini() {
     $pane = new stdClass();
     $pane->pid = 'new-1';
     $pane->panel = 'middle';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'kontaktblok-panel_pane_1';
+    $pane->type = 'views';
+    $pane->subtype = 'kontaktblok';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'arguments' => array(
-        'nid' => '',
-      ),
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '1',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '2209',
+      'url' => '',
+      'display' => 'block',
       'override_title' => 0,
       'override_title_text' => '',
     );
@@ -59,6 +68,30 @@ function os2web_vis_kontaktblok_generelt_default_panels_mini() {
     $display->panels['middle'][0] = 'new-1';
     $pane = new stdClass();
     $pane->pid = 'new-2';
+    $pane->panel = 'middle';
+    $pane->type = 'views_panes';
+    $pane->subtype = 'kontaktblok-panel_pane_1';
+    $pane->shown = FALSE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'arguments' => array(
+        'nid' => '',
+      ),
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array();
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-2'] = $pane;
+    $display->panels['middle'][1] = 'new-2';
+    $pane = new stdClass();
+    $pane->pid = 'new-3';
     $pane->panel = 'middle';
     $pane->type = 'custom';
     $pane->subtype = 'custom';
@@ -77,12 +110,12 @@ function os2web_vis_kontaktblok_generelt_default_panels_mini() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 1;
+    $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-2'] = $pane;
-    $display->panels['middle'][1] = 'new-2';
+    $display->content['new-3'] = $pane;
+    $display->panels['middle'][2] = 'new-3';
     $pane = new stdClass();
-    $pane->pid = 'new-3';
+    $pane->pid = 'new-4';
     $pane->panel = 'middle';
     $pane->type = 'views_panes';
     $pane->subtype = 'spotboxe-panel_pane_10';
@@ -102,12 +135,12 @@ function os2web_vis_kontaktblok_generelt_default_panels_mini() {
     );
     $pane->css = array();
     $pane->extras = array();
-    $pane->position = 2;
+    $pane->position = 3;
     $pane->locks = array();
-    $display->content['new-3'] = $pane;
-    $display->panels['middle'][2] = 'new-3';
+    $display->content['new-4'] = $pane;
+    $display->panels['middle'][3] = 'new-4';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-1';
+  $display->title_pane = 'new-2';
   $mini->display = $display;
   $export['hoejre_blokke_generel'] = $mini;
 
