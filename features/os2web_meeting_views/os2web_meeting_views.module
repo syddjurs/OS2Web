@@ -114,6 +114,9 @@ function _os2web_meeting_views_generate_search_data($entity) {
         foreach ($bpas as $bpa) {
           $node2 = node_load($bpa['target_id']);
           $body = field_get_items($entity_type, $node2, 'field_bpa_body');
+          if (!is_array($body)) {
+            $body = array(array());
+          }
           $text = html_entity_decode(strip_tags(check_markup(array_pop(array_pop($body)),'filtered_html')),ENT_COMPAT | ENT_HTML401,'UTF-8');
           $text = trim(preg_replace('/[\",;:.\'\(\)]/',' ',$text));
           $text = trim(preg_replace('/\s\s+/',' ',$text));
