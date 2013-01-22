@@ -2780,14 +2780,6 @@ return $field==1?true:false;';
   $handler->display->display_options['row_options']['default_field_elements'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Overskrift: Global: Tekstområde */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
-  $handler->display->display_options['header']['area']['content'] = '<div class="blanketter"><a href="/selvbetjening">Blanketter / Selvbetjening</a></div>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
-  $handler->display->display_options['header']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Sidefod: Global: Tekstområde */
   $handler->display->display_options['footer']['area']['id'] = 'area';
@@ -2938,7 +2930,6 @@ return $field==1?true:false;';
     t('<div class="aktuel-genvej-portal>Blanketter</div>'),
     t('<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706">Borger.dk</a><a class="virkdk" href="http://virk.dk">Virk.dk</a></div>'),
     t('selvbetjening-indholdsside'),
-    t('<div class="blanketter"><a href="/selvbetjening">Blanketter / Selvbetjening</a></div>'),
     t('field_noderef_selvbtjn'),
     t('<a href="node/[field_attached_node]" title="[title] ">[title]</a>'),
     t('<a href="[field_selvbetjening_direkte]" title="[title]">[title]</a>'),
