@@ -1,6 +1,7 @@
 name = Syddjurs - Eksterne links
 core = 7.x
 package = Features
+php = 5.2.4
 dependencies[] = extlink
 dependencies[] = strongarm
 features[ctools][] = strongarm:strongarm:1
