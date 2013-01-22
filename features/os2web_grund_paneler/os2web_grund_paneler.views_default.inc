@@ -10,7 +10,7 @@
 function os2web_grund_paneler_views_default_views() {
   $export = array();
 
-  $view = new view();
+  $view = new view;
   $view->name = 'aktuelt';
   $view->description = '';
   $view->tag = 'default';
@@ -22,14 +22,12 @@ function os2web_grund_paneler_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -41,10 +39,6 @@ function os2web_grund_paneler_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Felt: Indhold: Titel */
@@ -70,7 +64,6 @@ function os2web_grund_paneler_views_default_views() {
   $handler->display->display_options['arguments']['field_site_structure_tid']['id'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
@@ -105,8 +98,6 @@ function os2web_grund_paneler_views_default_views() {
 
   /* Display: Aktuelt - Sektionsforside */
   $handler = $view->new_display('panel_pane', 'Aktuelt - Sektionsforside', 'panel_pane_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -127,8 +118,6 @@ function os2web_grund_paneler_views_default_views() {
 
   /* Display: Aktuelt - Portalforside */
   $handler = $view->new_display('panel_pane', 'Aktuelt - Portalforside', 'panel_pane_2');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -166,10 +155,6 @@ function os2web_grund_paneler_views_default_views() {
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
-    t('« første'),
-    t('‹ forrige'),
-    t('næste ›'),
-    t('sidste »'),
     t('Alle'),
     t('Aktuelt - Sektionsforside'),
     t('CMS Theme'),
@@ -177,7 +162,7 @@ function os2web_grund_paneler_views_default_views() {
   );
   $export['aktuelt'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'kle_lonks_boks';
   $view->description = '';
   $view->tag = 'default';
@@ -190,14 +175,12 @@ function os2web_grund_paneler_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'KLE Links boks';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -223,7 +206,6 @@ function os2web_grund_paneler_views_default_views() {
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_index';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['vocabularies'] = array(
@@ -242,7 +224,6 @@ function os2web_grund_paneler_views_default_views() {
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -292,7 +273,6 @@ return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'kle_links_boks');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $translatables['kle_lonks_boks'] = array(
     t('Master'),
     t('KLE Links boks'),
@@ -307,7 +287,7 @@ return $field==1?true:false;';
   );
   $export['kle_lonks_boks'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'megadd_news';
   $view->description = '';
   $view->tag = 'default';
@@ -320,14 +300,12 @@ return $field==1?true:false;';
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Aktuelle emner';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -340,6 +318,7 @@ return $field==1?true:false;';
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Felt: Indhold: Titel */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -365,7 +344,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
@@ -400,12 +378,10 @@ return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
 
   /* Display: Content pane */
   $handler = $view->new_display('panel_pane', 'Content pane', 'panel_pane_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['argument_input'] = array(
     'field_site_structure_tid' => array(
       'type' => 'user',
@@ -432,7 +408,7 @@ return $field==1?true:false;';
   );
   $export['megadd_news'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'newslist';
   $view->description = '';
   $view->tag = 'default';
@@ -444,14 +420,12 @@ return $field==1?true:false;';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -526,7 +500,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -557,7 +530,6 @@ return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Global: Tilpasset tekst */
@@ -622,7 +594,6 @@ return $field==1?true:false;';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -702,7 +673,6 @@ return $field==1?true:false;';
 
   /* Display: Newslist */
   $handler = $view->new_display('panel_pane', 'Newslist', 'panel_pane_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -780,7 +750,6 @@ return $field==1?true:false;';
 
   /* Display: Portalnews */
   $handler = $view->new_display('panel_pane', 'Portalnews', 'panel_pane_2');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -857,7 +826,6 @@ return $field==1?true:false;';
   $handler = $view->new_display('panel_pane', 'Portalnews-big', 'panel_pane_3');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'portalnews-big';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '3';
@@ -964,7 +932,7 @@ return $field==1?true:false;';
   );
   $export['newslist'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'redaktoer_info';
   $view->description = '';
   $view->tag = 'default';
@@ -977,7 +945,6 @@ return $field==1?true:false;';
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Redaktør info';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -987,7 +954,6 @@ return $field==1?true:false;';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -1062,7 +1028,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
@@ -1080,7 +1045,6 @@ return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $translatables['redaktoer_info'] = array(
     t('Master'),
     t('Redaktør info'),
@@ -1105,7 +1069,7 @@ return $field==1?true:false;';
   );
   $export['redaktoer_info'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'rotating_image_view';
   $view->description = '';
   $view->tag = 'default';
@@ -1119,14 +1083,12 @@ return $field==1?true:false;';
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Rotating image view';
   $handler->display->display_options['css_class'] = 'custom-slideshow billedrotator ';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -1327,14 +1289,12 @@ return $field==1?true:false;';
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
 
   /* Display: Stor rotator - single */
   $handler = $view->new_display('block', 'Stor rotator - single', 'block_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'custom-slideshow billedrotator  slideshow_big';
   $handler->display->display_options['display_description'] = 'Vise kun en ad gangen, bruges bland andet på erhvervssiden';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'slideshow';
   $handler->display->display_options['style_options']['wrapper_class'] = 'item-list ';
@@ -1460,7 +1420,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -1470,7 +1429,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1520,7 +1478,6 @@ return $field==1?true:false;';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'custom-slideshow billedrotator  slideshow_big';
   $handler->display->display_options['display_description'] = 'Vise kun en ad gangen, bruges bland andet på erhvervssiden';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'slideshow';
   $handler->display->display_options['style_options']['wrapper_class'] = 'item-list ';
@@ -1650,7 +1607,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -1660,7 +1616,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1687,6 +1642,7 @@ return $field==1?true:false;';
     t('Stigende'),
     t('Faldende'),
     t('<a href="[field_rotating_link]">[field_rotate_image]</a>'),
+    t('[field_rotating_link]'),
     t('<a href="[field_rotating_link]"><span>[title]</span> [body]</a>'),
     t('<a href="[field_rotating_link]"><span>[title]</span></a>'),
     t('<div class="item-bg" title=\'[field_rotate_image_1]\'>[title]</div>'),
@@ -1700,7 +1656,7 @@ return $field==1?true:false;';
   );
   $export['rotating_image_view'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'selvbetjening';
   $view->description = '';
   $view->tag = 'default';
@@ -1714,14 +1670,12 @@ return $field==1?true:false;';
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Selvbetjening';
   $handler->display->display_options['css_class'] = 'selvbetjening';
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -1731,16 +1685,13 @@ return $field==1?true:false;';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['row_plugin'] = 'node';
   /* Overskrift: Global: Tekstområde */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   /* Felt: Felt: Spotboxe Bund */
   $handler->display->display_options['fields']['field_attached_node']['id'] = 'field_attached_node';
   $handler->display->display_options['fields']['field_attached_node']['table'] = 'field_data_field_attached_node';
@@ -1788,7 +1739,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -1818,8 +1768,6 @@ return $field==1?true:false;';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1839,11 +1787,9 @@ return $field==1?true:false;';
 
   /* Display: Feed */
   $handler = $view->new_display('feed', 'Feed', 'feed');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'rss';
   $handler->display->display_options['row_plugin'] = 'node_rss';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1869,7 +1815,6 @@ return $field==1?true:false;';
   $handler = $view->new_display('block', 'SB-block-forside', 'sb_block_forside');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-block-forside';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1886,6 +1831,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<h3><a href="/selvbetjening">Selvbetjening</a></h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -1893,11 +1839,13 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['view']['id'] = 'view';
   $handler->display->display_options['footer']['view']['table'] = 'views';
   $handler->display->display_options['footer']['view']['field'] = 'view';
+  $handler->display->display_options['footer']['view']['empty'] = FALSE;
   $handler->display->display_options['footer']['view']['view_to_insert'] = 'selvbetjening:sb_block_forside_att_1';
   /* Sidefod: Global: View-område */
   $handler->display->display_options['footer']['view_1']['id'] = 'view_1';
   $handler->display->display_options['footer']['view_1']['table'] = 'views';
   $handler->display->display_options['footer']['view_1']['field'] = 'view';
+  $handler->display->display_options['footer']['view_1']['empty'] = FALSE;
   $handler->display->display_options['footer']['view_1']['view_to_insert'] = 'selvbetjening:sb_block_forside_att_2';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Felt: Spotboxe Bund */
@@ -1938,7 +1886,6 @@ return $field==1?true:false;';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1971,7 +1918,6 @@ return $field==1?true:false;';
   $handler = $view->new_display('block', 'selvbetjening-megamenu', 'block_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-megamenu';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -1987,6 +1933,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<h3><a href="/selvbetjening">Selvbetjening</a></h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -2035,7 +1982,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['id'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
@@ -2046,7 +1992,6 @@ return $field==1?true:false;';
     'site_struktur' => 'site_struktur',
   );
   $handler->display->display_options['arguments']['field_site_structure_tid']['validate_options']['type'] = 'convert';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2066,7 +2011,6 @@ return $field==1?true:false;';
   /* Display: SB-block-forside-att-1 */
   $handler = $view->new_display('block', 'SB-block-forside-att-1', 'sb_block_forside_att_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2084,10 +2028,10 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = FALSE;
   $handler->display->display_options['footer']['area']['content'] = '<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2119,7 +2063,6 @@ return $field==1?true:false;';
   /* Display: SB-block-forside-att-2 */
   $handler = $view->new_display('block', 'SB-block-forside-att-2', 'sb_block_forside_att_2');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '8';
@@ -2137,6 +2080,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Aktuelle Genvej';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<div class="aktuel-genvej>Aktuelle Genveje</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -2144,6 +2088,7 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = FALSE;
   $handler->display->display_options['footer']['area']['content'] = '<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk" title="NemID">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706" title="Borger.dk">Borger.dk</a><a class="virkdk" href="http://virk.dk" title="Virk.dk">Virk.dk</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -2181,7 +2126,6 @@ return $field==1?true:false;';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['empty'] = '<a href="[field_attached_node]" title="[title]">[title]</a>';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2215,7 +2159,6 @@ return $field==1?true:false;';
   $handler = $view->new_display('block', 'SB-block-portal', 'block_2');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-block-forside selvbetjening-block-portal';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2232,6 +2175,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<h3><a href="/selvbetjening">Selvbetjening</a></h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -2239,12 +2183,14 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['view']['id'] = 'view';
   $handler->display->display_options['footer']['view']['table'] = 'views';
   $handler->display->display_options['footer']['view']['field'] = 'view';
+  $handler->display->display_options['footer']['view']['empty'] = FALSE;
   $handler->display->display_options['footer']['view']['view_to_insert'] = 'selvbetjening:sb_block_portal_att_1';
   $handler->display->display_options['footer']['view']['inherit_arguments'] = TRUE;
   /* Sidefod: Global: View-område */
   $handler->display->display_options['footer']['view_1']['id'] = 'view_1';
   $handler->display->display_options['footer']['view_1']['table'] = 'views';
   $handler->display->display_options['footer']['view_1']['field'] = 'view';
+  $handler->display->display_options['footer']['view_1']['empty'] = FALSE;
   $handler->display->display_options['footer']['view_1']['view_to_insert'] = 'selvbetjening:sb_block_portal_att_2';
   $handler->display->display_options['footer']['view_1']['inherit_arguments'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -2292,7 +2238,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'empty';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['term_page'] = FALSE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -2308,7 +2253,6 @@ return $field==1?true:false;';
     'site_struktur' => 'site_struktur',
   );
   $handler->display->display_options['arguments']['field_site_structure_tid']['validate']['fail'] = 'empty';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2340,7 +2284,6 @@ return $field==1?true:false;';
 
   /* Display: Selvbetjening - footerlinks */
   $handler = $view->new_display('block', 'Selvbetjening - footerlinks', 'block_3');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
@@ -2390,7 +2333,6 @@ return $field==1?true:false;';
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_selvbetjening_direkte']['type'] = 'text_plain';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2415,7 +2357,6 @@ return $field==1?true:false;';
   /* Display: SB-block-portal-att-1 */
   $handler = $view->new_display('block', 'SB-block-portal-att-1', 'sb_block_portal_att_1');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2473,7 +2414,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -2483,7 +2423,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2510,7 +2449,6 @@ return $field==1?true:false;';
   /* Display: SB-block-portal-att-2 */
   $handler = $view->new_display('block', 'SB-block-portal-att-2', 'sb_block_portal_att_2');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -2527,6 +2465,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Aktuelle Genvej';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<div class="aktuel-genvej-portal">Aktuelle Genveje</div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -2534,6 +2473,7 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = FALSE;
   $handler->display->display_options['footer']['area']['content'] = '<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk" title="NemID">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706" title="Borger.dk">Borger.dk</a><a class="virkdk" href="http://virk.dk" title="Virk.dk">Virk.dk</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -2579,7 +2519,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -2588,7 +2527,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2617,7 +2555,6 @@ return $field==1?true:false;';
   $handler = $view->new_display('block', 'SB-block-sektion', 'block_4');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-block-forside selvbetjening-block-portal selvbetjening-block-sektion';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -2633,6 +2570,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<h3><a href="/selvbetjening">Selvbetjening</a></h3>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -2640,6 +2578,7 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['view_1']['id'] = 'view_1';
   $handler->display->display_options['footer']['view_1']['table'] = 'views';
   $handler->display->display_options['footer']['view_1']['field'] = 'view';
+  $handler->display->display_options['footer']['view_1']['empty'] = FALSE;
   $handler->display->display_options['footer']['view_1']['view_to_insert'] = 'selvbetjening:sb_block_portal_att_2';
   $handler->display->display_options['footer']['view_1']['inherit_arguments'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -2690,7 +2629,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['limit'] = TRUE;
@@ -2700,7 +2638,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2727,7 +2664,6 @@ return $field==1?true:false;';
   /* Display: SB-block-sektion2 */
   $handler = $view->new_display('block', 'SB-block-sektion2', 'block_5');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -2744,6 +2680,7 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Aktuelle Genvej';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<div class="aktuel-genvej-portal>Blanketter</div>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['footer'] = FALSE;
@@ -2751,6 +2688,7 @@ return $field==1?true:false;';
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = FALSE;
   $handler->display->display_options['footer']['area']['content'] = '<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706">Borger.dk</a><a class="virkdk" href="http://virk.dk">Virk.dk</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -2792,7 +2730,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['table'] = 'field_data_field_site_structure';
   $handler->display->display_options['arguments']['field_site_structure_tid']['field'] = 'field_site_structure_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_structure_tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['field_site_structure_tid']['default_argument_options']['vocabularies'] = array(
@@ -2801,7 +2738,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_structure_tid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2832,7 +2768,6 @@ return $field==1?true:false;';
   $handler->display->display_options['title'] = 'Selvbetjening';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'selvbetjening selvbetjening-indholdsside';
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '0';
@@ -2849,13 +2784,16 @@ return $field==1?true:false;';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div class="blanketter"><a href="/selvbetjening">Blanketter</a></div>';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
+  $handler->display->display_options['header']['area']['content'] = '<div class="blanketter"><a href="/selvbetjening">Blanketter / Selvbetjening</a></div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['footer'] = FALSE;
   /* Sidefod: Global: Tekstområde */
   $handler->display->display_options['footer']['area']['id'] = 'area';
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
+  $handler->display->display_options['footer']['area']['empty'] = FALSE;
   $handler->display->display_options['footer']['area']['content'] = '<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk" title="NemID">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706" title="Borger.dk">Borger.dk</a><a class="virkdk" href="http://virk.dk" title="Virk.dk">Virk.dk</a></div>';
   $handler->display->display_options['footer']['area']['format'] = 'blokindhold';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -2933,12 +2871,10 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
   $handler->display->display_options['arguments']['nid']['field'] = 'nid';
   $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2968,13 +2904,10 @@ return $field==1?true:false;';
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
-    t('« første'),
-    t('‹ forrige'),
-    t('næste ›'),
-    t('sidste »'),
     t('node/[field_attached_node-nid]'),
     t('[field_selvbetjening_direkte-value]'),
     t('[field_attached_node]'),
+    t('[field_selvbetjening_direkte]'),
     t('[title]'),
     t('Alle'),
     t('Page'),
@@ -2982,6 +2915,7 @@ return $field==1?true:false;';
     t('SB-block-forside'),
     t('<h3><a href="/selvbetjening">Selvbetjening</a></h3>'),
     t('selvbetjening-megamenu'),
+    t('node/[field_attached_node]'),
     t('<a href="/[field_attached_node]" title="[title]">[title]</a>'),
     t('SB-block-forside-att-1'),
     t('<div class="knapper"><a class="kviksvar" href="/kviksvar">Kviksvar</a><a class="nemindsigt" href="http://webkort.syddjurs.dk/?profile=lokalplaner-borger">Kort</a></div>'),
@@ -3004,7 +2938,7 @@ return $field==1?true:false;';
     t('<div class="aktuel-genvej-portal>Blanketter</div>'),
     t('<div class="selbetjening-bund"><a class="nemid" href="http://nemid.dk">NEMID</a><a class="borgerdk" href="https://www.borger.dk/Sider/default.aspx?KommuneId=706">Borger.dk</a><a class="virkdk" href="http://virk.dk">Virk.dk</a></div>'),
     t('selvbetjening-indholdsside'),
-    t('<div class="blanketter"><a href="/selvbetjening">Blanketter</a></div>'),
+    t('<div class="blanketter"><a href="/selvbetjening">Blanketter / Selvbetjening</a></div>'),
     t('field_noderef_selvbtjn'),
     t('<a href="node/[field_attached_node]" title="[title] ">[title]</a>'),
     t('<a href="[field_selvbetjening_direkte]" title="[title]">[title]</a>'),
@@ -3012,7 +2946,7 @@ return $field==1?true:false;';
   );
   $export['selvbetjening'] = $view;
 
-  $view = new view();
+  $view = new view;
   $view->name = 'sitestuktur';
   $view->description = '';
   $view->tag = 'default';
@@ -3024,14 +2958,12 @@ return $field==1?true:false;';
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['use_more_text'] = 'mere';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Udfør';
   $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Gendan';
   $handler->display->display_options['exposed_form']['options']['exposed_sorts_label'] = 'Sortér efter';
   $handler->display->display_options['exposed_form']['options']['sort_asc_label'] = 'Stigende';
@@ -3040,10 +2972,6 @@ return $field==1?true:false;';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
-  $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
-  $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Felt: Ord i ordforråd: Navn */
@@ -3078,7 +3006,6 @@ return $field==1?true:false;';
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'taxonomy_tid';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['node'] = TRUE;
   $handler->display->display_options['arguments']['tid']['default_argument_options']['limit'] = TRUE;
@@ -3098,18 +3025,15 @@ return $field==1?true:false;';
 
   /* Display: Logo */
   $handler = $view->new_display('block', 'Logo', 'block_1');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
 
   /* Display: Logo - Borger */
   $handler = $view->new_display('block', 'Logo - Borger', 'block_2');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: Ord i ordforråd: Term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '4';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
@@ -3118,14 +3042,12 @@ return $field==1?true:false;';
 
   /* Display: Logo - Erhverv */
   $handler = $view->new_display('block', 'Logo - Erhverv', 'block_3');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: Ord i ordforråd: Term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '5';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
@@ -3134,14 +3056,12 @@ return $field==1?true:false;';
 
   /* Display: Logo - Politik og planer */
   $handler = $view->new_display('block', 'Logo - Politik og planer', 'block_4');
-  $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Kontekstuelt filter: Ord i ordforråd: Term ID */
   $handler->display->display_options['arguments']['tid']['id'] = 'tid';
   $handler->display->display_options['arguments']['tid']['table'] = 'taxonomy_term_data';
   $handler->display->display_options['arguments']['tid']['field'] = 'tid';
   $handler->display->display_options['arguments']['tid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['tid']['exception']['title'] = 'Alle';
   $handler->display->display_options['arguments']['tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['tid']['default_argument_options']['argument'] = '6';
   $handler->display->display_options['arguments']['tid']['summary']['number_of_records'] = '0';
@@ -3158,10 +3078,6 @@ return $field==1?true:false;';
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
-    t('« første'),
-    t('‹ forrige'),
-    t('næste ›'),
-    t('sidste »'),
     t('[name]'),
     t('Term ID'),
     t('.'),
