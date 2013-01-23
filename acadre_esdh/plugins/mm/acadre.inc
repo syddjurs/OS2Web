@@ -230,7 +230,11 @@ function _acadre_esdh_import_item($info, $xml) {
     // Process attachments.
     foreach ($xml->xpath("table[@name='bullet']") as $bullet_xml) {
       if (($bullet = _acadre_esdh_import_bullet($info, $bullet_xml)) !== FALSE) {
-        $item['bullets'][] = $bullet;
+        if (is_int($bullet['sort']) && $bullet['sort'] > 0) {
+          $item['bullets'][$bullet['sort'] -1] = $bullet;
+        } else {
+          $item['bullets'][] = $bullet;
+        }
       }
     }
     // Process enclosures.
@@ -266,6 +270,7 @@ function _acadre_esdh_import_bullet($info, $bullet_xml) {
   $bullet = array(
     'title' => (string) array_shift($bullet_xml->xpath("fields/field[@name='bulletname']")),
     'body' => (string) array_shift($bullet_xml->xpath("fields/field[@name='bulletcontent']")),
+    'sort' => (int) array_shift($bullet_xml->xpath("fields/field[@name='bulletsortorder']")),
   );
   if ($bullet['body'] === '') {
     return FALSE;

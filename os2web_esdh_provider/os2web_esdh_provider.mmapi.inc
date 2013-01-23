@@ -202,8 +202,10 @@ function _os2web_esdh_provider_import_items($items) {
  *   List of imported node ids
  */
 function _os2web_esdh_provider_import_bullets($bullets) {
+  // Since we need to run this often, we reset the execution timer to avoid timeouts.
+  set_time_limit(60);
   $nids = array();
-  foreach ($bullets as $bullet) {
+  foreach ($bullets as $idx => $bullet) {
     $node = new stdClass();
     $node->type = "bullet_point_attachment";
     $node->language = LANGUAGE_NONE;
@@ -217,7 +219,7 @@ function _os2web_esdh_provider_import_bullets($bullets) {
     $node->field_bpa_body[$node->language][0]['format'] = 'filtered_html';
     node_submit($node);
     node_save($node);
-    $nids[] = $node->nid;
+    $nids[$idx] = $node->nid;
   }
   return $nids;
 }
@@ -233,6 +235,8 @@ function _os2web_esdh_provider_import_bullets($bullets) {
  *   Drupal standard file object
  */
 function _os2web_esdh_provider_import_file($file_meta) {
+  // Since we need to run this often, we reset the execution timer to avoid timeouts.
+  set_time_limit(60);
   $uri_in = $file_meta['uri'];
 
   $pinfo = pathinfo($uri_in);
@@ -507,7 +511,7 @@ function _os2web_esdh_provider_import_output($id, $nids) {
   if (isset($id)) {
     $msg = 'Meeting not found.';
   }
-  if (isset($nids) && !empty($nids)) {
+  if (isset($nids) && empty($nids)) {
     $msg = 'Meeting ' . $id . ' imported, but no nodes created.';
   }
   else {
