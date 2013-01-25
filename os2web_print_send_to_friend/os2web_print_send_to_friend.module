@@ -85,10 +85,10 @@ function os2web_print_send_to_friend_send_to_friend_form($bullet_point_id){
   $html = t('Fill out the fields below and press "Send", when you want to send the e-mail');
   $html .= '<form id="send_to_friend_form">';
   $html .= '<label>'.t('Your name').':</label><input type="text" name="name" />';
-  $html .= '<label>'.t('Message').':</label><textarea name="message"> </textarea>';
+  $html .= '<label>'.t('Message').':</label><textarea name="message"></textarea>';
   $html .= '<label>'.t('Recipients email').':</label><input type="text" name="email" id="field_send_to_friend_email" />';
-  $html .= '<input type="hidden" name="base_url" value="'.$GLOBALS['base_url'].'" />';
-  $html .= '<input type="hidden" name="bullet_point_id" id="field_bullet_point_id" value="'.$bullet_point_id.'" />';
+  $html .= '<input type="hidden" id="field_base_url" name="base_url" value="' . $GLOBALS['base_url'] . '" />';
+  $html .= '<input type="hidden" name="bullet_point_id" id="field_bullet_point_id" value="' . $bullet_point_id . '" />';
   $html .= '<button type="submit" id="btn_send_to_friend">Send</button>';
   $html .= '<div class="throbber"></div>';
   $html .= '</form>';
@@ -97,7 +97,9 @@ function os2web_print_send_to_friend_send_to_friend_form($bullet_point_id){
 }
 
 function os2web_print_send_to_friend_bullet_point_access($bullet_point_id){
+  return TRUE;
   $bullet_point = node_load($bullet_point_id);
+  
   if (strcmp($bullet_point->type, 'bullet_point') == 0) {
     if ($bullet_point->field_bul_point_closed['und'][0]['value'])
       return TRUE;
@@ -118,15 +120,19 @@ function os2web_print_send_to_friend_send_to_friend($bullet_point_id){
     $bullet_point = node_load($bullet_point_id);
     $subject = 'Dagsorden Punkt: ' . $bullet_point->title;
 
-    $body = "Hej \n\n" .$_POST['name'] ." har sendt dig et dagsordenspunkt. \n\n";
-    $body .= "Med beskeden:\n".trim($_POST['message']) ."\n\n";
+    $name = check_plain(trim($_POST['name']));
+    $message = check_plain(trim($_POST['message']));
+    $to_email = check_plain($_POST['email']);
+    
+    $body = "Hej \n\n" . $name ." har sendt dig et dagsordenspunkt. \n\n";
+    $body .= "Med beskeden:\n". $message ."\n\n";
 
     $body .= os2web_print_send_to_friend_print_bullet_point($bullet_point_id);
-
+    
     $from = variable_get('system_mail');
     $message = array(
       'id' => 'send_to_friend_',
-      'to' => $_POST['email'],
+      'to' => $to_email,
       'subject' => $subject,
       'body' => array($body),
       'headers' => array(
