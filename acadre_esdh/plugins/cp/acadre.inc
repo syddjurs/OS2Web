@@ -30,6 +30,11 @@ function acadre_esdh_cp_handle_request() {
   $data = $HTTP_RAW_POST_DATA;
   file_unmanaged_save_data($data, 'public://soap/request-' . time(), FILE_EXISTS_REPLACE);
 
+  global $HTTP_RAW_POST_DATA;
+  $data = $HTTP_RAW_POST_DATA;
+  file_unmanaged_save_data($data,'public://soap/request-'.time(),FILE_EXISTS_REPLACE);
+
+
   ini_set("soap.wsdl_cache_enabled", "0");
   $server = new SoapServer(NULL, array(
         'uri' => 'http://tempuri.org/',
