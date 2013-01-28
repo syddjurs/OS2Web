@@ -4,7 +4,6 @@
  * @file
  * This file describes the Content pushing plugin as implemented by Acadre
  */
-
 /**
  * Plugin definition with callbacks
  */
@@ -87,15 +86,30 @@ function acadre_esdh_cp_handle_request() {
     }
   }
 
+  class TraenPublishingDestinationSystemService {
+
+    public function RecievedEntityLayout($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemUnPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+  }
+
   global $HTTP_RAW_POST_DATA;
   $data = $HTTP_RAW_POST_DATA;
-  file_unmanaged_save_data($data,'public://soap/request-'.time(),FILE_EXISTS_REPLACE);
+  file_unmanaged_save_data($data, 'public://soap/request-' . time(), FILE_EXISTS_REPLACE);
 
 
   ini_set("soap.wsdl_cache_enabled", "0");
-  $server = new SoapServer(NULL, array( 'uri' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path()));
-  $server->AddFunction('publish');
-  $server->AddFunction('unpublish');
+  $server = new SoapServer(NULL, array('uri' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path()));
+  $server->setClass(TraenPublishingDestinationSystemService);
   $server->handle();
 }
 
@@ -176,11 +190,12 @@ function _acadre_esdh_cp_find_item($item_id) {
  */
 function _acadre_esdh_cp_get_wsdl($xsd = FALSE) {
   if ($xsd) {
-    $xsd = (int) str_replace('xsd','',$xsd);
+    $xsd = (int) str_replace('xsd', '', $xsd);
     $xsd = $xsd > 0 ? $xsd : '';
     error_log("Var: \$xsd = " . print_r($xsd, 1));
     $filename = 'TraenPublishingDestinationSystemService' . $xsd . '.xsd';
-  } else {
+  }
+  else {
     $filename = 'TraenPublishingDestinationSystemService.wsdl';
   }
   $filename = drupal_get_path('module', 'acadre_esdh') . '/' . $filename;
