@@ -87,8 +87,13 @@ function acadre_esdh_cp_handle_request() {
     }
   }
 
+  global $HTTP_RAW_POST_DATA;
+  $data = $HTTP_RAW_POST_DATA;
+  file_unmanaged_save_data($data,'public://soap/request-'.time(),FILE_EXISTS_REPLACE);
+
+
   ini_set("soap.wsdl_cache_enabled", "0");
-  $server = new SoapServer(drupal_get_path('module', 'acadre_esdh') . '/soap_server.wsdl');
+  $server = new SoapServer(NULL, array( 'uri' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path()));
   $server->AddFunction('publish');
   $server->AddFunction('unpublish');
   $server->handle();
