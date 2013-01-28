@@ -33,9 +33,25 @@ function acadre_esdh_cp_handle_request() {
   $data = $HTTP_RAW_POST_DATA;
   file_unmanaged_save_data($data, 'public://soap/request-' . time(), FILE_EXISTS_REPLACE);
 
+  class TraenPublishingDestinationSystemService {
+
+    public function RecievedEntityLayout($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemUnPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+  }
+
   global $HTTP_RAW_POST_DATA;
   $data = $HTTP_RAW_POST_DATA;
-  file_unmanaged_save_data($data,'public://soap/request-'.time(),FILE_EXISTS_REPLACE);
+  file_unmanaged_save_data($data, 'public://soap/request-' . time(), FILE_EXISTS_REPLACE);
 
 
   ini_set("soap.wsdl_cache_enabled", "0");
@@ -123,11 +139,12 @@ function _acadre_esdh_cp_find_item($item_id) {
  */
 function _acadre_esdh_cp_get_wsdl($xsd = FALSE) {
   if ($xsd) {
-    $xsd = (int) str_replace('xsd','',$xsd);
+    $xsd = (int) str_replace('xsd', '', $xsd);
     $xsd = $xsd > 0 ? $xsd : '';
     error_log("Var: \$xsd = " . print_r($xsd, 1));
     $filename = 'TraenPublishingDestinationSystemService' . $xsd . '.xsd';
-  } else {
+  }
+  else {
     $filename = 'TraenPublishingDestinationSystemService.wsdl';
   }
   $filename = drupal_get_path('module', 'acadre_esdh') . '/' . $filename;
