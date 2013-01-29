@@ -31,6 +31,9 @@ function acadre_esdh_cp_handle_request() {
   if (isset($_GET['xsd'])) {
     TraenPublishingDestinationSystemService::getWSDL($_GET['xsd']);
   }
+  if (isset($_GET['xsd'])) {
+    _acadre_esdh_cp_get_wsdl($_GET['xsd']);
+  }
   if (!lock_acquire(__FUNCTION__, 5)) {
     lock_wait(__FUNCTION__);
     return acadre_esdh_cp_handle_request();
@@ -84,6 +87,22 @@ function acadre_esdh_cp_handle_request() {
       }
       return 'Success. Removed node-id(s): ' . implode(',', $nids);
     }
+  }
+
+  class TraenPublishingDestinationSystemService {
+
+    public function RecievedEntityLayout($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
+    public function RecievedItemUnPublished($data) {
+      error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    }
+
   }
 
   global $HTTP_RAW_POST_DATA;
@@ -218,4 +237,34 @@ function _acadre_esdh_cp_find_item($item_id) {
       ->execute();
   $nids = array_keys($result['node']);
   return $nids;
+}
+
+/**
+ * Dumps the wsdl for the serivce.
+ */
+function _acadre_esdh_cp_get_wsdl($xsd = FALSE) {
+  if ($xsd) {
+    $xsd = (int) str_replace('xsd', '', $xsd);
+    $xsd = $xsd > 0 ? $xsd : '';
+    error_log("Var: \$xsd = " . print_r($xsd, 1));
+    $filename = 'TraenPublishingDestinationSystemService' . $xsd . '.xsd';
+  }
+  else {
+    $filename = 'TraenPublishingDestinationSystemService.wsdl';
+  }
+  $filename = drupal_get_path('module', 'acadre_esdh') . '/' . $filename;
+  $handle = fopen($filename, 'r');
+  $contents = fread($handle, filesize($filename));
+  fclose($handle);
+
+  drupal_add_http_header('Connection', 'close', FALSE);
+  drupal_add_http_header('Content-Length', drupal_strlen($contents), TRUE);
+  drupal_add_http_header('Content-Type', 'text/plain; charset=utf-8', TRUE);
+  drupal_add_http_header('Date', date('r'), TRUE);
+
+  $replacements = array(
+    '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path(),
+  );
+  echo format_string($contents, $replacements);
+  exit;
 }
