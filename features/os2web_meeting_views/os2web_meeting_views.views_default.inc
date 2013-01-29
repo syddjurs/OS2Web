@@ -1069,25 +1069,29 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h2 class="pane-title">Tillægs[field_meeting_type]</h2>';
+  $handler->display->display_options['header']['area']['content'] = '<div class="clearfix"><h2 class="pane-title" style="float:left">Tillægs[field_meeting_type]</h2><div style="float:right;margin: 10px 30px 0 0"><span>[field_full_doc]</span></div></div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Forbindelse: Indhold: Tillæg til (field_addenum_to) - reverse */
+  /* Forbindelse: Tillæg */
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['id'] = 'reverse_field_addenum_to_node';
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['field'] = 'reverse_field_addenum_to_node';
-  /* Forbindelse: Entity Reference: Refereret entity */
+  $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['ui_name'] = 'Tillæg';
+  $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['required'] = TRUE;
+  /* Forbindelse: Bullets */
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['id'] = 'field_ref_bullet_points_target_id';
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['table'] = 'field_data_field_ref_bullet_points';
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['field'] = 'field_ref_bullet_points_target_id';
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['relationship'] = 'reverse_field_addenum_to_node';
+  $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['ui_name'] = 'Bullets';
   $handler->display->display_options['relationships']['field_ref_bullet_points_target_id']['required'] = TRUE;
-  /* Forbindelse: Entity Reference: Refererende entity */
+  /* Forbindelse: Bullet content */
   $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['id'] = 'reverse_field_ref_bullet_point_node';
   $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['field'] = 'reverse_field_ref_bullet_point_node';
   $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['relationship'] = 'field_ref_bullet_points_target_id';
+  $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['ui_name'] = 'Bullet content';
   $handler->display->display_options['relationships']['reverse_field_ref_bullet_point_node']['label'] = 'bullet point speaking paper';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Felt: Meeting id - hidden */
@@ -1150,6 +1154,46 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['field_bul_point_closed']['alter']['text'] = '<strong style="float: right;margin-left:1em">([field_bul_point_closed])</strong>';
   $handler->display->display_options['fields']['field_bul_point_closed']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_bul_point_closed']['hide_empty'] = TRUE;
+  /* Felt: Global: PHP */
+  $handler->display->display_options['fields']['php']['id'] = 'php';
+  $handler->display->display_options['fields']['php']['table'] = 'views';
+  $handler->display->display_options['fields']['php']['field'] = 'php';
+  $handler->display->display_options['fields']['php']['label'] = 'Send to friend link';
+  $handler->display->display_options['fields']['php']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['php']['alter']['path'] = 'dagsorden_punkt/[nid]/send_to_friend_form';
+  $handler->display->display_options['fields']['php']['alter']['rel'] = 'lightframe';
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['php_output'] = '<?php
+if (function_exists("os2web_print_send_to_friend_bullet_point_access"))
+{
+if (os2web_print_send_to_friend_bullet_point_access($row->nid)){
+echo \'<span class="bullet-point-send-to-friend"></span>\';
+}
+}
+?> ';
+  $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+  /* Felt: Global: PHP */
+  $handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+  $handler->display->display_options['fields']['php_1']['table'] = 'views';
+  $handler->display->display_options['fields']['php_1']['field'] = 'php';
+  $handler->display->display_options['fields']['php_1']['label'] = 'Print bullet point link';
+  $handler->display->display_options['fields']['php_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['php_1']['alter']['path'] = 'print/dagsorden_punkt/[nid]/print';
+  $handler->display->display_options['fields']['php_1']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_1']['php_output'] = '<?php
+if (function_exists("os2web_print_send_to_friend_bullet_point_access"))
+{
+if (os2web_print_send_to_friend_bullet_point_access($row->nid)){
+echo \'<span class="bullet-point-print-link"></span>\';
+} 
+}
+?>';
+  $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Felt: Bullet point title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1158,7 +1202,7 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['title']['ui_name'] = 'Bullet point title';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] [field_bul_point_closed]';
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] [field_bul_point_closed] [php] [php_1]';
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['title']['alter']['link_class'] = 'agenda-bullet-list';
@@ -1182,6 +1226,22 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['field_meeting_type']['label'] = '';
   $handler->display->display_options['fields']['field_meeting_type']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_meeting_type']['element_label_colon'] = FALSE;
+  /* Felt: Indhold: Full doc */
+  $handler->display->display_options['fields']['field_full_doc']['id'] = 'field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['table'] = 'field_data_field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['field'] = 'field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['relationship'] = 'reverse_field_addenum_to_node';
+  $handler->display->display_options['fields']['field_full_doc']['label'] = '';
+  $handler->display->display_options['fields']['field_full_doc']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet tillæg';
+  $handler->display->display_options['fields']['field_full_doc']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['path'] = '[field_full_doc]';
+  $handler->display->display_options['fields']['field_full_doc']['alter']['external'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['alt'] = 'Download hele referatet som samlet dokument';
+  $handler->display->display_options['fields']['field_full_doc']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_full_doc']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_full_doc']['type'] = 'file_url_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1203,6 +1263,11 @@ echo \'<span class="bullet-point-print-link"></span>\';
     'meeting' => 'meeting',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filterkriterie: Indhold: Tillæg til (field_addenum_to) */
+  $handler->display->display_options['filters']['field_addenum_to_nid']['id'] = 'field_addenum_to_nid';
+  $handler->display->display_options['filters']['field_addenum_to_nid']['table'] = 'field_data_field_addenum_to';
+  $handler->display->display_options['filters']['field_addenum_to_nid']['field'] = 'field_addenum_to_nid';
+  $handler->display->display_options['filters']['field_addenum_to_nid']['operator'] = 'not empty';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -1251,9 +1316,9 @@ echo \'<span class="bullet-point-print-link"></span>\';
     t('field_addenum_to'),
     t('Lokation'),
     t('Bullet points - Tillæg'),
-    t('<h2 class="pane-title">Tillægs[field_meeting_type]</h2>'),
-    t('[title] [field_bul_point_closed]'),
+    t('<div class="clearfix"><h2 class="pane-title" style="float:left">Tillægs[field_meeting_type]</h2><div style="float:right;margin: 10px 30px 0 0"><span>[field_full_doc]</span></div></div>'),
     t('<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>'),
+    t('Samlet tillæg'),
   );
   $export['meeting_details'] = $view;
 
