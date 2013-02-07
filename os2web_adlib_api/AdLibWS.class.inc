@@ -104,8 +104,8 @@ class AdLibWS {
       '!outfile' => $this->safeFilename($file_info['out_filename']),
       '!outfolder' => self::$basePath . $file_info['out_folder'],
       '!jobtype' => ($type == ADLIB_JOBTYPE_HTML ? 'HTML' : 'PDF'),
-    ));
-    $result = simplexml_load_string($this->client->addJob(array('job_info' => $job_info, 'job_ticket' => $job_ticket))->AddJobResult);
+        ));
+    $result = simplexml_load_string($this->client->addJob(array('jobInfo' => $job_info, 'jobTicket' => $job_ticket))->AddJobResult);
     if (is_object($result) && isset($result->JobSettings['JobID'])) {
       return $result;
     }
