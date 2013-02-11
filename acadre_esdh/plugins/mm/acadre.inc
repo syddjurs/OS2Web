@@ -247,6 +247,7 @@ function _acadre_esdh_import_item($info, $xml) {
             $info['filesfolder'],
             $filename_in)),
           'title' => trim((string) array_shift($enclosure->xpath("fields/field[@name='name']"))),
+          'access' => 2 != (int) array_shift($enclosure->xpath("fields/field[@name='access']")),
         );
       }
     }
