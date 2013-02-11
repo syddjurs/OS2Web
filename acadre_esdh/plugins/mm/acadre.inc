@@ -251,7 +251,11 @@ function _acadre_esdh_import_item($info, $xml) {
             $info['filesfolder'],
             $filename_in)),
           'title' => trim((string) array_shift($enclosure->xpath("fields/field[@name='name']"))),
+<<<<<<< HEAD
           'access' => ACADRE_MM_ACCESS_OPEN == (int) array_shift($enclosure->xpath("fields/field[@name='access']")),
+=======
+          'access' => 2 != (int) array_shift($enclosure->xpath("fields/field[@name='access']")),
+>>>>>>> respecting access attribute on enclusures
         );
       }
     }
