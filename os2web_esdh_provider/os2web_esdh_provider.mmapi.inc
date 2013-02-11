@@ -5,6 +5,16 @@
  * This file implements the importing functions of the MM functionality and depends on a
  * plugin to do the actual filereads
  */
+function hr_size($size) {
+  $unit = array('b', 'kb', 'mb', 'gb', 'tb', 'pb');
+  return @round($size / pow(1024, ($i = floor(log($size, 1024)))), 2) . ' ' . $unit[$i];
+}
+
+function err_debug($msg = FALSE) {
+  $mem = hr_size(memory_get_usage());
+  $timer = number_format(timer_read('mm_import') / 1000, 2) . "sec.";
+//  error_log("Import debug $msg $mem $timer");
+}
 
 /**
  * Imports meeting metadata into a node.
@@ -19,8 +29,10 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   if (!lock_acquire(__FUNCTION__ . $meeting_id['id'])) {
     return;
   }
-  error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' - Importing file: ' . $meeting_id['uri']);
+  timer_start('mm_import');
+  err_debug('Init.');
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
+  err_debug('Meetings loaded.');
   $nids = array();
   foreach ($meetings as $meeting) {
 
@@ -126,6 +138,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       '%mid' => $meeting['meeting_id'],
       '%nid' => $node->nid), WATCHDOG_DEBUG);
     $nids[] = $node->nid;
+    err_debug('Meeting saved.');
   }
   variable_set('os2web_esdh_provider_last_import', time());
   lock_release(__FUNCTION__ . $meeting_id['id']);
@@ -176,16 +189,19 @@ function _os2web_esdh_provider_import_items($items) {
       }
       // Gather enclosures.
       foreach ($item['enclosures'] as $enclosure) {
-        if ($file = _os2web_esdh_provider_import_file($enclosure)) {
-          $node->field_enclosures[LANGUAGE_NONE][] = (array) $file;
-        }
-        else {
-          watchdog('ESDH', 'There was an error importing file %uri ', array('%uri' => $enclosure['uri']), WATCHDOG_ERROR);
+        if ($enclosure['access']) {
+          if ($file = _os2web_esdh_provider_import_file($enclosure)) {
+            $node->field_enclosures[LANGUAGE_NONE][] = (array) $file;
+          }
+          else {
+            watchdog('ESDH', 'There was an error importing file %uri ', array('%uri' => $enclosure['uri']), WATCHDOG_ERROR);
+          }
         }
       }
       node_submit($node);
       node_save($node);
       $nids[] = $node->nid;
+      err_debug('Item saved');
     }
   }
   return $nids;
@@ -203,7 +219,7 @@ function _os2web_esdh_provider_import_items($items) {
  */
 function _os2web_esdh_provider_import_bullets($bullets) {
   // Since we need to run this often, we reset the execution timer to avoid timeouts.
-  set_time_limit(60);
+  set_time_limit(180);
   $nids = array();
   foreach ($bullets as $idx => $bullet) {
     $node = new stdClass();
@@ -220,6 +236,7 @@ function _os2web_esdh_provider_import_bullets($bullets) {
     node_submit($node);
     node_save($node);
     $nids[$idx] = $node->nid;
+    err_debug('Bullet saved.');
   }
   return $nids;
 }
@@ -236,7 +253,7 @@ function _os2web_esdh_provider_import_bullets($bullets) {
  */
 function _os2web_esdh_provider_import_file($file_meta) {
   // Since we need to run this often, we reset the execution timer to avoid timeouts.
-  set_time_limit(60);
+  set_time_limit(300);
   $uri_in = $file_meta['uri'];
 
   $pinfo = pathinfo($uri_in);
@@ -319,6 +336,7 @@ function _os2web_esdh_provider_import_file($file_meta) {
     watchdog('acadre MM', 'File %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
   }
 
+  err_debug('File imported.');
   // watchdog('acadre MM', 'Imported file %filename (fid: %fid).', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_DEBUG);
   return $file;
 }
