@@ -7,8 +7,8 @@
 
 define('ADLIB_JOBTYPE_PDF', 0);
 define('ADLIB_JOBTYPE_HTML', 1);
-//define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
-define('ADLIB_DISABLED', FALSE);
+define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
+//define('ADLIB_DISABLED', TRUE);
 
 /**
  * Description of AdLibWS
