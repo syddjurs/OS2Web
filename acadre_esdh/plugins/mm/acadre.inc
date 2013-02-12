@@ -7,6 +7,10 @@
 
 // Set this to the publication-id ie. 1577 for file XML_1577.
 define('ACADRE_MM_PUB_FOCUS', FALSE);
+// Misc. magic numbers.
+define('ACADRE_MM_ACCESS_OPEN', 1);
+define('ACADRE_MM_ACCESS_LUKKET', 2);
+define('ACADRE_MM_ACCESS_PERSON', 3);
 
 /**
  * Plugin definition with callbacks
@@ -247,7 +251,7 @@ function _acadre_esdh_import_item($info, $xml) {
             $info['filesfolder'],
             $filename_in)),
           'title' => trim((string) array_shift($enclosure->xpath("fields/field[@name='name']"))),
-          'access' => 1 == (int) array_shift($enclosure->xpath("fields/field[@name='access']")),
+          'access' => ACADRE_MM_ACCESS_OPEN == (int) array_shift($enclosure->xpath("fields/field[@name='access']")),
         );
       }
     }
