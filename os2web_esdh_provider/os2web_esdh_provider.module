@@ -217,6 +217,7 @@ function _os2web_esdh_provider_cron_queue_worker($args) {
  *   True is API is implmemented and available.
  */
 function os2web_esdh_provider_has_api($api) {
+  ctools_include('plugins');
   $info = ctools_plugin_get_info('os2web_esdh_provider', $api);
   if ($info) {
     $plugins = ctools_get_plugins('os2web_esdh_provider', $api);
@@ -432,7 +433,7 @@ function _os2web_esdh_provider_import_check($caller = 'internal') {
     '#state' => $error == 0,
     '#severity' => $severity,
     '#value_ok' => t('Working'),
-    '#value_nok' => $error==1?t('Warning'):t('Error'),
+    '#value_nok' => $error == 1 ? t('Warning') : t('Error'),
     '#description_ok' => t('Import was run within the last hour, at %time, which indicates that it is run correctly during cron.', array('%time' => $last_import_hr)),
     '#description_nok' => t('Import has not been run recently. Lastly at %time This could be due to a faulty cron setup, you can run it manually Verify endpoint is properly set up in the <a href="/admin/config/os2web/esdh_provider">here</a>.', array('%time' => $last_import_hr)),
     '#nagios_key' => 'OS2',
@@ -488,7 +489,7 @@ function _os2web_esdh_provider_adlib_check($caller = 'internal') {
   }
   else {
     // Module not available.
-   $msg = 'AdLib module not available. Check <a href="/admin/modules">module list</a>';
+    $msg = 'AdLib module not available. Check <a href="/admin/modules">module list</a>';
   }
 
   $check['esdh_adlib_check'] = array(
