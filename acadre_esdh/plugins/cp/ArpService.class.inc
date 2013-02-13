@@ -35,131 +35,9 @@ class TraenPublishingDestinationSystemService {
     drupal_add_http_header('Date', date('r'), TRUE);
 
     echo format_string($contents, array(
-      '!endpointurl' => 'http' . ($_SERVER['HTTPS'] === 'on' ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path(),
+      '!endpointurl' => 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 's' : '') . '://' . $_SERVER['SERVER_NAME'] . '/' . request_path(),
     ));
     exit;
-  }
-
-  /**
-   * DEPRECATED Published a given input type.
-   *
-   * Delegates actual node creation to worker functions.
-   *
-   * @param mixed $info
-   *   Info block from request.
-   * @param mixed $parent_item_id
-   *   Parent ID from request.
-   */
-  private function publish($info, $parent_item_id) {
-    $meta = $info->Metadata;
-    // File was decoded to utf-8 data, so charset will break.
-    $meta = preg_replace('/(<\?xml[^?]+?)utf-16/i', '$1utf-8', $meta);
-    $meta = simplexml_load_string($meta) or soap_error(2);
-    $info->Metadata = (object) $meta;
-
-    $type = $meta->getName();
-    switch (strtolower($type)) {
-      case 'publishedcase':
-        return $this->acadre_esdh_cp_process_case($info);
-
-      default:
-        error_log("Unhandled request: \$type = " . print_r($type, 1));
-        soap_error(4);
-    }
-    return 'Ilde request';
-  }
-
-  /**
-   * DEPRECATED Process case info and generate API arrays.
-   *
-   * @param array $info
-   *   Info block from request.
-   */
-  private function acadre_esdh_cp_process_case($info) {
-    $item_id = $info->ItemId;
-    $meta = $info->Metadata;
-    $node = (object) NULL;
-    $node->type = 'arp_case';
-    $node->uid = 0;
-    $node->status = 1;
-    $node->comment = 0;
-    $node->promote = 0;
-    $node->moderate = 0;
-    $node->sticky = 0;
-    $node->language = LANGUAGE_NONE;
-    $arp_year = $meta->Year % 100;
-    node_object_prepare($node);
-
-    $node->title = (string) $meta->Title;
-    $node->field_itemid[LANGUAGE_NONE][]['value'] = $item_id;
-    $node->body[LANGUAGE_NONE][]['value'] = (string) $meta->CaseContent;
-    $node->field_arp_case_type[LANGUAGE_NONE][]['value'] = (string) $meta->CaseType;
-
-    $tid = db_query('SELECT tid FROM  `taxonomy_term_data` WHERE  `name` LIKE  :term', array(
-      ':term' => $meta->JournalizingCode[0]->FieldValue . '%',
-        ))->fetchField();
-    if (is_numeric($tid)) {
-      $node->field_termref_kle[LANGUAGE_NONE][]['tid'] = $tid;
-    }
-
-    $responsible = $meta->CaseResponsibleUser;
-    $node->field_arp_case_handler_ini[LANGUAGE_NONE][]['value'] = $responsible->UserInitials;
-    $node->field_arp_casehandler_name[LANGUAGE_NONE][]['value'] = $responsible->UserName;
-    $node->field_arp_case_created[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
-    $node->field_arp_case_last_modified[LANGUAGE_NONE][]['value'] = strtotime((string) $meta->CreationDate);
-    $node->field_case[LANGUAGE_NONE][]['case_ident'] = $arp_year . '/' . (string) $meta->SequenceNumber;
-    $node->field_arp_case_id[LANGUAGE_NONE][]['value'] = $arp_year . '/' . (string) $meta->SequenceNumber;
-
-    node_submit($node);
-    node_save($node);
-    if (is_numeric($node->nid)) {
-      return "Success: Node-id = " . $node->nid;
-    }
-    else {
-      soap_error(3);
-    }
-  }
-
-  /**
-   * DEPRECATED Unpublishes a given ItemId.
-   *
-   * @param mixed $item_id
-   *   Item ID from request
-   * @param mixed $location_id
-   *   Location ID from request. Currently unused.
-   */
-  private function unpublish($item_id, $location_id) {
-    $nids = $this->os2web_acadre_arp_find_item($item_id);
-    if (empty($nids)) {
-      return 'Success. No nodes removed.';
-    }
-    else {
-      foreach ($nids as $nid) {
-        node_delete($nid);
-      }
-      return 'Success. Removed node-id(s): ' . implode(',', $nids);
-    }
-  }
-
-  /**
-   * DEPRECATED Locates nids with a given ItemId.
-   *
-   * @param string $item_id
-   *   Item ID to locate.
-   *
-   * @return array
-   *   List of nids
-   */
-  private function acadre_esdh_cp_find_item($item_id) {
-    $query = new EntityFieldQuery();
-    $result = $query
-        ->entityCondition('entity_type', 'node')
-        ->propertyCondition('type', array('arp_case', 'arp_document'))
-        ->propertyCondition('status', 1)
-        ->fieldCondition('field_itemid', 'value', $item_id, '=')
-        ->execute();
-    $nids = array_keys($result['node']);
-    return $nids;
   }
 
   //*********** PUBLIC API ***************//
@@ -173,7 +51,34 @@ class TraenPublishingDestinationSystemService {
   }
 
   public function RecievedItemPublished($data) {
-    error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    switch (strtolower($data->Name)) {
+      case 'sag':
+        $type = 'case';
+        break;
+      case 'dokument':
+        $type = 'document';
+        break;
+      default:
+        $type = 'unknown';
+    }
+    if (function_exists('os2web_cs_service_create_' . $type)) {
+      foreach ($data->Fields->Field as $field) {
+        if (trim($field->Value) && trim($field->Name)) {
+          $publication['fields'][$field->Name] = $field->Value;
+        }
+      }
+      foreach ($data->TriggerRules as $rule) {
+        if (trim($rule->ID) && trim($rule->Name)) {
+          $publication['rules'][$rule->ID] = $rule->Name;
+        }
+      }
+      $publication['type'] = $type;
+      $publication['status'] = $data->Status;
+      return (bool) os2web_cs_service_create_case($publication);
+    }
+    else {
+      return FALSE;
+    }
   }
 
   public function __call($name, $arguments) {
