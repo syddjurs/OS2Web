@@ -24,9 +24,6 @@ function acadre_esdh_cp_handle_request() {
   if (isset($_GET['xsd'])) {
     TraenPublishingDestinationSystemService::getXSD($_GET['xsd']);
   }
-  if (isset($_GET['xsd'])) {
-    TraenPublishingDestinationSystemService::getWSDL($_GET['xsd']);
-  }
   if (!lock_acquire(__FUNCTION__, 5)) {
     lock_wait(__FUNCTION__);
     return acadre_esdh_cp_handle_request();
