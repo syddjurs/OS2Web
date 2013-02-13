@@ -19,7 +19,7 @@ $plugin = array(
 function acadre_esdh_cp_handle_request() {
   module_load_include('inc', 'acadre_esdh', 'plugins/cp/ArpService.class');
   if (isset($_GET['wsdl']) || isset($_GET['xsd'])) {
-    TraenPublishingDestinationSystemService::getWSDL($_GET['xsd']);
+    TraenPublishingDestinationSystemService::getWSDL(isset($_GET['xsd']) ? $_GET['xsd'] : NULL);
   }
   if (!lock_acquire(__FUNCTION__, 5)) {
     lock_wait(__FUNCTION__);
