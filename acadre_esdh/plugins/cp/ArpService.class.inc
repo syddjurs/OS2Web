@@ -61,7 +61,8 @@ class TraenPublishingDestinationSystemService {
       default:
         $type = 'unknown';
     }
-    if (function_exists('os2web_cs_service_create_' . $type)) {
+    $function = 'os2web_cs_service_create_' . $type;
+    if (function_exists($function)) {
       foreach ($data->Fields->Field as $field) {
         if (trim($field->Value) && trim($field->Name)) {
           $publication['fields'][$field->Name] = $field->Value;
@@ -74,7 +75,7 @@ class TraenPublishingDestinationSystemService {
       }
       $publication['type'] = $type;
       $publication['status'] = $data->Status;
-      return (bool) os2web_cs_service_create_case($publication);
+      return (bool) call_user_func($function, $publication);
     }
     else {
       return FALSE;
