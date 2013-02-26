@@ -16,15 +16,36 @@ class TraenPublishingDestinationSystemService {
   /**
    * Dumps the wsdl for the serivce.
    */
-  public static function getWSDL($xsd = FALSE) {
-    if ($xsd) {
-      $xsd = str_replace('0', '', str_replace('xsd', '', $xsd));
-      $filename = 'plugins/cp/TraenPublishingDestinationSystemService' . check_plain($xsd) . '.xsd';
+  public static function getWSDL($wsdl = FALSE) {
+    if ($wsdl) {
+      $wsdl = str_replace('wsdl', '', $wsdl);
+      $filename = 'plugins/cp/TraenPublishingDestinationSystemService' . check_plain($wsdl + 1) . '.wsdl';
     }
     else {
       $filename = 'plugins/cp/TraenPublishingDestinationSystemService.wsdl';
     }
+    self::echoFile($filename);
+  }
+
+  /**
+   * Dumps an xsd for the serivce.
+   */
+  public static function getXSD($xsd = FALSE) {
+    if ($xsd) {
+      $xsd = str_replace('xsd', '', $xsd);
+      $filename = 'plugins/cp/TraenPublishingDestinationSystemService' . check_plain($xsd + 1) . '.xsd';
+    }
+    else {
+      $filename = 'plugins/cp/TraenPublishingDestinationSystemService.xsd';
+    }
+    self::echoFile($filename);
+  }
+
+  private static function echoFile($filename) {
     $filename = drupal_get_path('module', 'acadre_esdh') . '/' . $filename;
+    if (!file_exists($filename)) {
+      drupal_not_found();
+    }
     $handle = fopen($filename, 'r');
     $contents = fread($handle, filesize($filename));
     fclose($handle);
