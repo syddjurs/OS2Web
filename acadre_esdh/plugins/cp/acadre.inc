@@ -34,7 +34,7 @@ function acadre_esdh_cp_handle_request() {
 
   global $HTTP_RAW_POST_DATA;
   $data = $HTTP_RAW_POST_DATA;
-  file_unmanaged_save_data($data, 'public://soap/request-' . time(), FILE_EXISTS_REPLACE);
+  file_unmanaged_save_data($data, 'public://soap/request-' . time() . '-' . uniqid(), FILE_EXISTS_REPLACE);
 
   global $HTTP_RAW_POST_DATA;
   $data = $HTTP_RAW_POST_DATA;
@@ -47,6 +47,7 @@ function acadre_esdh_cp_handle_request() {
       ));
   $server->setClass(TraenPublishingDestinationSystemService);
   $server->handle();
+  lock_release(__FUNCTION__);
 }
 
 class TraenPublishingDestinationSystemService {
