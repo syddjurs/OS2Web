@@ -37,7 +37,7 @@ function acadre_esdh_cp_handle_request() {
   $server = new SoapServer(NULL, array(
         'uri' => 'http://tempuri.org/',
       ));
-  $server->setClass(TraenPublishingDestinationSystemService);
+  $server->setClass('TraenPublishingDestinationSystemService');
   $server->handle();
   lock_release(__FUNCTION__);
 }
