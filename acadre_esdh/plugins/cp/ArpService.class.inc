@@ -65,10 +65,12 @@ class TraenPublishingDestinationSystemService {
 
   public function RecievedEntityLayout($data) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    return false;
   }
 
   public function RecievedItemUnPublished($data) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    return false;
   }
 
   public function RecievedConfiguration($data) {
@@ -80,7 +82,7 @@ class TraenPublishingDestinationSystemService {
         }
       }
     }
-
+    return true;
   }
 
   public function RecievedItemPublished($data) {
