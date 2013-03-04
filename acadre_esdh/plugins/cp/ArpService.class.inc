@@ -65,14 +65,28 @@ class TraenPublishingDestinationSystemService {
 
   public function RecievedEntityLayout($data) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    return false;
   }
 
   public function RecievedItemUnPublished($data) {
     error_log(basename(__FILE__) . ':' . __LINE__ . ' Var: $data = ' . print_r($data, 1));
+    return false;
+  }
+
+  public function RecievedConfiguration($data) {
+    $function = 'os2web_cs_service_alter_configuration'; // Function used to handle the configuration
+    if (function_exists($function)) {
+      foreach ($data as $configuration_key => $value) {
+        if(!empty($value)){
+          call_user_func($function, $configuration_key, $value);
+        }
+      }
+    }
+    return true;
   }
 
   public function RecievedItemPublished($data) {
-    switch (strtolower($data->Name)) {
+    switch (strtolower($data->EntityName)) {
       case 'sag':
         $type = 'case';
         break;
@@ -84,6 +98,7 @@ class TraenPublishingDestinationSystemService {
     }
     $function = 'os2web_cs_service_create_' . $type;
     if (function_exists($function)) {
+      $publication = array();
       foreach ($data->Fields->Field as $field) {
         if (trim($field->Value) && trim($field->Name)) {
           $publication['fields'][$field->Name] = $field->Value;
