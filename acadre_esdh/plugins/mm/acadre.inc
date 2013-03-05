@@ -91,6 +91,7 @@ function acadre_esdh_mm_import_meeting($meeting) {
           // 'sysid' => (int) array_shift($xml_item->xpath('field/@sysid')),
           'sysid' => $agenda_id,
           'publish' => (int) array_shift($xml_item->xpath('field/@publish')),
+          'meeting_sub_id' => (int) array_shift($xml_item->xpath('field/@sysid')),
           'access' => (string) array_shift($xml_item->xpath('field/@access')),
           'filesfolder' => (string) array_shift($xml_item->xpath('field/@filesfolder')),
           'xmlfilename' => (string) array_shift($xml_item->xpath('field/@xmlfilename')),
@@ -143,6 +144,7 @@ function _acadre_esdh_import_meeting($info) {
       'title' => (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='name']")),
       'meeting_id' => (string) array_shift($xml->xpath("//table[@name='meeting']/fields/field[@name='sysid']")),
       'system_id' => $info['sysid'],
+      'meeting_sub_id' => $info['meeting_sub_id'],
       'publication_id' => (string) array_shift($xml->xpath("//table[@name='agenda']/fields/field[@name='sysid']")),
       'creation_date' => strtotime((string) array_shift($xml->xpath("//table[@name='agenda']/fields/field[@name='producedate']"))),
       'description' => (string) array_shift($xml->xpath("//table[@name='agenda']/fields/field[@name='description']")),
@@ -327,8 +329,8 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       $nids[$node->nid] = $node->nid;
     }
     $meeting_id = array_shift(field_get_items('node', $node, 'field_meeting_id'));
-    $system_id = array_shift(field_get_items('node', $node, 'field_system_id'));
-    if (isset($meetings[$meeting_id['value']][$system_id['value']])) {
+    $meeting_sub_id = array_shift(field_get_items('node', $node, 'field_meeting_sub_id'));
+    if (isset($meetings[$meeting_id['value']][$meeting_sub_id['value']])) {
       // Duplicate meeting detected.
       watchdog('os2web_meetings', 'Duplicate import found for meeting %mid. Deleting.', array('%mid' => $meeting_id['value']), WATCHDOG_ERROR);
       node_delete($node->nid);

@@ -33,17 +33,49 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   err_debug('Init.');
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
   err_debug('Meetings loaded.');
+
   $nids = array();
   foreach ($meetings as $meeting) {
+
+    $meetings_query = new EntityFieldQuery();
+    $meetings_result = $meetings_query->entityCondition('entity_type', 'node')
+      ->propertyCondition('type', 'meeting')
+      ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
+      ->execute();
+
+    $duplicate_meeting = FALSE;
+
+    if($meetings_result['node'] && $meeting['type'] === 'Dagsorden'){
+      $duplicate_meeting = TRUE; 
+    }
 
     // Run check to see if meeting is already imported.
     $query = new EntityFieldQuery();
     $result = $query->entityCondition('entity_type', 'node')
         ->propertyCondition('type', 'meeting')
-        ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
+        ->fieldCondition('field_meeting_sub_id', 'value', $meeting['meeting_sub_id'], '=')
         ->execute();
     if (isset($result['node'])) {
       $nid = array_shift($result['node'])->nid;
+
+      // we dont want 2 published nodes from one meeting
+      $meetings_query = new EntityFieldQuery();
+      $meetings_result = $meetings_query->entityCondition('entity_type', 'node')
+        ->propertyCondition('type', 'meeting')
+        ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
+        ->execute();
+      
+      if (isset($meetings_result['node'])) {
+        if($meeting['type'] === 'Dagsorden'){
+          if( count ($meetings_result['node']) >= 2){
+            error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
+            node_delete($nid);
+            watchdog('ESDH', 'Unpublished %nid .', array('%nid' => $nid), WATCHDOG_INFO);
+            continue;
+          }
+        }
+      }
+
       if (!$meeting['publish']) {
         // Meeting needs to be unpublished.
         error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
@@ -65,7 +97,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       }
     }
     else {
-      if (!$meeting['publish']) {
+      if (!$meeting['publish'] || $duplicate_meeting) {
+        error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Skipping meeting sub id: ' . $meeting['meeting_sub_id']);
         continue;
       }
       // We create a new node object.
@@ -92,6 +125,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     $node->field_date[LANGUAGE_NONE][0]['date_type'] = 'datetime';
     // Proper id tagging.
     $node->field_meeting_id[LANGUAGE_NONE][0]['value'] = $meeting['meeting_id'];
+    $node->field_meeting_sub_id[LANGUAGE_NONE][0]['value'] = $meeting['meeting_sub_id'];
     $node->field_system_id[LANGUAGE_NONE][0]['value'] = $meeting['system_id'];
     // Type import.
     $node->field_meeting_type[LANGUAGE_NONE][0]['value'] = $meeting['type'];
