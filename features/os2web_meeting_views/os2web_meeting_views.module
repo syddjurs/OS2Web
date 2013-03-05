@@ -10,16 +10,15 @@ function os2web_meeting_views_form_views_exposed_form_alter(&$form, &$form_state
   if ($form['#id'] === 'views-exposed-form-meetings-search-page') {
     $form['committee']['#options']['http://norddjurs.dk/%C3%85bne-dagsordener.4803.aspx?doshow4803=1&filtercontrol48031=5488&filtercontrol48032=5462&filtercontrol48033=&filtercontrol48034=0&searchword4803='] = 'Djurs Mad I/S';
     $form['committee']['#options']['http://www.norddjurs.dk/%C3%85bne-dagsordener.4803.aspx?doshow4803=1&filtercontrol48031=5473&filtercontrol48032=0&filtercontrol48033=&filtercontrol48034=0&searchword4803='] = 'Beredskabskommisionen';
+    // Set up a validate function to forward user.
+    $form['#validate'] = array('os2web_meeting_views_views_exposed_form_meetings_search_page_validate');
   }
-  // Set up a validate function to forward user.
-  // NOTE: Breaks Ajax form..
-  $form['#validate'] = array('os2web_meeting_views_views_exposed_form_meetings_search_page_validate');
 }
 
 function os2web_meeting_views_views_exposed_form_meetings_search_page_validate(&$form, &$form_state) {
   $searchtext = rawurlencode($form_state['values']['search_params']);
   if (is_numeric($form_state['values']['committee']) || $form_state['values']['committee'] === 'All') {
-    
+
   }
   else {
     $options = array(
@@ -75,9 +74,9 @@ function _os2web_meeting_views_get_exposed_filter() {
 }
 
 /**
- * Helper function for the meetings_search view 
- * 
- * @param stdObject $entity 
+ * Helper function for the meetings_search view
+ *
+ * @param stdObject $entity
  * @access protected
  * @return void
  */
@@ -114,7 +113,10 @@ function _os2web_meeting_views_generate_search_data($entity) {
         foreach ($bpas as $bpa) {
           $node2 = node_load($bpa['target_id']);
           $body = field_get_items($entity_type, $node2, 'field_bpa_body');
-          $text = html_entity_decode(strip_tags(check_markup(array_pop(array_pop($body)),'filtered_html')),0 , 'UTF-8');
+          if (!is_array($body)) {
+            $body = array(array());
+          }
+          $text = html_entity_decode(strip_tags(check_markup(array_pop(array_pop($body)),'filtered_html')),ENT_COMPAT | ENT_HTML401,'UTF-8');
           $text = trim(preg_replace('/[\",;:.\'\(\)]/',' ',$text));
           $text = trim(preg_replace('/\s\s+/',' ',$text));
           $bps .= ' '.$text;
@@ -144,6 +146,6 @@ function _os2web_meeting_views_strip_words($text) {
     return true;
   }
   else {
-    return false; 
+    return false;
   }
 }
