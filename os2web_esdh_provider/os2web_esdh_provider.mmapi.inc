@@ -58,13 +58,6 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     if (isset($result['node'])) {
       $nid = array_shift($result['node'])->nid;
 
-      // we dont want 2 published nodes from one meeting
-      $meetings_query = new EntityFieldQuery();
-      $meetings_result = $meetings_query->entityCondition('entity_type', 'node')
-        ->propertyCondition('type', 'meeting')
-        ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
-        ->execute();
-      
       if (isset($meetings_result['node'])) {
         if($meeting['type'] === 'Dagsorden'){
           if( count ($meetings_result['node']) >= 2){
