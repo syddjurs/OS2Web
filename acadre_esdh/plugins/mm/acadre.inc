@@ -4,7 +4,6 @@
  * @file
  * This file describes the MM plugin as implemented by Acadre
  */
-
 // Set this to the publication-id ie. 1577 for file XML_1577.
 define('ACADRE_MM_PUB_FOCUS', FALSE);
 // Misc. magic numbers.
@@ -43,7 +42,8 @@ function acadre_esdh_mm_get_import_list() {
    * We will enumerate the list with the publication-id as parsed from the filename.
    */
   $uris = array();
-  foreach (file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => FALSE)) as $xml_file) {
+  foreach (file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array(
+    'recurse' => FALSE)) as $xml_file) {
     $pub_id = (int) str_replace('XML_', '', $xml_file->name);
     if (is_numeric($pub_id)) {
       $uris[] = array('id' => $pub_id, 'uri' => $xml_file->uri);
@@ -116,13 +116,15 @@ function acadre_esdh_mm_import_meeting($meeting) {
           // Publication not published or public.
           $meetings[] = array(
             'system_id' => $agendainfo['sysid'],
-            'publish' => FALSE,
-          ) + os2web_esdh_provider_default_meeting();
+            'publish' => 0,
+            'meeting_sub_id' => $agendainfo['meeting_sub_id'],
+              ) + os2web_esdh_provider_default_meeting();
         }
       }
     }
     else {
-      watchdog('acadre MM', 'Failed to parse XML in %file during import.', array('%file' => $file), WATCHDOG_WARNING);
+      watchdog('acadre MM', 'Failed to parse XML in %file during import.', array(
+        '%file' => $file), WATCHDOG_WARNING);
     }
   }
   return $meetings;
@@ -237,8 +239,9 @@ function _acadre_esdh_import_item($info, $xml) {
     foreach ($xml->xpath("table[@name='bullet']") as $bullet_xml) {
       if (($bullet = _acadre_esdh_import_bullet($info, $bullet_xml)) !== FALSE) {
         if (is_int($bullet['sort']) && $bullet['sort'] > 0) {
-          $item['bullets'][$bullet['sort'] -1] = $bullet;
-        } else {
+          $item['bullets'][$bullet['sort'] - 1] = $bullet;
+        }
+        else {
           $item['bullets'][] = $bullet;
         }
       }
@@ -332,7 +335,8 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
     $meeting_sub_id = array_shift(field_get_items('node', $node, 'field_meeting_sub_id'));
     if (isset($meetings[$meeting_id['value']][$meeting_sub_id['value']])) {
       // Duplicate meeting detected.
-      watchdog('os2web_meetings', 'Duplicate import found for meeting %mid. Deleting.', array('%mid' => $meeting_id['value']), WATCHDOG_ERROR);
+      watchdog('os2web_meetings', 'Duplicate import found for meeting %mid. Deleting.', array(
+        '%mid' => $meeting_id['value']), WATCHDOG_ERROR);
       node_delete($node->nid);
     }
     else {

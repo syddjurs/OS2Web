@@ -39,14 +39,27 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
 
     $meetings_query = new EntityFieldQuery();
     $meetings_result = $meetings_query->entityCondition('entity_type', 'node')
-      ->propertyCondition('type', 'meeting')
-      ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
-      ->execute();
+        ->propertyCondition('type', 'meeting')
+        ->fieldCondition('field_system_id', 'value', $meeting['system_id'], '=')
+        ->execute();
+
+    // Deal with nodes without sub_id.
+    if (is_array($meetings_result['node'])) {
+      foreach ($meetings_result['node'] as $meeting_old) {
+        $meeting_old = node_load($meeting_old->nid);
+        $sub_id = field_get_items('node', $meeting_old, 'field_meeting_sub_id');
+        if (!isset($sub_id[0]['value'])) {
+          // since we do not know what sub_id of this item, remove it to trigger re-import.
+          node_delete($meeting_old->nid);
+          error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: removed " . $meeting_old->nid . " prior to import.");
+        }
+      }
+    }
 
     $duplicate_meeting = FALSE;
 
-    if($meetings_result['node'] && $meeting['type'] === 'Dagsorden'){
-      $duplicate_meeting = TRUE; 
+    if ($meetings_result['node'] && $meeting['type'] === 'Dagsorden') {
+      $duplicate_meeting = TRUE;
     }
 
     // Run check to see if meeting is already imported.
@@ -59,8 +72,8 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       $nid = array_shift($result['node'])->nid;
 
       if (isset($meetings_result['node'])) {
-        if($meeting['type'] === 'Dagsorden'){
-          if( count ($meetings_result['node']) >= 2){
+        if ($meeting['type'] === 'Dagsorden') {
+          if (count($meetings_result['node']) >= 2) {
             error_log('MARK - ' . basename(__FILE__) . ':' . __LINE__ . ' in ' . __FUNCTION__ . ' - Unpublish nid: ' . $nid);
             node_delete($nid);
             watchdog('ESDH', 'Unpublished %nid .', array('%nid' => $nid), WATCHDOG_INFO);
@@ -315,7 +328,8 @@ function _os2web_esdh_provider_import_file($file_meta) {
     $uri_in = _os2web_esdh_provider_similar_file_exists(drupal_realpath($uri_in));
     if ($uri_in === FALSE || FALSE === file_unmanaged_copy($uri_in, $uri_out, FILE_EXISTS_REPLACE)) {
       // Bummed out on copy.
-      watchdog('acadre MM', 'File copy failed for %infile -> %outfile. Check folder permissions.', array('%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
+      watchdog('acadre MM', 'File copy failed for %infile -> %outfile. Check folder permissions.', array(
+        '%infile' => $uri_old, '%outfile' => $uri_out), WATCHDOG_WARNING);
       return FALSE;
     }
     else {
@@ -325,12 +339,14 @@ function _os2web_esdh_provider_import_file($file_meta) {
   }
 
   if (FALSE === $uri) {
-    watchdog('acadre MM', 'Processing of %infile failed. If exists, check permissions.', array('%infile', $uri_in), WATCHDOG_WARNING);
+    watchdog('acadre MM', 'Processing of %infile failed. If exists, check permissions.', array(
+      '%infile', $uri_in), WATCHDOG_WARNING);
     return FALSE;
   }
 
   if (file_uri_scheme($uri) != 'public') {
-    watchdog('acadre MM', 'Invalid scheme for uri %uri, Possibly absolut path ?', array('%uri', $uri), WATCHDOG_ERROR);
+    watchdog('acadre MM', 'Invalid scheme for uri %uri, Possibly absolut path ?', array(
+      '%uri', $uri), WATCHDOG_ERROR);
     error_log("Var: \$uri = " . print_r($uri, 1));
     error_log("Var: \$uri_in = " . print_r($uri_in, 1));
     error_log("Var: \$uri_out = " . print_r($uri_out, 1));
@@ -360,7 +376,8 @@ function _os2web_esdh_provider_import_file($file_meta) {
   if ($convert) {
     drupal_load('module', 'os2web_adlib_api');
     os2web_adlib_api_convert_to_pdf($file->fid, $file->filename);
-    watchdog('acadre MM', 'File %filename (fid: %fid) queued for PDF conversion.', array('%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
+    watchdog('acadre MM', 'File %filename (fid: %fid) queued for PDF conversion.', array(
+      '%filename' => $file->filename, '%fid' => $file->fid), WATCHDOG_INFO);
   }
 
   err_debug('File imported.');
@@ -415,7 +432,8 @@ function _os2web_esdh_provider_node_tab_page($nid, $op = FALSE) {
   $meeting_id = $node->field_meeting_id[LANGUAGE_NONE][0]['value'];
   $system_id = $node->field_system_id[LANGUAGE_NONE][0]['value'];
   $filename = 'Unknown';
-  $files = file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array('recurse' => FALSE));
+  $files = file_scan_directory(variable_get('os2web_meetings_path', ACADRE_MM_IMPORT_DIR), '/\.xml$/i', array(
+    'recurse' => FALSE));
   foreach ($files as $file) {
     $xml = simplexml_load_file(drupal_realpath($file->uri));
     if (is_object($xml)) {
