@@ -10,6 +10,7 @@
   </xs:element>
   <xs:complexType name="Configuration">
     <xs:sequence>
+      <xs:element minOccurs="0" name="DestinationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileServiceURL" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -90,7 +91,6 @@
       <xs:element name="EntityName" nillable="true" type="xs:string" />
       <xs:element name="Fields" nillable="true" type="tns:ArrayOfField" />
       <xs:element name="Key" nillable="true" type="tns:ArrayOfField" />
-      <xs:element name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ParentKey" nillable="true" type="tns:ArrayOfField" />
       <xs:element name="Status" type="tns:EntityStatus" />
       <xs:element minOccurs="0" name="SubEntityItemGroups" nillable="true" type="tns:ArrayOfSubEntityItemGroup" />
