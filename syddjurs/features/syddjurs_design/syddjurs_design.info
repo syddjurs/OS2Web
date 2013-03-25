@@ -16,3 +16,15 @@ features[fontyourface][] = Myriad Pro Light
 features[fontyourface][] = Myriad Pro Regular
 features[variable][] = theme_cmstheme_settings
 features[variable][] = typekit_api_token
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.17
+timestamp=1364213835
+
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.18
+timestamp=1364215842
+

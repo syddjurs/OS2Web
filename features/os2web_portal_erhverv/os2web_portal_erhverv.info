@@ -9,3 +9,15 @@ dependencies[] = page_manager
 features[ctools][] = page_manager:pages_default:1
 features[features_api][] = api:1
 features[page_manager_handlers][] = term_view_panel_context_3
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.17
+timestamp=1364213835
+
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.18
+timestamp=1364215842
+
