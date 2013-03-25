@@ -136,10 +136,11 @@ function os2web_print_send_to_friend_send_to_friend($bullet_point_id) {
 
   $body .= os2web_print_send_to_friend_print_bullet_point($bullet_point_id);
 
-  $from = variable_get('system_mail');
+  $from = variable_get('site_mail');
+  $to = $_POST['email'];
   $message = array(
     'id' => 'send_to_friend_',
-    'to' => 'jm@bellcom.dk',
+    'to' => $to,
     'subject' => $subject,
     'body' => array($body),
     'headers' => array(
