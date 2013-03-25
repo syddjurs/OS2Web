@@ -332,7 +332,12 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       $nids[$node->nid] = $node->nid;
     }
     $meeting_id = array_shift(field_get_items('node', $node, 'field_meeting_id'));
-    $meeting_sub_id = array_shift(field_get_items('node', $node, 'field_meeting_sub_id'));
+
+    $meeting_sub_id = field_get_items('node', $node, 'field_meeting_sub_id');
+    if(empty($meeting_sub_id)){
+      continue;
+    }
+    $meeting_sub_id = array_shift($meeting_sub_id);
     if (isset($meetings[$meeting_id['value']][$meeting_sub_id['value']])) {
       // Duplicate meeting detected.
       watchdog('os2web_meetings', 'Duplicate import found for meeting %mid. Deleting.', array(
@@ -340,7 +345,7 @@ function _acadre_esdh_mm_order_addenums($drush = FALSE) {
       node_delete($node->nid);
     }
     else {
-      $meetings[$meeting_id['value']][$system_id['value']] = $node->nid;
+      $meetings[$meeting_id['value']][$meeting_sub_id['value']] = $node->nid;
     }
   }
   foreach ($meetings as $m_id => $meeting) {
