@@ -679,67 +679,6 @@ print("<div class=\\"indicator-has-notes\\"></div>");
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'nid_1' => 'nid_1',
-    'nid' => 'nid',
-    'nothing' => 'nothing',
-    'title' => 'title',
-    'php' => 'title',
-    'field_ref_attachment' => 'title',
-    'nothing_1' => 'nothing_1',
-    'field_qbrick_ref' => 'field_qbrick_ref',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'nid_1' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nid' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nothing' => array(
-      'align' => 'views-align-left',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'php' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_ref_attachment' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_qbrick_ref' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 1,
-    ),
-  );
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
@@ -854,7 +793,7 @@ if (function_exists("os2web_print_send_to_friend_bullet_point_access"))
 {
 if (os2web_print_send_to_friend_bullet_point_access($row->nid)){
 echo \'<span class="bullet-point-print-link"></span>\';
-} 
+}
 }
 ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -1008,79 +947,12 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'nid_1' => 'nid_1',
-    'nid' => 'nid',
-    'nothing' => 'nothing',
-    'title' => 'title',
-    'php' => 'title',
-    'field_ref_attachment' => 'title',
-    'nothing_1' => 'nothing_1',
-    'field_qbrick_ref' => 'field_qbrick_ref',
-  );
-  $handler->display->display_options['style_options']['default'] = '-1';
-  $handler->display->display_options['style_options']['info'] = array(
-    'nid_1' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nid' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nothing' => array(
-      'align' => 'views-align-left',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'php' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_ref_attachment' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'nothing_1' => array(
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 0,
-    ),
-    'field_qbrick_ref' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-      'empty_column' => 1,
-    ),
-  );
+  $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
-  /* Overskrift: Global: Tekstområde */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<div class="clearfix"><h2 class="pane-title" style="float:left">Tillægs[field_meeting_type]</h2><div style="float:right;margin: 10px 30px 0 0"><span>[field_full_doc]</span></div></div>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
-  $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Forbindelse: Tillæg */
   $handler->display->display_options['relationships']['reverse_field_addenum_to_node']['id'] = 'reverse_field_addenum_to_node';
@@ -1111,6 +983,37 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['nid_1']['label'] = '';
   $handler->display->display_options['fields']['nid_1']['exclude'] = TRUE;
   $handler->display->display_options['fields']['nid_1']['element_label_colon'] = FALSE;
+  /* Felt: Indhold: Type */
+  $handler->display->display_options['fields']['field_meeting_type']['id'] = 'field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['table'] = 'field_data_field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['field'] = 'field_meeting_type';
+  $handler->display->display_options['fields']['field_meeting_type']['label'] = '';
+  $handler->display->display_options['fields']['field_meeting_type']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_meeting_type']['element_label_colon'] = FALSE;
+  /* Felt: Indhold: Full doc */
+  $handler->display->display_options['fields']['field_full_doc']['id'] = 'field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['table'] = 'field_data_field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['field'] = 'field_full_doc';
+  $handler->display->display_options['fields']['field_full_doc']['relationship'] = 'reverse_field_addenum_to_node';
+  $handler->display->display_options['fields']['field_full_doc']['label'] = '';
+  $handler->display->display_options['fields']['field_full_doc']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet Tilæg';
+  $handler->display->display_options['fields']['field_full_doc']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_full_doc']['alter']['path'] = '[field_full_doc]';
+  $handler->display->display_options['fields']['field_full_doc']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_full_doc']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_full_doc']['type'] = 'file_url_plain';
+  /* Felt: Global: Tilpasset tekst */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = '';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '<div class="clearfix">
+<h2 class="pane-title">Tillægs[field_meeting_type]</h2>
+<div class="full-doc-link">[field_full_doc]</div>
+</div>';
+  $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Felt: Bullet point id - hidden */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
@@ -1198,7 +1101,7 @@ if (function_exists("os2web_print_send_to_friend_bullet_point_access"))
 {
 if (os2web_print_send_to_friend_bullet_point_access($row->nid)){
 echo \'<span class="bullet-point-print-link"></span>\';
-} 
+}
 }
 ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -1228,29 +1131,6 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['field_qbrick_ref']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_qbrick_ref']['click_sort_column'] = 'seek';
   $handler->display->display_options['fields']['field_qbrick_ref']['type'] = 'qbrick_movie_seek';
-  /* Felt: Indhold: Type */
-  $handler->display->display_options['fields']['field_meeting_type']['id'] = 'field_meeting_type';
-  $handler->display->display_options['fields']['field_meeting_type']['table'] = 'field_data_field_meeting_type';
-  $handler->display->display_options['fields']['field_meeting_type']['field'] = 'field_meeting_type';
-  $handler->display->display_options['fields']['field_meeting_type']['label'] = '';
-  $handler->display->display_options['fields']['field_meeting_type']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_meeting_type']['element_label_colon'] = FALSE;
-  /* Felt: Indhold: Full doc */
-  $handler->display->display_options['fields']['field_full_doc']['id'] = 'field_full_doc';
-  $handler->display->display_options['fields']['field_full_doc']['table'] = 'field_data_field_full_doc';
-  $handler->display->display_options['fields']['field_full_doc']['field'] = 'field_full_doc';
-  $handler->display->display_options['fields']['field_full_doc']['relationship'] = 'reverse_field_addenum_to_node';
-  $handler->display->display_options['fields']['field_full_doc']['label'] = '';
-  $handler->display->display_options['fields']['field_full_doc']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet tillæg';
-  $handler->display->display_options['fields']['field_full_doc']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['path'] = '[field_full_doc]';
-  $handler->display->display_options['fields']['field_full_doc']['alter']['external'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['alt'] = 'Download hele referatet som samlet dokument';
-  $handler->display->display_options['fields']['field_full_doc']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_full_doc']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_full_doc']['type'] = 'file_url_plain';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1380,7 +1260,12 @@ echo \'<span class="bullet-point-print-link"></span>\';
     t('field_addenum_to'),
     t('Lokation'),
     t('Bullet points - Tillæg'),
-    t('<div class="clearfix"><h2 class="pane-title" style="float:left">Tillægs[field_meeting_type]</h2><div style="float:right;margin: 10px 30px 0 0"><span>[field_full_doc]</span></div></div>'),
+    t('Samlet Tilæg'),
+    t('<div class="clearfix">
+<h2 class="pane-title">Tillægs[field_meeting_type]</h2>
+<div class="full-doc-link">[field_full_doc]</div>
+</div>'),
+    t('[title] [field_bul_point_closed]'),
     t('<div class="agenda-item">[field_ref_attachment][field_enclosures] </div>'),
     t('Samlet tillæg'),
     t('Bilag 4'),
@@ -2005,9 +1890,9 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['filters']['php']['group'] = 1;
   $handler->display->display_options['filters']['php']['use_php_setup'] = 0;
   $handler->display->display_options['filters']['php']['php_filter'] = 'if (count($view->exposed_input)) {
-return FALSE; 
-} else { 
-return TRUE; 
+return FALSE;
+} else {
+return TRUE;
 }';
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -2369,9 +2254,9 @@ return TRUE;
   $handler->display->display_options['filters']['php']['group'] = 1;
   $handler->display->display_options['filters']['php']['use_php_setup'] = 0;
   $handler->display->display_options['filters']['php']['php_filter'] = 'if (count($view->exposed_input)) {
-return FALSE; 
-} else { 
-return TRUE; 
+return FALSE;
+} else {
+return TRUE;
 }';
   /* Filterkriterie: Indhold: Udgivet */
   $handler->display->display_options['filters']['status']['id'] = 'status';
