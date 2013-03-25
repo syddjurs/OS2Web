@@ -19,7 +19,7 @@ function os2web_meeting_views_form_views_exposed_form_alter(&$form, &$form_state
 function os2web_meeting_views_views_exposed_form_meetings_search_page_validate(&$form, &$form_state) {
   $searchtext = rawurlencode($form_state['values']['search_params']);
   if (is_numeric($form_state['values']['committee']) || $form_state['values']['committee'] === 'All') {
-    
+
   }
   else {
     $options = array(
@@ -75,9 +75,9 @@ function _os2web_meeting_views_get_exposed_filter() {
 }
 
 /**
- * Helper function for the meetings_search view 
- * 
- * @param stdObject $entity 
+ * Helper function for the meetings_search view
+ *
+ * @param stdObject $entity
  * @access protected
  * @return void
  */
@@ -114,7 +114,10 @@ function _os2web_meeting_views_generate_search_data($entity) {
         foreach ($bpas as $bpa) {
           $node2 = node_load($bpa['target_id']);
           $body = field_get_items($entity_type, $node2, 'field_bpa_body');
-          $text = html_entity_decode(strip_tags(check_markup(array_pop(array_pop($body)),'filtered_html')),0 , 'UTF-8');
+          if (!is_array($body)) {
+            $body = array(array());
+          }
+          $text = html_entity_decode(strip_tags(check_markup(array_pop(array_pop($body)),'filtered_html')),ENT_COMPAT | ENT_HTML401,'UTF-8');
           $text = trim(preg_replace('/[\",;:.\'\(\)]/',' ',$text));
           $text = trim(preg_replace('/\s\s+/',' ',$text));
           $bps .= ' '.$text;
@@ -144,6 +147,6 @@ function _os2web_meeting_views_strip_words($text) {
     return true;
   }
   else {
-    return false; 
+    return false;
   }
 }
