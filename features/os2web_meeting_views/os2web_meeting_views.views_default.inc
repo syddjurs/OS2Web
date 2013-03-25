@@ -998,7 +998,7 @@ echo \'<span class="bullet-point-print-link"></span>\';
   $handler->display->display_options['fields']['field_full_doc']['label'] = '';
   $handler->display->display_options['fields']['field_full_doc']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_full_doc']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet Tilæg';
+  $handler->display->display_options['fields']['field_full_doc']['alter']['text'] = 'Samlet Tillæg';
   $handler->display->display_options['fields']['field_full_doc']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_full_doc']['alter']['path'] = '[field_full_doc]';
   $handler->display->display_options['fields']['field_full_doc']['element_label_colon'] = FALSE;
@@ -1260,7 +1260,7 @@ echo \'<span class="bullet-point-print-link"></span>\';
     t('field_addenum_to'),
     t('Lokation'),
     t('Bullet points - Tillæg'),
-    t('Samlet Tilæg'),
+    t('Samlet Tillæg'),
     t('<div class="clearfix">
 <h2 class="pane-title">Tillægs[field_meeting_type]</h2>
 <div class="full-doc-link">[field_full_doc]</div>
