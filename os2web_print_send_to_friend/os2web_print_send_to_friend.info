@@ -3,3 +3,9 @@ description = A module allowing print bullet point ot send it to friend via emai
 core = 7.x
 package = OS2Web
 
+
+;Added by OS2Web 2013-03-22
+project=OS2Web
+version=1.11.14
+timestamp=1363962750
+
