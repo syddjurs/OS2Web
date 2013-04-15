@@ -137,7 +137,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
 
       # adding the alias and setting pathauto to 0 for this content type. otherwise we get 2 aliases. 
       $path_alias = array(
-          'alias' => '/dagsorden/' . pathauto_cleanstring($node->title),
+          'alias' => 'dagsorden/' . pathauto_cleanstring($node->title),
           'pid' => null,
           'source' => null,
           'language' => LANGUAGE_NONE,   
