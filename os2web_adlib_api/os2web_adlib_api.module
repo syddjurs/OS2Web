@@ -168,7 +168,7 @@ function _os2web_adlib_api_reprocess_nid($nid, &$context = array()) {
 
   if (isset($node->field_enclosures['und'])) {
     foreach ($node->field_enclosures['und'] as $file) {
-      if (file_exists(drupal_realpath($file['uri'])) && !_os2web_adlib_api_is_file_pdf($file['fid'])) {
+      if (file_exists(drupal_realpath($file['uri'])) && _os2web_adlib_api_is_filetype_approved($file['fid'])) {
         if (os2web_adlib_api_convert_to_pdf($file['fid'])) {
           watchdog('adlib_api', 'readded fid to conversion queue:' . $file['fid'], NULL, WATCHDOG_DEBUG);
         }
@@ -381,7 +381,7 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
     // file_delete($file);
     return FALSE;
   }
-  if (!_os2web_adlib_api_is_file_pdf($fid)) {
+  if (_os2web_adlib_api_is_filetype_approved($fid)) {
     if (0 === db_query('SELECT fid from {os2web_adlib_api_doc_files} where fid = :fid AND jobtype = :jobtype', array(':fid' => $fid, ':jobtype' => 0))->rowCount()) {
       $record = array(
         'fid' => $fid,
@@ -701,7 +701,7 @@ function _os2web_adlib_api_process_html($data, $base_url) {
 function _os2web_adlib_api_queue_file($file) {
   $file->file = file_load($file->fid);
 
-  if (is_file(drupal_realpath($file->file->uri)) && !_os2web_adlib_api_is_file_pdf($file->file->fid)) {
+  if (is_file(drupal_realpath($file->file->uri)) && _os2web_adlib_api_is_filetype_approved($file->file->fid)) {
     $adlib = _os2web_adlib_api_get_instance();
     $upload = $adlib->uploadData($file->file->filename, file_get_contents(drupal_realpath($file->file->uri)));
     if ($upload) {
@@ -733,7 +733,7 @@ function _os2web_adlib_api_queue_file($file) {
     }
   }
   else {
-    if (_os2web_adlib_api_is_file_pdf($file->file->fid)) {
+    if (!_os2web_adlib_api_is_filetype_approved($file->file->fid)) {
       $jobinfo = array(
         'fid' => $file->fid,
         'jobtype' => $file->jobtype,
@@ -752,27 +752,60 @@ function _os2web_adlib_api_queue_file($file) {
 }
 
 /**
- * Helper function, check if file is already PDF.
+ * Helper function, check if file type is correct.
  * @access protected
  *
  * @param int $fid
  *   File id
  *
- * @return boolean
- *   True if file is pdf.
+ * @return bool
+ *   True if file is approved for processing.
  */
-function _os2web_adlib_api_is_file_pdf($fid) {
+function _os2web_adlib_api_is_filetype_approved($fid) {
+
+  // Filetypes which are approved for processing.
+  $approved_files = array(
+    'docx',
+    'docm',
+    // 'doc',
+    'dotx',
+    'dotm',
+    'xps',
+    'rtf',
+    'xlsx',
+    'odt',
+    'xlsm',
+    'xlsb',
+    'xls',
+    'xltx',
+    'xltm',
+    'xlt',
+    'xps',
+    'ods',
+    'wps',
+    'pptx',
+    'pptm',
+    'ppt',
+    'potx',
+    'potm',
+    'ppsx',
+    'ppsm',
+    'pps',
+    'odp',
+    'msg',
+  );
+
   if (is_array($fid)) {
     $result = array();
     $files = file_load_multiple($fid);
     foreach ($files as $file) {
-      $result[$file->fid]['is_pdf'] = strcasecmp(pathinfo($file->filename, PATHINFO_EXTENSION), 'pdf') === 0;
+      $result[$file->fid]['is_pdf'] = in_array(strtolower(pathinfo(file_load($fid)->filename, PATHINFO_EXTENSION)), $approved_files);
       $result[$file->fid]['file'] = $file;
     }
     return $result;
   }
   else {
-    return strcasecmp(pathinfo(file_load($fid)->filename, PATHINFO_EXTENSION), 'pdf') === 0;
+    return in_array(strtolower(pathinfo(file_load($fid)->filename, PATHINFO_EXTENSION)), $approved_files);
   }
 }
 

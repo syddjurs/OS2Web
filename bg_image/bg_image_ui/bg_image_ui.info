@@ -60,6 +60,7 @@ version=7.x-1.10
 timestamp=1353326099
 
 
+<<<<<<< HEAD
 ;Added by OS2Web 2013-03-25
 project=OS2Web
 version=1.11.17
@@ -76,4 +77,16 @@ timestamp=1364215842
 project=OS2Web
 version=1.11.19
 timestamp=1364217284
+=======
+;Added by OS2Web 2013-03-22
+project=OS2Web
+version=1.11.14
+timestamp=1363962750
+
+
+;Added by OS2Web 2013-04-15
+project=OS2Web
+version=1.11.21
+timestamp=1366016369
+>>>>>>> dbb8ba7c63db18661ec75f0b98815a9c8e1a8d19
 
