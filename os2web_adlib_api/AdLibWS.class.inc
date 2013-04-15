@@ -8,6 +8,7 @@
 define('ADLIB_JOBTYPE_PDF', 0);
 define('ADLIB_JOBTYPE_HTML', 1);
 define('ADLIB_DISABLED', $_SERVER['SERVER_ADDR'] != '10.255.1.46');
+define('ADLIB_DISABLED', FALSE);
 //define('ADLIB_DISABLED', TRUE);
 
 /**
@@ -130,6 +131,8 @@ class AdLibWS {
         $msg = 'Unknown reason.';
       }
       error_log(basename(__FILE__) . ':' . __LINE__ . " jm@bellcom.dk: Failed to add job. Reason: " . $msg);
+      error_log("Var: getlastrequest() = " . print_r($this->client->__getLastRequest(), 1));
+
       return FALSE;
     }
   }
