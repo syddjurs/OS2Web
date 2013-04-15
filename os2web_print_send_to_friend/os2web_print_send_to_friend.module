@@ -158,5 +158,4 @@ function os2web_print_send_to_friend_send_to_friend($bullet_point_id) {
   $message = $system->format($message);
 
   $system->mail($message);
->>>>>>> master
 }
