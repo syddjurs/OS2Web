@@ -17,3 +17,15 @@ features[user_permission][] = administer feedback
 features[user_permission][] = view feedback messages
 features[variable][] = feedback_excluded_paths
 features[variable][] = field_bundle_settings_feedback__feedback
+
+;Added by OS2Web 2013-03-22
+project=OS2Web
+version=1.11.14
+timestamp=1363962750
+
+
+;Added by OS2Web 2013-04-15
+project=OS2Web
+version=1.11.21
+timestamp=1366016369
+
