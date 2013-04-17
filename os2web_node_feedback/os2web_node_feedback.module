@@ -74,6 +74,15 @@ function os2web_node_feedback_form_os2web_settings_settings_form_alter(&$form, &
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function os2web_node_feedback_form_alter(&$form, &$form_state) {
+  if ($form['#id'] === 'feedback-form') {
+    honeypot_add_form_protection($form, $form_state, array('honeypot'));
+  }
+}
+
+/**
  * Implements hook_FORM_validate().
  */
 function os2web_node_feedback_form_os2web_settings_settings_form_validate($form, &$form_state) {
