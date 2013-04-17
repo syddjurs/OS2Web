@@ -13,20 +13,6 @@ function os2web_node_feedback_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'captcha_add_captcha_description';
-  $strongarm->value = 1;
-  $export['captcha_add_captcha_description'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'captcha_description_da';
-  $strongarm->value = 'Verificer at du ikke er en robot:';
-  $export['captcha_description_da'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'feedback_excluded_paths';
   $strongarm->value = 'admin/
 admin/reports/feedback
