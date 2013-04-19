@@ -8,6 +8,7 @@ project = os2web_node_feedback
 dependencies[] = features
 dependencies[] = feedback
 dependencies[] = strongarm
+dependencies[] = honeypot
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[field][] = feedback-feedback-field_feedback_email
