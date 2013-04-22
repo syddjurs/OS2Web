@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Syddjurs - Eksterne links feature.
+ */
+
+include_once 'syddjurs_eksterne_links.features.inc';

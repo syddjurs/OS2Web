@@ -8,6 +8,7 @@ project = os2web_node_feedback
 dependencies[] = features
 dependencies[] = feedback
 dependencies[] = strongarm
+dependencies[] = honeypot
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[field][] = feedback-feedback-field_feedback_email
@@ -40,4 +41,10 @@ timestamp=1364217284
 project=OS2Web
 version=1.11.21
 timestamp=1366016369
+
+
+;Added by OS2Web 2013-04-19
+project=OS2Web
+version=1.12
+timestamp=1366374241
 
