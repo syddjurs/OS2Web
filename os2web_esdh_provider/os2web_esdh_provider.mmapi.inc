@@ -124,7 +124,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     $node->title = $meeting['title'];  
     # The original field for title came from $meeting['title'];
     # This is a rewrite of the function to set the path automaticaly and with custom data - sutch as date. 
-    # skiffter@bellcom.dk - 2013-04-12
+    # skifter@bellcom.dk - 2013-04-14 / 2013-04-24
  
     # is the pathauto module loades ? 
     if (module_exists('pathauto')) {
@@ -133,7 +133,9 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       module_load_include('inc', 'pathauto', 'pathauto');
       
       # Setting the new title with committee name and meeting date substring
-      $node->title = $meeting['committee'] . ' - ' . substr($meeting['meeting_date_start'], 0,10);
+      $my_date = date_create(substr($meeting['meeting_date_start'], 0,10));
+      $format = "d-m-Y";
+      $node->title = $meeting['committee'] . ' - ' . date_format($my_date,$format);
 
       # adding the alias and setting pathauto to 0 for this content type. otherwise we get 2 aliases. 
       $path_alias = array(
