@@ -3,15 +3,12 @@ description = Aktiver en feedback form på hjemmesiden.
 core = 7.x
 package = Features
 php = 5.2.4
-version = 7.x-1.11
+version = 7.x-1.10
 project = os2web_node_feedback
-dependencies[] = captcha
-dependencies[] = ctools
 dependencies[] = features
 dependencies[] = feedback
-dependencies[] = math_captcha
 dependencies[] = strongarm
-dependencies[] = text
+dependencies[] = honeypot
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:1
 features[field][] = feedback-feedback-field_feedback_email
@@ -19,8 +16,35 @@ features[field][] = feedback-feedback-field_feedback_navn
 features[user_permission][] = access feedback form
 features[user_permission][] = administer feedback
 features[user_permission][] = view feedback messages
-features[variable][] = captcha_add_captcha_description
-features[variable][] = captcha_description_da
 features[variable][] = feedback_excluded_paths
 features[variable][] = field_bundle_settings_feedback__feedback
-timestamp = 1366016369
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.17
+timestamp=1364213835
+
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.18
+timestamp=1364215842
+
+
+;Added by OS2Web 2013-03-25
+project=OS2Web
+version=1.11.19
+timestamp=1364217284
+
+
+;Added by OS2Web 2013-04-15
+project=OS2Web
+version=1.11.21
+timestamp=1366016369
+
+
+;Added by OS2Web 2013-04-19
+project=OS2Web
+version=1.12
+timestamp=1366374241
+
