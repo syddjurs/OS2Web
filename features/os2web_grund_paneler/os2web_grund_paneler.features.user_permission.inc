@@ -14,8 +14,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['administer advanced pane settings'] = array(
     'name' => 'administer advanced pane settings',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -24,8 +24,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['administer pane access'] = array(
     'name' => 'administer pane access',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -34,8 +34,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['administer panel-nodes'] = array(
     'name' => 'administer panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -44,8 +44,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['administer panels layouts'] = array(
     'name' => 'administer panels layouts',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -54,8 +54,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['administer panels styles'] = array(
     'name' => 'administer panels styles',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -64,7 +64,7 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['change layouts in place editing'] = array(
     'name' => 'change layouts in place editing',
     'roles' => array(
-      0 => 'Administrator',
+      'Administrator' => 'Administrator',
     ),
     'module' => 'panels',
   );
@@ -73,8 +73,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['create panel-nodes'] = array(
     'name' => 'create panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -83,8 +83,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['delete any panel-nodes'] = array(
     'name' => 'delete any panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -93,8 +93,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['delete own panel-nodes'] = array(
     'name' => 'delete own panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -103,8 +103,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['edit any panel-nodes'] = array(
     'name' => 'edit any panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -113,8 +113,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['edit own panel-nodes'] = array(
     'name' => 'edit own panel-nodes',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels_node',
   );
@@ -123,8 +123,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['use panels caching features'] = array(
     'name' => 'use panels caching features',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -133,8 +133,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['use panels dashboard'] = array(
     'name' => 'use panels dashboard',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -143,7 +143,7 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['use panels in place editing'] = array(
     'name' => 'use panels in place editing',
     'roles' => array(
-      0 => 'Administrator',
+      'Administrator' => 'Administrator',
     ),
     'module' => 'panels',
   );
@@ -152,8 +152,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['use panels locks'] = array(
     'name' => 'use panels locks',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
@@ -162,8 +162,8 @@ function os2web_grund_paneler_user_default_permissions() {
   $permissions['view pane admin links'] = array(
     'name' => 'view pane admin links',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'panels',
   );
