@@ -515,6 +515,7 @@ function _os2web_adlib_api_process_file($file) {
       $fdata = file_load($file->fid);
       if (!file_exists(drupal_realpath($fdata->uri)) || file_uri_scheme($fdata->uri) == '' || $fdata->filemime == 'application/pdf') {
         if ($fdata->filemime == 'application/pdf') {
+
           $record = array(
             'fid' => $fdata->fid,
             'jobtype' => $fdata->jobtype,
@@ -767,7 +768,7 @@ function _os2web_adlib_api_is_filetype_approved($fid) {
   $approved_files = array(
     'docx',
     'docm',
-    // 'doc',
+    'doc',
     'dotx',
     'dotm',
     'xps',
