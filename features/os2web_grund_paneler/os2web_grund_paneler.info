@@ -3,7 +3,7 @@ description = Forside og Portalforside Paneler
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.10
+version = 7.x-1.12
 project = os2web_grund_paneler
 dependencies[] = ctools
 dependencies[] = delta
@@ -11,10 +11,13 @@ dependencies[] = features
 dependencies[] = jcarousel
 dependencies[] = menu
 dependencies[] = page_manager
+dependencies[] = panels
 dependencies[] = panels_mini
 dependencies[] = panels_node
 dependencies[] = strongarm
 dependencies[] = views
+dependencies[] = views_content
+dependencies[] = views_slideshow
 datestamp = 1338117520
 features[ctools][] = delta:delta:3
 features[ctools][] = page_manager:pages_default:1
@@ -65,34 +68,4 @@ features[views_view][] = redaktoer_info
 features[views_view][] = rotating_image_view
 features[views_view][] = selvbetjening
 features[views_view][] = sitestuktur
-timestamp = 1353326099
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.17
-timestamp=1364213835
-
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.18
-timestamp=1364215842
-
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.19
-timestamp=1364217284
-
-
-;Added by OS2Web 2013-04-15
-project=OS2Web
-version=1.11.21
-timestamp=1366016369
-
-
-;Added by OS2Web 2013-04-19
-project=OS2Web
-version=1.12
-timestamp=1366374241
-
+timestamp = 1366374241
