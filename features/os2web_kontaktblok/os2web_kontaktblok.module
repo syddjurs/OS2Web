@@ -24,8 +24,9 @@ function os2web_kontaktblok_get_block() {
       $ent = node_load($path[1]);
       $field = field_get_items('node', $ent, 'field_node_reference_kontaktblok');
     }
-    else {
-      // Unknown entity type.. Possibly root
+    elseif ($path[1] == 0) {
+      $node = menu_get_object();
+      $field = field_get_items('node', $node,'field_node_reference_kontaktblok');
     }
     if (isset($field[0]['nid'])) {
       $result = $field[0]['nid'];
