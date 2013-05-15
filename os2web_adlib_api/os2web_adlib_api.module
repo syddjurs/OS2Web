@@ -767,7 +767,7 @@ function _os2web_adlib_api_is_filetype_approved($fid) {
   $approved_files = array(
     'docx',
     'docm',
-    // 'doc',
+    'doc',
     'dotx',
     'dotm',
     'xps',
