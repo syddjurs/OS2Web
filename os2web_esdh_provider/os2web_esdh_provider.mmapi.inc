@@ -354,13 +354,18 @@ function _os2web_esdh_provider_import_file($file_meta) {
   }
 
   $fid = db_select('file_managed', 'fm')
-          ->fields('fm', array('fid'))
-          ->condition('uri', $uri)
-          ->execute()->fetchField();
+    ->condition('uri', $uri)
+    ->execute()->fetchObject();
 
   $file = new stdClass();
-  if ($fid) {
-    $file->fid = $fid;
+  if (isset($fid->fid) && !empty($fid)) {
+    $file->fid = $fid->fid;
+    if (filesize($file->uri) !== $file->filesize) {
+      $convert = TRUE;
+
+      watchdog('acadre MM', 'File: %filename, fid: %fid has Changed.', array(
+        '%filename' => $fid->filename, '%fid' => $fid->fid), WATCHDOG_INFO);
+    }
   }
   $file->uri = $uri;
   $file->display = 1;
