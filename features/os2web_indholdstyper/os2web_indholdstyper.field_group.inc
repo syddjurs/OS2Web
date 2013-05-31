@@ -64,6 +64,34 @@ function os2web_indholdstyper_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_case_doc|node|news|form';
+  $field_group->group_name = 'group_case_doc';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'news';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_news_tabs';
+  $field_group->data = array(
+    'label' => 'Sager og Dokumenter',
+    'weight' => '3',
+    'children' => array(
+      0 => 'field_case',
+      1 => 'field_doc',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_case_doc|node|news|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_document|node|contentpage|default';
   $field_group->group_name = 'group_document';
   $field_group->entity_type = 'node';
@@ -336,7 +364,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Indstillinger',
-    'weight' => '3',
+    'weight' => '5',
     'children' => array(
       0 => 'field_promoteto',
       1 => 'path',
@@ -371,6 +399,7 @@ function os2web_indholdstyper_field_group_info() {
       0 => 'group_indstillinger',
       1 => 'group_taksonomi',
       2 => 'group_tekst',
+      3 => 'group_case_doc',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
@@ -455,7 +484,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Emneord',
-    'weight' => '2',
+    'weight' => '4',
     'children' => array(
       0 => 'field_termref_kle',
       1 => 'field_organization',
@@ -493,7 +522,8 @@ function os2web_indholdstyper_field_group_info() {
       1 => 'field_lead_image',
       2 => 'field_resume_long',
       3 => 'field_site_structure',
-      4 => 'title',
+      4 => 'field_mediafile',
+      5 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

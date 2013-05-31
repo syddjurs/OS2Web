@@ -708,11 +708,11 @@ function os2web_indholdstyper_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
-            'image' => 0,
-            'video' => 0,
-            0 => 0,
             'audio' => 0,
             'default' => 'default',
+            0 => 0,
+            'image' => 0,
+            'video' => 0,
           ),
           'browser_plugins' => array(),
           'progress_indicator' => 'throbber',
@@ -4113,6 +4113,128 @@ function os2web_indholdstyper_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-news-field_case'.
+  $fields['node-news-field_case'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_case',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'os2web_case_field',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'case_ident',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_case_field',
+          'settings' => array(),
+          'type' => 'case_ident_formatter',
+          'weight' => 16,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_case',
+      'label' => 'Sag',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_case_field',
+        'settings' => array(),
+        'type' => 'case_ident_widget',
+        'weight' => '49',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-news-field_doc'.
+  $fields['node-news-field_doc'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_doc',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'doc_ident' => array(
+          0 => 'doc_ident',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'os2web_doc_field',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'doc_ident',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'os2web_doc_field',
+          'settings' => array(),
+          'type' => 'doc_ident_formatter',
+          'weight' => 17,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_doc',
+      'label' => 'Dokument',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'os2web_doc_field',
+        'settings' => array(),
+        'type' => 'doc_ident_widget',
+        'weight' => '50',
+      ),
+    ),
+  );
+
   // Exported field: 'node-news-field_editortags'.
   $fields['node-news-field_editortags'] = array(
     'field_config' => array(
@@ -4312,6 +4434,99 @@ function os2web_indholdstyper_field_default_fields() {
         ),
         'type' => 'media_generic',
         'weight' => '-1',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-news-field_mediafile'.
+  $fields['node-news-field_mediafile'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_mediafile',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '0',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => 15,
+        ),
+        'related_block' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_mediafile',
+      'label' => 'Filer',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => '',
+        'file_extensions' => 'pdf doc docx xls xlsx',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'media',
+        'settings' => array(
+          'allowed_schemes' => array(
+            'public' => 'public',
+            'youtube' => 0,
+          ),
+          'allowed_types' => array(
+            'audio' => 0,
+            'document' => 0,
+            'image' => 'image',
+            'video' => 0,
+          ),
+          'browser_plugins' => array(
+            'media_internet' => 0,
+            'upload' => 0,
+          ),
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'media_generic',
+        'weight' => '0',
       ),
     ),
   );
@@ -6441,6 +6656,7 @@ function os2web_indholdstyper_field_default_fields() {
   t('Dokument');
   t('Egenavne / stednavne');
   t('Egennavne/stednavne');
+  t('Filer');
   t('Forfrem til');
   t('Forældre-menupunkt');
   t('Gruppe ID');

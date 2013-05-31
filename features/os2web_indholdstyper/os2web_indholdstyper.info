@@ -3,27 +3,35 @@ description = Frit overtaget fra Ballerup
 core = 7.x
 package = OS2Web - Struktur
 php = 5.2.4
-version = 7.x-1.10
-project = OS2Web
+version = 7.x-1.12
+project = os2web_indholdstyper
 dependencies[] = balk_custom
 dependencies[] = borger_dk_integration
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = eim
+dependencies[] = features
 dependencies[] = field_group
 dependencies[] = field_slideshow
 dependencies[] = fieldable_panels_panes
 dependencies[] = file
 dependencies[] = image
 dependencies[] = imagefield_crop
+dependencies[] = link
 dependencies[] = list
 dependencies[] = media
+dependencies[] = node
+dependencies[] = node_reference
 dependencies[] = number
+dependencies[] = options
 dependencies[] = os2web_case_field
 dependencies[] = os2web_doc_field
 dependencies[] = page_manager
 dependencies[] = panels
+dependencies[] = strongarm
 dependencies[] = taxonomies_and_taxonomy_importers
+dependencies[] = taxonomy
+dependencies[] = text
 datestamp = 1338117520
 features[ctools][] = field_group:field_group:1
 features[ctools][] = page_manager:pages_default:1
@@ -79,8 +87,11 @@ features[field][] = node-media-field_site_structure
 features[field][] = node-media-field_source_id
 features[field][] = node-news-body
 features[field][] = node-news-field_additional_info
+features[field][] = node-news-field_case
+features[field][] = node-news-field_doc
 features[field][] = node-news-field_editortags
 features[field][] = node-news-field_lead_image
+features[field][] = node-news-field_mediafile
 features[field][] = node-news-field_organization
 features[field][] = node-news-field_politics
 features[field][] = node-news-field_promoteto
@@ -108,6 +119,7 @@ features[field][] = taxonomy_term-site_struktur-field_attached_node
 features[field][] = taxonomy_term-site_struktur-field_attached_node_fokus
 features[field_group][] = group_billeder|node|contentpage|form
 features[field_group][] = group_billede|node|news|form
+features[field_group][] = group_case_doc|node|news|form
 features[field_group][] = group_document|node|contentpage|default
 features[field_group][] = group_esdh|node|contentpage|form
 features[field_group][] = group_extras|node|contentpage|form
@@ -227,34 +239,4 @@ features[variable][] = node_submitted_media
 features[variable][] = node_submitted_news
 features[variable][] = node_submitted_rotating_image
 features[variable][] = node_submitted_selvbetjeningslinks
-timestamp = 1353326099
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.17
-timestamp=1364213835
-
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.18
-timestamp=1364215842
-
-
-;Added by OS2Web 2013-03-25
-project=OS2Web
-version=1.11.19
-timestamp=1364217284
-
-
-;Added by OS2Web 2013-04-15
-project=OS2Web
-version=1.11.21
-timestamp=1366016369
-
-
-;Added by OS2Web 2013-04-19
-project=OS2Web
-version=1.12
-timestamp=1366374241
-
+timestamp = 1366374241
