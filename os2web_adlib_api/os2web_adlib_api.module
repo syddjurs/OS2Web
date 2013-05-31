@@ -190,10 +190,22 @@ function os2web_adlib_api_status() {
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['reset'])) {
+    $file = db_select('os2web_adlib_api_doc_files', 'df')
+      ->fields('df')
+      ->condition('fid', $_GET['reset'])
+      ->execute()
+      ->fetchObject();
+
     $query = db_delete('os2web_adlib_api_doc_files');
     $query = $query->condition('fid', $_GET['reset']);
     $query->execute();
-    os2web_adlib_api_convert_to_pdf($_GET['reset']);
+
+    if (is_object($file) && !empty($file->did)) {
+      os2web_adlib_api_convert_to_pdf($_GET['reset'], $file->did);
+    }
+    else {
+      os2web_adlib_api_convert_to_pdf($_GET['reset']);
+    }
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['process'])) {
