@@ -158,17 +158,17 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
         $node->field_qbrick_ref = array();
       }
     }
-    // // Add full document.
-    // if (FALSE !== ($file = _os2web_esdh_provider_import_file($meeting['full_doc']))) {
-    //   $node->field_full_doc[LANGUAGE_NONE][] = (array) $file;
-    // }
-    // // Import items.
-    // if (is_array($meeting['items'])) {
-    //   $item_nids = _os2web_esdh_provider_import_items($meeting['items']);
-    //   foreach ($item_nids as $nid) {
-    //     $node->field_ref_bullet_points[LANGUAGE_NONE][]['target_id'] = $nid;
-    //   }
-    // }
+    // Add full document.
+    if (FALSE !== ($file = _os2web_esdh_provider_import_file($meeting['full_doc']))) {
+      $node->field_full_doc[LANGUAGE_NONE][] = (array) $file;
+    }
+    // Import items.
+    if (is_array($meeting['items'])) {
+      $item_nids = _os2web_esdh_provider_import_items($meeting['items']);
+      foreach ($item_nids as $nid) {
+        $node->field_ref_bullet_points[LANGUAGE_NONE][]['target_id'] = $nid;
+      }
+    }
 
     // Save the meeting node.
     $node = node_submit($node);
