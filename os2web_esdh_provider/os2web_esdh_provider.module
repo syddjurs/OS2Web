@@ -138,7 +138,7 @@ function os2web_esdh_provider_node_delete($node) {
                 ->propertyCondition('type', 'meeting')
                 ->fieldCondition('field_addenum_to', 'nid', $node->nid, '=')
                 ->execute()));
-    if (is_array($results)) {
+    if (is_array($result)) {
       foreach ($result as $add_node) {
         node_delete($add_node->nid);
       }
