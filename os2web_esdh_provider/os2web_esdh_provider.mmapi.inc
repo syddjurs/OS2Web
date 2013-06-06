@@ -43,7 +43,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   // Do an initially check on if there are any approved meetings.
   if (count($meetings) === 0) {
     watchdog('acadre MM', 'There was no meetings to import. See if all manifests are OK? ', WATCHDOG_WARNING);
-    _os2web_esdh_provider_send_statusmail(t('There was no meetings to import for meeting %id. See if all manifests are OK?', array('%id' => $meeting_id['id'])), TRUE);
+    _os2web_esdh_provider_send_statusmail(t('There was no meetings to import for meeting !id. See if all manifests are OK?', array('!id' => $meeting_id['id'])), TRUE);
     lock_release(__FUNCTION__ . $meeting_id['id']);
     return;
   }
@@ -193,7 +193,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     err_debug('Meeting saved. $node->nid = ' . print_r($node->nid, 1));
   }
 
-  _os2web_esdh_provider_send_statusmail(t('%id successfully imported.', array('%id' => $meeting_id)));
+  _os2web_esdh_provider_send_statusmail(t('!id successfully imported into node !nid.', array('!id' => $meeting_id['id'], '!nid' => $node->nid)));
 
   variable_set('os2web_esdh_provider_last_import', time());
   err_debug('END import meeting ' . $meeting['system_id'] . '');
@@ -636,9 +636,9 @@ function _os2web_esdh_provider_send_statusmail($message, $is_error = FALSE) {
   if ($mail_to = variable_get('os2web_esdh_provider_debug_email')) {
 
     // Set up the mail body.
-    $mail_body = '<h1>' . t('MM Import') . "</h1>\n";
-    $mail_body .= t('Status') . ": " . ($is_error)? t('Error') : t('Success') . "\n";
-    $mail_body .= t('Time spend') . ": " . (timer_read('mm_import') > 0)? timer_read('mm_import') . 'ms' : '' . "\n";
+    $mail_body = t('MM Import') . "\n";
+    $mail_body .= t('Status') . ": " . ($is_error)? t('Error') . "\n" : t('Success') . "\n";
+    $mail_body .= t('Time spend') . ": " . (timer_read('mm_import') > 0)? timer_read('mm_import') . "ms\n" : "n/a\n";
     $mail_body .= t('Messages') . ":\n\n !message\n";
 
     $from = variable_get('site_mail', '');
@@ -648,7 +648,7 @@ function _os2web_esdh_provider_send_statusmail($message, $is_error = FALSE) {
       'id' => $my_module . '_' . $my_mail_token,
       'to' => $mail_to,
       'subject' => t('MM Import status'),
-      'body' => format_string($mail_body, array('!message' => $message)),
+      'body' => format_string($mail_body, array('!message' => check_plain($message))),
       'headers' => array(
         'From' => $from,
         'Sender' => $from,
