@@ -259,7 +259,8 @@ function os2web_esdh_provider_has_api($api) {
  */
 function os2web_esdh_provider_supports($api, $method) {
   ctools_include('plugins');
-  if ($plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api))) {
+  $plugin = array_shift(ctools_get_plugins('os2web_esdh_provider', $api));
+  if ($plugin) {
     return function_exists(ctools_plugin_get_function($plugin, $method));
   }
   else {
