@@ -637,7 +637,7 @@ function _os2web_esdh_provider_import_output($id, $nids) {
  */
 function _os2web_esdh_provider_send_statusmail($message, $is_error = FALSE) {
   // Only send if an email is stored.
-  if (strpos(request_uri(), "/cron.php") !== 0 && $mail_to = variable_get('os2web_esdh_provider_debug_email')) {
+  if (strpos(request_uri(), "cron") !== 0 && $mail_to = variable_get('os2web_esdh_provider_debug_email')) {
 
     // Set up the mail body.
     $mail_body = t('MM Import') . "\n";

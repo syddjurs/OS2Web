@@ -175,9 +175,7 @@ function os2web_esdh_provider_cron() {
       foreach ($meetings as $meeting) {
         $queue->createItem(array('meeting' => $meeting, 'force' => FALSE));
       }
-      if (os2web_esdh_provider_supports('mm', 'post_import_process')) {
-        os2web_esdh_provider_invoke('mm', 'post_import_process');
-      }
+      $queue->createItem(array('post_import_process' => TRUE));
     }
   }
 }
@@ -200,8 +198,15 @@ function os2web_esdh_provider_cron_queue_info() {
  *   Meeting data for the import.
  */
 function _os2web_esdh_provider_cron_queue_worker($args) {
-  module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
-  _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
+  if (isset($args['meeting']) && isset($args['force'])) {
+    module_load_include('inc', 'os2web_esdh_provider', 'os2web_esdh_provider.mmapi');
+    _os2web_esdh_provider_import_meeting($args['meeting'], $args['force']);
+  }
+  elseif (isset($args['post_import_process']) &&
+          $args['post_import_process'] === TRUE &&
+          os2web_esdh_provider_supports('mm', 'post_import_process')) {
+    os2web_esdh_provider_invoke('mm', 'post_import_process');
+  }
 }
 
 /**
