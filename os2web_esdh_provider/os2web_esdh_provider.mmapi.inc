@@ -637,8 +637,13 @@ function _os2web_esdh_provider_send_statusmail($message, $is_error = FALSE) {
 
     // Set up the mail body.
     $mail_body = t('MM Import') . "\n";
-    $mail_body .= t('Status') . ": " . ($is_error)? t('Error') . "\n" : t('Success') . "\n";
-    $mail_body .= t('Time spend') . ": " . (timer_read('mm_import') > 0)? timer_read('mm_import') . "ms\n" : "n/a\n";
+    if ($is_error) {
+      $mail_body .= t('Status') . ": " . t('Error') . "\n";
+    }
+    else {
+      $mail_body .= t('Status') . ": " . t('Success') . "\n";
+    }
+    $mail_body .= t('Time spend') . ": " . number_format(timer_read('mm_import') / 1000, 2) . "sec.\n";
     $mail_body .= t('Messages') . ":\n\n !message\n";
 
     $from = variable_get('site_mail', '');
