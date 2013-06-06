@@ -623,17 +623,21 @@ function _os2web_esdh_provider_import_output($id, $nids) {
 /**
  * Sends a mail to the importer's email.
  *
+ * It only sends an email if the email is entered,
+ * and it is not cron which which is calling it.
+ *
  * @param string $message
  *   The message to send.
  *
  * @param bool $is_error
  *   Wheter the message is an error
  *
- * @return bool True on success
+ * @return bool
+ *   True on success
  */
 function _os2web_esdh_provider_send_statusmail($message, $is_error = FALSE) {
   // Only send if an email is stored.
-  if ($mail_to = variable_get('os2web_esdh_provider_debug_email')) {
+  if (strpos(request_uri(), "/cron.php") !== 0 && $mail_to = variable_get('os2web_esdh_provider_debug_email')) {
 
     // Set up the mail body.
     $mail_body = t('MM Import') . "\n";
