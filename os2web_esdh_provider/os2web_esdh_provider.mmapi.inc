@@ -35,7 +35,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   err_debug('Init.');
 
   $meetings = os2web_esdh_provider_invoke('mm', 'import_meeting', $meeting_id);
-  err_debug('Done generate meetings array from XML' . $meeting_id['id']);
+  err_debug('Done generate meetings array from XML ' . $meeting_id['id']);
 
   $nids = array();
   $nid = NULL;
