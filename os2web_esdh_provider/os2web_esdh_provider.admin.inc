@@ -156,6 +156,7 @@ function _os2web_esdh_provider_status_confirm_submit($form, &$form_state) {
     'title' => 'Dagsorden import',
     'operations' => array(),
     'file' => drupal_get_path('module', 'os2web_esdh_provider') . '/os2web_esdh_provider.mmapi.inc',
+    'init_message' => t('Scanner filer'),
   );
   $meetings = os2web_esdh_provider_invoke('mm', 'get_import_list');
   foreach ($meetings as $meeting) {
