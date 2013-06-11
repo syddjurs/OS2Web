@@ -180,7 +180,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     if (is_array($bullets)) {
       $nids_to_delete = array();
       foreach ($bullets as $nids) {
-        $nids_to_delete[$nids['target_id']] => $nids['target_id'];
+        $nids_to_delete[$nids['target_id']] = $nids['target_id'];
       }
       node_delete_multiple($nids_to_delete);
     }
