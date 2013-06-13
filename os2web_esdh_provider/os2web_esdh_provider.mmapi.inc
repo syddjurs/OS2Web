@@ -182,12 +182,14 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       foreach ($bullets as $nids) {
         $nids_to_delete[$nids['target_id']] = $nids['target_id'];
       }
-      node_delete_multiple($nids_to_delete);
     }
 
     // Import items.
     if (is_array($meeting['items'])) {
       $item_nids = _os2web_esdh_provider_import_items($meeting['items']);
+      if (!empty($nids_to_delete)) {
+        node_delete_multiple($nids_to_delete);
+      }
       foreach ($item_nids as $nid) {
         $node->field_ref_bullet_points[LANGUAGE_NONE][]['target_id'] = $nid;
       }
