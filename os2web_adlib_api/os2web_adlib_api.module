@@ -458,21 +458,21 @@ function _os2web_adlib_api_do_processing() {
   // Add set up queue for adlib processing.
   //
   // Disable auto queue of missing files
-  // $queue = DrupalQueue::get('os2web_adlib_process');
-  // if ($queue->numberOfItems() == 0) {
-  //   $items = db_select('os2web_adlib_api_doc_files', 'f')
-  //       ->fields('f')
-  //       ->condition(db_or()->condition('job_id', 'Complete', '!=')->isNull('job_id'))
-  //       ->execute()
-  //       ->fetchAll();
-  //   $chunk_size = max(min((int) sqrt(count($items)), 25), 1);
-  //   $items = array_chunk($items, $chunk_size);
-  //   foreach ($items as $item) {
-  //     if ($item->job_id != 'Complete') {
-  //       $queue->createItem($item);
-  //     }
-  //   }
-  // }
+  $queue = DrupalQueue::get('os2web_adlib_process');
+  if ($queue->numberOfItems() == 0) {
+    $items = db_select('os2web_adlib_api_doc_files', 'f')
+        ->fields('f')
+        ->condition(db_or()->condition('job_id', 'Complete', '!=')->isNull('job_id'))
+        ->execute()
+        ->fetchAll();
+    $chunk_size = max(min((int) sqrt(count($items)), 25), 1);
+    $items = array_chunk($items, $chunk_size);
+    foreach ($items as $item) {
+      if ($item->job_id != 'Complete') {
+        $queue->createItem($item);
+      }
+    }
+  }
 }
 
 /**
