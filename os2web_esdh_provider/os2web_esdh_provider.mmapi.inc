@@ -198,7 +198,7 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
     }
     // Add full document.
     if (FALSE !== ($file = _os2web_esdh_provider_import_file($meeting['full_doc']))) {
-      $node->field_full_doc[LANGUAGE_NONE][] = (array) $file;
+      $node->field_full_doc[LANGUAGE_NONE][0] = (array) $file;
     }
 
 
