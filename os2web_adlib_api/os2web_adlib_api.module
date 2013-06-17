@@ -45,6 +45,24 @@ function os2web_adlib_api_menu() {
 }
 
 /**
+ * Implements hook_FORM_alter().
+ */
+function os2web_adlib_api_form_os2web_settings_settings_form_alter(&$form, &$form_state) {
+  // Adlib API configuration.
+
+  $form['os2web_adlib_api_config_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('AdLib Configuration'),
+  );
+  $form['os2web_adlib_api_config_group']['os2web_adlib_api_allowed_ip_host'] = array(
+    '#type' => 'textfield',
+    '#title' => 'IP addresser der kan udløse AdLib konvertering',
+    '#description' => 'Komma separeret liste af ip-addresser/servernavne der kan anvende AdLib. Husk AdLib kan køres fra admin og fra cron.',
+    '#default_value' => variable_get('os2web_adlib_api_allowed_ip_host', ip_address()),
+  );
+}
+
+/**
  * Ajax callback to update job status.
  *
  * @param int $fid

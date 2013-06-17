@@ -52,11 +52,6 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
   // Retrieve nid of already existing node.
   $number_of_meetings = count($meetings);
   for ($i = 0; $i < $number_of_meetings; $i++) {
-    if ($meetings[$i]['publish'] === FALSE) {
-      unset($meetings[$i]);
-      continue;
-    }
-
     if (!$nid) {
       // Run check to see if meeting is already imported.
       // System ID is the same on all meetings.
@@ -68,6 +63,10 @@ function _os2web_esdh_provider_import_meeting($meeting_id, $force = FALSE, &$con
       if (isset($result['node'])) {
         $nid = array_shift($result['node'])->nid;
       }
+    }
+
+    if ($meetings[$i]['publish'] === FALSE) {
+      unset($meetings[$i]);
     }
   }
 
