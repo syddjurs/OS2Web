@@ -64,6 +64,7 @@ features[views_view][] = aktuelt
 features[views_view][] = kle_lonks_boks
 features[views_view][] = megadd_news
 features[views_view][] = newslist
+features[views_view][] = nyheds_lister
 features[views_view][] = redaktoer_info
 features[views_view][] = rotating_image_view
 features[views_view][] = selvbetjening
