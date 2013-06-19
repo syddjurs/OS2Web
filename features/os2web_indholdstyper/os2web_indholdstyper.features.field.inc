@@ -4140,7 +4140,7 @@ function os2web_indholdstyper_field_default_fields() {
           'module' => 'os2web_case_field',
           'settings' => array(),
           'type' => 'case_ident_formatter',
-          'weight' => 16,
+          'weight' => '16',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -4203,7 +4203,7 @@ function os2web_indholdstyper_field_default_fields() {
           'module' => 'os2web_doc_field',
           'settings' => array(),
           'type' => 'doc_ident_formatter',
-          'weight' => 17,
+          'weight' => '17',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -4475,11 +4475,11 @@ function os2web_indholdstyper_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
-          'weight' => 15,
+          'type' => 'file_table',
+          'weight' => '15',
         ),
         'related_block' => array(
           'label' => 'above',
@@ -4658,7 +4658,7 @@ function os2web_indholdstyper_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 14,
+          'weight' => '14',
         ),
         'related_block' => array(
           'label' => 'above',
