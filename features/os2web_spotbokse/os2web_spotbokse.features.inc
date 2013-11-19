@@ -26,7 +26,7 @@ function os2web_spotbokse_ctools_plugin_api() {
  * Implements hook_views_api().
  */
 function os2web_spotbokse_views_api() {
-  return array("version" => "3.0");
+  return array("api" => "3.0");
 }
 
 /**
@@ -49,10 +49,10 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '300',
-          'height' => '261',
+          'width' => 300,
+          'height' => 261,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -71,11 +71,11 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_crop',
         'data' => array(
-          'width' => '230',
-          'height' => '337',
+          'width' => 230,
+          'height' => 337,
           'anchor' => 'center-center',
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -94,10 +94,10 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '290',
-          'height' => '85',
+          'width' => 290,
+          'height' => 85,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -116,11 +116,11 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
-          'width' => '230',
+          'width' => 230,
           'height' => '',
           'upscale' => 0,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
       9 => array(
         'label' => 'Beskær',
@@ -132,11 +132,11 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_crop',
         'data' => array(
-          'width' => '230',
-          'height' => '115',
+          'width' => 230,
+          'height' => 115,
           'anchor' => 'center-center',
         ),
-        'weight' => '2',
+        'weight' => 2,
       ),
     ),
   );
@@ -155,11 +155,11 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
-          'width' => '310',
+          'width' => 310,
           'height' => '',
           'upscale' => 1,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
       10 => array(
         'label' => 'Beskær',
@@ -171,11 +171,11 @@ function os2web_spotbokse_image_default_styles() {
         'module' => 'image',
         'name' => 'image_crop',
         'data' => array(
-          'width' => '310',
-          'height' => '177',
+          'width' => 310,
+          'height' => 177,
           'anchor' => 'center-center',
         ),
-        'weight' => '2',
+        'weight' => 2,
       ),
     ),
   );

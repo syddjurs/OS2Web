@@ -27,7 +27,9 @@ function os2web_spotbokse_field_group_info() {
       1 => 'field_termref_kle',
       2 => 'field_site_structure',
       3 => 'field_spotbox_image_tall',
-      4 => 'title',
+      4 => 'field_fokus_sektionsforside',
+      5 => 'title',
+      6 => 'field_billede_300_x_261',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -53,7 +55,7 @@ function os2web_spotbokse_field_group_info() {
   $field_group->parent_name = 'group_spotbox';
   $field_group->data = array(
     'label' => 'Links',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'field_url',
       1 => 'field_text',
@@ -109,7 +111,7 @@ function os2web_spotbokse_field_group_info() {
   $field_group->parent_name = 'group_spotbox';
   $field_group->data = array(
     'label' => 'Emneord',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_termref_sted',
       1 => 'field_organization',
