@@ -1461,8 +1461,7 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['fields']['field_spotbox_video']['table'] = 'field_data_field_spotbox_video';
   $handler->display->display_options['fields']['field_spotbox_video']['field'] = 'field_spotbox_video';
   $handler->display->display_options['fields']['field_spotbox_video']['label'] = '';
-  $handler->display->display_options['fields']['field_spotbox_video']['alter']['text'] = '<img src="[field_lead_image]" alt="[title_1]" />
-<span class="zoom-icon-video"></span>';
+  $handler->display->display_options['fields']['field_spotbox_video']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_spotbox_video']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_spotbox_video']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_spotbox_video']['type'] = 'file_rendered';
@@ -1474,19 +1473,15 @@ function os2web_spotbokse_views_default_views() {
   $handler->display->display_options['fields']['field_lead_image']['table'] = 'field_data_field_lead_image';
   $handler->display->display_options['fields']['field_lead_image']['field'] = 'field_lead_image';
   $handler->display->display_options['fields']['field_lead_image']['label'] = '';
-  $handler->display->display_options['fields']['field_lead_image']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_lead_image']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_lead_image']['alter']['text'] = '<img src="[field_lead_image]" alt="[title_1]" />
-<span class="zoom-icon-video"></span>';
   $handler->display->display_options['fields']['field_lead_image']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_lead_image']['alter']['path'] = '[field_url]';
   $handler->display->display_options['fields']['field_lead_image']['alter']['link_class'] = 'overlayclass';
   $handler->display->display_options['fields']['field_lead_image']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_lead_image']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_lead_image']['type'] = 'image_url';
   $handler->display->display_options['fields']['field_lead_image']['settings'] = array(
     'image_style' => 'video_forside',
-    'image_link' => 'content',
+    'image_link' => '',
   );
   $handler->display->display_options['fields']['field_lead_image']['delta_limit'] = '1';
   $handler->display->display_options['fields']['field_lead_image']['delta_offset'] = '0';
@@ -3148,8 +3143,6 @@ function os2web_spotbokse_views_default_views() {
     t('Spotboxe / forside - Video'),
     t('[body_1-value]'),
     t('<div class="video-text">[body_1]</div>'),
-    t('<img src="[field_lead_image]" alt="[title_1]" />
-<span class="zoom-icon-video"></span>'),
     t('Video (field_spotbox_video:fid)'),
     t('Blok - Spotbox node'),
     t('Spotboxe portal - 3'),
