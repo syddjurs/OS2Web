@@ -191,6 +191,7 @@ function os2web_indholdstyper_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_resume_long',
+      2 => 'field_site_structure',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -222,8 +223,7 @@ function os2web_indholdstyper_field_group_info() {
       1 => 'field_node_reference_kontaktblok',
       2 => 'field_indholdsside_spotboxe',
       3 => 'field_noderef_selvbtjn',
-      4 => 'field_skjul_relaterede_links',
-      5 => 'group_hidden',
+      4 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -251,7 +251,6 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '18',
     'children' => array(
       0 => 'field_source_id',
-      1 => 'field_site_structure',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
