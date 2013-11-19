@@ -78,13 +78,21 @@ function os2web_spotbokse_file_default_displays() {
   $file_display->weight = 0;
   $file_display->status = TRUE;
   $file_display->settings = array(
-    'theme' => 'light',
-    'width' => '310',
-    'height' => '177',
+    'width' => '640',
+    'height' => '390',
+    'theme' => 'dark',
+    'color' => 'red',
+    'autohide' => '2',
     'autoplay' => 0,
-    'related' => 0,
-    'modestbranding' => 1,
-    'showinfo' => 0,
+    'loop' => 0,
+    'showinfo' => 1,
+    'modestbranding' => 0,
+    'rel' => 1,
+    'nocookie' => 0,
+    'protocol_specify' => 0,
+    'protocol' => 'https:',
+    'enablejsapi' => 0,
+    'origin' => '',
   );
   $export['video__default__media_youtube_video'] = $file_display;
 

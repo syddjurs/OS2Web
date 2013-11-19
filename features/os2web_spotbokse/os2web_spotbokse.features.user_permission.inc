@@ -14,10 +14,10 @@ function os2web_spotbokse_user_default_permissions() {
   $permissions['create spotbox content'] = array(
     'name' => 'create spotbox content',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Editor' => 'Editor',
+      'Kommunikation' => 'Kommunikation',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -26,9 +26,9 @@ function os2web_spotbokse_user_default_permissions() {
   $permissions['delete any spotbox content'] = array(
     'name' => 'delete any spotbox content',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Kommunikation',
-      2 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Kommunikation' => 'Kommunikation',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -37,10 +37,10 @@ function os2web_spotbokse_user_default_permissions() {
   $permissions['delete own spotbox content'] = array(
     'name' => 'delete own spotbox content',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Editor' => 'Editor',
+      'Kommunikation' => 'Kommunikation',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -49,10 +49,10 @@ function os2web_spotbokse_user_default_permissions() {
   $permissions['edit any spotbox content'] = array(
     'name' => 'edit any spotbox content',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Editor' => 'Editor',
+      'Kommunikation' => 'Kommunikation',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'node',
   );
@@ -61,10 +61,10 @@ function os2web_spotbokse_user_default_permissions() {
   $permissions['edit own spotbox content'] = array(
     'name' => 'edit own spotbox content',
     'roles' => array(
-      0 => 'Administrator',
-      1 => 'Editor',
-      2 => 'Kommunikation',
-      3 => 'Webmaster',
+      'Administrator' => 'Administrator',
+      'Editor' => 'Editor',
+      'Kommunikation' => 'Kommunikation',
+      'Webmaster' => 'Webmaster',
     ),
     'module' => 'node',
   );
