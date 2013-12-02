@@ -288,9 +288,6 @@ function os2web_indholdstyper_strongarm() {
       'revision' => array(
         'custom_settings' => FALSE,
       ),
-      'meeting_detail_view' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'display' => array(),
@@ -459,9 +456,6 @@ function os2web_indholdstyper_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'meeting_detail_view' => array(
-        'custom_settings' => FALSE,
-      ),
     ),
     'extra_fields' => array(
       'display' => array(),
@@ -493,9 +487,6 @@ function os2web_indholdstyper_strongarm() {
         ),
         'path' => array(
           'weight' => '2',
-        ),
-        'workbench_access' => array(
-          'weight' => '0',
         ),
       ),
       'display' => array(),
