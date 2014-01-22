@@ -2422,7 +2422,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2473,7 +2473,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 8,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2505,6 +2505,53 @@ function os2web_indholdstyper_field_default_field_instances() {
       ),
       'type' => 'taxonomy_autocomplete',
       'weight' => 43,
+    ),
+  );
+
+  // Exported field_instance: 'node-news-field_indholdsside_spotboxe'
+  $field_instances['node-news-field_indholdsside_spotboxe'] = array(
+    'bundle' => 'news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'node_reference',
+        'settings' => array(),
+        'type' => 'node_reference_default',
+        'weight' => 15,
+      ),
+      'related_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_indholdsside_spotboxe',
+    'label' => 'Spotboxe',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'node_reference',
+      'settings' => array(
+        'autocomplete_match' => 'contains',
+        'autocomplete_path' => 'node_reference/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'node_reference_autocomplete',
+      'weight' => 47,
     ),
   );
 
@@ -2600,6 +2647,52 @@ function os2web_indholdstyper_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-news-field_node_reference_kontaktblok'
+  $field_instances['node-news-field_node_reference_kontaktblok'] = array(
+    'bundle' => 'news',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'related_block' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_node_reference_kontaktblok',
+    'label' => 'Kontaktblok',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'node_reference',
+      'settings' => array(
+        'autocomplete_match' => 'contains',
+        'autocomplete_path' => 'node_reference/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'node_reference_autocomplete',
+      'weight' => 46,
+    ),
+  );
+
   // Exported field_instance: 'node-news-field_organization'
   $field_instances['node-news-field_organization'] = array(
     'bundle' => 'news',
@@ -2611,7 +2704,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 7,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2658,7 +2751,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 14,
+        'weight' => 2,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2704,7 +2797,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 4,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2746,7 +2839,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2798,7 +2891,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 14,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2850,7 +2943,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2909,7 +3002,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 5,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -2951,7 +3044,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -3003,7 +3096,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'related_block' => array(
         'label' => 'above',
@@ -3049,7 +3142,7 @@ function os2web_indholdstyper_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 8,
+        'weight' => 9,
       ),
       'related_block' => array(
         'label' => 'above',

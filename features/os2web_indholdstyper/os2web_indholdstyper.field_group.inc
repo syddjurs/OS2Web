@@ -73,10 +73,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->data = array(
     'label' => 'Sager og Dokumenter',
     'weight' => '3',
-    'children' => array(
-      0 => 'field_case',
-      1 => 'field_doc',
-    ),
+    'children' => array(),
     'format_type' => 'htab',
     'format_settings' => array(
       'formatter' => 'closed',
@@ -304,7 +301,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_indstillinger';
   $field_group->data = array(
     'label' => 'Skjult',
-    'weight' => '46',
+    'weight' => '49',
     'children' => array(
       0 => 'field_additional_info',
       1 => 'field_related',
@@ -366,8 +363,11 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '5',
     'children' => array(
       0 => 'field_promoteto',
-      1 => 'path',
-      2 => 'group_hidden',
+      1 => 'field_node_reference_kontaktblok',
+      2 => 'field_indholdsside_spotboxe',
+      3 => 'field_noderef_selvbtjn',
+      4 => 'path',
+      5 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -395,10 +395,10 @@ function os2web_indholdstyper_field_group_info() {
     'label' => 'News',
     'weight' => '0',
     'children' => array(
-      0 => 'group_indstillinger',
-      1 => 'group_taksonomi',
-      2 => 'group_tekst',
-      3 => 'group_case_doc',
+      0 => 'group_case_doc',
+      1 => 'group_indstillinger',
+      2 => 'group_taksonomi',
+      3 => 'group_tekst',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
@@ -521,8 +521,7 @@ function os2web_indholdstyper_field_group_info() {
       1 => 'field_lead_image',
       2 => 'field_resume_long',
       3 => 'field_site_structure',
-      4 => 'field_mediafile',
-      5 => 'title',
+      4 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
