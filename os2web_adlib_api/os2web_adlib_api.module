@@ -45,6 +45,24 @@ function os2web_adlib_api_menu() {
 }
 
 /**
+ * Implements hook_FORM_alter().
+ */
+function os2web_adlib_api_form_os2web_settings_settings_form_alter(&$form, &$form_state) {
+  // Adlib API configuration.
+
+  $form['os2web_adlib_api_config_group'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('AdLib Configuration'),
+  );
+  $form['os2web_adlib_api_config_group']['os2web_adlib_api_allowed_ip_host'] = array(
+    '#type' => 'textfield',
+    '#title' => 'IP addresser der kan udløse AdLib konvertering',
+    '#description' => 'Komma separeret liste af ip-addresser/servernavne der kan anvende AdLib. Husk AdLib kan køres fra admin og fra cron.',
+    '#default_value' => variable_get('os2web_adlib_api_allowed_ip_host', ip_address()),
+  );
+}
+
+/**
  * Ajax callback to update job status.
  *
  * @param int $fid
@@ -190,10 +208,22 @@ function os2web_adlib_api_status() {
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['reset'])) {
+    $file = db_select('os2web_adlib_api_doc_files', 'df')
+      ->fields('df')
+      ->condition('fid', $_GET['reset'])
+      ->execute()
+      ->fetchObject();
+
     $query = db_delete('os2web_adlib_api_doc_files');
     $query = $query->condition('fid', $_GET['reset']);
     $query->execute();
-    os2web_adlib_api_convert_to_pdf($_GET['reset']);
+
+    if (is_object($file) && !empty($file->did)) {
+      os2web_adlib_api_convert_to_pdf($_GET['reset'], $file->did);
+    }
+    else {
+      os2web_adlib_api_convert_to_pdf($_GET['reset']);
+    }
     drupal_goto('admin/config/os2web/adlibstatus');
   }
   if (isset($_GET['process'])) {
@@ -418,10 +448,15 @@ function os2web_adlib_api_convert_to_pdf($fid, $docref = NULL) {
  *   Reference for the file
  *
  * @return int
- *   File id
+ *   File id, false if none.
  */
 function os2web_adlib_api_get_fid($ref) {
-  return (int) db_query('SELECT fid FROM {os2web_adlib_api_doc_files} WHERE did=:did', array(':did' => $ref))->fetchField();
+
+  $fid = db_query('SELECT fid FROM {os2web_adlib_api_doc_files} WHERE did=:did', array(':did' => $ref))->fetchField();
+  if ($fid) {
+    return $fid;
+  }
+  return false;
 }
 
 /**
@@ -446,21 +481,21 @@ function _os2web_adlib_api_do_processing() {
   // Add set up queue for adlib processing.
   //
   // Disable auto queue of missing files
-  // $queue = DrupalQueue::get('os2web_adlib_process');
-  // if ($queue->numberOfItems() == 0) {
-  //   $items = db_select('os2web_adlib_api_doc_files', 'f')
-  //       ->fields('f')
-  //       ->condition(db_or()->condition('job_id', 'Complete', '!=')->isNull('job_id'))
-  //       ->execute()
-  //       ->fetchAll();
-  //   $chunk_size = max(min((int) sqrt(count($items)), 25), 1);
-  //   $items = array_chunk($items, $chunk_size);
-  //   foreach ($items as $item) {
-  //     if ($item->job_id != 'Complete') {
-  //       $queue->createItem($item);
-  //     }
-  //   }
-  // }
+  $queue = DrupalQueue::get('os2web_adlib_process');
+  if ($queue->numberOfItems() == 0) {
+    $items = db_select('os2web_adlib_api_doc_files', 'f')
+        ->fields('f')
+        ->condition(db_or()->condition('job_id', 'Complete', '!=')->isNull('job_id'))
+        ->execute()
+        ->fetchAll();
+    $chunk_size = max(min((int) sqrt(count($items)), 25), 1);
+    $items = array_chunk($items, $chunk_size);
+    foreach ($items as $item) {
+      if ($item->job_id != 'Complete') {
+        $queue->createItem($item);
+      }
+    }
+  }
 }
 
 /**
@@ -767,7 +802,7 @@ function _os2web_adlib_api_is_filetype_approved($fid) {
   $approved_files = array(
     'docx',
     'docm',
-    // 'doc',
+    'doc',
     'dotx',
     'dotm',
     'xps',

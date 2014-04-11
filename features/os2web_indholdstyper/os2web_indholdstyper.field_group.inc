@@ -64,6 +64,31 @@ function os2web_indholdstyper_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_case_doc|node|news|form';
+  $field_group->group_name = 'group_case_doc';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'news';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_news_tabs';
+  $field_group->data = array(
+    'label' => 'Sager og Dokumenter',
+    'weight' => '3',
+    'children' => array(),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_case_doc|node|news|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_document|node|contentpage|default';
   $field_group->group_name = 'group_document';
   $field_group->entity_type = 'node';
@@ -163,6 +188,7 @@ function os2web_indholdstyper_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_resume_long',
+      2 => 'field_site_structure',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -194,8 +220,7 @@ function os2web_indholdstyper_field_group_info() {
       1 => 'field_node_reference_kontaktblok',
       2 => 'field_indholdsside_spotboxe',
       3 => 'field_noderef_selvbtjn',
-      4 => 'field_skjul_relaterede_links',
-      5 => 'group_hidden',
+      4 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -223,7 +248,6 @@ function os2web_indholdstyper_field_group_info() {
     'weight' => '18',
     'children' => array(
       0 => 'field_source_id',
-      1 => 'field_site_structure',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -277,7 +301,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_indstillinger';
   $field_group->data = array(
     'label' => 'Skjult',
-    'weight' => '46',
+    'weight' => '49',
     'children' => array(
       0 => 'field_additional_info',
       1 => 'field_related',
@@ -336,11 +360,14 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Indstillinger',
-    'weight' => '3',
+    'weight' => '5',
     'children' => array(
       0 => 'field_promoteto',
-      1 => 'path',
-      2 => 'group_hidden',
+      1 => 'field_node_reference_kontaktblok',
+      2 => 'field_indholdsside_spotboxe',
+      3 => 'field_noderef_selvbtjn',
+      4 => 'path',
+      5 => 'group_hidden',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -368,9 +395,10 @@ function os2web_indholdstyper_field_group_info() {
     'label' => 'News',
     'weight' => '0',
     'children' => array(
-      0 => 'group_indstillinger',
-      1 => 'group_taksonomi',
-      2 => 'group_tekst',
+      0 => 'group_case_doc',
+      1 => 'group_indstillinger',
+      2 => 'group_taksonomi',
+      3 => 'group_tekst',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
@@ -455,7 +483,7 @@ function os2web_indholdstyper_field_group_info() {
   $field_group->parent_name = 'group_news_tabs';
   $field_group->data = array(
     'label' => 'Emneord',
-    'weight' => '2',
+    'weight' => '4',
     'children' => array(
       0 => 'field_termref_kle',
       1 => 'field_organization',

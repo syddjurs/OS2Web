@@ -39,13 +39,14 @@ function ofir_job_index_integration_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Antal elementer';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all_label'] = '- Alle -';
   $handler->display->display_options['pager']['options']['expose']['offset_label'] = 'Forskydning';
-  $handler->display->display_options['pager']['options']['tags']['first'] = '« første';
+  $handler->display->display_options['pager']['options']['tags']['first'] = '‹‹ forrige';
   $handler->display->display_options['pager']['options']['tags']['previous'] = '‹ forrige';
   $handler->display->display_options['pager']['options']['tags']['next'] = 'næste ›';
-  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste »';
+  $handler->display->display_options['pager']['options']['tags']['last'] = 'sidste ››';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'node';
   $handler->display->display_options['row_options']['links'] = FALSE;
@@ -130,10 +131,10 @@ function ofir_job_index_integration_views_default_views() {
     t('Antal elementer'),
     t('- Alle -'),
     t('Forskydning'),
-    t('« første'),
+    t('‹‹ forrige'),
     t('‹ forrige'),
     t('næste ›'),
-    t('sidste »'),
+    t('sidste ››'),
     t('Page'),
     t('Jobs i Syddjurs Kommune'),
     t('Jobagent - header link'),
