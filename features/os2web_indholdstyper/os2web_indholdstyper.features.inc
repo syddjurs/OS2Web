@@ -46,10 +46,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '470',
-          'height' => '230',
+          'width' => 470,
+          'height' => 230,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -68,11 +68,11 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
-          'width' => '460',
+          'width' => 460,
           'height' => '',
           'upscale' => 1,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
       6 => array(
         'label' => 'Beskær',
@@ -84,11 +84,11 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_crop',
         'data' => array(
-          'width' => '460',
-          'height' => '260',
+          'width' => 460,
+          'height' => 260,
           'anchor' => 'center-center',
         ),
-        'weight' => '2',
+        'weight' => 2,
       ),
     ),
   );
@@ -107,10 +107,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '180',
-          'height' => '140',
+          'width' => 180,
+          'height' => 140,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -129,10 +129,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '60',
-          'height' => '69',
+          'width' => 60,
+          'height' => 69,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -151,10 +151,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '214',
-          'height' => '116',
+          'width' => 214,
+          'height' => 116,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -173,10 +173,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '460',
-          'height' => '260',
+          'width' => 460,
+          'height' => 260,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );
@@ -195,10 +195,10 @@ function os2web_indholdstyper_image_default_styles() {
         'module' => 'image',
         'name' => 'image_scale_and_crop',
         'data' => array(
-          'width' => '161',
-          'height' => '65',
+          'width' => 161,
+          'height' => 65,
         ),
-        'weight' => '1',
+        'weight' => 1,
       ),
     ),
   );

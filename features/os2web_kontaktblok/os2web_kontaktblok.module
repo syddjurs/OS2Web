@@ -33,5 +33,14 @@ function os2web_kontaktblok_get_block() {
       break;
     }
   }
+error_log($result);
+  if ($result == 0) {
+    // Try to find current nodes contact. These are for them who are not in menu.
+    $node = menu_get_object();
+    if ($node && $node->nid) {
+      $field = field_get_items('node', $node, 'field_node_reference_kontaktblok');
+      $result = $field[0]['nid'];
+    }
+  }
   return $result;
 }
