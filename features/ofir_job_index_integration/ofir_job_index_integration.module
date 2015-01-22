@@ -121,7 +121,7 @@ function _ofir_job_index_integration_cronbatch() {
       continue;
     }
     if (_ofir_job_index_integration_check_existed($job)) {
-      //continue;
+      continue;
     }
     $job_text = _ofir_job_index_integration_parse_job_text($job);
     ofir_job_index_integration_import_job($job_text);
